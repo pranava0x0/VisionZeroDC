@@ -1,0 +1,204 @@
+# AGENTS.md - How to Work in This Repo
+
+> Operating guide for AI agents working on DC Vehicle Safety.
+> Read [CLAUDE.md](CLAUDE.md) for project intent and engineering rules. Read [DESIGN.md](DESIGN.md) before changing the UI or recommendation presentation.
+
+---
+
+## Read These First
+
+Before touching code or data, read:
+
+1. [CLAUDE.md](CLAUDE.md) - project intent, data rules, recommendation rules.
+2. [DESIGN.md](DESIGN.md) - visual system, map/table UX, accessibility.
+3. `backlog.md` if present - planned work and priorities.
+4. `issues.md` if present - known bugs, data-quality problems, source outages.
+5. `security.md` if present - latest dependency/advisory sweep.
+
+If one of those files is missing, do not invent history. Create it only when the task calls for it.
+
+---
+
+## Workflow: Explore -> Plan -> Code -> Verify
+
+### Explore
+
+- Use `rg` / `rg --files` first.
+- Read relevant files before editing, even if they were read earlier in the session.
+- For data work, inspect the schema, a small sample of source rows, and the canonical output before changing logic.
+- For UI work, inspect the current component/layout pattern before introducing a new one.
+
+### Plan
+
+For anything beyond a one-line fix, state the approach before editing. Significant changes need 2-3 options with tradeoffs, especially when they affect:
+
+- data schema
+- recommendation rules
+- source hierarchy
+- visual identity
+- map/table interaction
+- dependency choices
+- public policy framing
+
+### Code
+
+- Prefer existing files and local patterns.
+- Keep changes scoped to the requested behavior.
+- Do not add helper abstractions for one-shot logic.
+- Do not loosen schema or tests without understanding why they exist.
+- Keep source data edits and generated/baked outputs together when both are required.
+
+### Verify
+
+- Run the narrowest meaningful tests first, then broader tests when the change has cross-cutting risk.
+- For UI changes, also run the app and click through the affected flow.
+- For data changes, inspect the output diff. A quick skim catches schema drift, broken encodings, unexpected nulls, and runaway file size.
+
+---
+
+## Verification Matrix
+
+Update this once the stack is real. Until then, use this matrix as the default.
+
+| Change kind | Verify with |
+| --- | --- |
+| Schema/model change | schema tests + fixture validation |
+| Source connector | connector tests + one small live fetch if ethical and needed |
+| Data normalization | before/after fixture diff + required-field tests |
+| Geospatial join | boundary/outlier tests + spot-check map coordinates |
+| Recommendation rule | unit tests for each rule branch + sample explanation output |
+| Frontend map/table/filter | unit tests where available + browser walkthrough |
+| Design tokens | visual check at mobile and desktop + contrast/focus check |
+| Dependency install/upgrade | advisory sweep + lockfile diff + test/build |
+| Anything substantial | full test suite and build |
+
+---
+
+## Common Tasks
+
+### Add a Data Source
+
+1. Confirm it is in scope and preferably listed in [CLAUDE.md](CLAUDE.md).
+2. Add or update the source entry in the canonical config.
+3. Create a connector with a stable slug and cache namespace.
+4. Save raw source snapshots with `captured_at`.
+5. Normalize into typed records, preserving raw fields where cleaning occurs.
+6. Add fixture tests and schema tests.
+7. Run a small fetch before a full run.
+8. Update docs with the source, caveats, and refresh cadence.
+
+### Add a Recommendation Rule
+
+1. Write the rule in prose first: trigger, evidence, mechanism, confidence, uncertainty.
+2. Add or update the canonical intervention taxonomy if needed.
+3. Implement with explicit thresholds and source-backed features.
+4. Add tests for positive, negative, boundary, and missing-data cases.
+5. Ensure the UI shows the rationale and not just a label.
+
+### Add a Map or Table Filter
+
+1. Add the filter to the canonical filter state, not just the component.
+2. Ensure reset clears it.
+3. Ensure URL/share state includes it if the app supports permalinks.
+4. Render an explicit empty state when no records match.
+5. Add tests for combined filters.
+
+### Add a New Category or Vocabulary Item
+
+This is a schema change. Do not do it casually.
+
+1. Add a `backlog.md` note explaining the gap.
+2. Add the value to the canonical constant.
+3. Mirror labels/colors/icons from the same source of truth.
+4. Migrate existing records if appropriate.
+5. Add drift tests so frontend/backend copies cannot diverge.
+
+---
+
+## What Not To Do
+
+- Do not add a source record without a real source URL.
+- Do not silently drop rows because they are hard to parse.
+- Do not represent missing data as zero.
+- Do not overwrite raw source captures.
+- Do not create a "safety score", "danger score", or "bad neighborhood" ranking without transparent components and explicit approval.
+- Do not LLM-classify policy judgments as if they were facts.
+- Do not use enforcement-heavy framing as the default recommendation.
+- Do not add a new framework, UI kit, map stack, charting dependency, font, or analytics SDK without a clear reason.
+- Do not edit baked `docs/data/*.json` by hand if a source or seed file generated it.
+- Do not expand scope inside a bug fix. Put follow-up ideas in `backlog.md`.
+- Do not use `--no-verify` to bypass tests or hooks.
+- Do not add AI co-author trailers to commits.
+
+---
+
+## Repo Norms
+
+- Type hints on every Python function.
+- TypeScript strict mode and no `any` if TypeScript is used.
+- Use `pathlib.Path` for Python file paths.
+- Use logging for runtime output; no bare `print()` in production paths.
+- Functional components and hooks only if React is used.
+- Constants, labels, category lists, and color semantics live in one source of truth.
+- Loading, error, and empty states exist for every data view.
+- Touch targets are at least 44px.
+- Mobile-first behavior is verified before declaring UI work done.
+- System fonts by default.
+
+---
+
+## Data Review Checklist
+
+Before shipping a data refresh or analysis output:
+
+- Required fields are present.
+- Source URLs resolve or are marked unavailable.
+- `captured_at` is set.
+- Row counts are plausible versus the prior snapshot.
+- Duplicate IDs are intentional or resolved.
+- Nulls are explicit and meaningful.
+- Coordinates fall inside expected boundaries or are flagged.
+- Date ranges match the source metadata.
+- Rates and comparisons use appropriate denominators.
+- The output diff does not include unrelated churn.
+
+---
+
+## Policy Review Checklist
+
+Before shipping a policy recommendation:
+
+- The recommendation states its mechanism.
+- The evidence links back to source records.
+- The confidence level matches the data quality.
+- The uncertainty is visible.
+- Enforcement, engineering, and equity tradeoffs are separated.
+- The recommendation does not overstate causality.
+- The language describes fixable street conditions, not resident blame.
+
+---
+
+## Escalate To The Human When
+
+- The source conflicts with another authoritative source.
+- A dataset disappears, changes license, or changes schema in a way that affects historical results.
+- A recommendation would be politically or ethically sensitive.
+- The policy taxonomy needs a new top-level category.
+- A schema migration affects source data, output JSON, UI, and tests.
+- A failing test looks unrelated but blocks confidence.
+- The task requires a paid API, browser challenge workaround, or rate-limit-heavy scraping.
+
+---
+
+## Current Project Status
+
+This repo currently starts with documentation only. The first implementation pass should choose a minimal stack and build one end-to-end path:
+
+1. fetch one official crash dataset,
+2. normalize and validate it,
+3. emit a small baked JSON file,
+4. render a map/table view,
+5. show source attribution and one simple analysis.
+
+Do not start with a giant multi-source pipeline. Start with the loop that proves the product can work.
+

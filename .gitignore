@@ -1,0 +1,18 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test artifacts & UAT logs
+uat-screenshots/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Dependency and cache directories
+node_modules/
+.npm
+.eslintcache
