@@ -36,13 +36,13 @@ Run these every UAT pass:
 
 | Section | Last Tested | Notes |
 | --- | --- | --- |
-| App shell / initial load | 2026-05-27 | Functional, but external Leaflet CSS SRI issue is open. |
+| App shell / initial load | 2026-05-27 | Passed local smoke; Leaflet CSS SRI and favicon issues resolved. |
 | Filter toolbar | 2026-05-27 | Passed normal and rapid filter changes. |
 | KPI strip | 2026-05-27 | Updates after queries; horizontal scrolling on narrow phones is intentional. |
-| Crash map | 2026-05-27 | Draws points; direct point selection is difficult in dense areas. |
+| Crash map | 2026-05-27 | Draws points; nearest-crash click fallback opened an incident file in desktop, tablet, and mobile smoke tests. |
 | Hotspot ranking | 2026-05-27 | Loads ward-aware ranking rows and map popup on row click. |
 | Moving violations overlay | 2026-05-27 | Toggle and month selector worked in tested runs. |
-| Responsive layout | 2026-05-27 | No page-level horizontal overflow at tested sizes. |
+| Responsive layout | 2026-05-27 | No page-level horizontal overflow or undersized visible controls at tested desktop, tablet, and mobile sizes. |
 | Keyboard navigation | 2026-05-27 | Basic tab order reached core controls and map controls. |
 
 ## Known Stable Areas
@@ -54,8 +54,7 @@ Run these every UAT pass:
 
 ## Known Flaky / Unstable Areas
 
-- External asset hygiene: Leaflet CSS SRI mismatch and missing favicon.
-- Direct crash point selection on dense canvas-rendered layers.
+- Live DC ArcGIS latency can make the first load feel slow, especially on broad citywide filters.
 
 ## Exploration Notes
 

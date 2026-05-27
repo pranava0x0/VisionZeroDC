@@ -82,7 +82,7 @@ const VIOLATION_FIELDS = [
 ].join(",");
 
 const CRASH_PAGE_SIZE = 1000;
-const CRASH_DRAW_LIMIT = 10000;
+const CRASH_DRAW_LIMIT = 5000;
 const VIOLATION_PAGE_SIZE = 2000;
 const VIOLATION_DRAW_LIMIT = 5000;
 const HOTSPOT_QUERY_LIMIT = 160;
@@ -119,6 +119,7 @@ const state = {
   crashAbort: null,
   violationsAbort: null,
   loadingCrashes: false,
+  drawnCrashes: [],
   hotspots: {
     locations: [],
     wards: [],
@@ -546,6 +547,10 @@ function addCrashFeature(feature) {
   `);
   marker.on("click", () => selectCrash(props));
   marker.addTo(crashLayer);
+  state.drawnCrashes.push({
+    latlng: L.latLng(coords[1], coords[0]),
+    props,
+  });
   return { severity, reportDate: props.REPORTDATE || 0 };
 }
 
@@ -555,6 +560,7 @@ async function loadCrashes() {
   const { signal } = state.crashAbort;
   state.loadingCrashes = true;
   crashLayer.clearLayers();
+  state.drawnCrashes = [];
 
   const where = baseWhere();
   setNotice("Loading crash records from Open Data DC...");
@@ -788,6 +794,27 @@ function handleHotspotClick(event) {
   zoomToHotspot(item);
 }
 
+function selectNearestCrash(event) {
+  if (!state.drawnCrashes.length) return;
+
+  const maxDistance = window.matchMedia("(pointer: coarse)").matches ? 28 : 18;
+  let nearest = null;
+  let nearestDistance = Infinity;
+
+  for (const crash of state.drawnCrashes) {
+    const point = map.latLngToContainerPoint(crash.latlng);
+    const distance = point.distanceTo(event.containerPoint);
+    if (distance < nearestDistance) {
+      nearest = crash;
+      nearestDistance = distance;
+    }
+  }
+
+  if (nearest && nearestDistance <= maxDistance) {
+    selectCrash(nearest.props);
+  }
+}
+
 function refreshAll() {
   loadCrashes();
   loadViolations();
@@ -798,6 +825,7 @@ map.on("moveend", () => {
   clearTimeout(moveTimer);
   moveTimer = setTimeout(refreshAll, 250);
 });
+map.on("click", selectNearestCrash);
 
 els.refresh.addEventListener("click", refreshAll);
 els.dateRange.addEventListener("change", refreshAll);
