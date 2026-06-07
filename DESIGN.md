@@ -7,19 +7,27 @@
 
 ## Product Posture
 
-This is a public-record safety atlas with the posture of a Sidewalk Labs-style civic-tech product: optimistic about cities, confident in design, generous with whitespace, and rigorous about evidence. It should feel like a well-funded urbanist research studio published this — clean, modern, and humane — while keeping every number traceable to a primary source.
+This is a public-record safety atlas with the posture of a Washington Post-style civic data investigation: direct, text-forward, sourced, restrained, and built for scrutiny. The product identity, voice, and editorial promise are the anchor; they do not change with the visual skin.
 
-The influence is the visual *style* of Sidewalk Labs (the Alphabet urban-innovation company), reconstructed from the archived `sidewalklabs.com` (Wayback Machine, 2020) — not a brand clone. Do not copy their logo, proprietary fonts (the site used **Circular Pro** for headings/UI and **Freight Text Pro** for body; the print "Yellow Book" used Beatrice and Neue Droschke), exact page furniture, or marketing copy. We approximate the type with web-safe stacks. Borrow the useful design values: a single signature yellow used with discipline, big heavy geometric-sans headlines over serif body, warm near-black ink on a light canvas, a buttery cream tint for emphasis blocks, and lots of air.
+The influence is newsroom design values, not brand imitation. Borrow the useful ones: high-contrast type, disciplined grids, dense but readable information, clear source trails, and calm authority. Do not lapse into a marketing or promotional voice. Separate observed facts, modeled estimates, and policy judgments; surface missingness; keep every number traceable to a primary source.
 
-The first screen should still be the tool itself: map/table, filters, key metrics, and selected evidence. The Sidewalk influence is about *finish*, not about turning this into a marketing site. Think "civic-tech research studio's interactive atlas", not landing page and not dense SaaS analytics console.
+The first screen should still be the tool itself: map/table, filters, key metrics, and selected evidence. Do not build a marketing landing page. Think "interactive local accountability desk", not campaign site and not SaaS analytics console.
+
+---
+
+## Visual Theme — Sidewalk-inspired skin (current)
+
+The **posture above is fixed**; the *visual theme* below is a narrower implementation layer — currently a Sidewalk-Labs-inspired skin — that can be re-themed without touching product identity, information priorities, the editorial promise, or the data/severity semantics. Treat it as a polish experiment, not a redefinition of the project. If it ever fights the restrained civic-data posture (e.g. reads as a brand campaign), the posture wins.
+
+The skin is reconstructed from the archived `sidewalklabs.com` (Wayback Machine, 2020) — values, not assets. Do not copy their logo, proprietary fonts (the site used **Circular Pro** for headings/UI and **Freight Text Pro** for body; the print "Yellow Book" used Beatrice and Neue Droschke), page furniture, or marketing copy; the type is approximated with web-safe stacks. What it borrows: a single signature yellow used with discipline, heavy geometric-sans headlines over serif body, warm near-black ink on a light canvas, a buttery cream tint for emphasis blocks, soft rounding, and generous whitespace.
 
 ---
 
 ## Visual Identity
 
-The visual system is built on three moves: **a light warm-neutral canvas, warm near-black ink (`#262626`), and one signature yellow (`#ffcf2b`).** Headlines are large and heavy in a **geometric sans**; body prose is set in a **serif** — the distinctive Sidewalk pairing (their site used Circular Pro at weight 800 for headings and Freight Text Pro for body). Supporting accents (deep-blue link, brick-red urgency, mode and severity hues) are a flat, friendly palette used only when they carry meaning. Surfaces are lightly rounded; the buttery cream `#fdf5d1` and the yellow do the section-marking that hairline rules used to do.
+The theme is built on three moves: **a light warm-neutral canvas, warm near-black ink (`#262626`), and one signature yellow (`#ffcf2b`).** Headlines are large and heavy in a **geometric sans**; body prose is set in a **serif** (approximating the site's Circular Pro headings + Freight Text Pro body). Supporting accents (deep-blue link, brick-red urgency, mode and severity hues) are a flat palette used only when they carry meaning. Surfaces are lightly rounded; the buttery cream `#fdf5d1` and the yellow do the section-marking that hairline rules used to do — but the information hierarchy and source-first discipline of the posture are unchanged.
 
-The yellow is the brand. Use it as the through-line: the top-of-page brand bar, the active navigation pill, label ticks, the highlight behind a key phrase, the underline under a KPI number, primary-button hover, and selected filter controls. It is a wayfinding and emphasis color, never a severity or status color.
+The yellow is the theme accent, used with restraint: the top-of-page brand bar, the active navigation pill, label ticks, the highlight behind a key phrase, the underline under a KPI number, primary-button hover, and selected filter controls. It is a wayfinding and emphasis color, never a severity or status color.
 
 Use red only for fatalities, severe warnings, urgent states, or editorial alerting. Use blue for links, selected text states, and navigational affordances. Keep most of the canvas paper, ink, and yellow; let the flat accent palette appear only where it encodes data.
 

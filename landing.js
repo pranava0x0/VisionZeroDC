@@ -251,10 +251,14 @@ function renderRecommendations(recs, library) {
       const evidence = (r.evidence || [])
         .map((e) => `<li>${esc(e.claim)} ${sourceLink(e.source_url, e.source_title)}</li>`)
         .join("");
+      const conf = esc(r.confidence || "medium");
       return (
         `<article class="rec-card">` +
         `<div class="rec-head"><h3>${esc(r.title)}</h3></div>` +
         `<p class="rec-problem">${esc(r.problem)}</p>` +
+        // Confidence stays in the always-visible header so it survives the
+        // mobile collapse to title + problem (recommendation contract).
+        `<p class="rec-confidence"><span class="badge conf-${conf}">${conf} confidence</span></p>` +
         // Detail collapses behind a toggle on mobile; stays open on desktop.
         `<details class="rec-more" open>` +
         `<summary class="rec-more-toggle">Details</summary>` +

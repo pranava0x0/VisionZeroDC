@@ -102,7 +102,7 @@ const {
   cleanLocationName,
   triageScore,
   parseHotspot,
-  isViewCovered,
+  viewUnchanged,
   formatRate,
   decodeFilters,
   parseView,
@@ -653,15 +653,18 @@ async function loadCrashes() {
     els.major.textContent = formatNumber(majorCount);
     els.updated.textContent = latest ? formatDate(latest) : "N/A";
 
+    // Record the loaded view so a later no-op settle (same view) can skip the
+    // reload. A real pan/zoom differs from this and reloads, refreshing all
+    // current-view summaries — so this is safe whether or not the draw was
+    // truncated.
+    state.loadedBounds = loadBounds;
+    state.loadedZoom = loadZoom;
+
     if (total > summaries.length) {
-      // Truncated: leave loadedBounds null so panning reloads for fuller data.
       setNotice(
         `Showing ${formatNumber(summaries.length)} of ${formatNumber(total)} matching crashes in this view. Zoom in, change filters, or use a shorter date range to draw every matching point.`
       );
     } else {
-      // Complete: record the extent so panning within it skips a reload.
-      state.loadedBounds = loadBounds;
-      state.loadedZoom = loadZoom;
       setNotice(`Showing all ${formatNumber(summaries.length)} matching crashes in this view.`);
     }
   } catch (error) {
@@ -941,9 +944,11 @@ function refreshAll() {
 // True when the settled view is already fully drawn: same zoom and within the
 // extent of the last complete load. Lets us skip a redundant full reload on a
 // pan that stays inside already-loaded data.
-function viewAlreadyLoaded() {
+// Only true for a no-op settle (same view). A real pan/zoom returns false so
+// the reload — and every "current view" summary it refreshes — still runs.
+function settledViewUnchanged() {
   if (!state.loadedBounds) return false;
-  return isViewCovered({
+  return viewUnchanged({
     loadedBounds: boundsToObj(state.loadedBounds),
     loadedZoom: state.loadedZoom,
     currentBounds: boundsToObj(map.getBounds()),
@@ -955,8 +960,8 @@ let moveTimer = null;
 map.on("moveend", () => {
   clearTimeout(moveTimer);
   moveTimer = setTimeout(() => {
-    if (viewAlreadyLoaded()) {
-      writeUrlState(); // keep the shareable URL in sync without refetching
+    if (settledViewUnchanged()) {
+      writeUrlState(); // no-op settle: nothing changed, just sync the URL
       return;
     }
     refreshAll();

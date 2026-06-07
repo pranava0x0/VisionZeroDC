@@ -8,10 +8,11 @@
  *   1. marker popups use { autoPan: false } so clicking a circle never nudges
  *      the map (a nudge would fire `moveend` -> a full reload). That is a
  *      Leaflet option exercised in the browser, not here.
- *   2. `isViewCovered()` decides whether a settled `moveend` can SKIP the reload
- *      because the view is already fully drawn. That decision is pure and is
- *      what these tests pin down — so a future refactor can't silently make the
- *      map refetch on every pan again.
+ *   2. `viewUnchanged()` lets a settled `moveend` SKIP the reload ONLY when the
+ *      view is genuinely unchanged (a no-op settle). A reload also refreshes
+ *      every "current view" summary (KPIs, hotspots, ward/map notes, the
+ *      violations overlay), so skipping a *changed* view would leave that UI
+ *      stale — these tests pin the guard to no-op settles so it never does.
  *
  * Run: node --test
  */
@@ -27,7 +28,7 @@ const C = require("../src/crash-logic.js");
 const LOADED = { west: -77.12, south: 38.79, east: -76.91, north: 38.99 };
 const ZOOM = 13;
 
-// Build isViewCovered() options, defaulting to "view unchanged since load".
+// Build viewUnchanged() options, defaulting to "view unchanged since load".
 const opts = (over = {}) => ({
   loadedBounds: LOADED,
   loadedZoom: ZOOM,
@@ -36,74 +37,74 @@ const opts = (over = {}) => ({
   ...over,
 });
 
-// --- boundsContains ------------------------------------------------------
+// --- boundsApproxEqual ---------------------------------------------------
 
-test("boundsContains: identical bounds are contained", () => {
-  assert.equal(C.boundsContains(LOADED, { ...LOADED }), true);
+test("boundsApproxEqual: identical bounds are equal", () => {
+  assert.equal(C.boundsApproxEqual(LOADED, { ...LOADED }), true);
 });
 
-test("boundsContains: a strictly smaller inner box is contained", () => {
-  const inner = { west: -77.05, south: 38.85, east: -76.98, north: 38.93 };
-  assert.equal(C.boundsContains(LOADED, inner), true);
+test("boundsApproxEqual: sub-epsilon float jitter still counts as equal", () => {
+  const jittered = {
+    west: LOADED.west + 1e-9,
+    south: LOADED.south - 1e-9,
+    east: LOADED.east + 1e-9,
+    north: LOADED.north - 1e-9,
+  };
+  assert.equal(C.boundsApproxEqual(LOADED, jittered), true);
 });
 
-test("boundsContains: touching the edge still counts as contained", () => {
-  const edge = { ...LOADED, east: LOADED.east }; // shares the east edge exactly
-  assert.equal(C.boundsContains(LOADED, edge), true);
+test("boundsApproxEqual: a real difference (any edge) is not equal", () => {
+  assert.equal(C.boundsApproxEqual(LOADED, { ...LOADED, west: -77.10 }), false);
+  assert.equal(C.boundsApproxEqual(LOADED, { ...LOADED, north: 38.98 }), false);
 });
 
-test("boundsContains: a box past any single edge is not contained", () => {
-  assert.equal(C.boundsContains(LOADED, { ...LOADED, west: -77.20 }), false); // off west
-  assert.equal(C.boundsContains(LOADED, { ...LOADED, east: -76.80 }), false); // off east
-  assert.equal(C.boundsContains(LOADED, { ...LOADED, south: 38.70 }), false); // off south
-  assert.equal(C.boundsContains(LOADED, { ...LOADED, north: 39.10 }), false); // off north
+test("boundsApproxEqual: epsilon is configurable", () => {
+  const off = { ...LOADED, west: LOADED.west + 0.001 };
+  assert.equal(C.boundsApproxEqual(LOADED, off, 1e-7), false);
+  assert.equal(C.boundsApproxEqual(LOADED, off, 0.01), true);
 });
 
-test("boundsContains: null inputs are never contained", () => {
-  assert.equal(C.boundsContains(null, LOADED), false);
-  assert.equal(C.boundsContains(LOADED, null), false);
-  assert.equal(C.boundsContains(undefined, undefined), false);
+test("boundsApproxEqual: null inputs are never equal", () => {
+  assert.equal(C.boundsApproxEqual(null, LOADED), false);
+  assert.equal(C.boundsApproxEqual(LOADED, null), false);
+  assert.equal(C.boundsApproxEqual(undefined, undefined), false);
 });
 
-// --- isViewCovered (the reload-skip decision) ----------------------------
+// --- viewUnchanged (the reload-skip decision) ----------------------------
 
-test("isViewCovered: skips reload when the view is unchanged at the same zoom", () => {
-  assert.equal(C.isViewCovered(opts()), true);
+test("viewUnchanged: skips reload on a no-op settle (same view, same zoom)", () => {
+  assert.equal(C.viewUnchanged(opts()), true);
 });
 
-test("isViewCovered: skips reload when panned to a view inside the loaded extent", () => {
-  // e.g. zoomed in within an already-loaded extent.
-  const inside = { west: -77.05, south: 38.85, east: -76.98, north: 38.93 };
-  assert.equal(C.isViewCovered(opts({ currentBounds: inside })), true);
+test("viewUnchanged: tolerates sub-epsilon jitter from an animated settle", () => {
+  const jittered = { ...LOADED, east: LOADED.east + 1e-9 };
+  assert.equal(C.viewUnchanged(opts({ currentBounds: jittered })), true);
 });
 
-test("isViewCovered: forces a reload when nothing complete has loaded (null bounds)", () => {
-  // loadedBounds is null after a TRUNCATED load (e.g. dense citywide view), so
-  // panning keeps refetching to draw fuller data.
-  assert.equal(C.isViewCovered(opts({ loadedBounds: null })), false);
-  assert.equal(C.isViewCovered({}), false);
+test("viewUnchanged: forces a reload before anything has loaded (null bounds)", () => {
+  assert.equal(C.viewUnchanged(opts({ loadedBounds: null })), false);
+  assert.equal(C.viewUnchanged({}), false);
 });
 
-test("isViewCovered: forces a reload on any zoom change (in or out)", () => {
-  assert.equal(C.isViewCovered(opts({ currentZoom: ZOOM + 1 })), false); // zoom in
-  assert.equal(C.isViewCovered(opts({ currentZoom: ZOOM - 1 })), false); // zoom out
+test("viewUnchanged: forces a reload on any zoom change (in or out)", () => {
+  assert.equal(C.viewUnchanged(opts({ currentZoom: ZOOM + 1 })), false); // zoom in
+  assert.equal(C.viewUnchanged(opts({ currentZoom: ZOOM - 1 })), false); // zoom out
 });
 
-test("isViewCovered: forces a reload when the view moves outside the loaded extent", () => {
-  const outside = { west: -77.30, south: 38.85, east: -77.18, north: 38.93 };
-  assert.equal(C.isViewCovered(opts({ currentBounds: outside })), false);
-});
-
-test("isViewCovered: a same-zoom pan to a same-size shifted view reloads", () => {
-  // Real pans shift a same-size box, so it leaves the loaded extent and must
-  // reload. (Identical-bounds moveends — popup autopans, momentum settles — are
-  // the case the guard actually saves.)
+test("viewUnchanged: forces a reload on a real pan", () => {
   const width = LOADED.east - LOADED.west;
-  const shifted = {
+  const panned = {
     west: LOADED.west + width / 2,
     east: LOADED.east + width / 2,
     south: LOADED.south,
     north: LOADED.north,
   };
-  assert.equal(C.isViewCovered(opts({ currentBounds: shifted })), false);
+  assert.equal(C.viewUnchanged(opts({ currentBounds: panned })), false);
+});
+
+test("viewUnchanged: a smaller view inside the loaded extent still reloads", () => {
+  // The view CHANGED, so KPIs/hotspots/notes/violations must refresh — the
+  // guard must NOT treat 'contained' as covered.
+  const inside = { west: -77.05, south: 38.85, east: -76.98, north: 38.93 };
+  assert.equal(C.viewUnchanged(opts({ currentBounds: inside })), false);
 });

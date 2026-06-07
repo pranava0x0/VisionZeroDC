@@ -49,7 +49,7 @@ python3 tests/test_snapshot.py   # pipeline: area math, aggregation, denominator
 node --test                      # frontend pure logic in src/crash-logic.js (severity, triage, URL state, map reload guard)
 ```
 
-The frontend's pure, DOM-free logic lives in [src/crash-logic.js](src/crash-logic.js) (loaded before `app.js` in the browser, `require()`d by the Node tests) so it can be unit-tested without a browser. Triage-score weights are duplicated in `pipeline/snapshot.py` and `src/crash-logic.js`; tests in both suites guard against them drifting apart. The map's reload-skip decision (`isViewCovered` / `boundsContains`) is also pure and tested in [tests/map-perf.test.mjs](tests/map-perf.test.mjs) so a refactor can't silently make the map refetch on every pan.
+The frontend's pure, DOM-free logic lives in [src/crash-logic.js](src/crash-logic.js) (loaded before `app.js` in the browser, `require()`d by the Node tests) so it can be unit-tested without a browser. Triage-score weights are duplicated in `pipeline/snapshot.py` and `src/crash-logic.js`; tests in both suites guard against them drifting apart. The map's reload-skip decision (`viewUnchanged` / `boundsApproxEqual`) is also pure and tested in [tests/map-perf.test.mjs](tests/map-perf.test.mjs); it only skips a reload on a genuine no-op settle, so "current view" summaries (KPIs, hotspots, notes, violations) never go stale.
 
 ### Continuous integration
 

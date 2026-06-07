@@ -1380,7 +1380,7 @@ body.violations-visible .violations-source-container {
 .site-nav .nav-links a {
   display: inline-flex;
   align-items: center;
-  min-height: 40px;
+  min-height: 44px;
   padding: 8px 16px;
   border-radius: var(--radius-pill);
   color: var(--text-muted);
@@ -1556,6 +1556,9 @@ body.violations-visible .violations-source-container {
 .rec-problem {
   margin: 0;
   font-size: 0.9rem;
+}
+.rec-confidence {
+  margin: 0;
 }
 .rec-line {
   margin: 0;
@@ -1740,7 +1743,7 @@ p.rec-key {
   }
   .section-jump a {
     flex: 0 0 auto;
-    min-height: 36px;
+    min-height: 44px;
     display: inline-flex;
     align-items: center;
     padding: 6px 16px;
@@ -1771,7 +1774,7 @@ p.rec-key {
     align-items: center;
     gap: 6px;
     width: fit-content;
-    min-height: 40px;
+    min-height: 44px;
     padding: 8px 16px;
     border-radius: var(--radius-pill);
     border: 1px solid var(--brand-strong);
