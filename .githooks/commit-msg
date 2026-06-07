@@ -1,0 +1,22 @@
+#!/bin/sh
+# commit-msg hook: strip AI co-author / attribution trailers from commit messages.
+#
+# Project policy (AGENTS.md): no AI assistant is ever credited as a commit
+# co-author. This hook enforces it automatically so a stray "Co-Authored-By:
+# Claude" or "Generated with Claude Code" trailer can never land, regardless of
+# any tool's default behavior. Human Co-Authored-By lines are left untouched.
+#
+# Enabled via:  git config core.hooksPath .githooks
+# (run scripts/setup-hooks.sh once after cloning).
+
+msg_file="$1"
+tmp_file="$msg_file.aiclean"
+
+grep -ivE '^[[:space:]]*Co-authored-by:.*(claude|anthropic)' "$msg_file" \
+  | grep -ivE 'Generated with \[?Claude Code' \
+  | grep -ivE 'noreply@anthropic\.com' \
+  | grep -ivE '^[[:space:]]*🤖' \
+  > "$tmp_file"
+
+mv "$tmp_file" "$msg_file"
+exit 0

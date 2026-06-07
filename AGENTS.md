@@ -141,8 +141,12 @@ This is a schema change. Do not do it casually.
 - Do not add a new framework, UI kit, map stack, charting dependency, font, or analytics SDK without a clear reason.
 - Do not edit baked `docs/data/*.json` by hand if a source or seed file generated it.
 - Do not expand scope inside a bug fix. Put follow-up ideas in `backlog.md`.
-- Do not use `--no-verify` to bypass tests or hooks.
-- Do not add AI co-author trailers to commits.
+- Do not use `--no-verify` to bypass tests or hooks (it would also skip the commit-msg hook below).
+- Do not add AI co-author trailers to commits. No AI assistant is ever credited as a
+  co-author. This is enforced automatically: the version-controlled `.githooks/commit-msg`
+  hook strips any `Co-Authored-By: Claude/Anthropic`, `Generated with Claude Code`, or
+  `🤖` attribution line. Enable it once per clone with `sh scripts/setup-hooks.sh`
+  (sets `core.hooksPath` to `.githooks`). Do not remove or weaken this hook.
 
 ---
 
