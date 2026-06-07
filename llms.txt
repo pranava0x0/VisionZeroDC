@@ -1,0 +1,36 @@
+# Vision Zero DC
+
+> Public-interest tool that reads official Washington, DC open crash data to show where people are killed or seriously injured on DC streets, who is hurt, and which evidence-backed interventions are best supported. Static site; every number traces to a primary source.
+
+The site has two pages — a Safety Overview (insights + recommendations) and an interactive Crash Map — backed by baked JSON generated from Open Data DC by a Python pipeline. Editorial rule: separate observed facts from estimates and judgments; recommendations are transparent evidence cards, never opaque "safety scores." KSI = people Killed or Seriously (major) Injured.
+
+## Pages
+
+- [Safety Overview](https://pranava0x0.github.io/VisionZeroDC/index.html): accountability scorecard (deaths & serious injuries vs. a settled baseline, honest about the missed 2024 target and preliminary recent years), multi-year deaths-vs-injuries trend, who-is-hurt by travel mode, the "where harm concentrates" headline, and evidence-backed policy recommendations.
+- [Crash Map](https://pranava0x0.github.io/VisionZeroDC/map.html): interactive Leaflet map of geocoded police-reported crashes with date / severity / mode / KSI-only filters, hot spots, ward crash rates with denominators, a moving-violations overlay, and per-crash case files. Filters and map view are URL-shareable.
+
+## Data (baked, machine-readable JSON)
+
+- [crash-summary.json](https://pranava0x0.github.io/VisionZeroDC/data/crash-summary.json): per-ward and per-year crash totals, KSI, severity-weighted triage score, exposure rates (per 100k residents and per sq mi), an accountability `scorecard`, and per-mode KSI — with full provenance and caveats. The canonical numeric source for the site.
+- [ward-denominators.json](https://pranava0x0.github.io/VisionZeroDC/data/ward-denominators.json): ward population (interim source, pending a direct primary-source citation) used as a rate denominator.
+- [countermeasures.json](https://pranava0x0.github.io/VisionZeroDC/data/countermeasures.json): proven traffic-safety interventions with cited crash-reduction effect sizes (flagged unverified until checked against the primary source).
+- [recommendations.json](https://pranava0x0.github.io/VisionZeroDC/data/recommendations.json): evidence-card recommendations (problem, location, evidence + sources, mechanism, equity check, confidence, uncertainty).
+
+## Documentation
+
+- [README](https://pranava0x0.github.io/VisionZeroDC/README.md): how to run locally, the data pipeline, the two pages, and the tests.
+- [CLAUDE.md](https://pranava0x0.github.io/VisionZeroDC/CLAUDE.md): project intent, the editorial promise, data principles, and recommendation rules.
+- [AGENTS.md](https://pranava0x0.github.io/VisionZeroDC/AGENTS.md): operating manual for AI agents, including token and web-search discipline.
+- [DESIGN.md](https://pranava0x0.github.io/VisionZeroDC/DESIGN.md): the visual and UX system.
+- [BACKLOG.md](https://pranava0x0.github.io/VisionZeroDC/BACKLOG.md): roadmap, peer-city research, and shipped items.
+
+## Authoritative sources
+
+- [Open Data DC — Crashes in DC](https://opendata.dc.gov/datasets/DCGIS::crashes-in-dc): the underlying crash dataset.
+- [DDOT Vision Zero](https://visionzero.dc.gov/): DC's official Vision Zero program and curated figures.
+- [DC Vision Zero crash dashboard](https://dcvisionzero.github.io/Crash-Injury-Dashboard/): DDOT's interactive crash/injury dashboard.
+
+## Optional
+
+- [llms-full.txt](https://pranava0x0.github.io/VisionZeroDC/llms-full.txt): fuller context — data dictionary, methodology, and caveats in one file.
+- [pipeline/snapshot.py](https://pranava0x0.github.io/VisionZeroDC/pipeline/snapshot.py): regenerates crash-summary.json from the live ArcGIS endpoints.

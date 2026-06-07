@@ -9,6 +9,10 @@ Static public-interest tool for reading DC crash data and related safety context
 
 A top nav links the two. Recommendation cards on the landing page deep-link into the map with the relevant filters applied.
 
+## For machine readers (llms.txt)
+
+[`llms.txt`](llms.txt) is a concise, link-first index of the pages, baked data files, docs, and authoritative sources, following the [llms.txt convention](https://llmstxt.org/). [`llms-full.txt`](llms-full.txt) adds the `crash-summary.json` data dictionary, methodology, and caveats in one file. Both are served at the site root (`/llms.txt`, `/llms-full.txt`) and avoid hardcoding volatile figures — they point to `data/crash-summary.json` as the canonical numeric source. Update them when pages, data files, or sources change.
+
 ## Run Locally
 
 ```bash

@@ -1,0 +1,57 @@
+# Vision Zero DC — Full Context
+
+> Public-interest tool that turns official Washington, DC open crash data into a readable safety picture and evidence-backed policy recommendations. Static site (HTML/CSS/JS + a Python pipeline), no backend. This file gives an LLM enough context to use the data and pages correctly without fetching everything.
+
+Current live numbers are NOT hardcoded here — read them from data/crash-summary.json so this file never goes stale.
+
+## What the project answers
+
+1. Where are people injured or killed on DC streets?
+2. Which corridors, intersections, and modes face the highest risk?
+3. What interventions are best supported by the evidence?
+4. What changed after a policy, camera, redesign, or project?
+
+Editorial promise (see CLAUDE.md): every numeric claim links to a primary source; separate observed facts from estimates and judgments; recommendations are transparent evidence cards, never opaque scores; avoid victim-blaming language; surface missingness; report wins alongside failures.
+
+## Pages
+
+- index.html — Safety Overview (logic: landing.js). Renders, from crash-summary.json: an accountability scorecard (A2), a deaths-vs-injuries trend (A3), KSI by travel mode (A4), and a "where harm concentrates" headline (A1); plus recommendation cards (from recommendations.json) and a countermeasure library (from countermeasures.json).
+- map.html — Crash Map (logic: app.js). Live Leaflet map querying DC ArcGIS directly, with date/severity/mode/KSI filters, hot spots, ward crash-rate table, moving-violations overlay, and per-crash case files. Filters + map view serialize to the URL query string (date, sev, mode, viol, vmonth, ksi, c=lat,lng, z=zoom).
+- src/crash-logic.js — shared pure logic (severity math, triage score, URL encode/decode), unit-tested in Node.
+
+## Data dictionary — data/crash-summary.json
+
+Top level: `schema_version`, `captured_at` (ISO), `generator`, `sources` (with query/page URLs), `method` (triage formula + notes), `caveats` (array), `scorecard`, `citywide_by_year` (array), `windows` (object keyed by date range).
+
+- `windows[key]` for key in {"2024","2025","2026","all"}: `label`, `since`, `citywide` (crashes, fatalities, major_injuries, minor_injuries, pedestrians_involved, bicycles_involved, speeding_involved), `ksi_by_mode` (array of {mode, vulnerable, fatalities, major_injuries, ksi}), and `wards` (array, sorted by triage_score) where each ward has: ward, crashes, fatalities, major_injuries, minor_injuries, pedestrians_involved, bicycles_involved, speeding_involved, triage_score, population, land_area_sq_mi, crashes_per_100k, crashes_per_sq_mi, ksi_per_100k, ksi_per_sq_mi. The "Unknown ward" bucket merges records with missing/unparseable ward labels (meaningful missingness — do not drop).
+- `scorecard`: baseline_window [2015,2019] and recent_window [2020,2024] averages for fatalities and ksi; latest_full_year + its fatalities/ksi; peak_recent_year/fatalities; preliminary_years; ytd_*; target_year (2024); data_quality note.
+- `citywide_by_year`: {year, crashes, fatalities, major_injuries, minor_injuries, ksi} for 2015–present.
+
+## Methodology
+
+- Triage score (screening heuristic, NOT an official DDOT ranking; components always visible): crashes + 40*fatalities + 12*major_injuries + 2*minor_injuries + 2*pedestrians_involved + 2*bicycles_involved + 1*speeding_involved.
+- KSI = fatalities + major (serious) injuries.
+- Exposure rates use ward population (per 100k) and ward land area computed from official 2022 ward polygons via a local equirectangular projection (per sq mi). Per-area is preferred over per-capita because DC wards are drawn toward equal population.
+- Scorecard accountability framing uses the settled 2020–2024 window (the 2015 open-data major-injury counts look anomalously high) and flags the most recent two years as preliminary because counts rise as records are coded.
+
+## Key caveats (do not present as settled without checking)
+
+- Open police-reported crash counts may differ from DDOT's curated Vision Zero figures.
+- The most recent ~2 years are preliminary (reporting lag).
+- Ward population is an interim figure from a Wikipedia table citing DC Health Matters / DC Office of Planning; replace with a direct primary source before final public analysis.
+- Countermeasure effect sizes are transcribed from cited sources and flagged unverified until re-checked.
+- "Where harm concentrates" is currently ward-grain; the stronger street-segment "X% of streets = Y% of KSI" figure needs a crashes↔High Injury Network spatial join (planned).
+- Moving-violation records are enforcement tickets, not crashes.
+
+## Regenerating the data
+
+`python3 pipeline/snapshot.py` (add `--refresh` to bypass the on-disk cache) fetches per-ward and per-year statistics from the DC ArcGIS endpoints, computes ward area + rates, joins denominators, and writes data/crash-summary.json with a pre-write sanity gate. Tests: `python3 tests/test_snapshot.py` and `node --test`.
+
+## Authoritative sources
+
+- Open Data DC — Crashes in DC: https://opendata.dc.gov/datasets/DCGIS::crashes-in-dc (ArcGIS layer .../Public_Safety_WebMercator/MapServer/24)
+- Open Data DC — Crash Details Table: .../Public_Safety_WebMercator/MapServer/25
+- DDOT Vision Zero: https://visionzero.dc.gov/
+- DDOT Vision Zero crash analysis: https://visionzero.dc.gov/pages/crash-analysis
+- DC Vision Zero crash dashboard: https://dcvisionzero.github.io/Crash-Injury-Dashboard/
+- Ward 2022 boundaries (DCGIS): .../Administrative_Other_Boundaries_WebMercator/MapServer/53
