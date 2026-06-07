@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-06-07T19:07:44Z",
+  "captured_at": "2026-06-07T19:34:13Z",
   "generator": "pipeline/snapshot.py",
   "sources": {
     "crashes": {
@@ -15,12 +15,12 @@
       "query_url": "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Administrative_Other_Boundaries_WebMercator/MapServer/53/query"
     },
     "population": {
-      "source_title": "Ward population (2022 estimate)",
-      "source_agency": "DC Health Matters / DC Office of Planning",
+      "source_title": "Wikipedia ward population table (2022 estimate)",
+      "source_agency": "Wikipedia, citing DC Health Matters / DC Office of Planning",
       "source_url": "https://en.wikipedia.org/wiki/Wards_of_Washington,_D.C.",
       "vintage": "2022",
       "captured_at": "2026-06-07",
-      "note": "2022 ward-level population estimates under the 2022 ward boundaries, as compiled by DC Health Matters and summarized on Wikipedia. Replace with a direct DC Office of Planning citation when available.",
+      "note": "2022 ward-level population estimates under the 2022 ward boundaries, summarized on Wikipedia with an attribution to DC Health Matters / DC Office of Planning. Treat as an interim denominator and replace with a direct primary-source citation when available.",
       "by_ward": {
         "Ward 1": 88846,
         "Ward 2": 89518,
@@ -40,6 +40,7 @@
   },
   "caveats": [
     "DC ward boundaries are redrawn each decade toward roughly equal population, so crashes-per-resident varies less across wards than crashes-per-area or crashes-per-road-mile. Treat per-capita ward comparison as weak and prefer per-area until road-mileage / VMT / trip denominators are added (see BACKLOG.md).",
+    "Population denominators are currently taken from a Wikipedia ward table that cites DC Health Matters / DC Office of Planning. Replace with a direct primary-source citation before relying on these rates in final public analysis.",
     "Population is a 2022 estimate, not a same-year match to every crash window. Rates spanning multiple years use a fixed denominator and are approximate.",
     "Land area is land only where the source distinguishes it; computed polygon area may include some non-land surface. It is an exposure proxy, not an official cadastral measure."
   ],

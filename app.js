@@ -847,8 +847,10 @@ function renderWardRates() {
   const captured = summary.captured_at
     ? formatDate(Date.parse(summary.captured_at))
     : "an unknown date";
-  els.wardRatesNote.textContent =
-    `Baked snapshot for ${win.label}. The date filter applies here; severity and mode filters do not (this table covers all severities and modes).`;
+  const filterNote = els.ksiToggle && els.ksiToggle.checked
+    ? "The date filter applies here; KSI, severity, and mode filters do not (this table covers all severities and modes)."
+    : "The date filter applies here; severity and mode filters do not (this table covers all severities and modes).";
+  els.wardRatesNote.textContent = `Baked snapshot for ${win.label}. ${filterNote}`;
   els.wardRatesCaveat.textContent =
     "Per-area is the more meaningful ward comparison: DC wards are drawn toward equal population, " +
     "so per-capita rates vary little and are easily skewed by commuter-heavy wards. Population is a " +
