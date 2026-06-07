@@ -485,6 +485,65 @@ body.violations-visible .violations-source-container {
   font-weight: 700;
 }
 
+.ward-rates-panel {
+  padding-top: 16px;
+  margin-top: 16px;
+  border-top: 2px solid var(--rule);
+}
+
+.ward-rates-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.ward-rates-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.86rem;
+}
+
+.ward-rates-table th,
+.ward-rates-table td {
+  padding: 6px 4px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.ward-rates-table th {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+
+.ward-rates-table th.num,
+.ward-rates-table td.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.ward-rates-table td.num.lead {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.ward-rates-table tbody tr:hover {
+  background: var(--surface-2);
+}
+
+.ward-rates-caveat {
+  margin-top: 12px;
+  font-size: 0.78rem;
+  color: var(--text-soft);
+}
+
 .pill-row {
   display: flex;
   flex-wrap: wrap;

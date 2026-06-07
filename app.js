@@ -92,6 +92,22 @@ const DC_BOUNDS = [
   [38.995, -76.91],
 ];
 
+// Pure crash logic lives in src/crash-logic.js (loaded before this script) so
+// it can be unit-tested in Node. See tests/crash-logic.test.mjs.
+const {
+  FILTER_DEFAULTS,
+  FILTER_OPTIONS,
+  crashStats,
+  severityFor,
+  cleanLocationName,
+  triageScore,
+  parseHotspot,
+  formatRate,
+  decodeFilters,
+  parseView,
+  encodeState,
+} = window.CrashLogic;
+
 const els = {
   dateRange: document.querySelector("#date-range"),
   severity: document.querySelector("#severity-filter"),
@@ -113,6 +129,10 @@ const els = {
   detailTitle: document.querySelector("#detail-title"),
   docketStamp: document.querySelector("#docket-stamp"),
   detailBody: document.querySelector("#detail-body"),
+  wardRatesNote: document.querySelector("#ward-rates-note"),
+  wardRatesSort: document.querySelector("#ward-rates-sort"),
+  wardRatesBody: document.querySelector("#ward-rates-body"),
+  wardRatesCaveat: document.querySelector("#ward-rates-caveat"),
 };
 
 const state = {
@@ -124,7 +144,48 @@ const state = {
     locations: [],
     wards: [],
   },
+  summary: null,
 };
+
+// --- Shareable URL state (filters + map view) -----------------------------
+// Filters and map bounds are mirrored into the query string so a view can be
+// linked and restored. Defaults are omitted to keep shared URLs short.
+
+function applyUrlState() {
+  const f = decodeFilters(location.search);
+  els.dateRange.value = f.date;
+  els.severity.value = f.sev;
+  els.mode.value = f.mode;
+  if (f.vmonth && els.violationsSource.querySelector(`option[value="${CSS.escape(f.vmonth)}"]`)) {
+    els.violationsSource.value = f.vmonth;
+  }
+  if (f.violOn) {
+    els.violationsToggle.checked = true;
+    document.body.classList.add("violations-visible");
+  }
+}
+
+let urlWriteTimer = null;
+function writeUrlState() {
+  clearTimeout(urlWriteTimer);
+  urlWriteTimer = setTimeout(() => {
+    const center = map.getCenter();
+    const qs = encodeState({
+      date: els.dateRange.value,
+      sev: els.severity.value,
+      mode: els.mode.value,
+      violOn: els.violationsToggle.checked,
+      vmonth: els.violationsSource.value,
+      lat: center.lat,
+      lng: center.lng,
+      zoom: map.getZoom(),
+    });
+    history.replaceState(null, "", qs ? `?${qs}` : location.pathname);
+  }, 300);
+}
+
+applyUrlState();
+const initialView = parseView(location.search);
 
 const canvasRenderer = L.canvas({ tolerance: 10 });
 
@@ -133,11 +194,20 @@ const map = L.map("map", {
   zoomControl: true,
   maxBounds: DC_BOUNDS,
   maxBoundsViscosity: 0.65,
-}).fitBounds(DC_BOUNDS);
+});
+if (initialView) {
+  map.setView(initialView.center, initialView.zoom);
+} else {
+  map.fitBounds(DC_BOUNDS);
+}
 
 function settleMapSize() {
   map.invalidateSize();
-  map.fitBounds(DC_BOUNDS);
+  if (initialView) {
+    map.setView(initialView.center, initialView.zoom, { animate: false });
+  } else {
+    map.fitBounds(DC_BOUNDS);
+  }
 }
 
 requestAnimationFrame(settleMapSize);
@@ -184,40 +254,6 @@ function escapeHtml(value) {
 
 function quoteSql(value) {
   return String(value).replace(/'/g, "''");
-}
-
-function num(props, key) {
-  return Number(props[key] || 0);
-}
-
-function crashStats(props) {
-  const fatalities =
-    num(props, "FATAL_BICYCLIST") +
-    num(props, "FATAL_DRIVER") +
-    num(props, "FATAL_PEDESTRIAN") +
-    num(props, "FATALPASSENGER") +
-    num(props, "FATALOTHER");
-  const major =
-    num(props, "MAJORINJURIES_BICYCLIST") +
-    num(props, "MAJORINJURIES_DRIVER") +
-    num(props, "MAJORINJURIES_PEDESTRIAN") +
-    num(props, "MAJORINJURIESPASSENGER") +
-    num(props, "MAJORINJURIESOTHER");
-  const minor =
-    num(props, "MINORINJURIES_BICYCLIST") +
-    num(props, "MINORINJURIES_DRIVER") +
-    num(props, "MINORINJURIES_PEDESTRIAN") +
-    num(props, "MINORINJURIESPASSENGER") +
-    num(props, "MINORINJURIESOTHER");
-  return { fatalities, major, minor };
-}
-
-function severityFor(props) {
-  const stats = crashStats(props);
-  if (stats.fatalities > 0) return "fatal";
-  if (stats.major > 0) return "major";
-  if (stats.minor > 0) return "minor";
-  return "property";
 }
 
 function colorForSeverity(severity) {
@@ -359,49 +395,6 @@ async function loadGroupedHotspots(where, groupByFields, extraWhere, signal) {
   boundsParams(params);
   const json = await queryJson(CRASH_LAYER, params, signal);
   return json.features || [];
-}
-
-function attrNumber(attrs, key) {
-  return Number(attrs[key] ?? attrs[key.toUpperCase()] ?? 0);
-}
-
-function cleanLocationName(value) {
-  return String(value || "Location not available")
-    .replace(/\s*WASHINGTON,?\s*$/i, "")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-function triageScore(attrs) {
-  const crashes = attrNumber(attrs, "CRASH_COUNT");
-  const fatalities = attrNumber(attrs, "FATAL_COUNT");
-  const major = attrNumber(attrs, "MAJOR_COUNT");
-  const minor = attrNumber(attrs, "MINOR_COUNT");
-  const pedestrians = attrNumber(attrs, "PEDESTRIAN_COUNT");
-  const bicycles = attrNumber(attrs, "BICYCLE_COUNT");
-  const speeding = attrNumber(attrs, "SPEEDING_COUNT");
-
-  return crashes + fatalities * 40 + major * 12 + minor * 2 + pedestrians * 2 + bicycles * 2 + speeding;
-}
-
-function parseHotspot(feature, kind) {
-  const attrs = feature.attributes || {};
-  const location = kind === "ward" ? attrs.WARD || "Ward not available" : cleanLocationName(attrs.ADDRESS);
-  return {
-    kind,
-    location,
-    ward: attrs.WARD || "Ward not available",
-    crashes: attrNumber(attrs, "CRASH_COUNT"),
-    fatalities: attrNumber(attrs, "FATAL_COUNT"),
-    major: attrNumber(attrs, "MAJOR_COUNT"),
-    minor: attrNumber(attrs, "MINOR_COUNT"),
-    pedestrians: attrNumber(attrs, "PEDESTRIAN_COUNT"),
-    bicycles: attrNumber(attrs, "BICYCLE_COUNT"),
-    speeding: attrNumber(attrs, "SPEEDING_COUNT"),
-    lat: attrNumber(attrs, "AVG_LATITUDE"),
-    lon: attrNumber(attrs, "AVG_LONGITUDE"),
-    score: triageScore(attrs),
-  };
 }
 
 function renderHotspotLoading() {
@@ -815,7 +808,64 @@ function selectNearestCrash(event) {
   }
 }
 
+// --- Ward crash rates from the baked snapshot (exposure denominators) ------
+
+function renderWardRates() {
+  const summary = state.summary;
+  if (!summary) return;
+  const win = summary.windows[els.dateRange.value];
+  if (!win) return;
+
+  const sortField = els.wardRatesSort.value;
+  const rows = win.wards
+    .filter((r) => r.ward.startsWith("Ward "))
+    .slice()
+    .sort((a, b) => (b[sortField] ?? -1) - (a[sortField] ?? -1));
+
+  const lead = (field) => (field === sortField ? " lead" : "");
+  els.wardRatesBody.innerHTML = rows
+    .map(
+      (r) => `<tr>
+        <td>${escapeHtml(r.ward)}</td>
+        <td class="num${lead("crashes")}">${formatNumber(r.crashes)}</td>
+        <td class="num${lead("crashes_per_sq_mi")}">${formatRate(r.crashes_per_sq_mi)}</td>
+        <td class="num${lead("crashes_per_100k")}">${formatRate(r.crashes_per_100k)}</td>
+      </tr>`
+    )
+    .join("");
+
+  const captured = summary.captured_at
+    ? formatDate(Date.parse(summary.captured_at))
+    : "an unknown date";
+  els.wardRatesNote.textContent =
+    `Baked snapshot for ${win.label}. The date filter applies here; severity and mode filters do not (this table covers all severities and modes).`;
+  els.wardRatesCaveat.textContent =
+    "Per-area is the more meaningful ward comparison: DC wards are drawn toward equal population, " +
+    "so per-capita rates vary little and are easily skewed by commuter-heavy wards. Population is a " +
+    `2022 estimate; land area is computed from official ward polygons. Snapshot captured ${captured}.`;
+}
+
+async function loadWardRates() {
+  if (state.summary) {
+    renderWardRates();
+    return;
+  }
+  try {
+    const resp = await fetch("data/crash-summary.json", { cache: "no-cache" });
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    state.summary = await resp.json();
+  } catch (err) {
+    els.wardRatesNote.textContent =
+      "Ward rate snapshot unavailable. Run python3 pipeline/snapshot.py to generate data/crash-summary.json.";
+    els.wardRatesBody.innerHTML = '<tr><td colspan="4">No snapshot loaded.</td></tr>';
+    return;
+  }
+  renderWardRates();
+}
+
 function refreshAll() {
+  writeUrlState();
+  renderWardRates();
   loadCrashes();
   loadViolations();
 }
@@ -833,10 +883,16 @@ els.severity.addEventListener("change", refreshAll);
 els.mode.addEventListener("change", refreshAll);
 els.locationHotspots.addEventListener("click", handleHotspotClick);
 els.wardHotspots.addEventListener("click", handleHotspotClick);
+els.wardRatesSort.addEventListener("change", renderWardRates);
 els.violationsToggle.addEventListener("change", () => {
   document.body.classList.toggle("violations-visible", els.violationsToggle.checked);
+  writeUrlState();
   loadViolations();
 });
-els.violationsSource.addEventListener("change", loadViolations);
+els.violationsSource.addEventListener("change", () => {
+  writeUrlState();
+  loadViolations();
+});
 
+loadWardRates();
 refreshAll();
