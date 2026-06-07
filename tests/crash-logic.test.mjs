@@ -127,6 +127,7 @@ test("decodeFilters returns defaults for empty or invalid params", () => {
     mode: "all",
     violOn: false,
     vmonth: null,
+    ksiOn: false,
   });
   // invalid values fall back to defaults
   const f = C.decodeFilters("?date=1999&sev=bogus&mode=teleport");
@@ -135,14 +136,15 @@ test("decodeFilters returns defaults for empty or invalid params", () => {
   assert.equal(f.mode, "all");
 });
 
-test("decodeFilters reads valid filters and the violations overlay", () => {
-  const f = C.decodeFilters("?date=all&sev=fatal&mode=pedestrian&viol=1&vmonth=2025-11");
+test("decodeFilters reads valid filters, violations overlay, and KSI toggle", () => {
+  const f = C.decodeFilters("?date=all&sev=fatal&mode=pedestrian&viol=1&vmonth=2025-11&ksi=1");
   assert.deepEqual(f, {
     date: "all",
     sev: "fatal",
     mode: "pedestrian",
     violOn: true,
     vmonth: "2025-11",
+    ksiOn: true,
   });
 });
 
@@ -175,13 +177,14 @@ test("encodeState omits default filters to keep URLs short", () => {
   assert.equal(p.get("z"), "12");
 });
 
-test("encodeState includes non-default filters and the violations month", () => {
+test("encodeState includes non-default filters, violations month, and KSI", () => {
   const qs = C.encodeState({
     date: "all",
     sev: "fatal",
     mode: "pedestrian",
     violOn: true,
     vmonth: "2025-11",
+    ksiOn: true,
     lat: 38.901,
     lng: -77.03,
     zoom: 14,
@@ -192,10 +195,16 @@ test("encodeState includes non-default filters and the violations month", () => 
   assert.equal(p.get("mode"), "pedestrian");
   assert.equal(p.get("viol"), "1");
   assert.equal(p.get("vmonth"), "2025-11");
+  assert.equal(p.get("ksi"), "1");
+});
+
+test("encodeState omits the KSI flag when off", () => {
+  const p = new URLSearchParams(C.encodeState({ date: "2024", ksiOn: false, lat: 38.9, lng: -77, zoom: 12 }));
+  assert.equal(p.get("ksi"), null);
 });
 
 test("encode -> decode round-trips the filter state", () => {
-  const original = { date: "2025", sev: "major", mode: "bicycle", violOn: true, vmonth: "2026-01" };
+  const original = { date: "2025", sev: "major", mode: "bicycle", violOn: true, vmonth: "2026-01", ksiOn: true };
   const qs = C.encodeState({ ...original, lat: 38.9, lng: -77.0, zoom: 13 });
   const decoded = C.decodeFilters("?" + qs);
   assert.deepEqual(decoded, original);

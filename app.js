@@ -133,14 +133,7 @@ const els = {
   wardRatesSort: document.querySelector("#ward-rates-sort"),
   wardRatesBody: document.querySelector("#ward-rates-body"),
   wardRatesCaveat: document.querySelector("#ward-rates-caveat"),
-  insightsBand: document.querySelector(".insights-band"),
-  scDeaths: document.querySelector("#sc-deaths"),
-  scDeathsLabel: document.querySelector("#sc-deaths-label"),
-  scKsi: document.querySelector("#sc-ksi"),
-  scKsiLabel: document.querySelector("#sc-ksi-label"),
-  scContext: document.querySelector("#sc-context"),
-  hinHeadline: document.querySelector("#hin-headline"),
-  hinContext: document.querySelector("#hin-context"),
+  ksiToggle: document.querySelector("#ksi-toggle"),
 };
 
 const state = {
@@ -171,6 +164,7 @@ function applyUrlState() {
     els.violationsToggle.checked = true;
     document.body.classList.add("violations-visible");
   }
+  if (f.ksiOn && els.ksiToggle) els.ksiToggle.checked = true;
 }
 
 let urlWriteTimer = null;
@@ -184,6 +178,7 @@ function writeUrlState() {
       mode: els.mode.value,
       violOn: els.violationsToggle.checked,
       vmonth: els.violationsSource.value,
+      ksiOn: els.ksiToggle ? els.ksiToggle.checked : false,
       lat: center.lat,
       lng: center.lng,
       zoom: map.getZoom(),
@@ -303,6 +298,13 @@ function baseWhere() {
     clauses.push("TOTAL_BICYCLES > 0");
   } else if (els.mode.value === "speeding") {
     clauses.push("SPEEDING_INVOLVED > 0");
+  }
+
+  // C1 — KSI-only: restrict to crashes with a death or major (serious) injury.
+  if (els.ksiToggle && els.ksiToggle.checked) {
+    clauses.push(
+      "((FATAL_BICYCLIST + FATAL_DRIVER + FATAL_PEDESTRIAN + FATALPASSENGER + FATALOTHER) > 0 OR (MAJORINJURIES_BICYCLIST + MAJORINJURIES_DRIVER + MAJORINJURIES_PEDESTRIAN + MAJORINJURIESPASSENGER + MAJORINJURIESOTHER) > 0)"
+    );
   }
 
   return clauses.length ? clauses.join(" AND ") : "1=1";
@@ -816,56 +818,6 @@ function selectNearestCrash(event) {
   }
 }
 
-// --- Landing insights: accountability scorecard (A2) + concentration (A1) --
-
-function joinWithAnd(items) {
-  if (items.length <= 1) return String(items[0] ?? "");
-  return items.slice(0, -1).join(", ") + " and " + items[items.length - 1];
-}
-
-function renderInsights() {
-  const summary = state.summary;
-  if (!summary || !summary.scorecard) return;
-  const sc = summary.scorecard;
-
-  // A2 — accountability scorecard
-  els.scDeaths.textContent = formatNumber(sc.latest_full_year_fatalities);
-  els.scDeathsLabel.textContent = `traffic deaths in ${sc.latest_full_year} (preliminary)`;
-  els.scKsi.textContent = formatNumber(sc.latest_full_year_ksi);
-  els.scKsiLabel.textContent = `killed or seriously injured, ${sc.latest_full_year} (preliminary)`;
-  els.scContext.textContent =
-    `DC averaged ${sc.recent_avg_fatalities} deaths a year in ${sc.recent_window[0]}–${sc.recent_window[1]}, ` +
-    `reaching ${sc.peak_recent_fatalities} in ${sc.peak_recent_year} — the year it had targeted zero deaths ` +
-    `and serious injuries. The ${joinWithAnd(sc.preliminary_years)} counts are preliminary and rise as records are ` +
-    `coded. Figures are from open police-reported crash data and may differ from DDOT's curated counts.`;
-
-  // A1 — where harm concentrates (computed from the 2024-present window)
-  const win = summary.windows && summary.windows["2024"];
-  if (win) {
-    const wards = win.wards
-      .filter((w) => w.ward.startsWith("Ward ") && w.population)
-      .map((w) => ({ ...w, ksi: w.fatalities + w.major_injuries }));
-    const totalKsi = wards.reduce((s, w) => s + w.ksi, 0);
-    const totalPop = wards.reduce((s, w) => s + w.population, 0);
-    const top = [...wards].sort((a, b) => b.ksi - a.ksi).slice(0, 3);
-    if (totalKsi > 0 && totalPop > 0 && top.length === 3) {
-      const ksiShare = Math.round((top.reduce((s, w) => s + w.ksi, 0) / totalKsi) * 100);
-      const popShare = Math.round((top.reduce((s, w) => s + w.population, 0) / totalPop) * 100);
-      const nums = top.map((w) => Number(w.ward.replace("Ward ", ""))).sort((a, b) => a - b);
-      els.hinHeadline.innerHTML =
-        `Wards ${escapeHtml(joinWithAnd(nums))} — three of the District's eight — account for ` +
-        `<span class="pct">${ksiShare}%</span> of everyone killed or seriously injured since 2024, ` +
-        `while home to ${popShare}% of residents.`;
-    }
-  }
-  els.hinContext.innerHTML =
-    "Severe crashes cluster on a small share of streets and corridors. DDOT's " +
-    '<a href="https://visionzero.dc.gov/" target="_blank" rel="noopener noreferrer">High Injury Network</a> ' +
-    "targets these places for redesign and enforcement. Exact street-segment shares are a planned addition.";
-
-  els.insightsBand.hidden = false;
-}
-
 // --- Ward crash rates from the baked snapshot (exposure denominators) ------
 
 function renderWardRates() {
@@ -906,7 +858,6 @@ function renderWardRates() {
 async function loadWardRates() {
   if (state.summary) {
     renderWardRates();
-    renderInsights();
     return;
   }
   try {
@@ -920,7 +871,6 @@ async function loadWardRates() {
     return;
   }
   renderWardRates();
-  renderInsights();
 }
 
 function refreshAll() {
@@ -944,6 +894,7 @@ els.mode.addEventListener("change", refreshAll);
 els.locationHotspots.addEventListener("click", handleHotspotClick);
 els.wardHotspots.addEventListener("click", handleHotspotClick);
 els.wardRatesSort.addEventListener("change", renderWardRates);
+if (els.ksiToggle) els.ksiToggle.addEventListener("change", refreshAll);
 els.violationsToggle.addEventListener("change", () => {
   document.body.classList.toggle("violations-visible", els.violationsToggle.checked);
   writeUrlState();

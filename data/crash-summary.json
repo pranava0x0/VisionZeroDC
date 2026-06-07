@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-06-07T18:16:04Z",
+  "captured_at": "2026-06-07T19:07:44Z",
   "generator": "pipeline/snapshot.py",
   "sources": {
     "crashes": {
@@ -197,6 +197,43 @@
         "bicycles_involved": 1786,
         "speeding_involved": 1331
       },
+      "ksi_by_mode": [
+        {
+          "mode": "driver",
+          "vulnerable": false,
+          "fatalities": 33,
+          "major_injuries": 337,
+          "ksi": 370
+        },
+        {
+          "mode": "pedestrian",
+          "vulnerable": true,
+          "fatalities": 35,
+          "major_injuries": 200,
+          "ksi": 235
+        },
+        {
+          "mode": "passenger",
+          "vulnerable": false,
+          "fatalities": 12,
+          "major_injuries": 91,
+          "ksi": 103
+        },
+        {
+          "mode": "bicyclist",
+          "vulnerable": true,
+          "fatalities": 3,
+          "major_injuries": 99,
+          "ksi": 102
+        },
+        {
+          "mode": "other",
+          "vulnerable": false,
+          "fatalities": 3,
+          "major_injuries": 45,
+          "ksi": 48
+        }
+      ],
       "wards": [
         {
           "ward": "Ward 2",
@@ -365,6 +402,43 @@
         "bicycles_involved": 1159,
         "speeding_involved": 711
       },
+      "ksi_by_mode": [
+        {
+          "mode": "driver",
+          "vulnerable": false,
+          "fatalities": 12,
+          "major_injuries": 173,
+          "ksi": 185
+        },
+        {
+          "mode": "pedestrian",
+          "vulnerable": true,
+          "fatalities": 19,
+          "major_injuries": 115,
+          "ksi": 134
+        },
+        {
+          "mode": "bicyclist",
+          "vulnerable": true,
+          "fatalities": 1,
+          "major_injuries": 70,
+          "ksi": 71
+        },
+        {
+          "mode": "passenger",
+          "vulnerable": false,
+          "fatalities": 3,
+          "major_injuries": 43,
+          "ksi": 46
+        },
+        {
+          "mode": "other",
+          "vulnerable": false,
+          "fatalities": 1,
+          "major_injuries": 24,
+          "ksi": 25
+        }
+      ],
       "wards": [
         {
           "ward": "Ward 2",
@@ -516,6 +590,43 @@
         "bicycles_involved": 362,
         "speeding_involved": 197
       },
+      "ksi_by_mode": [
+        {
+          "mode": "driver",
+          "vulnerable": false,
+          "fatalities": 6,
+          "major_injuries": 49,
+          "ksi": 55
+        },
+        {
+          "mode": "pedestrian",
+          "vulnerable": true,
+          "fatalities": 5,
+          "major_injuries": 35,
+          "ksi": 40
+        },
+        {
+          "mode": "passenger",
+          "vulnerable": false,
+          "fatalities": 1,
+          "major_injuries": 15,
+          "ksi": 16
+        },
+        {
+          "mode": "bicyclist",
+          "vulnerable": true,
+          "fatalities": 1,
+          "major_injuries": 13,
+          "ksi": 14
+        },
+        {
+          "mode": "other",
+          "vulnerable": false,
+          "fatalities": 1,
+          "major_injuries": 9,
+          "ksi": 10
+        }
+      ],
       "wards": [
         {
           "ward": "Ward 2",
@@ -667,6 +778,43 @@
         "bicycles_involved": 7462,
         "speeding_involved": 7630
       },
+      "ksi_by_mode": [
+        {
+          "mode": "driver",
+          "vulnerable": false,
+          "fatalities": 385,
+          "major_injuries": 18165,
+          "ksi": 18550
+        },
+        {
+          "mode": "passenger",
+          "vulnerable": false,
+          "fatalities": 101,
+          "major_injuries": 5956,
+          "ksi": 6057
+        },
+        {
+          "mode": "pedestrian",
+          "vulnerable": true,
+          "fatalities": 189,
+          "major_injuries": 3776,
+          "ksi": 3965
+        },
+        {
+          "mode": "bicyclist",
+          "vulnerable": true,
+          "fatalities": 21,
+          "major_injuries": 568,
+          "ksi": 589
+        },
+        {
+          "mode": "other",
+          "vulnerable": false,
+          "fatalities": 6,
+          "major_injuries": 98,
+          "ksi": 104
+        }
+      ],
       "wards": [
         {
           "ward": "Ward 2",

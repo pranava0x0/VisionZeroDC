@@ -163,6 +163,33 @@ def test_build_joins_denominators_and_sorts_by_triage() -> None:
     assert citywide["crashes"] == 50 + 200 + 9
 
 
+def test_citywide_ksi_by_mode_splits_and_sorts() -> None:
+    feature = {
+        "attributes": {
+            "s_FATAL_PEDESTRIAN": 10,
+            "s_MAJORINJURIES_PEDESTRIAN": 90,
+            "s_FATAL_DRIVER": 5,
+            "s_MAJORINJURIES_DRIVER": 200,
+            "s_FATAL_BICYCLIST": 1,
+            "s_MAJORINJURIES_BICYCLIST": 19,
+        }
+    }
+    original = snapshot.fetch_json
+    snapshot.fetch_json = lambda url, params, *, refresh, label: {"features": [feature]}
+    try:
+        modes = snapshot.citywide_ksi_by_mode("2024-01-01", refresh=False)
+    finally:
+        snapshot.fetch_json = original
+
+    by_mode = {m["mode"]: m for m in modes}
+    assert by_mode["pedestrian"]["ksi"] == 100
+    assert by_mode["pedestrian"]["vulnerable"] is True
+    assert by_mode["driver"]["ksi"] == 205
+    assert by_mode["driver"]["vulnerable"] is False
+    # sorted by KSI descending: driver (205) before pedestrian (100)
+    assert modes[0]["mode"] == "driver"
+
+
 def test_build_scorecard_uses_settled_recent_window_and_flags_preliminary() -> None:
     # 2015 is an intentional outlier (high), like the real open data; the recent
     # window (2020-2024) is what the honest comparison should rely on.

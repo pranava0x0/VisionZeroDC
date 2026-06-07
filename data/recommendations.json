@@ -1,0 +1,57 @@
+{
+  "_about": "Evidence-backed policy recommendation cards. Each follows the CLAUDE.md recommendation rules (problem, location, evidence, mechanism, intervention, equity check, confidence, uncertainty) and links to proven countermeasures (data/countermeasures.json) plus a filtered map view. These are analyst-drafted starting points for human review, NOT automated or final policy.",
+  "_captured_at": "2026-06-07",
+  "recommendations": [
+    {
+      "id": "rec-east-of-river-pedestrian",
+      "title": "Prioritize a low-cost pedestrian-safety package east of the river",
+      "problem": "Severe crashes concentrate in a few wards and fall hardest on people walking. Wards 7 and 8 carry an outsized share of killed-or-seriously-injured cases relative to their population.",
+      "location_scope": "Wards 7 and 8 (corridor/intersection grain within them)",
+      "evidence": [
+        { "claim": "The three highest-burden wards account for ~49% of citywide KSI since 2024 while home to ~36% of residents.", "source_title": "Computed from Crashes in DC + ward population", "source_url": "https://opendata.dc.gov/datasets/DCGIS::crashes-in-dc" },
+        { "claim": "Pedestrians made up ~235 KSI in 2024-present with a high share of deaths, second only to drivers citywide.", "source_title": "Crashes in DC (per-mode fatal/major fields)", "source_url": "https://opendata.dc.gov/datasets/DCGIS::crashes-in-dc" }
+      ],
+      "countermeasure_ids": ["daylighting", "curb_extension", "leading_pedestrian_interval", "speed_limit_20"],
+      "mechanism": "Layering daylighting, curb extensions, leading pedestrian intervals, and lower speeds onto routine repaving improves sight lines, shortens crossings, and cuts impact speeds where pedestrians are most exposed.",
+      "intervention_type": "engineering + signal timing + speed management",
+      "equity_check": "Wards 7 and 8 have faced historic transportation disinvestment; investing engineering here addresses a disparate burden. The package is engineering-led, avoiding enforcement-heavy approaches that can fall unevenly.",
+      "confidence": "medium",
+      "uncertainty": "Ward grain is coarse; exact corridors need an intersection/HIN-level join. Recent-year counts are preliminary. KSI shares use a fixed population denominator.",
+      "map_link": "map.html?sev=major&mode=pedestrian"
+    },
+    {
+      "id": "rec-speed-management-hin",
+      "title": "Target speed management on the High Injury Network",
+      "problem": "Speed-involved crashes raise injury severity, and a small set of corridors carries most severe crashes. Enforcement alone is uneven; it should accompany engineering.",
+      "location_scope": "High Injury Network corridors citywide",
+      "evidence": [
+        { "claim": "Speeding is flagged in thousands of DC crashes and concentrates on higher-speed arterials.", "source_title": "Crashes in DC (SPEEDING_INVOLVED)", "source_url": "https://opendata.dc.gov/datasets/DCGIS::crashes-in-dc" },
+        { "claim": "A DDOT study reported ~20% fewer injuries around enforced locations (841 to 673 injury crashes).", "source_title": "DDOT speed-camera study (TRB)", "source_url": "https://ddot.dc.gov/sites/default/files/dc/sites/ddot/publication/attachments/Vision%20Zero%20Photo%20Enforcement%20-%20TRB%20Submission%20-%20Final.pdf" }
+      ],
+      "countermeasure_ids": ["road_diet", "automated_speed_camera", "speed_limit_20"],
+      "mechanism": "Road diets and lower limits reduce top-end speeds by design; automated enforcement reinforces them where geometry can't be changed quickly, lowering the speeds that drive crash severity.",
+      "intervention_type": "speed management + engineering",
+      "equity_check": "Automated enforcement can burden some communities disproportionately; lead with engineering, site cameras transparently on the HIN, and monitor ticket distribution.",
+      "confidence": "medium",
+      "uncertainty": "Exact HIN-corridor crash shares need a crashes-to-HIN spatial join (planned). Before/after camera effects are subject to regression-to-the-mean.",
+      "map_link": "map.html?mode=speeding"
+    },
+    {
+      "id": "rec-reverse-rising-deaths",
+      "title": "Scale cheap, systemic fixes to reverse the rising-deaths trend",
+      "problem": "DC set a goal of zero deaths and serious injuries by 2024 and did not meet it; traffic deaths rose through the early 2020s, peaking around 50 in 2024.",
+      "location_scope": "Citywide / programmatic",
+      "evidence": [
+        { "claim": "DC averaged ~43 traffic deaths a year in 2020-2024, peaking at 50 in 2024 — the target year.", "source_title": "Computed from Crashes in DC by year", "source_url": "https://opendata.dc.gov/datasets/DCGIS::crashes-in-dc" },
+        { "claim": "Hoboken NJ reached multiple consecutive years with zero traffic deaths using low-cost measures on routine repaving.", "source_title": "Results4America — Hoboken case study", "source_url": "https://catalog.results4america.org/case-studies/improving-traffic-safety-hoboken-nj" }
+      ],
+      "countermeasure_ids": ["daylighting", "curb_extension", "leading_pedestrian_interval", "speed_limit_20", "road_diet"],
+      "mechanism": "Systematically applying proven low-cost countermeasures across the network during repaving cycles compounds small safety gains citywide rather than waiting on large capital projects.",
+      "intervention_type": "engineering + speed management + budget",
+      "equity_check": "A systemic program should sequence by injury burden so historically disinvested wards are not last; keep the prioritization components visible.",
+      "confidence": "medium",
+      "uncertainty": "Open-data counts may differ from DDOT's curated figures; 2025-2026 are preliminary. Causal attribution of any future decline requires before/after evaluation.",
+      "map_link": "map.html?sev=major"
+    }
+  ]
+}

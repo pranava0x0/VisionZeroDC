@@ -141,6 +141,7 @@
       mode: pick("mode"),
       violOn: p.get("viol") === "1",
       vmonth: p.get("vmonth") || null,
+      ksiOn: p.get("ksi") === "1",
     };
   }
 
@@ -166,6 +167,7 @@
       p.set("viol", "1");
       if (s.vmonth) p.set("vmonth", s.vmonth);
     }
+    if (s.ksiOn) p.set("ksi", "1");
     if (Number.isFinite(s.lat) && Number.isFinite(s.lng)) {
       p.set("c", `${s.lat.toFixed(5)},${s.lng.toFixed(5)}`);
     }

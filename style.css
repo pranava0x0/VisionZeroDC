@@ -1245,3 +1245,324 @@ body.violations-visible .violations-source-container {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-muted);
 }
+
+/* ============================================================
+   Multi-page: shared nav + landing-page sections
+   ============================================================ */
+
+/* Shared top nav */
+.site-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 24px;
+  background: var(--rule);
+}
+.site-nav .nav-brand {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  color: #fff;
+  text-decoration: none;
+}
+.site-nav .nav-links {
+  display: flex;
+  gap: 4px;
+}
+.site-nav .nav-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 8px 14px;
+  color: #d7d7d2;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.site-nav .nav-links a:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+}
+.site-nav .nav-links a[aria-current="page"] {
+  color: #fff;
+  background: var(--accent);
+}
+
+/* Landing: charts band (trend + mode share) */
+.charts-band {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--rule);
+  border-bottom: 2px solid var(--rule);
+}
+.chart-card {
+  background: var(--paper);
+  padding: 22px 24px;
+}
+.chart-card h2 {
+  margin: 2px 0 14px;
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+}
+
+/* Trend sparklines */
+.trend-row {
+  display: grid;
+  gap: 6px;
+  padding: 10px 0;
+  border-top: 1px solid var(--border-soft);
+}
+.trend-row:first-child {
+  border-top: 0;
+}
+.trend-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.trend-label {
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.trend-range {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+.spark {
+  width: 100%;
+  height: 56px;
+  display: block;
+}
+.trend-stats {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+.trend-stats strong {
+  color: var(--text);
+}
+
+/* Mode share bars */
+.mode-row {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 0;
+  border-top: 1px solid var(--border-soft);
+}
+.mode-row:first-child {
+  border-top: 0;
+}
+.mode-name {
+  font-size: 0.85rem;
+}
+.vru-tag {
+  margin-left: 4px;
+  padding: 1px 4px;
+  border: 1px solid var(--mode-walking);
+  color: var(--mode-walking);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.mode-bar {
+  position: relative;
+  height: 14px;
+  background: var(--surface-2);
+}
+.mode-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--severity-major);
+}
+.mode-row.vulnerable .mode-fill {
+  background: var(--severity-fatal);
+}
+.mode-val {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+.mode-pct {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+/* Recommendations + countermeasures sections */
+.recs-section,
+.countermeasures-section {
+  padding: 24px;
+  border-bottom: 1px solid var(--border);
+}
+.section-heading {
+  margin: 4px 0 6px;
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+}
+.section-intro {
+  max-width: 70ch;
+  margin: 0 0 18px;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+.recs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+}
+.rec-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.rec-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+.rec-head h3 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+}
+.rec-problem {
+  margin: 0;
+  font-size: 0.9rem;
+}
+.rec-line {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+.rec-key {
+  display: inline-block;
+  margin-right: 4px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+p.rec-key {
+  margin: 4px 0 2px;
+}
+.rec-cms {
+  margin: 0 0 4px;
+  padding-left: 18px;
+  font-size: 0.84rem;
+}
+.rec-evidence {
+  font-size: 0.84rem;
+}
+.rec-evidence summary {
+  cursor: pointer;
+  color: var(--link);
+}
+.rec-evidence ul {
+  margin: 6px 0;
+  padding-left: 18px;
+}
+.rec-line.uncertainty {
+  color: var(--text-soft);
+}
+.rec-actions {
+  margin-top: auto;
+}
+.rec-map-link {
+  font-weight: 700;
+  font-size: 0.86rem;
+  text-decoration: none;
+}
+.rec-map-link:hover {
+  text-decoration: underline;
+}
+
+/* Badges */
+.badge {
+  padding: 2px 6px;
+  border: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+.badge.conf-high {
+  color: var(--mode-biking);
+  border-color: var(--mode-biking);
+}
+.badge.conf-medium {
+  color: var(--severity-minor);
+  border-color: var(--severity-minor);
+}
+.badge.conf-low {
+  color: var(--text-muted);
+}
+.badge.unverified {
+  color: var(--severity-major);
+  border-color: var(--severity-major);
+}
+
+/* Countermeasure library */
+.cm-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+.cm-card {
+  padding: 14px;
+  border: 1px solid var(--border-soft);
+  background: var(--surface);
+}
+.cm-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+.cm-head h3 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 1rem;
+}
+.cm-type {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.cm-mech {
+  margin: 8px 0;
+  font-size: 0.84rem;
+}
+.cm-effect {
+  margin: 0 0 8px;
+  font-size: 0.82rem;
+}
+.cm-src {
+  margin: 0;
+  font-size: 0.78rem;
+}
+
+#snapshot-status.stale {
+  color: var(--severity-major);
+  font-weight: 700;
+}
+
+@media (max-width: 720px) {
+  .charts-band {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,6 +1,13 @@
-# Vision Zero DC Crash Map
+# Vision Zero DC
 
-Static prototype for mapping DC crash records and related safety context from official District open data sources.
+Static public-interest tool for reading DC crash data and related safety context from official District open data sources.
+
+## Pages
+
+- **`index.html` — Safety Overview (landing).** Accountability scorecard, deaths-vs-injuries trend, who-is-being-hurt mode share, the "where harm concentrates" headline, and evidence-backed policy recommendations + a countermeasure library. Reads the baked snapshot and curated JSON; no map libraries.
+- **`map.html` — Crash Map.** The interactive Leaflet map with date/severity/mode filters, a KSI-only toggle, moving-violations overlay, hot spots, ward crash rates, and per-crash case files. Shareable via URL state.
+
+A top nav links the two. Recommendation cards on the landing page deep-link into the map with the relevant filters applied.
 
 ## Run Locally
 
@@ -8,7 +15,7 @@ Static prototype for mapping DC crash records and related safety context from of
 python3 -m http.server 8050
 ```
 
-Open <http://localhost:8050>.
+Open <http://localhost:8050> (landing page); the crash map is at `/map.html`.
 
 The app has no build step and no package install. It uses Leaflet from a CDN and queries official DC ArcGIS/Open Data endpoints directly.
 
@@ -21,7 +28,9 @@ python3 pipeline/snapshot.py            # uses data/cache/ when present
 python3 pipeline/snapshot.py --refresh  # force re-fetch from ArcGIS
 ```
 
-This writes [data/crash-summary.json](data/crash-summary.json) (committed and served by the site) with per-ward crash totals, fatalities/injuries, the triage score, and exposure rates for each date window, plus full provenance and caveats. Denominators come from [data/ward-denominators.json](data/ward-denominators.json) (population) and computed ward polygon area. Re-runs are idempotent; raw caches live under `data/cache/` and are gitignored.
+This writes [data/crash-summary.json](data/crash-summary.json) (committed and served by the site) with per-ward crash totals, fatalities/injuries, the triage score, and exposure rates for each date window; a citywide `scorecard` and `citywide_by_year` trend; and per-window `ksi_by_mode` — plus full provenance and caveats. Denominators come from [data/ward-denominators.json](data/ward-denominators.json) (population) and computed ward polygon area. Re-runs are idempotent; raw caches live under `data/cache/` and are gitignored.
+
+Two curated (hand-authored, source-linked) files back the recommendations on the landing page: [data/countermeasures.json](data/countermeasures.json) (proven fixes with cited effect sizes; figures are flagged unverified until checked against the primary source) and [data/recommendations.json](data/recommendations.json) (evidence cards following the CLAUDE.md recommendation fields).
 
 ## Sharing Views
 
