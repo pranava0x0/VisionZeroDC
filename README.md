@@ -12,6 +12,32 @@ Open <http://localhost:8050>.
 
 The app has no build step and no package install. It uses Leaflet from a CDN and queries official DC ArcGIS/Open Data endpoints directly.
 
+## Data Pipeline
+
+Ward-level summaries (counts, KSI, and exposure rates) are precomputed into a baked file so the frontend does not depend on fragile live grouped queries for that view.
+
+```bash
+python3 pipeline/snapshot.py            # uses data/cache/ when present
+python3 pipeline/snapshot.py --refresh  # force re-fetch from ArcGIS
+```
+
+This writes [data/crash-summary.json](data/crash-summary.json) (committed and served by the site) with per-ward crash totals, fatalities/injuries, the triage score, and exposure rates for each date window, plus full provenance and caveats. Denominators come from [data/ward-denominators.json](data/ward-denominators.json) (population) and computed ward polygon area. Re-runs are idempotent; raw caches live under `data/cache/` and are gitignored.
+
+## Sharing Views
+
+Filters (date, severity, mode, moving-violations month) and the map center/zoom are mirrored into the URL query string, so any view can be copied from the address bar and reopened. Default filter values are omitted to keep shared links short.
+
+## Tests
+
+No test framework or dependencies — both suites use built-in runners.
+
+```bash
+python3 tests/test_snapshot.py   # pipeline: area math, aggregation, denominator join, sanity gate
+node --test                      # frontend pure logic in src/crash-logic.js (severity, triage, URL state)
+```
+
+The frontend's pure, DOM-free logic lives in [src/crash-logic.js](src/crash-logic.js) (loaded before `app.js` in the browser, `require()`d by the Node tests) so it can be unit-tested without a browser. Triage-score weights are duplicated in `pipeline/snapshot.py` and `src/crash-logic.js`; tests in both suites guard against them drifting apart.
+
 ## Current Layers
 
 | Layer | Status | Source |
@@ -21,6 +47,8 @@ The app has no build step and no package install. It uses Leaflet from a CDN and
 | Vision Zero Tracker / dashboard | Linked as official framing and verified-metric context | `https://dcvisionzero.github.io/Crash-Injury-Dashboard/` |
 | Moving Violations | Implemented as optional contextual overlay for selected monthly tables | `Violations_Moving_2025` and `Violations_Moving_2026` MapServer tables |
 | Hot spots in view | Implemented as server-side grouped statistics by address/ward and by ward | `Crashes in DC` grouped queries |
+| Ward crash rates | Implemented from the baked snapshot with population and area denominators; rankable by crashes per sq mi, per 100k residents, or total | [data/crash-summary.json](data/crash-summary.json) via `pipeline/snapshot.py` |
+| Landing insights band | Implemented: an accountability scorecard (deaths + KSI vs. a settled baseline, honest about the missed 2024 target and preliminary recent years) and a "where harm concentrates" headline (ward KSI share vs. population share) | `scorecard` + `citywide_by_year` in the baked snapshot |
 
 ## Design Choice
 

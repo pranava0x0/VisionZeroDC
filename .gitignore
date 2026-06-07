@@ -16,3 +16,7 @@ uat-screenshots/
 node_modules/
 .npm
 .eslintcache
+
+# Pipeline caches and raw downloads (baked data/crash-summary.json IS committed)
+data/cache/
+data/raw/

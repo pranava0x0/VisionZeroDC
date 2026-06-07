@@ -5,6 +5,20 @@
 
 ---
 
+## Token And Effort Discipline
+
+Be judicious with tokens. The expensive failure mode here is fanning out a large multi-agent or deep-research flow, having it stall or return noise, and burning a large budget before producing anything useful.
+
+- **Efficient first, then fan out and scale.** Solve the task the cheapest way that can work, confirm the approach produces good results, and only then widen to parallel agents, deep research, or large sweeps.
+- **Start with one cheap probe.** Before a broad run, do a single small fetch / one search / one file read to confirm the source, schema, and query shape are right. A 5,000-row pull that returns garbage costs more than the one row that would have caught it.
+- **Prefer the local, static, cached path.** Reuse cached data, baked JSON, and existing code before issuing new live queries or spawning agents. Re-runs should not re-fetch unchanged data.
+- **Scope deep research narrowly.** These flows can fail or wander. Give them a tight, verifiable question, a small source set, and a clear stop condition. Do not launch one to answer something a targeted query or a doc already answers.
+- **Match the tool to the task size.** Single-fact lookup → read it directly. Bounded change → do it inline. Reserve multi-agent orchestration for work that genuinely needs breadth, and say so before spending on it.
+- **Fail fast and stop.** If a flow is not converging, stop, report what you have, and pick a cheaper approach rather than retrying the same expensive path.
+- **Surface the cost/benefit before a big spend.** If a step will be token-heavy, state why it earns the cost and what the cheaper alternative would miss.
+
+---
+
 ## Read These First
 
 Before touching code or data, read:
@@ -127,8 +141,12 @@ This is a schema change. Do not do it casually.
 - Do not add a new framework, UI kit, map stack, charting dependency, font, or analytics SDK without a clear reason.
 - Do not edit baked `docs/data/*.json` by hand if a source or seed file generated it.
 - Do not expand scope inside a bug fix. Put follow-up ideas in `backlog.md`.
-- Do not use `--no-verify` to bypass tests or hooks.
-- Do not add AI co-author trailers to commits.
+- Do not use `--no-verify` to bypass tests or hooks (it would also skip the commit-msg hook below).
+- Do not add AI co-author trailers to commits. No AI assistant is ever credited as a
+  co-author. This is enforced automatically: the version-controlled `.githooks/commit-msg`
+  hook strips any `Co-Authored-By: Claude/Anthropic`, `Generated with Claude Code`, or
+  `🤖` attribution line. Enable it once per clone with `sh scripts/setup-hooks.sh`
+  (sets `core.hooksPath` to `.githooks`). Do not remove or weaken this hook.
 
 ---
 

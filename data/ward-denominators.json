@@ -1,0 +1,33 @@
+{
+  "_about": "Canonical exposure denominators for DC ward-level crash rate context. Population is an external authoritative figure; land area is computed from official ward polygons by pipeline/snapshot.py. Edit population here when a newer authoritative count is published; do not hand-edit generated outputs.",
+  "_caveats": [
+    "DC ward boundaries are redrawn each decade toward roughly equal population, so crashes-per-resident varies less across wards than crashes-per-area or crashes-per-road-mile. Treat per-capita ward comparison as weak and prefer per-area until road-mileage / VMT / trip denominators are added (see BACKLOG.md).",
+    "Population is a 2022 estimate, not a same-year match to every crash window. Rates spanning multiple years use a fixed denominator and are approximate.",
+    "Land area is land only where the source distinguishes it; computed polygon area may include some non-land surface. It is an exposure proxy, not an official cadastral measure."
+  ],
+  "population": {
+    "source_title": "Ward population (2022 estimate)",
+    "source_agency": "DC Health Matters / DC Office of Planning",
+    "source_url": "https://en.wikipedia.org/wiki/Wards_of_Washington,_D.C.",
+    "vintage": "2022",
+    "captured_at": "2026-06-07",
+    "note": "2022 ward-level population estimates under the 2022 ward boundaries, as compiled by DC Health Matters and summarized on Wikipedia. Replace with a direct DC Office of Planning citation when available.",
+    "by_ward": {
+      "Ward 1": 88846,
+      "Ward 2": 89518,
+      "Ward 3": 81883,
+      "Ward 4": 83996,
+      "Ward 5": 86794,
+      "Ward 6": 99652,
+      "Ward 7": 77456,
+      "Ward 8": 77756
+    }
+  },
+  "land_area": {
+    "source_title": "Ward - 2022 boundary polygons",
+    "source_agency": "Open Data DC / DCGIS",
+    "source_url": "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Administrative_Other_Boundaries_WebMercator/MapServer/53",
+    "method": "Square miles computed from official ward polygons by pipeline/snapshot.py using a local equirectangular projection at DC latitude; written into data/crash-summary.json at build time.",
+    "note": "Values are emitted into crash-summary.json, not stored here, so they always match the polygon snapshot used for the build."
+  }
+}

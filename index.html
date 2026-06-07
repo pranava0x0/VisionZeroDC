@@ -38,6 +38,29 @@
       </p>
     </header>
 
+    <section class="insights-band" aria-label="Key safety insights" hidden>
+      <article class="insight scorecard" aria-label="DC traffic toll scorecard">
+        <p class="section-label">The toll on DC streets</p>
+        <div class="scorecard-figures">
+          <div class="big-figure">
+            <strong id="sc-deaths">-</strong>
+            <span id="sc-deaths-label">traffic deaths</span>
+          </div>
+          <div class="big-figure">
+            <strong id="sc-ksi">-</strong>
+            <span id="sc-ksi-label">killed or seriously injured</span>
+          </div>
+        </div>
+        <p id="sc-context" class="insight-context"></p>
+      </article>
+
+      <article class="insight hin-hero" aria-label="Where severe crashes concentrate">
+        <p class="section-label">Where harm concentrates</p>
+        <p id="hin-headline" class="hin-headline">-</p>
+        <p id="hin-context" class="insight-context"></p>
+      </article>
+    </section>
+
     <section class="toolbar" aria-label="Map controls">
       <div class="sentence-filter">
         Showing
@@ -145,6 +168,36 @@
           </div>
         </section>
 
+        <section class="ward-rates-panel" aria-label="Ward crash rates with exposure denominators">
+          <p class="section-label">Exposure context</p>
+          <h2>Ward crash rates</h2>
+          <p id="ward-rates-note" class="panel-note">Loading ward rate snapshot...</p>
+          <div class="ward-rates-controls">
+            <label for="ward-rates-sort">Rank by</label>
+            <span class="select-wrapper">
+              <select id="ward-rates-sort" aria-label="Ward rate ranking metric">
+                <option value="crashes_per_sq_mi" selected>crashes / sq mi</option>
+                <option value="crashes_per_100k">crashes / 100k residents</option>
+                <option value="crashes">total crashes</option>
+              </select>
+            </span>
+          </div>
+          <table class="ward-rates-table">
+            <thead>
+              <tr>
+                <th scope="col">Ward</th>
+                <th scope="col" class="num">Crashes</th>
+                <th scope="col" class="num">/ sq mi</th>
+                <th scope="col" class="num">/ 100k</th>
+              </tr>
+            </thead>
+            <tbody id="ward-rates-body">
+              <tr><td colspan="4">Loading ward rate snapshot...</td></tr>
+            </tbody>
+          </table>
+          <p id="ward-rates-caveat" class="ward-rates-caveat panel-note"></p>
+        </section>
+
         <section class="case-docket-section">
           <p class="section-label">Incident Case File</p>
           <div class="docket-header">
@@ -185,6 +238,7 @@
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
+    <script src="src/crash-logic.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
