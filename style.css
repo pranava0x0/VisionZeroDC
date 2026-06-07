@@ -143,6 +143,83 @@ a:focus-visible,
   line-height: 1.45;
 }
 
+/* Landing insights band: accountability scorecard (A2) + concentration hero (A1) */
+.insights-band {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--rule);
+  border-bottom: 2px solid var(--rule);
+}
+
+.insight {
+  padding: 22px 24px;
+  background: var(--paper);
+}
+
+.insight .section-label {
+  margin-bottom: 12px;
+}
+
+.scorecard-figures {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  margin-bottom: 12px;
+}
+
+.big-figure {
+  display: flex;
+  flex-direction: column;
+}
+
+.big-figure strong {
+  font-family: var(--font-serif);
+  font-size: 2.6rem;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.big-figure span {
+  margin-top: 6px;
+  max-width: 18ch;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  line-height: 1.3;
+}
+
+.hin-headline {
+  margin: 0 0 12px;
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  line-height: 1.25;
+}
+
+.hin-headline .pct {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.insight-context {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+.insight-context a {
+  color: var(--link);
+}
+
+@media (max-width: 720px) {
+  .insights-band {
+    grid-template-columns: 1fr;
+  }
+  .big-figure strong {
+    font-size: 2.1rem;
+  }
+}
+
 .toolbar {
   display: flex;
   flex-direction: column;

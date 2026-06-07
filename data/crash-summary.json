@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-06-07T17:51:28Z",
+  "captured_at": "2026-06-07T18:16:04Z",
   "generator": "pipeline/snapshot.py",
   "sources": {
     "crashes": {
@@ -42,6 +42,147 @@
     "DC ward boundaries are redrawn each decade toward roughly equal population, so crashes-per-resident varies less across wards than crashes-per-area or crashes-per-road-mile. Treat per-capita ward comparison as weak and prefer per-area until road-mileage / VMT / trip denominators are added (see BACKLOG.md).",
     "Population is a 2022 estimate, not a same-year match to every crash window. Rates spanning multiple years use a fixed denominator and are approximate.",
     "Land area is land only where the source distinguishes it; computed polygon area may include some non-land surface. It is an exposure proxy, not an official cadastral measure."
+  ],
+  "scorecard": {
+    "baseline_window": [
+      2015,
+      2019
+    ],
+    "baseline_years_used": [
+      2015,
+      2016,
+      2017,
+      2018,
+      2019
+    ],
+    "baseline_avg_fatalities": 39.0,
+    "baseline_avg_ksi": 817.8,
+    "recent_window": [
+      2020,
+      2024
+    ],
+    "recent_years_used": [
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ],
+    "recent_avg_fatalities": 43.4,
+    "recent_avg_ksi": 424.0,
+    "peak_recent_year": 2024,
+    "peak_recent_fatalities": 50,
+    "latest_full_year": 2025,
+    "latest_full_year_fatalities": 22,
+    "latest_full_year_ksi": 326,
+    "fatalities_change_vs_baseline_pct": -43.6,
+    "ytd_year": 2026,
+    "ytd_fatalities": 14,
+    "ytd_ksi": 135,
+    "preliminary_years": [
+      2025,
+      2026
+    ],
+    "target_year": 2024,
+    "data_quality": "Counts come from the open, police-reported Crashes in DC dataset and may differ from DDOT's curated Vision Zero figures. The most recent 2 years (2025, 2026) are preliminary and typically rise as records are coded. 2015 major-injury counts in the open data look anomalously high, so the comparison uses the settled 2020-2024 window. KSI = people killed or seriously (major) injured. DC set a goal of zero deaths and serious injuries by 2024 and did not meet it."
+  },
+  "citywide_by_year": [
+    {
+      "year": 2015,
+      "crashes": 22355,
+      "fatalities": 64,
+      "major_injuries": 2040,
+      "minor_injuries": 5811,
+      "ksi": 2104
+    },
+    {
+      "year": 2016,
+      "crashes": 26568,
+      "fatalities": 36,
+      "major_injuries": 507,
+      "minor_injuries": 7774,
+      "ksi": 543
+    },
+    {
+      "year": 2017,
+      "crashes": 26464,
+      "fatalities": 35,
+      "major_injuries": 467,
+      "minor_injuries": 8130,
+      "ksi": 502
+    },
+    {
+      "year": 2018,
+      "crashes": 26558,
+      "fatalities": 33,
+      "major_injuries": 433,
+      "minor_injuries": 8154,
+      "ksi": 466
+    },
+    {
+      "year": 2019,
+      "crashes": 26788,
+      "fatalities": 27,
+      "major_injuries": 447,
+      "minor_injuries": 8026,
+      "ksi": 474
+    },
+    {
+      "year": 2020,
+      "crashes": 18313,
+      "fatalities": 41,
+      "major_injuries": 380,
+      "minor_injuries": 5759,
+      "ksi": 421
+    },
+    {
+      "year": 2021,
+      "crashes": 21271,
+      "fatalities": 39,
+      "major_injuries": 441,
+      "minor_injuries": 6164,
+      "ksi": 480
+    },
+    {
+      "year": 2022,
+      "crashes": 18905,
+      "fatalities": 38,
+      "major_injuries": 369,
+      "minor_injuries": 6086,
+      "ksi": 407
+    },
+    {
+      "year": 2023,
+      "crashes": 20777,
+      "fatalities": 49,
+      "major_injuries": 366,
+      "minor_injuries": 6558,
+      "ksi": 415
+    },
+    {
+      "year": 2024,
+      "crashes": 20254,
+      "fatalities": 50,
+      "major_injuries": 347,
+      "minor_injuries": 6270,
+      "ksi": 397
+    },
+    {
+      "year": 2025,
+      "crashes": 18156,
+      "fatalities": 22,
+      "major_injuries": 304,
+      "minor_injuries": 5553,
+      "ksi": 326
+    },
+    {
+      "year": 2026,
+      "crashes": 7388,
+      "fatalities": 14,
+      "major_injuries": 121,
+      "minor_injuries": 2315,
+      "ksi": 135
+    }
   ],
   "windows": {
     "2024": {

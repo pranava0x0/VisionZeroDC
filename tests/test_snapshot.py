@@ -163,6 +163,51 @@ def test_build_joins_denominators_and_sorts_by_triage() -> None:
     assert citywide["crashes"] == 50 + 200 + 9
 
 
+def test_build_scorecard_uses_settled_recent_window_and_flags_preliminary() -> None:
+    # 2015 is an intentional outlier (high), like the real open data; the recent
+    # window (2020-2024) is what the honest comparison should rely on.
+    by_year = [
+        {"year": 2015, "crashes": 100, "fatalities": 64, "major_injuries": 2000, "ksi": 2064},
+        {"year": 2016, "crashes": 100, "fatalities": 36, "major_injuries": 500, "ksi": 536},
+        {"year": 2017, "crashes": 100, "fatalities": 35, "major_injuries": 470, "ksi": 505},
+        {"year": 2018, "crashes": 100, "fatalities": 33, "major_injuries": 433, "ksi": 466},
+        {"year": 2019, "crashes": 100, "fatalities": 27, "major_injuries": 447, "ksi": 474},
+        {"year": 2020, "crashes": 100, "fatalities": 41, "major_injuries": 380, "ksi": 421},
+        {"year": 2021, "crashes": 100, "fatalities": 39, "major_injuries": 441, "ksi": 480},
+        {"year": 2022, "crashes": 100, "fatalities": 38, "major_injuries": 369, "ksi": 407},
+        {"year": 2023, "crashes": 100, "fatalities": 49, "major_injuries": 366, "ksi": 415},
+        {"year": 2024, "crashes": 100, "fatalities": 50, "major_injuries": 347, "ksi": 397},
+        {"year": 2025, "crashes": 100, "fatalities": 22, "major_injuries": 304, "ksi": 326},
+        {"year": 2026, "crashes": 50, "fatalities": 14, "major_injuries": 121, "ksi": 135},
+    ]
+    sc = snapshot.build_scorecard(by_year, this_year=2026)
+
+    assert sc["recent_window"] == [2020, 2024]
+    assert sc["recent_years_used"] == [2020, 2021, 2022, 2023, 2024]
+    assert sc["recent_avg_fatalities"] == 43.4  # (41+39+38+49+50)/5
+    assert sc["peak_recent_year"] == 2024
+    assert sc["peak_recent_fatalities"] == 50
+    assert sc["latest_full_year"] == 2025
+    assert sc["latest_full_year_fatalities"] == 22
+    assert sc["preliminary_years"] == [2025, 2026]
+    assert sc["ytd_year"] == 2026 and sc["ytd_fatalities"] == 14
+    assert sc["target_year"] == 2024
+
+
+def test_build_scorecard_skips_missing_years() -> None:
+    # Only recent data present: baseline window has no data and must degrade to None.
+    by_year = [
+        {"year": 2023, "crashes": 100, "fatalities": 49, "major_injuries": 366, "ksi": 415},
+        {"year": 2024, "crashes": 100, "fatalities": 50, "major_injuries": 347, "ksi": 397},
+        {"year": 2025, "crashes": 100, "fatalities": 22, "major_injuries": 304, "ksi": 326},
+    ]
+    sc = snapshot.build_scorecard(by_year, this_year=2025)
+    assert sc["baseline_avg_fatalities"] is None
+    assert sc["baseline_years_used"] == []
+    assert sc["latest_full_year"] == 2024
+    assert sc["latest_full_year_fatalities"] == 50
+
+
 def test_ward_land_area_matches_square_geometry() -> None:
     original = _install_fake_fetch([])
     try:

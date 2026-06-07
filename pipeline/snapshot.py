@@ -225,6 +225,123 @@ def ward_statistics(since: str, *, refresh: bool) -> dict[str, dict[str, int]]:
     return wards
 
 
+# --- Citywide trend by year + accountability scorecard ---------------------
+
+# Vision Zero launched in DC in 2015; 2015-2019 is the pre-COVID baseline window.
+SCORECARD_BASELINE = (2015, 2019)
+# Recent, settled window used for the honest accountability comparison. Avoids the
+# 2015 open-data anomaly (its major-injury counts are far above 2016-2019) and the
+# reporting lag in the newest years.
+SCORECARD_RECENT = (2020, 2024)
+# The newest calendar years are still being coded, so their death/injury counts are
+# preliminary and tend to rise as records settle. Flag this many latest years.
+PRELIMINARY_YEARS = 2
+TREND_START_YEAR = 2015
+
+
+def citywide_by_year(*, refresh: bool, end_year: int) -> list[dict[str, int]]:
+    """Citywide crash + KSI totals per calendar year, TREND_START_YEAR..end_year."""
+    rows: list[dict[str, int]] = []
+    for year in range(TREND_START_YEAR, end_year + 1):
+        where = (
+            f"REPORTDATE >= DATE '{year}-01-01' AND REPORTDATE < DATE '{year + 1}-01-01'"
+        )
+        data = fetch_json(
+            CRASH_LAYER,
+            {"where": where, "outStatistics": _out_statistics()},
+            refresh=refresh,
+            label=f"year {year}",
+        )
+        feats = data.get("features", [])
+        attrs = feats[0]["attributes"] if feats else {}
+        crashes = int(attrs.get("N") or attrs.get("n") or 0)
+        fatal = _sum(attrs, FATAL_FIELDS)
+        major = _sum(attrs, MAJOR_FIELDS)
+        minor = _sum(attrs, MINOR_FIELDS)
+        rows.append(
+            {
+                "year": year,
+                "crashes": crashes,
+                "fatalities": fatal,
+                "major_injuries": major,
+                "minor_injuries": minor,
+                "ksi": fatal + major,
+            }
+        )
+    return rows
+
+
+def _window_avg(by: dict[int, dict[str, int]], lo: int, hi: int, metric: str):
+    """Average of a metric over a year window, using only years that have data."""
+    years = [y for y in range(lo, hi + 1) if by.get(y, {}).get("crashes", 0) > 0]
+    if not years:
+        return None, []
+    return round(sum(by[y][metric] for y in years) / len(years), 1), years
+
+
+def _pct_change(current, base) -> float | None:
+    if current is None or not base:
+        return None
+    return round((current - base) / base * 100, 1)
+
+
+def build_scorecard(by_year: list[dict[str, int]], *, this_year: int) -> dict[str, Any]:
+    """Accountability scorecard comparing recent traffic deaths/serious injuries to
+    the launch-era baseline, framed honestly around DC's missed 2024 target.
+
+    The headline year is the latest full year, but the most recent PRELIMINARY_YEARS
+    are flagged because their counts rise as records are coded. The "peak" year in the
+    settled recent window carries the real accountability story (deaths rose, not fell).
+    """
+    by = {r["year"]: r for r in by_year}
+    base_fatal, base_years = _window_avg(by, *SCORECARD_BASELINE, "fatalities")
+    base_ksi, _ = _window_avg(by, *SCORECARD_BASELINE, "ksi")
+    recent_fatal, recent_years = _window_avg(by, *SCORECARD_RECENT, "fatalities")
+    recent_ksi, _ = _window_avg(by, *SCORECARD_RECENT, "ksi")
+
+    latest_full_year = this_year - 1
+    latest = by.get(latest_full_year)
+    ytd = by.get(this_year)
+    preliminary_years = sorted(by)[-PRELIMINARY_YEARS:] if by else []
+
+    # Peak death year within the settled recent window (the accountability hook).
+    settled_recent = [by[y] for y in recent_years]
+    peak = max(settled_recent, key=lambda r: r["fatalities"]) if settled_recent else None
+
+    return {
+        "baseline_window": list(SCORECARD_BASELINE),
+        "baseline_years_used": base_years,
+        "baseline_avg_fatalities": base_fatal,
+        "baseline_avg_ksi": base_ksi,
+        "recent_window": list(SCORECARD_RECENT),
+        "recent_years_used": recent_years,
+        "recent_avg_fatalities": recent_fatal,
+        "recent_avg_ksi": recent_ksi,
+        "peak_recent_year": peak["year"] if peak else None,
+        "peak_recent_fatalities": peak["fatalities"] if peak else None,
+        "latest_full_year": latest_full_year,
+        "latest_full_year_fatalities": latest["fatalities"] if latest else None,
+        "latest_full_year_ksi": latest["ksi"] if latest else None,
+        "fatalities_change_vs_baseline_pct": _pct_change(
+            latest["fatalities"] if latest else None, base_fatal
+        ),
+        "ytd_year": this_year,
+        "ytd_fatalities": ytd["fatalities"] if ytd else None,
+        "ytd_ksi": ytd["ksi"] if ytd else None,
+        "preliminary_years": preliminary_years,
+        "target_year": 2024,
+        "data_quality": (
+            "Counts come from the open, police-reported Crashes in DC dataset and may "
+            "differ from DDOT's curated Vision Zero figures. The most recent "
+            f"{PRELIMINARY_YEARS} years ({', '.join(map(str, preliminary_years))}) are "
+            "preliminary and typically rise as records are coded. 2015 major-injury "
+            "counts in the open data look anomalously high, so the comparison uses the "
+            "settled 2020-2024 window. KSI = people killed or seriously (major) injured. "
+            "DC set a goal of zero deaths and serious injuries by 2024 and did not meet it."
+        ),
+    }
+
+
 # --- Ward land area from official polygons ---------------------------------
 
 
@@ -285,10 +402,13 @@ def rate_per(numerator: int, denominator: float | None, scale: float = 1.0) -> f
 
 
 def build(*, refresh: bool) -> dict[str, Any]:
-    captured_at = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    now = dt.datetime.now(dt.timezone.utc)
+    captured_at = now.strftime("%Y-%m-%dT%H:%M:%SZ")
     denominators = json.loads(DENOMINATORS_PATH.read_text())
     population = denominators["population"]["by_ward"]
     land_area = ward_land_area(refresh=refresh)
+    by_year = citywide_by_year(refresh=refresh, end_year=now.year)
+    scorecard = build_scorecard(by_year, this_year=now.year)
 
     windows_out: dict[str, Any] = {}
     for window in DATE_WINDOWS:
@@ -364,6 +484,8 @@ def build(*, refresh: bool) -> dict[str, Any]:
             "land_area": denominators["land_area"]["method"],
         },
         "caveats": denominators["_caveats"],
+        "scorecard": scorecard,
+        "citywide_by_year": by_year,
         "windows": windows_out,
     }
 

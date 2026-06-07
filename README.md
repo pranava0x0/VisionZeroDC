@@ -48,6 +48,7 @@ The frontend's pure, DOM-free logic lives in [src/crash-logic.js](src/crash-logi
 | Moving Violations | Implemented as optional contextual overlay for selected monthly tables | `Violations_Moving_2025` and `Violations_Moving_2026` MapServer tables |
 | Hot spots in view | Implemented as server-side grouped statistics by address/ward and by ward | `Crashes in DC` grouped queries |
 | Ward crash rates | Implemented from the baked snapshot with population and area denominators; rankable by crashes per sq mi, per 100k residents, or total | [data/crash-summary.json](data/crash-summary.json) via `pipeline/snapshot.py` |
+| Landing insights band | Implemented: an accountability scorecard (deaths + KSI vs. a settled baseline, honest about the missed 2024 target and preliminary recent years) and a "where harm concentrates" headline (ward KSI share vs. population share) | `scorecard` + `citywide_by_year` in the baked snapshot |
 
 ## Design Choice
 
