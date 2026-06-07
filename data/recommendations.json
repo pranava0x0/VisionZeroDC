@@ -9,7 +9,7 @@
       "location_scope": "Wards 7 and 8 (corridor/intersection grain within them)",
       "evidence": [
         { "claim": "The three highest-burden wards account for ~49% of citywide KSI since 2024.", "source_title": "Computed from Crashes in DC", "source_url": "https://opendata.dc.gov/datasets/DCGIS::crashes-in-dc" },
-        { "claim": "Those same wards are home to ~36% of residents using the current interim ward-population denominator.", "source_title": "Wikipedia ward population table, cited in data/ward-denominators.json", "source_url": "data/ward-denominators.json" },
+        { "claim": "Those same wards are home to ~36% of residents using the current interim ward-population denominator.", "source_title": "Ward population (interim) — Wikipedia, citing DC Health Matters / DC Office of Planning", "source_url": "https://en.wikipedia.org/wiki/Wards_of_Washington,_D.C." },
         { "claim": "Pedestrians made up ~235 KSI in 2024-present with a high share of deaths, second only to drivers citywide.", "source_title": "Crashes in DC (per-mode fatal/major fields)", "source_url": "https://opendata.dc.gov/datasets/DCGIS::crashes-in-dc" }
       ],
       "countermeasure_ids": ["daylighting", "curb_extension", "leading_pedestrian_interval", "speed_limit_20"],
@@ -18,7 +18,7 @@
       "equity_check": "Wards 7 and 8 have faced historic transportation disinvestment; investing engineering here addresses a disparate burden. The package is engineering-led, avoiding enforcement-heavy approaches that can fall unevenly.",
       "confidence": "medium",
       "uncertainty": "Ward grain is coarse; exact corridors need an intersection/HIN-level join. Recent-year counts are preliminary. KSI shares use a fixed population denominator.",
-      "map_link": "map.html?sev=major&mode=pedestrian"
+      "map_link": "map.html?sev=major&mode=pedestrian&c=38.868,-76.97&z=13"
     },
     {
       "id": "rec-speed-management-hin",

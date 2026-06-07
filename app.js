@@ -354,9 +354,43 @@ function scopedWhere(where, extraClause) {
   return extraClause ? `(${where}) AND (${extraClause})` : where;
 }
 
-async function queryJson(url, params, signal) {
-  const response = await fetch(`${url}?${params.toString()}`, { signal });
-  if (!response.ok) throw new Error(`Request failed: ${response.status}`);
+function sleep(ms, signal) {
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(resolve, ms);
+    if (signal) {
+      signal.addEventListener(
+        "abort",
+        () => {
+          clearTimeout(timer);
+          reject(new DOMException("Aborted", "AbortError"));
+        },
+        { once: true }
+      );
+    }
+  });
+}
+
+// Fetch JSON with backoff retries for TRANSIENT failures only — network errors
+// (e.g. "Failed to fetch") and 429/5xx. Aborts and ArcGIS query errors are not
+// retried. Smooths over the flaky first-load fetches against the DC ArcGIS host.
+async function queryJson(url, params, signal, retries = 2) {
+  const target = `${url}?${params.toString()}`;
+  let response;
+  for (let attempt = 0; ; attempt++) {
+    try {
+      response = await fetch(target, { signal });
+    } catch (err) {
+      if (err.name === "AbortError" || attempt >= retries) throw err;
+      await sleep(300 * 2 ** attempt, signal);
+      continue;
+    }
+    if (response.ok) break;
+    if ((response.status === 429 || response.status >= 500) && attempt < retries) {
+      await sleep(300 * 2 ** attempt, signal);
+      continue;
+    }
+    throw new Error(`Request failed: ${response.status}`);
+  }
   const json = await response.json();
   if (json.error) throw new Error(json.error.message || "ArcGIS query error");
   return json;
@@ -385,10 +419,7 @@ async function loadCrashPage(where, offset, signal) {
     f: "geojson",
   });
   boundsParams(params);
-  const response = await fetch(`${CRASH_LAYER}?${params.toString()}`, { signal });
-  if (!response.ok) throw new Error(`Crash request failed: ${response.status}`);
-  const json = await response.json();
-  if (json.error) throw new Error(json.error.message || "Crash query error");
+  const json = await queryJson(CRASH_LAYER, params, signal);
   return json.features || [];
 }
 

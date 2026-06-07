@@ -42,6 +42,15 @@ function joinWithAnd(items) {
   return items.slice(0, -1).join(", ") + " and " + items[items.length - 1];
 }
 
+// Render a source as an external link only when it's a real http(s) URL; otherwise
+// show plain text so a relative path can't open a raw data file in a new tab.
+function sourceLink(url, title) {
+  const label = esc(title || "source");
+  return /^https?:\/\//i.test(url || "")
+    ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${label}</a>`
+    : `<span class="src-plain">${label}</span>`;
+}
+
 // --- A2 scorecard + A1 concentration --------------------------------------
 
 function renderInsights(summary) {
@@ -195,7 +204,7 @@ function renderCountermeasures(library) {
         `<p class="cm-effect"><strong>Effect:</strong> ${esc(cm.effect_size)}` +
         (cm.verified ? "" : ' <span class="badge unverified" title="Transcribed from the source; not yet re-verified.">unverified</span>') +
         `</p>` +
-        `<p class="cm-src"><a href="${esc(cm.source_url)}" target="_blank" rel="noopener noreferrer">${esc(cm.source_title)}</a></p>` +
+        `<p class="cm-src">${sourceLink(cm.source_url, cm.source_title)}</p>` +
         `</article>`
     )
     .join("");
@@ -214,14 +223,7 @@ function renderRecommendations(recs, library) {
         .map((cm) => `<li>${esc(cm.name)}</li>`)
         .join("");
       const evidence = (r.evidence || [])
-        .map(
-          (e) =>
-            `<li>${esc(e.claim)} ` +
-            (e.source_url
-              ? `<a href="${esc(e.source_url)}" target="_blank" rel="noopener noreferrer">${esc(e.source_title || "source")}</a>`
-              : `<span class="src-plain">${esc(e.source_title || "")}</span>`) +
-            `</li>`
-        )
+        .map((e) => `<li>${esc(e.claim)} ${sourceLink(e.source_url, e.source_title)}</li>`)
         .join("");
       const conf = esc(r.confidence || "medium");
       return (
