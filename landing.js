@@ -85,7 +85,7 @@ function renderInsights(summary) {
 
 // --- A3 trend sparklines ---------------------------------------------------
 
-function sparkline(values, { width = 280, height = 56, preliminary = 0, color = "var(--accent)" }) {
+function sparkline(values, { width = 280, height = 56, preliminary = 0, color = "var(--accent)", label = "Trend" }) {
   const max = Math.max(...values, 1);
   const min = Math.min(...values, 0);
   const span = max - min || 1;
@@ -98,8 +98,10 @@ function sparkline(values, { width = 280, height = 56, preliminary = 0, color = 
   const dots = values
     .map((v, i) => `<circle cx="${x(i).toFixed(1)}" cy="${y(v).toFixed(1)}" r="2" fill="${color}"/>`)
     .join("");
+  const accessibleName = `${label}: from ${values[0]} to ${values[values.length - 1]}, peak ${Math.max(...values)}.`;
   return (
-    `<svg class="spark" viewBox="0 0 ${width} ${height}" role="img" preserveAspectRatio="none">` +
+    `<svg class="spark" viewBox="0 0 ${width} ${height}" role="img" aria-label="${esc(accessibleName)}" preserveAspectRatio="none">` +
+    `<title>${esc(accessibleName)}</title>` +
     `<polyline fill="none" stroke="${color}" stroke-width="2" points="${solidPts.join(" ")}"/>` +
     (preliminary > 0
       ? `<polyline fill="none" stroke="${color}" stroke-width="2" stroke-dasharray="3 3" opacity="0.6" points="${dashPts.join(" ")}"/>`
@@ -129,7 +131,7 @@ function renderTrend(summary) {
       `<div class="trend-row">` +
       `<div class="trend-meta"><span class="trend-label">${esc(label)}</span>` +
       `<span class="trend-range">${first}–${last}</span></div>` +
-      sparkline(vals, { preliminary: prelimCount, color: series === "deaths" ? "var(--severity-fatal)" : "var(--severity-major)" }) +
+      sparkline(vals, { preliminary: prelimCount, label, color: series === "deaths" ? "var(--severity-fatal)" : "var(--severity-major)" }) +
       `<div class="trend-stats"><strong>${fmtNum(lastVal)}</strong> latest · peak ${fmtNum(peak)}</div>` +
       `</div>`
     );
