@@ -46,10 +46,16 @@ No test framework or dependencies — both suites use built-in runners.
 
 ```bash
 python3 tests/test_snapshot.py   # pipeline: area math, aggregation, denominator join, sanity gate
-node --test                      # frontend pure logic in src/crash-logic.js (severity, triage, URL state)
+node --test                      # frontend pure logic in src/crash-logic.js (severity, triage, URL state, map reload guard)
 ```
 
-The frontend's pure, DOM-free logic lives in [src/crash-logic.js](src/crash-logic.js) (loaded before `app.js` in the browser, `require()`d by the Node tests) so it can be unit-tested without a browser. Triage-score weights are duplicated in `pipeline/snapshot.py` and `src/crash-logic.js`; tests in both suites guard against them drifting apart.
+The frontend's pure, DOM-free logic lives in [src/crash-logic.js](src/crash-logic.js) (loaded before `app.js` in the browser, `require()`d by the Node tests) so it can be unit-tested without a browser. Triage-score weights are duplicated in `pipeline/snapshot.py` and `src/crash-logic.js`; tests in both suites guard against them drifting apart. The map's reload-skip decision (`viewUnchanged` / `boundsApproxEqual`) is also pure and tested in [tests/map-perf.test.mjs](tests/map-perf.test.mjs); it only skips a reload on a genuine no-op settle, so "current view" summaries (KPIs, hotspots, notes, violations) never go stale.
+
+### Continuous integration
+
+Both suites run in GitHub Actions ([.github/workflows/deploy.yml](.github/workflows/deploy.yml)) on every push to `main` and on every pull request. Deployment to GitHub Pages is gated on `needs: test`, so a failing test blocks the deploy; pull requests run the tests but do not deploy.
+
+To make the gate enforced on merges (not just informational), enable branch protection: **Settings → Branches → Add branch ruleset (or protection rule)** for `main` → require status checks to pass → select the **`test`** check. With that on, a PR can't merge while tests are red.
 
 ## Current Layers
 

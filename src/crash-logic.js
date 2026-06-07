@@ -120,6 +120,35 @@
     };
   }
 
+  // --- Map reload guard (performance) -------------------------------------
+  // A crash reload is expensive: a count query, a hotspot query, and redrawing
+  // up to thousands of canvas markers. But a reload also refreshes every
+  // "current view" summary — KPIs, hotspot rankings, ward/map notes, and the
+  // moving-violations overlay — so it may ONLY be skipped when the settled view
+  // is genuinely unchanged (a no-op settle: same zoom, same bounds). Any real
+  // pan or zoom must reload so that view-scoped UI never goes stale.
+  //
+  // Bounds are plain {west, south, east, north} objects so this stays
+  // Leaflet-free and testable. The epsilon absorbs sub-pixel float jitter from
+  // animated settles (e.g. momentum) without treating a real pan as a no-op.
+  function boundsApproxEqual(a, b, epsilon = 1e-7) {
+    if (!a || !b) return false;
+    return (
+      Math.abs(a.west - b.west) <= epsilon &&
+      Math.abs(a.east - b.east) <= epsilon &&
+      Math.abs(a.south - b.south) <= epsilon &&
+      Math.abs(a.north - b.north) <= epsilon
+    );
+  }
+
+  // True only when the settled view is effectively the loaded view (no-op).
+  // loadedBounds is null before any successful load, which forces a reload.
+  function viewUnchanged({ loadedBounds, loadedZoom, currentBounds, currentZoom, epsilon } = {}) {
+    if (!loadedBounds) return false;
+    if (currentZoom !== loadedZoom) return false;
+    return boundsApproxEqual(loadedBounds, currentBounds, epsilon);
+  }
+
   // --- Display helpers -----------------------------------------------------
   function formatRate(value) {
     if (value === null || value === undefined) return "n/a";
@@ -186,6 +215,8 @@
     cleanLocationName,
     triageScore,
     parseHotspot,
+    boundsApproxEqual,
+    viewUnchanged,
     formatRate,
     decodeFilters,
     parseView,

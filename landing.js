@@ -208,6 +208,32 @@ function renderCountermeasures(library) {
         `</article>`
     )
     .join("");
+  setupCmToggle(items.length);
+}
+
+// On mobile, show 3 countermeasures behind a "Show all" toggle.
+function setupCmToggle(count) {
+  const grid = els.countermeasures;
+  let btn = document.querySelector(".cm-toggle");
+  if (count <= 3) {
+    if (btn) btn.remove();
+    return;
+  }
+  if (!btn) {
+    btn = document.createElement("button");
+    btn.className = "cm-toggle";
+    btn.type = "button";
+    btn.setAttribute("aria-controls", grid.id);
+    grid.insertAdjacentElement("afterend", btn);
+    btn.addEventListener("click", () => {
+      const open = grid.classList.toggle("cm-expanded");
+      btn.setAttribute("aria-expanded", String(open));
+      btn.textContent = open ? "Show fewer" : `Show all ${count} fixes`;
+    });
+  }
+  grid.classList.remove("cm-expanded");
+  btn.setAttribute("aria-expanded", "false");
+  btn.textContent = `Show all ${count} fixes`;
 }
 
 function renderRecommendations(recs, library) {
@@ -228,9 +254,15 @@ function renderRecommendations(recs, library) {
       const conf = esc(r.confidence || "medium");
       return (
         `<article class="rec-card">` +
-        `<div class="rec-head"><h3>${esc(r.title)}</h3>` +
-        `<span class="badge conf-${conf}">${conf} confidence</span></div>` +
+        `<div class="rec-head"><h3>${esc(r.title)}</h3></div>` +
         `<p class="rec-problem">${esc(r.problem)}</p>` +
+        // Confidence stays in the always-visible header so it survives the
+        // mobile collapse to title + problem (recommendation contract).
+        `<p class="rec-confidence"><span class="badge conf-${conf}">${conf} confidence</span></p>` +
+        // Detail collapses behind a toggle on mobile; stays open on desktop.
+        `<details class="rec-more" open>` +
+        `<summary class="rec-more-toggle">Details</summary>` +
+        `<div class="rec-more-body">` +
         `<p class="rec-line"><span class="rec-key">Where</span> ${esc(r.location_scope)}</p>` +
         `<p class="rec-line"><span class="rec-key">Mechanism</span> ${esc(r.mechanism)}</p>` +
         `<details class="rec-evidence"><summary>Evidence &amp; sources</summary><ul>${evidence}</ul></details>` +
@@ -240,11 +272,26 @@ function renderRecommendations(recs, library) {
         (r.map_link
           ? `<p class="rec-actions"><a class="rec-map-link" href="${esc(r.map_link)}">View on the crash map →</a></p>`
           : "") +
+        `</div>` +
+        `</details>` +
         `</article>`
       );
     })
     .join("");
+  syncRecDisclosures();
 }
+
+// Recommendation detail is collapsed on mobile, expanded on desktop.
+const recMobileMq = window.matchMedia("(max-width: 640px)");
+function syncRecDisclosures() {
+  const collapse = recMobileMq.matches;
+  document
+    .querySelectorAll("details.rec-more")
+    .forEach((d) => {
+      d.open = !collapse;
+    });
+}
+recMobileMq.addEventListener("change", syncRecDisclosures);
 
 // --- snapshot hygiene ------------------------------------------------------
 
