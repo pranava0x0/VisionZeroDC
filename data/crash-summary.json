@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-06-07T18:16:04Z",
+  "captured_at": "2026-06-07T19:34:13Z",
   "generator": "pipeline/snapshot.py",
   "sources": {
     "crashes": {
@@ -15,12 +15,12 @@
       "query_url": "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Administrative_Other_Boundaries_WebMercator/MapServer/53/query"
     },
     "population": {
-      "source_title": "Ward population (2022 estimate)",
-      "source_agency": "DC Health Matters / DC Office of Planning",
+      "source_title": "Wikipedia ward population table (2022 estimate)",
+      "source_agency": "Wikipedia, citing DC Health Matters / DC Office of Planning",
       "source_url": "https://en.wikipedia.org/wiki/Wards_of_Washington,_D.C.",
       "vintage": "2022",
       "captured_at": "2026-06-07",
-      "note": "2022 ward-level population estimates under the 2022 ward boundaries, as compiled by DC Health Matters and summarized on Wikipedia. Replace with a direct DC Office of Planning citation when available.",
+      "note": "2022 ward-level population estimates under the 2022 ward boundaries, summarized on Wikipedia with an attribution to DC Health Matters / DC Office of Planning. Treat as an interim denominator and replace with a direct primary-source citation when available.",
       "by_ward": {
         "Ward 1": 88846,
         "Ward 2": 89518,
@@ -40,6 +40,7 @@
   },
   "caveats": [
     "DC ward boundaries are redrawn each decade toward roughly equal population, so crashes-per-resident varies less across wards than crashes-per-area or crashes-per-road-mile. Treat per-capita ward comparison as weak and prefer per-area until road-mileage / VMT / trip denominators are added (see BACKLOG.md).",
+    "Population denominators are currently taken from a Wikipedia ward table that cites DC Health Matters / DC Office of Planning. Replace with a direct primary-source citation before relying on these rates in final public analysis.",
     "Population is a 2022 estimate, not a same-year match to every crash window. Rates spanning multiple years use a fixed denominator and are approximate.",
     "Land area is land only where the source distinguishes it; computed polygon area may include some non-land surface. It is an exposure proxy, not an official cadastral measure."
   ],
@@ -197,6 +198,43 @@
         "bicycles_involved": 1786,
         "speeding_involved": 1331
       },
+      "ksi_by_mode": [
+        {
+          "mode": "driver",
+          "vulnerable": false,
+          "fatalities": 33,
+          "major_injuries": 337,
+          "ksi": 370
+        },
+        {
+          "mode": "pedestrian",
+          "vulnerable": true,
+          "fatalities": 35,
+          "major_injuries": 200,
+          "ksi": 235
+        },
+        {
+          "mode": "passenger",
+          "vulnerable": false,
+          "fatalities": 12,
+          "major_injuries": 91,
+          "ksi": 103
+        },
+        {
+          "mode": "bicyclist",
+          "vulnerable": true,
+          "fatalities": 3,
+          "major_injuries": 99,
+          "ksi": 102
+        },
+        {
+          "mode": "other",
+          "vulnerable": false,
+          "fatalities": 3,
+          "major_injuries": 45,
+          "ksi": 48
+        }
+      ],
       "wards": [
         {
           "ward": "Ward 2",
@@ -365,6 +403,43 @@
         "bicycles_involved": 1159,
         "speeding_involved": 711
       },
+      "ksi_by_mode": [
+        {
+          "mode": "driver",
+          "vulnerable": false,
+          "fatalities": 12,
+          "major_injuries": 173,
+          "ksi": 185
+        },
+        {
+          "mode": "pedestrian",
+          "vulnerable": true,
+          "fatalities": 19,
+          "major_injuries": 115,
+          "ksi": 134
+        },
+        {
+          "mode": "bicyclist",
+          "vulnerable": true,
+          "fatalities": 1,
+          "major_injuries": 70,
+          "ksi": 71
+        },
+        {
+          "mode": "passenger",
+          "vulnerable": false,
+          "fatalities": 3,
+          "major_injuries": 43,
+          "ksi": 46
+        },
+        {
+          "mode": "other",
+          "vulnerable": false,
+          "fatalities": 1,
+          "major_injuries": 24,
+          "ksi": 25
+        }
+      ],
       "wards": [
         {
           "ward": "Ward 2",
@@ -516,6 +591,43 @@
         "bicycles_involved": 362,
         "speeding_involved": 197
       },
+      "ksi_by_mode": [
+        {
+          "mode": "driver",
+          "vulnerable": false,
+          "fatalities": 6,
+          "major_injuries": 49,
+          "ksi": 55
+        },
+        {
+          "mode": "pedestrian",
+          "vulnerable": true,
+          "fatalities": 5,
+          "major_injuries": 35,
+          "ksi": 40
+        },
+        {
+          "mode": "passenger",
+          "vulnerable": false,
+          "fatalities": 1,
+          "major_injuries": 15,
+          "ksi": 16
+        },
+        {
+          "mode": "bicyclist",
+          "vulnerable": true,
+          "fatalities": 1,
+          "major_injuries": 13,
+          "ksi": 14
+        },
+        {
+          "mode": "other",
+          "vulnerable": false,
+          "fatalities": 1,
+          "major_injuries": 9,
+          "ksi": 10
+        }
+      ],
       "wards": [
         {
           "ward": "Ward 2",
@@ -667,6 +779,43 @@
         "bicycles_involved": 7462,
         "speeding_involved": 7630
       },
+      "ksi_by_mode": [
+        {
+          "mode": "driver",
+          "vulnerable": false,
+          "fatalities": 385,
+          "major_injuries": 18165,
+          "ksi": 18550
+        },
+        {
+          "mode": "passenger",
+          "vulnerable": false,
+          "fatalities": 101,
+          "major_injuries": 5956,
+          "ksi": 6057
+        },
+        {
+          "mode": "pedestrian",
+          "vulnerable": true,
+          "fatalities": 189,
+          "major_injuries": 3776,
+          "ksi": 3965
+        },
+        {
+          "mode": "bicyclist",
+          "vulnerable": true,
+          "fatalities": 21,
+          "major_injuries": 568,
+          "ksi": 589
+        },
+        {
+          "mode": "other",
+          "vulnerable": false,
+          "fatalities": 6,
+          "major_injuries": 98,
+          "ksi": 104
+        }
+      ],
       "wards": [
         {
           "ward": "Ward 2",

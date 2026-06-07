@@ -7,9 +7,9 @@ _Last run: 2026-05-27_
 
 - **Stack**: Static HTML/CSS/JS with Leaflet.
 - **Dev server**: `python3 -m http.server 8050` -> `http://localhost:8050`
-- **Entry point**: `index.html`
-- **Main logic**: `app.js`
+- **Pages**: `index.html` (safety overview / landing, logic in `landing.js`) and `map.html` (crash map, logic in `app.js`). Shared pure logic in `src/crash-logic.js`.
 - **Styles**: `style.css`
+- **Data**: baked `data/crash-summary.json` (+ curated `data/countermeasures.json`, `data/recommendations.json`); regenerate with `python3 pipeline/snapshot.py`.
 - **Known supporting docs**: `CLAUDE.md`, `DESIGN.md`, `BACKLOG.md`, `ISSUES.md`
 
 ## Key UI Sections

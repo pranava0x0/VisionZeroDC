@@ -211,8 +211,9 @@ Consider moving an item from this backlog into active work when one of these sta
 
 - Add road-centerline mileage and/or VMT per ward as stronger exposure denominators (population is near-flat across DC wards by design).
 - Let severity/mode filters drive the ward-rate table (currently date-window only; would need per-severity/mode baked slices or a live query).
-- Schedule or document a refresh cadence for `data/crash-summary.json` and add a stale-snapshot label in the UI.
+- ~~Add a stale-snapshot label in the UI.~~ Done 2026-06-08: the landing footer shows "Snapshot captured …" and flags it stale past 45 days. _Still open: a scheduled/documented refresh cadence (e.g. a CI job running `pipeline/snapshot.py`)._
 - Extend the snapshot to intersection/corridor grain to back a sortable evidence table (ties into item 2 and item 5).
+- Site is now two pages (`index.html` landing + `map.html`) with shared nav and a shared pure-logic module (`src/crash-logic.js`). B4 (recommendation → evidence-trail deep links) is effectively shipped via card `map_link`s.
 
 ---
 
@@ -233,14 +234,14 @@ Researched how leading programs present crash data and turn it into recommendati
 
 - **A1 — "Where harm concentrates" hero (small).** _Shipped 2026-06-07_ as a defensible interim: "Wards 2, 7 and 8 account for ~49% of citywide KSI since 2024 while home to ~36% of residents," computed from the baked ward KSI + population, framed around DDOT's High Injury Network (linked). **Still open:** the stronger street-segment version ("X% of streets = Y% of KSI") needs the DC HIN layer + a crashes↔HIN spatial join in `pipeline/` — DDOT does not appear to publish DC's exact %/% figure, so it must be computed and source-shown.
 - **A2 — Headline accountability scorecard (small).** _Shipped 2026-06-07._ Latest-full-year deaths + KSI (flagged preliminary), with an honest context line: ~43 deaths/yr in 2020-2024, peaking at 50 in 2024 — the missed zero-target year. Pipeline emits `scorecard` + `citywide_by_year`; handles the 2015 open-data anomaly (uses the settled 2020-2024 window) and recent-year reporting lag. _Open follow-up: reconcile open-data counts with DDOT's curated Vision Zero figures._
-- **A3 — Multi-year trend with the "fewer injuries, more deaths" story (small).** Fatalities vs. injuries over time, annotated with the COVID-era divergence already documented in CLAUDE.md. Motivates the KSI focus. _Data ready: `citywide_by_year` (2015-present) is now baked into `data/crash-summary.json`, so this is just an inline SVG sparkline away._
-- **A4 — "Who is being hurt" mode-share panel (small).** KSI by pedestrian/cyclist/motorcyclist/occupant, vulnerable-road-user share called out. _Data: Crash Details per-person mode._
-- **A5 — "Top corridors right now" insight cards (medium).** 3-5 auto-generated cards naming highest-KSI HIN corridors, each deep-linking to the map filtered to that corridor + its records. _Data: crashes joined to HIN/road segments, ranked by the visible triage heuristic._
+- **A3 — Multi-year trend with the "fewer injuries, more deaths" story (small).** _Shipped 2026-06-08_ as paired inline-SVG sparklines (deaths + people injured, 2015-present) on the landing page, with dashed preliminary-year tails and the divergence caption. Data from baked `citywide_by_year`.
+- **A4 — "Who is being hurt" mode-share panel (small).** _Shipped 2026-06-08._ KSI by mode (driver/pedestrian/passenger/cyclist/other) as bars on the landing page, vulnerable road users highlighted, with the vulnerable share called out. Data from baked `ksi_by_mode` (per-mode fatal+major fields).
+- **A5 — "Top corridors right now" insight cards (medium).** 3-5 auto-generated cards naming highest-KSI HIN corridors, each deep-linking to the map filtered to that corridor + its records. _Data: crashes joined to HIN/road segments, ranked by the visible triage heuristic._ Still open (needs the HIN join).
 
 ### (B) Policy-recommendation / evidence-card ideas
 
-- **B1 — Standardized evidence-card component (medium).** Renders the CLAUDE.md fields: problem, location scope, linked evidence, mechanism, intervention type, equity check, confidence, uncertainty. This *is* the anti-opaque-score promise made concrete. _Data: curated recommendations JSON referencing crash IDs._
-- **B2 — Countermeasure library with cited effect sizes (medium).** Static reference table (LPI, daylighting, road diet, speed camera, bump-outs, 20mph, protected intersection), each with a one-line mechanism + a cited crash-reduction figure. Reusable across cards; needs no DC data to start.
+- **B1 — Standardized evidence-card component (medium).** _Shipped 2026-06-08._ Landing-page recommendation cards render the CLAUDE.md fields (problem, location, evidence+sources, mechanism, equity check, confidence badge, uncertainty) from [data/recommendations.json](data/recommendations.json), each deep-linking to a filtered map view. _Follow-up: ground more cards at intersection/corridor grain once the HIN join exists; reference stable crash IDs._
+- **B2 — Countermeasure library with cited effect sizes (medium).** _Shipped 2026-06-08_ as [data/countermeasures.json](data/countermeasures.json) + a landing-page grid (LPI, daylighting, road diet, speed camera, curb extension, protected intersection, 20mph), each with mechanism + cited effect. Figures show an "unverified" badge until checked against the primary source.
 - **B3 — Camera before/after evaluation cards (medium).** For each automated-enforcement camera, compare crash/injury counts before vs. after activation, with confidence + caveats (regression-to-mean, short windows). Does the quantified before/after even NYC's dashboard skips. _Data: Automated Safety Cameras (location + activation date) + nearby crashes + violations-by-month._
 - **B4 — Recommendation → evidence-trail linking (small).** Every card deep-links to the map filtered to its location and to the underlying records/datasets. Fulfills the "never lose the source trail" north star. _Builds on the URL-state work already shipped._
 - **B5 — Confidence + uncertainty badges from data completeness (small).** Derive the confidence label from sample size, geocoding confidence, recency, and presence of a denominator; show reasons on hover.
@@ -248,7 +249,7 @@ Researched how leading programs present crash data and turn it into recommendati
 
 ### (C) Analysis / methodology ideas
 
-- **C1 — KSI-only analysis mode (small).** Global toggle restricting map/tables to Killed-or-Seriously-Injured crashes, with KSI defined inline. Field-standard backbone.
+- **C1 — KSI-only analysis mode (small).** _Shipped 2026-06-08._ "KSI only" toggle in the map toolbar restricts to killed-or-seriously-injured crashes (URL-synced, with KSI defined inline on hover). _Follow-up: also gate the hot-spot/ward tables on it._
 - **C2 — Crash typing + mode filters (medium).** Filter by manner/type (pedestrian, rear-end, turning, fixed-object) and mode; surface the dominant type per corridor (type → specific fix). _Data: Crash Details collision-type/mode fields._
 - **C3 — Transparent severity-weighted triage ranking, components always visible (medium).** Rank HIN segments by severity-weighted KSI with every component shown and labeled a triage heuristic — extends the existing ward triage score to segment grain.
 - **C4 — Exposure-normalized rates where a denominator exists (large).** Crashes per VMT or per mile from DC Traffic Volume/AADT + centerline mileage; flag segments with no denominator as "rate unavailable." Extends the ward-denominator work to corridor grain.

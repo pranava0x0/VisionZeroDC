@@ -17,6 +17,18 @@ Be judicious with tokens. The expensive failure mode here is fanning out a large
 - **Fail fast and stop.** If a flow is not converging, stop, report what you have, and pick a cheaper approach rather than retrying the same expensive path.
 - **Surface the cost/benefit before a big spend.** If a step will be token-heavy, state why it earns the cost and what the cheaper alternative would miss.
 
+### Web search and deep research
+
+Web search and multi-agent deep-research flows are the easiest way to burn a large budget for little return — they fail, wander, or return noise, and the cost is already spent by the time you find out. Default to *not* using them.
+
+- **Don't reach for deep research unless the task genuinely needs it.** Most questions are answered by one or two targeted `WebSearch`/`WebFetch` calls, a doc already in the repo, or a primary source you can fetch directly. A heavy multi-agent research flow is a last resort for genuinely broad, multi-source synthesis — not the default for "look something up."
+- **Test a small query first to seed the format.** Before any fan-out, run one narrow search/fetch to confirm the source exists, the data is in the shape you expect, and the query terms actually hit. Use that result to fix the query and the output schema, *then* widen. Never launch a big batch blind.
+- **Prefer the primary source over a search sweep.** If you know the authoritative page or dataset (Open Data DC, DDOT, a known URL), fetch it directly instead of searching around it.
+- **Bound every research flow.** Tight question, small named source set, explicit stop condition, and a rough call count (e.g. "~6-10 searches, a few fetches"), not an open-ended crawl. Say the budget out loud before starting.
+- **One focused agent over a big fan-out.** When delegation helps, prefer a single scoped research agent that returns the conclusion. Reserve large multi-agent orchestration for work that has been explicitly authorized and clearly needs the breadth.
+- **Stop on the first sign of failure.** If searches return junk or a flow stalls, stop and report what you have — do not keep retrying the same expensive path hoping it converges.
+- **Verify before publishing.** Treat scraped figures as research-grade until checked against the primary source (see the editorial promise in CLAUDE.md); don't spend more tokens polishing an unverified number.
+
 ---
 
 ## Read These First

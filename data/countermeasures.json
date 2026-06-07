@@ -1,0 +1,92 @@
+{
+  "_about": "Curated library of proven traffic-safety countermeasures with cited crash-reduction effect sizes from peer programs and research. Referenced by data/recommendations.json so every recommendation names a mechanism and an evidence-backed effect rather than an opaque score.",
+  "_verification_note": "Effect sizes are transcribed from the cited sources but have NOT each been re-verified against the primary document. Treat `effect_size` as research-grade until `verified` is true. Per the project editorial promise, re-check each figure before presenting it as settled fact.",
+  "_captured_at": "2026-06-07",
+  "countermeasures": [
+    {
+      "id": "leading_pedestrian_interval",
+      "name": "Leading pedestrian interval (LPI)",
+      "intervention_type": "signal timing",
+      "mechanism": "Gives people on foot a 3-7 second head start into the crosswalk before parallel traffic gets a green, so turning drivers see and yield to pedestrians already in the intersection.",
+      "effect_size": "Seattle reported roughly -34% serious-injury/fatal pedestrian crashes and -48% pedestrian turning collisions at LPI locations.",
+      "cost": "low",
+      "vulnerable_user_focus": true,
+      "source_title": "Seattle SDOT — Leading Pedestrian Intervals",
+      "source_url": "https://www.seattle.gov/transportation/projects-and-programs/safety-first/vision-zero/leading-pedestrian-intervals",
+      "verified": false
+    },
+    {
+      "id": "daylighting",
+      "name": "Daylighting (clear-sight corners)",
+      "intervention_type": "curb management",
+      "mechanism": "Removes parking within ~20 feet of a crosswalk so drivers and pedestrians can see each other before the conflict point; often paired with bump-outs.",
+      "effect_size": "Core to Hoboken NJ's multi-year stretch with zero traffic deaths, deployed at 130+ intersections alongside high-visibility crosswalks and curb extensions.",
+      "cost": "low",
+      "vulnerable_user_focus": true,
+      "source_title": "Results4America — Improving Traffic Safety in Hoboken, NJ",
+      "source_url": "https://catalog.results4america.org/case-studies/improving-traffic-safety-hoboken-nj",
+      "verified": false
+    },
+    {
+      "id": "road_diet",
+      "name": "Road diet / lane rechannelization",
+      "intervention_type": "engineering",
+      "mechanism": "Converts a wide multi-lane road (e.g. 4 lanes to 3 with a center turn lane plus bike lanes), cutting speeding and turning conflicts and shortening pedestrian crossings.",
+      "effect_size": "FHWA cites ~19-47% total crash reductions for road diets; Seattle's Nickerson St saw roughly -93% aggressive (top-end) speeding.",
+      "cost": "medium",
+      "vulnerable_user_focus": true,
+      "source_title": "FHWA Vision Zero Toolkit; Seattle SDOT",
+      "source_url": "https://highways.dot.gov/sites/fhwa.dot.gov/files/2024-04/Vision%20Zero%20Toolkit%20508_0.pdf",
+      "verified": false
+    },
+    {
+      "id": "automated_speed_camera",
+      "name": "Automated speed enforcement",
+      "intervention_type": "speed management",
+      "mechanism": "Cameras ticket speeding automatically, lowering top-end speeds where crash severity rises steeply with speed. Most effective when sited on the High Injury Network and paired with engineering.",
+      "effect_size": "A DDOT study reported injury crashes falling from 841 to 673 (about -20% injuries) around enforced locations; Portland measured -71% to -93% top-end speeding within 30 days of activation.",
+      "cost": "medium",
+      "vulnerable_user_focus": false,
+      "equity_caution": "Enforcement-heavy measures can fall unevenly; pair with engineering and review ticket distribution. Prefer engineering/speed-management fixes where they address the problem directly.",
+      "source_title": "DDOT speed-camera study (TRB); Portland safety cameras",
+      "source_url": "https://ddot.dc.gov/sites/default/files/dc/sites/ddot/publication/attachments/Vision%20Zero%20Photo%20Enforcement%20-%20TRB%20Submission%20-%20Final.pdf",
+      "verified": false
+    },
+    {
+      "id": "curb_extension",
+      "name": "Curb extension / bump-out",
+      "intervention_type": "engineering",
+      "mechanism": "Extends the sidewalk at a crossing, shortening the pedestrian exposure distance, slowing turning vehicles, and improving sight lines.",
+      "effect_size": "A standard component of low-cost Vision Zero packages (e.g. Hoboken's 60+ curb extensions) credited in its sustained zero-death record.",
+      "cost": "low",
+      "vulnerable_user_focus": true,
+      "source_title": "Results4America — Hoboken case study",
+      "source_url": "https://catalog.results4america.org/case-studies/improving-traffic-safety-hoboken-nj",
+      "verified": false
+    },
+    {
+      "id": "protected_intersection",
+      "name": "Protected intersection",
+      "intervention_type": "protected infrastructure",
+      "mechanism": "Corner islands, setback crossings, and dedicated signal phases physically separate people biking and walking from turning vehicles.",
+      "effect_size": "Widely deployed in Vision Zero programs to remove turning conflicts at high-injury intersections; effect varies by site (verify locally).",
+      "cost": "high",
+      "vulnerable_user_focus": true,
+      "source_title": "FHWA Vision Zero Toolkit",
+      "source_url": "https://highways.dot.gov/sites/fhwa.dot.gov/files/2024-04/Vision%20Zero%20Toolkit%20508_0.pdf",
+      "verified": false
+    },
+    {
+      "id": "speed_limit_20",
+      "name": "20 mph default speed limit",
+      "intervention_type": "speed management",
+      "mechanism": "Lowering speed limits (with supporting design) reduces both crash frequency and the probability that a struck pedestrian is killed, which rises sharply above 20-25 mph.",
+      "effect_size": "Part of Hoboken's and London's Vision Zero approach; pedestrian survival probability is far higher in a 20 mph than a 30+ mph impact.",
+      "cost": "low",
+      "vulnerable_user_focus": true,
+      "source_title": "TfL Vision Zero for London; Hoboken",
+      "source_url": "https://tfl.gov.uk/corporate/safety-and-security/road-safety/vision-zero-for-london",
+      "verified": false
+    }
+  ]
+}

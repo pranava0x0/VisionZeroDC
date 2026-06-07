@@ -90,6 +90,16 @@ PED_FIELD = "TOTAL_PEDESTRIANS"
 BIKE_FIELD = "TOTAL_BICYCLES"
 SPEED_FIELD = "SPEEDING_INVOLVED"  # numeric count field, summed like the rest
 
+# Per-mode KSI breakdown: (label, fatal field, major-injury field). Used for the
+# "who is being hurt" panel (A4). Pedestrians and cyclists are vulnerable road users.
+KSI_MODES = [
+    ("pedestrian", "FATAL_PEDESTRIAN", "MAJORINJURIES_PEDESTRIAN", True),
+    ("bicyclist", "FATAL_BICYCLIST", "MAJORINJURIES_BICYCLIST", True),
+    ("driver", "FATAL_DRIVER", "MAJORINJURIES_DRIVER", False),
+    ("passenger", "FATALPASSENGER", "MAJORINJURIESPASSENGER", False),
+    ("other", "FATALOTHER", "MAJORINJURIESOTHER", False),
+]
+
 # Triage score weights (kept identical to README.md "Hotspot Method").
 W_FATAL = 40
 W_MAJOR = 12
@@ -223,6 +233,36 @@ def ward_statistics(since: str, *, refresh: bool) -> dict[str, dict[str, int]]:
             + W_SPEED * row["speeding_involved"]
         )
     return wards
+
+
+# --- Citywide KSI by travel mode (A4) --------------------------------------
+
+
+def citywide_ksi_by_mode(since: str, *, refresh: bool) -> list[dict[str, Any]]:
+    """Citywide killed-or-seriously-injured counts split by travel mode."""
+    data = fetch_json(
+        CRASH_LAYER,
+        {"where": _where_for(since), "outStatistics": _out_statistics()},
+        refresh=refresh,
+        label=f"mode KSI {since or 'all'}",
+    )
+    feats = data.get("features", [])
+    attrs = feats[0]["attributes"] if feats else {}
+    rows: list[dict[str, Any]] = []
+    for label, fatal_field, major_field, vulnerable in KSI_MODES:
+        fatal = _sum(attrs, [fatal_field])
+        major = _sum(attrs, [major_field])
+        rows.append(
+            {
+                "mode": label,
+                "vulnerable": vulnerable,
+                "fatalities": fatal,
+                "major_injuries": major,
+                "ksi": fatal + major,
+            }
+        )
+    rows.sort(key=lambda r: r["ksi"], reverse=True)
+    return rows
 
 
 # --- Citywide trend by year + accountability scorecard ---------------------
@@ -450,6 +490,7 @@ def build(*, refresh: bool) -> dict[str, Any]:
             "label": window["label"],
             "since": window["since"] or None,
             "citywide": citywide,
+            "ksi_by_mode": citywide_ksi_by_mode(window["since"], refresh=refresh),
             "wards": ward_rows,
         }
 

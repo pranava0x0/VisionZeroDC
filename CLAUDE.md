@@ -218,6 +218,20 @@ tests/
 
 ---
 
+## Web Search and Token Efficiency
+
+Be deliberately frugal with web search, web fetches, and any agent-driven research. They are the easiest way to spend a large token budget and still come back empty.
+
+- **Don't run deep / multi-agent research unless the task truly requires broad, multi-source synthesis.** For ordinary questions, prefer a known primary source (Open Data DC, DDOT, a specific URL), a doc already in this repo, or one or two targeted searches. Treat a large research fan-out as a last resort, and only when explicitly worth it.
+- **Seed the format with a small query first.** Run one narrow search or fetch to confirm the source exists and the result is shaped as expected, fix the query and output schema from it, then scale. Never launch a big batch blind.
+- **Bound it.** Tight question, small named source set, a rough call budget, and a stop condition — not an open-ended crawl. State the budget before starting.
+- **Fail fast.** If results are junk or a flow stalls, stop and report what you have instead of retrying the same costly path.
+- **Verify before publishing.** Scraped numbers and effect sizes are research-grade until checked against the primary source (see the Editorial Promise); don't burn more tokens polishing an unverified figure.
+
+See `AGENTS.md` ("Token And Effort Discipline") for the operational version of this rule.
+
+---
+
 ## Security and Dependencies
 
 - Never commit secrets, API keys, tokens, `.env`, `node_modules/`, `__pycache__/`, raw large downloads, or generated build directories.

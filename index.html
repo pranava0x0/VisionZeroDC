@@ -4,23 +4,26 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light">
-    <title>Vision Zero DC Crash Map</title>
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-      crossorigin=""
-    >
+    <title>Vision Zero DC — Safety Overview</title>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23111111'/%3E%3Ccircle cx='50' cy='50' r='25' fill='%239f1d20'/%3E%3Cline x1='50' y1='10' x2='50' y2='90' stroke='%23ffffff' stroke-width='6'/%3E%3Cline x1='10' y1='50' x2='90' y2='50' stroke='%23ffffff' stroke-width='6'/%3E%3C/svg%3E">
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to map</a>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <nav class="site-nav" aria-label="Primary">
+      <a href="index.html" class="nav-brand">Vision Zero DC</a>
+      <div class="nav-links">
+        <a href="index.html" aria-current="page">Overview</a>
+        <a href="map.html">Crash Map</a>
+      </div>
+    </nav>
+
     <header class="masthead">
       <div class="masthead-main">
         <p class="section-label">Independent Civic Analysis | DC Public Records</p>
         <div class="title-with-badge">
-          <h1>Vision Zero Crash Map</h1>
+          <h1>Where DC streets are deadliest — and what works</h1>
           <div class="editorial-seal">
             <svg viewBox="0 0 100 100" class="seal-svg" aria-hidden="true">
               <circle cx="50" cy="50" r="48" fill="none" stroke="var(--rule)" stroke-width="2"/>
@@ -34,211 +37,75 @@
         </div>
       </div>
       <p class="source-line">
-        An interactive public safety atlas tracking geocoded police-reported collisions. Data is fetched live from official DDOT & MPD catalogs.
+        A public-interest read of DC crash data: the toll, where harm concentrates, who is hurt, and evidence-backed fixes. Numbers are computed from official open data — explore them on the <a href="map.html">crash map</a>.
       </p>
     </header>
 
-    <section class="insights-band" aria-label="Key safety insights" hidden>
-      <article class="insight scorecard" aria-label="DC traffic toll scorecard">
-        <p class="section-label">The toll on DC streets</p>
-        <div class="scorecard-figures">
-          <div class="big-figure">
-            <strong id="sc-deaths">-</strong>
-            <span id="sc-deaths-label">traffic deaths</span>
+    <main id="main" tabindex="-1">
+      <section class="insights-band" aria-label="Key safety insights" hidden>
+        <article class="insight scorecard" aria-label="DC traffic toll scorecard">
+          <p class="section-label">The toll on DC streets</p>
+          <div class="scorecard-figures">
+            <div class="big-figure">
+              <strong id="sc-deaths">-</strong>
+              <span id="sc-deaths-label">traffic deaths</span>
+            </div>
+            <div class="big-figure">
+              <strong id="sc-ksi">-</strong>
+              <span id="sc-ksi-label">killed or seriously injured</span>
+            </div>
           </div>
-          <div class="big-figure">
-            <strong id="sc-ksi">-</strong>
-            <span id="sc-ksi-label">killed or seriously injured</span>
-          </div>
-        </div>
-        <p id="sc-context" class="insight-context"></p>
-      </article>
+          <p id="sc-context" class="insight-context"></p>
+        </article>
 
-      <article class="insight hin-hero" aria-label="Where severe crashes concentrate">
-        <p class="section-label">Where harm concentrates</p>
-        <p id="hin-headline" class="hin-headline">-</p>
-        <p id="hin-context" class="insight-context"></p>
-      </article>
-    </section>
-
-    <section class="toolbar" aria-label="Map controls">
-      <div class="sentence-filter">
-        Showing
-        <span class="select-wrapper">
-          <select id="date-range" aria-label="Date range">
-            <option value="2024" selected>2024-present</option>
-            <option value="2025">2025-present</option>
-            <option value="2026">2026-present</option>
-            <option value="all">all available records</option>
-          </select>
-        </span>
-        crashes of
-        <span class="select-wrapper">
-          <select id="severity-filter" aria-label="Severity">
-            <option value="all" selected>all severities</option>
-            <option value="fatal">fatal crashes</option>
-            <option value="major">major injury/fatal crashes</option>
-            <option value="injury">injury crashes</option>
-          </select>
-        </span>
-        where
-        <span class="select-wrapper">
-          <select id="mode-filter" aria-label="Mode">
-            <option value="all" selected>all modes</option>
-            <option value="pedestrian">pedestrians</option>
-            <option value="bicycle">cyclists</option>
-            <option value="speeding">speeding</option>
-          </select>
-        </span>
-        are involved.
-      </div>
-      
-      <div class="toolbar-actions">
-        <label class="toggle-control">
-          <input id="violations-toggle" type="checkbox">
-          <span class="toggle-label">Show moving violations</span>
-        </label>
-
-        <div id="violations-source-wrap" class="violations-source-container">
-          for
-          <span class="select-wrapper">
-            <select id="violations-source" aria-label="Violations month">
-              <option value="2026-01">Jan. 2026</option>
-              <option value="2026-02">Feb. 2026</option>
-              <option value="2025-12">Dec. 2025</option>
-              <option value="2025-11">Nov. 2025</option>
-              <option value="2025-10">Oct. 2025</option>
-            </select>
-          </span>
-        </div>
-
-        <button id="refresh-map" type="button">Refresh Map</button>
-      </div>
-    </section>
-
-    <section class="kpis" aria-label="Current map summary">
-      <div class="kpi">
-        <strong id="kpi-visible">-</strong>
-        <span>crashes drawn</span>
-      </div>
-      <div class="kpi">
-        <strong id="kpi-total">-</strong>
-        <span>matching current view</span>
-      </div>
-      <div class="kpi">
-        <strong id="kpi-fatal">-</strong>
-        <span>fatal crashes drawn</span>
-      </div>
-      <div class="kpi">
-        <strong id="kpi-major">-</strong>
-        <span>major injury crashes drawn</span>
-      </div>
-      <div class="kpi">
-        <strong id="kpi-updated">-</strong>
-        <span>latest report date drawn</span>
-      </div>
-    </section>
-
-    <main id="main" class="layout" tabindex="-1">
-      <section class="map-shell" aria-label="Crash map">
-        <div id="map"></div>
-        <div id="map-notice" class="map-notice" role="status" aria-live="polite">Loading official crash data...</div>
+        <article class="insight hin-hero" aria-label="Where severe crashes concentrate">
+          <p class="section-label">Where harm concentrates</p>
+          <p id="hin-headline" class="hin-headline">-</p>
+          <p id="hin-context" class="insight-context"></p>
+        </article>
       </section>
 
-      <aside class="detail-panel" aria-label="Selected crash and sources">
-        <section class="hotspot-panel" aria-label="Policy focus locations">
-          <p class="section-label">Policy focus</p>
-          <h2>Hot spots in view</h2>
-          <p id="hotspot-note" class="panel-note">
-            Ranking locations and wards from the current map filters...
-          </p>
+      <section class="charts-band" aria-label="Trends and who is hurt">
+        <article class="chart-card" aria-label="Deaths and serious injuries over time">
+          <p class="section-label">The trend</p>
+          <h2>Deaths vs. serious injuries by year</h2>
+          <div id="trend-chart" class="trend-chart">Loading trend…</div>
+          <p id="trend-caption" class="panel-note"></p>
+        </article>
 
-          <div class="hotspot-group">
-            <h3>Top crash locations</h3>
-            <ol id="location-hotspots" class="hotspot-list">
-              <li>Loading location statistics...</li>
-            </ol>
-          </div>
+        <article class="chart-card" aria-label="Who is being hurt by travel mode">
+          <p class="section-label">Who is being hurt</p>
+          <h2>People killed or seriously injured, by mode</h2>
+          <div id="mode-share" class="mode-share">Loading mode breakdown…</div>
+          <p id="mode-caption" class="panel-note"></p>
+        </article>
+      </section>
 
-          <div class="hotspot-group">
-            <h3>Ward totals</h3>
-            <ol id="ward-hotspots" class="hotspot-list ward-list">
-              <li>Loading ward statistics...</li>
-            </ol>
-          </div>
-        </section>
+      <section class="recs-section" aria-label="Policy recommendations">
+        <p class="section-label">Evidence-backed recommendations</p>
+        <h2 class="section-heading">What the data supports</h2>
+        <p class="section-intro">
+          Analyst-drafted starting points for human review — not automated or final policy. Each card shows the pattern that triggered it, the mechanism, an equity check, and how confident the evidence is.
+        </p>
+        <div id="recommendations" class="recs-grid">Loading recommendations…</div>
+      </section>
 
-        <section class="ward-rates-panel" aria-label="Ward crash rates with exposure denominators">
-          <p class="section-label">Exposure context</p>
-          <h2>Ward crash rates</h2>
-          <p id="ward-rates-note" class="panel-note">Loading ward rate snapshot...</p>
-          <div class="ward-rates-controls">
-            <label for="ward-rates-sort">Rank by</label>
-            <span class="select-wrapper">
-              <select id="ward-rates-sort" aria-label="Ward rate ranking metric">
-                <option value="crashes_per_sq_mi" selected>crashes / sq mi</option>
-                <option value="crashes_per_100k">crashes / 100k residents</option>
-                <option value="crashes">total crashes</option>
-              </select>
-            </span>
-          </div>
-          <table class="ward-rates-table">
-            <thead>
-              <tr>
-                <th scope="col">Ward</th>
-                <th scope="col" class="num">Crashes</th>
-                <th scope="col" class="num">/ sq mi</th>
-                <th scope="col" class="num">/ 100k</th>
-              </tr>
-            </thead>
-            <tbody id="ward-rates-body">
-              <tr><td colspan="4">Loading ward rate snapshot...</td></tr>
-            </tbody>
-          </table>
-          <p id="ward-rates-caveat" class="ward-rates-caveat panel-note"></p>
-        </section>
-
-        <section class="case-docket-section">
-          <p class="section-label">Incident Case File</p>
-          <div class="docket-header">
-            <h2 id="detail-title">Pick a crash</h2>
-            <div id="docket-stamp" class="docket-stamp empty">UNASSIGNED</div>
-          </div>
-          <div id="detail-body" class="detail-body">
-            <p class="empty-docket-message">Select an incident point on the map to open the official collision file and related participant rows.</p>
-          </div>
-        </section>
-
-        <section class="source-box">
-          <p class="section-label">Official sources</p>
-          <ul>
-            <li><a href="https://opendata.dc.gov/datasets/DCGIS::crashes-in-dc" target="_blank" rel="noopener noreferrer">Crashes in DC</a></li>
-            <li><a href="https://opendata.dc.gov/datasets/DCGIS::crash-details-table" target="_blank" rel="noopener noreferrer">Crash Details Table</a></li>
-            <li><a href="https://visionzero.dc.gov/pages/crash-analysis" target="_blank" rel="noopener noreferrer">Vision Zero Crash Analysis</a></li>
-            <li><a href="https://dcvisionzero.github.io/Crash-Injury-Dashboard/" target="_blank" rel="noopener noreferrer">Vision Zero crash dashboard</a></li>
-          </ul>
-        </section>
-
-        <section class="source-box">
-          <p class="section-label">Layer notes</p>
-          <p>
-            The crash layer contains geocoded police-reported collisions. The details table is relational and loads on demand by CRASHID. Moving violations are contextual ticket records, not crashes.
-          </p>
-        </section>
-      </aside>
+      <section class="countermeasures-section" aria-label="Countermeasure library">
+        <p class="section-label">Countermeasure library</p>
+        <h2 class="section-heading">Proven fixes and their effects</h2>
+        <p class="section-intro">
+          A reference of interventions with crash-reduction figures from peer programs. Effect sizes are research-grade until verified against the primary source.
+        </p>
+        <div id="countermeasures" class="cm-grid">Loading countermeasures…</div>
+      </section>
     </main>
 
     <footer class="site-footer">
       <span>Data attribution: District Department of Transportation, Metropolitan Police Department, Open Data DC.</span>
-      <span id="run-status">Ready.</span>
+      <span id="snapshot-status">Loading snapshot…</span>
     </footer>
 
-    <script
-      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-      crossorigin=""
-    ></script>
     <script src="src/crash-logic.js"></script>
-    <script src="app.js"></script>
+    <script src="landing.js"></script>
   </body>
 </html>
