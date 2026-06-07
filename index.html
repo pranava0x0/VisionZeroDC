@@ -21,9 +21,8 @@
 
     <header class="masthead">
       <div class="masthead-main">
-        <p class="section-label">Independent Civic Analysis | DC Public Records</p>
         <div class="title-with-badge">
-          <h1>Where DC streets are deadliest — and what works</h1>
+          <h1>Making DC streets safer — and <span class="mark">what works</span></h1>
           <div class="editorial-seal">
             <svg viewBox="0 0 100 100" class="seal-svg" aria-hidden="true">
               <circle cx="50" cy="50" r="48" fill="none" stroke="var(--rule)" stroke-width="2"/>
@@ -42,7 +41,14 @@
     </header>
 
     <main id="main" tabindex="-1">
-      <section class="insights-band" aria-label="Key safety insights" hidden>
+      <nav class="section-jump" aria-label="Jump to section">
+        <a href="#s-toll">Toll</a>
+        <a href="#s-trends">Trends</a>
+        <a href="#s-fixes">Fixes</a>
+        <a href="#s-library">Library</a>
+      </nav>
+
+      <section id="s-toll" class="insights-band" aria-label="Key safety insights" hidden>
         <article class="insight scorecard" aria-label="DC traffic toll scorecard">
           <p class="section-label">The toll on DC streets</p>
           <div class="scorecard-figures">
@@ -65,7 +71,7 @@
         </article>
       </section>
 
-      <section class="charts-band" aria-label="Trends and who is hurt">
+      <section id="s-trends" class="charts-band" aria-label="Trends and who is hurt">
         <article class="chart-card" aria-label="Deaths and serious injuries over time">
           <p class="section-label">The trend</p>
           <h2>Deaths vs. serious injuries by year</h2>
@@ -81,7 +87,7 @@
         </article>
       </section>
 
-      <section class="recs-section" aria-label="Policy recommendations">
+      <section id="s-fixes" class="recs-section" aria-label="Policy recommendations">
         <p class="section-label">Evidence-backed recommendations</p>
         <h2 class="section-heading">What the data supports</h2>
         <p class="section-intro">
@@ -90,7 +96,7 @@
         <div id="recommendations" class="recs-grid">Loading recommendations…</div>
       </section>
 
-      <section class="countermeasures-section" aria-label="Countermeasure library">
+      <section id="s-library" class="countermeasures-section" aria-label="Countermeasure library">
         <p class="section-label">Countermeasure library</p>
         <h2 class="section-heading">Proven fixes and their effects</h2>
         <p class="section-intro">

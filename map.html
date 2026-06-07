@@ -27,7 +27,6 @@
 
     <header class="masthead">
       <div class="masthead-main">
-        <p class="section-label">Independent Civic Analysis | DC Public Records</p>
         <div class="title-with-badge">
           <h1>Crash Map</h1>
         </div>
@@ -128,55 +127,67 @@
 
       <aside class="detail-panel" aria-label="Selected crash and sources">
         <section class="hotspot-panel" aria-label="Policy focus locations">
-          <p class="section-label">Policy focus</p>
-          <h2>Hot spots in view</h2>
-          <p id="hotspot-note" class="panel-note">
-            Ranking locations and wards from the current map filters...
-          </p>
+          <details class="panel-more" open>
+            <summary>
+              <span class="section-label">Policy focus</span>
+              <h2>Hot spots in view</h2>
+            </summary>
+            <div class="panel-more-body">
+              <p id="hotspot-note" class="panel-note">
+                Ranking locations and wards from the current map filters...
+              </p>
 
-          <div class="hotspot-group">
-            <h3>Top crash locations</h3>
-            <ol id="location-hotspots" class="hotspot-list">
-              <li>Loading location statistics...</li>
-            </ol>
-          </div>
+              <div class="hotspot-group">
+                <h3>Top crash locations</h3>
+                <ol id="location-hotspots" class="hotspot-list">
+                  <li>Loading location statistics...</li>
+                </ol>
+              </div>
 
-          <div class="hotspot-group">
-            <h3>Ward totals</h3>
-            <ol id="ward-hotspots" class="hotspot-list ward-list">
-              <li>Loading ward statistics...</li>
-            </ol>
-          </div>
+              <div class="hotspot-group">
+                <h3>Ward totals</h3>
+                <ol id="ward-hotspots" class="hotspot-list ward-list">
+                  <li>Loading ward statistics...</li>
+                </ol>
+              </div>
+            </div>
+          </details>
         </section>
 
         <section class="ward-rates-panel" aria-label="Ward crash rates with exposure denominators">
-          <p class="section-label">Exposure context</p>
-          <h2>Ward crash rates</h2>
-          <p id="ward-rates-note" class="panel-note">Loading ward rate snapshot...</p>
-          <div class="ward-rates-controls">
-            <label for="ward-rates-sort">Rank by</label>
-            <span class="select-wrapper">
-              <select id="ward-rates-sort" aria-label="Ward rate ranking metric">
-                <option value="crashes_per_sq_mi" selected>crashes / sq mi</option>
-                <option value="crashes_per_100k">crashes / 100k residents</option>
-                <option value="crashes">total crashes</option>
-              </select>
-            </span>
-          </div>
-          <table class="ward-rates-table">
-            <thead>
-              <tr>
-                <th scope="col">Ward</th>
-                <th scope="col" class="num">Crashes</th>
-                <th scope="col" class="num">/ sq mi</th>
-                <th scope="col" class="num">/ 100k</th>
-              </tr>
-            </thead>
-            <tbody id="ward-rates-body">
-              <tr><td colspan="4">Loading ward rate snapshot...</td></tr>
-            </tbody>
-          </table>
-          <p id="ward-rates-caveat" class="ward-rates-caveat panel-note"></p>
+          <details class="panel-more" open>
+            <summary>
+              <span class="section-label">Exposure context</span>
+              <h2>Ward crash rates</h2>
+            </summary>
+            <div class="panel-more-body">
+              <p id="ward-rates-note" class="panel-note">Loading ward rate snapshot...</p>
+              <div class="ward-rates-controls">
+                <label for="ward-rates-sort">Rank by</label>
+                <span class="select-wrapper">
+                  <select id="ward-rates-sort" aria-label="Ward rate ranking metric">
+                    <option value="crashes_per_sq_mi" selected>crashes / sq mi</option>
+                    <option value="crashes_per_100k">crashes / 100k residents</option>
+                    <option value="crashes">total crashes</option>
+                  </select>
+                </span>
+              </div>
+              <table class="ward-rates-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Ward</th>
+                    <th scope="col" class="num">Crashes</th>
+                    <th scope="col" class="num">/ sq mi</th>
+                    <th scope="col" class="num">/ 100k</th>
+                  </tr>
+                </thead>
+                <tbody id="ward-rates-body">
+                  <tr><td colspan="4">Loading ward rate snapshot...</td></tr>
+                </tbody>
+              </table>
+              <p id="ward-rates-caveat" class="ward-rates-caveat panel-note"></p>
+            </div>
+          </details>
         </section>
 
         <section class="case-docket-section">
@@ -191,20 +202,24 @@
         </section>
 
         <section class="source-box">
-          <p class="section-label">Official sources</p>
-          <ul>
-            <li><a href="https://opendata.dc.gov/datasets/DCGIS::crashes-in-dc" target="_blank" rel="noopener noreferrer">Crashes in DC</a></li>
-            <li><a href="https://opendata.dc.gov/datasets/DCGIS::crash-details-table" target="_blank" rel="noopener noreferrer">Crash Details Table</a></li>
-            <li><a href="https://visionzero.dc.gov/pages/crash-analysis" target="_blank" rel="noopener noreferrer">Vision Zero Crash Analysis</a></li>
-            <li><a href="https://dcvisionzero.github.io/Crash-Injury-Dashboard/" target="_blank" rel="noopener noreferrer">Vision Zero crash dashboard</a></li>
-          </ul>
+          <details class="panel-more" open>
+            <summary><span class="section-label">Official sources</span></summary>
+            <ul class="panel-more-body">
+              <li><a href="https://opendata.dc.gov/datasets/DCGIS::crashes-in-dc" target="_blank" rel="noopener noreferrer">Crashes in DC</a></li>
+              <li><a href="https://opendata.dc.gov/datasets/DCGIS::crash-details-table" target="_blank" rel="noopener noreferrer">Crash Details Table</a></li>
+              <li><a href="https://visionzero.dc.gov/pages/crash-analysis" target="_blank" rel="noopener noreferrer">Vision Zero Crash Analysis</a></li>
+              <li><a href="https://dcvisionzero.github.io/Crash-Injury-Dashboard/" target="_blank" rel="noopener noreferrer">Vision Zero crash dashboard</a></li>
+            </ul>
+          </details>
         </section>
 
         <section class="source-box">
-          <p class="section-label">Layer notes</p>
-          <p>
-            The crash layer contains geocoded police-reported collisions. The details table is relational and loads on demand by CRASHID. Moving violations are contextual ticket records, not crashes.
-          </p>
+          <details class="panel-more" open>
+            <summary><span class="section-label">Layer notes</span></summary>
+            <p class="panel-more-body">
+              The crash layer contains geocoded police-reported collisions. The details table is relational and loads on demand by CRASHID. Moving violations are contextual ticket records, not crashes.
+            </p>
+          </details>
         </section>
       </aside>
     </main>

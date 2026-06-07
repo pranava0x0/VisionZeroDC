@@ -120,6 +120,31 @@
     };
   }
 
+  // --- Map reload guard (performance) -------------------------------------
+  // A crash reload is expensive: a count query, a hotspot query, and redrawing
+  // up to thousands of canvas markers. When the settled map view is already
+  // fully covered by the last *complete* load (same zoom, and the view sits
+  // inside the loaded extent), the reload is skipped. Bounds are plain
+  // {west, south, east, north} objects so this stays Leaflet-free and testable.
+  function boundsContains(outer, inner) {
+    if (!outer || !inner) return false;
+    return (
+      inner.west >= outer.west &&
+      inner.east <= outer.east &&
+      inner.south >= outer.south &&
+      inner.north <= outer.north
+    );
+  }
+
+  // Returns true when the current view needs no reload (already drawn).
+  // loadedBounds is null after a truncated load, which forces a reload so
+  // smaller/denser views can fetch fuller data.
+  function isViewCovered({ loadedBounds, loadedZoom, currentBounds, currentZoom } = {}) {
+    if (!loadedBounds) return false;
+    if (currentZoom !== loadedZoom) return false;
+    return boundsContains(loadedBounds, currentBounds);
+  }
+
   // --- Display helpers -----------------------------------------------------
   function formatRate(value) {
     if (value === null || value === undefined) return "n/a";
@@ -186,6 +211,8 @@
     cleanLocationName,
     triageScore,
     parseHotspot,
+    boundsContains,
+    isViewCovered,
     formatRate,
     decodeFilters,
     parseView,

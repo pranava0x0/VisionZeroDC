@@ -102,11 +102,17 @@ const {
   cleanLocationName,
   triageScore,
   parseHotspot,
+  isViewCovered,
   formatRate,
   decodeFilters,
   parseView,
   encodeState,
 } = window.CrashLogic;
+
+// Leaflet LatLngBounds -> plain {west,south,east,north} for the pure guard.
+function boundsToObj(b) {
+  return { west: b.getWest(), south: b.getSouth(), east: b.getEast(), north: b.getNorth() };
+}
 
 const els = {
   dateRange: document.querySelector("#date-range"),
@@ -141,6 +147,8 @@ const state = {
   violationsAbort: null,
   loadingCrashes: false,
   drawnCrashes: [],
+  loadedBounds: null,
+  loadedZoom: null,
   hotspots: {
     locations: [],
     wards: [],
@@ -573,12 +581,17 @@ function addCrashFeature(feature) {
   });
 
   const title = props.ADDRESS || props.NEARESTINTSTREETNAME || "Crash location";
-  marker.bindPopup(`
+  // autoPan:false so opening a popup never nudges the map (which would fire
+  // moveend and trigger a full crash reload).
+  marker.bindPopup(
+    `
     <strong class="popup-title">${escapeHtml(title)}</strong>
     <div>${escapeHtml(formatDate(props.REPORTDATE))}</div>
     <div>${escapeHtml(props.WARD || "Ward not available")}</div>
     <div>${stats.fatalities} fatal / ${stats.major} major / ${stats.minor} minor injuries</div>
-  `);
+  `,
+    { autoPan: false }
+  );
   marker.on("click", () => selectCrash(props));
   marker.addTo(crashLayer);
   state.drawnCrashes.push({
@@ -595,6 +608,11 @@ async function loadCrashes() {
   state.loadingCrashes = true;
   crashLayer.clearLayers();
   state.drawnCrashes = [];
+  // Extent these results cover; recorded on success so moveend can skip
+  // redundant reloads when the user pans within already-drawn data.
+  const loadBounds = map.getBounds();
+  const loadZoom = map.getZoom();
+  state.loadedBounds = null;
 
   const where = baseWhere();
   setNotice("Loading crash records from Open Data DC...");
@@ -636,10 +654,14 @@ async function loadCrashes() {
     els.updated.textContent = latest ? formatDate(latest) : "N/A";
 
     if (total > summaries.length) {
+      // Truncated: leave loadedBounds null so panning reloads for fuller data.
       setNotice(
         `Showing ${formatNumber(summaries.length)} of ${formatNumber(total)} matching crashes in this view. Zoom in, change filters, or use a shorter date range to draw every matching point.`
       );
     } else {
+      // Complete: record the extent so panning within it skips a reload.
+      state.loadedBounds = loadBounds;
+      state.loadedZoom = loadZoom;
       setNotice(`Showing all ${formatNumber(summaries.length)} matching crashes in this view.`);
     }
   } catch (error) {
@@ -809,12 +831,15 @@ function addViolation(attrs) {
     opacity: 0.5,
     weight: 1,
   });
-  marker.bindPopup(`
+  marker.bindPopup(
+    `
     <strong class="popup-title">${escapeHtml(attrs.VIOLATION_PROCESS_DESC || "Moving violation")}</strong>
     <div>${escapeHtml(formatDate(attrs.ISSUE_DATE))}</div>
     <div>${escapeHtml(attrs.LOCATION || "Location not available")}</div>
     <div>${escapeHtml(attrs.VIOLATION_CODE || "")} ${attrs.FINE_AMOUNT ? `- $${escapeHtml(attrs.FINE_AMOUNT)}` : ""}</div>
-  `);
+  `,
+    { autoPan: false }
+  );
   marker.addTo(violationLayer);
 }
 
@@ -913,10 +938,29 @@ function refreshAll() {
   loadViolations();
 }
 
+// True when the settled view is already fully drawn: same zoom and within the
+// extent of the last complete load. Lets us skip a redundant full reload on a
+// pan that stays inside already-loaded data.
+function viewAlreadyLoaded() {
+  if (!state.loadedBounds) return false;
+  return isViewCovered({
+    loadedBounds: boundsToObj(state.loadedBounds),
+    loadedZoom: state.loadedZoom,
+    currentBounds: boundsToObj(map.getBounds()),
+    currentZoom: map.getZoom(),
+  });
+}
+
 let moveTimer = null;
 map.on("moveend", () => {
   clearTimeout(moveTimer);
-  moveTimer = setTimeout(refreshAll, 250);
+  moveTimer = setTimeout(() => {
+    if (viewAlreadyLoaded()) {
+      writeUrlState(); // keep the shareable URL in sync without refetching
+      return;
+    }
+    refreshAll();
+  }, 250);
 });
 map.on("click", selectNearestCrash);
 
@@ -937,6 +981,18 @@ els.violationsSource.addEventListener("change", () => {
   writeUrlState();
   loadViolations();
 });
+
+// Detail-panel reference sections collapse when the panel stacks below the map
+// (<=960px) and stay open in the desktop rail.
+const panelMq = window.matchMedia("(max-width: 960px)");
+function syncPanelDisclosures() {
+  const collapse = panelMq.matches;
+  document.querySelectorAll("details.panel-more").forEach((d) => {
+    d.open = !collapse;
+  });
+}
+panelMq.addEventListener("change", syncPanelDisclosures);
+syncPanelDisclosures();
 
 loadWardRates();
 refreshAll();
