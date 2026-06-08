@@ -1861,6 +1861,28 @@ p.rec-key {
   scrollbar-width: none;
 }
 
+.section-jump a {
+  flex: 0 0 auto;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-2);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.section-jump a:hover,
+.section-jump a:active {
+  background: var(--brand);
+  color: var(--on-brand);
+}
+
 @media (max-width: 640px) {
   /* Sticky in-page jump-nav */
   .section-jump {
