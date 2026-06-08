@@ -3,6 +3,8 @@
 > Expanded research on local groups, grassroots advocates, and additional policy interventions for Vision Zero DC.  
 > Last updated: 2026-06-07
 
+> **Sourcing note (2026-06-07):** Tiers 5–6, the legislation section, and the ward-specific efforts below were added with primary/authoritative sources cited inline (DC Law Library, DDOT, OAG, ANC sites, local press), per the project Editorial Promise. The earlier Tier 2 entries (Seniors Age Well, Georgetown Transportation, Transportation Choices Coalition) are **unverified** and should be confirmed or corrected before use — they could not be matched to a primary source in this pass.
+
 ---
 
 ## Part 1: Community Organizations & Advocates
@@ -106,6 +108,72 @@
 - **Role**: Evidence-based policy, cost-benefit analysis, funder alignment
 - **Reference**: Their Hoboken case study was in our recommendations
 - **Contact**: Explore whether DC interventions could be featured in their network
+
+---
+
+### **Tier 5: Verified Citywide & Ward-Specific Efforts (added 2026-06-07)**
+
+#### **15. DC Safe Streets Coalition**
+- **Focus**: Citywide street-safety advocacy coalition (complements the victim/survivor-led DC Families for Safe Streets).
+- **Opportunity**: Coalition amplification for corridor campaigns; shared turnout for Council hearings.
+- **Website**: https://dcsafestreetscoalition.org/
+
+#### **16. Anacostia Parks & Community Collaborative (APACC)**
+- **Focus**: Network of organizations maximizing public space along the Anacostia River for **Wards 7 & 8** residents.
+- **Why it matters here**: Trusted East-of-the-River convener that overlaps the South Capitol St, East Capitol St, and Southern Ave hotspots.
+- **Opportunity**: Co-host corridor safety walks tied to park access; route safe-streets messaging through an existing Ward 7/8 network.
+- **Status**: Real network referenced in regional reporting; **verify current URL/contact before outreach.**
+- **Context source**: ["A culture of speeding" — Wards 7 & 8 residents urge safety action, WUSA9](https://www.wusa9.com/article/features/producers-picks/dc-traffic-safety-wards-7-and-8-fatalities/65-0a1a344d-da56-4dc5-b3a3-76cc3efdc935)
+
+#### **17. Advisory Neighborhood Commissions (ANCs) — the ward-level channel**
+- **Focus**: DC's elected hyperlocal bodies; the natural co-sponsor for corridor-specific interventions.
+- **How it works**: ANCs pass resolutions requesting DDOT action (traffic calming, signals, crossings). The full resolution archive is public.
+- **Live examples to model**:
+  - **ANC 5B01 "Safer Streets"** priority page (Ward 5) — https://www.anc5b01.com/priorities/safer-streets
+  - **ANC 8A resources** (Ward 8) — https://anc8a.dc.gov/basic-page/anc-8a-resources
+  - **ANC 1E** resolution requesting a DDOT Traffic Safety Assessment for the 500–700 blocks of Columbia Rd NW (example of the request-for-TSA pattern) — [resolution PDF](https://resolutions.anc.dc.gov/AttachmentsFiles/42/1E_2023_0501_Resolution_in_Support_of_a_DDOT_Traffic_Safety_Assessment__TSA__for_the__500_700_Blocks_of_Columbia_Road_NW_TM_20230530083630PM.pdf)
+- **ANC resolution archive**: https://resolutions.anc.dc.gov/
+- **Opportunity**: Map each of our 5 corridors to the ANCs whose boundaries they cross, and supply a ready-to-adopt resolution + our evidence card.
+
+#### **18. DC Office of the Attorney General (OAG) — civil enforcement on repeat dangerous drivers**
+- **Focus**: AG Brian Schwalb's office has sued out-of-state drivers with large numbers of unpaid DC traffic citations (e.g., four drivers owing $340,000+ for 1,000+ citations).
+- **Why it matters here**: A non-MPD, non-police enforcement lever — useful for the equity framing that avoids defaulting to policing.
+- **Source**: [AG Schwalb sues four dangerous drivers over unpaid citations, OAG](https://oag.dc.gov/release/attorney-general-schwalb-sues-four-dangerous)
+
+---
+
+### **Tier 6: Official Resident-Driven Request Channels (DDOT)**
+
+These are not advocacy groups but the **formal mechanisms** a corridor campaign should route through. Worth surfacing in-product as "how to act on this."
+
+#### **19. DDOT Traffic Safety Input (TSI)**
+- **What**: Any resident can flag a roadway segment/intersection safety concern, which triggers a DDOT investigation. ANC pre-approval has been **removed from the front end** of the process — individuals can submit directly.
+- **Use**: The "report this corridor" call-to-action our hotspot cards could link to.
+- **Source**: https://ddot.dc.gov/service/traffic-safety-input
+
+#### **20. DDOT Traffic Calming & Traffic Safety Assessment (TSA)**
+- **What**: DDOT evaluates speed/volume concerns and installs short-term, high-impact measures (e.g., speed humps). Example: June 2024 speed humps on the 3800/3900 blocks of 20th St NE and 1900/2000 blocks of Quincy St NE (Ward 5).
+- **Source**: [Traffic Calming and Traffic Safety 101, DDOT](https://ddot.dc.gov/page/traffic-calming-and-traffic-safety-101)
+
+---
+
+## Part 1.5: DC Traffic-Safety Legislation & Legal Authority
+
+> The "what safety interventions have been installed, promised, delayed, or omitted?" question (CLAUDE.md Project Intent #3) runs through DC law. These are the statutes that authorize and fund Vision Zero work. Acts below were verified against the **DC Law Library** primary source.
+
+| Act | Citation | Effective | What it does |
+| --- | --- | --- | --- |
+| **Vision Zero Enhancement Omnibus Amendment Act of 2020** | [D.C. Law 23-158](https://code.dccouncil.gov/us/dc/council/laws/23-158) | 2020-12-23 | Comprehensive package: sidewalks + high-visibility crosswalks during road construction, protected bike lanes on designated routes, **20 mph default on local streets**, automated-enforcement camera requirements, no-right-on-red near schools/parks, and dangerous-corridor reporting. Lead sponsor: Councilmember Charles Allen. |
+| **Safer Streets Amendment Act of 2022** | [D.C. Law 24-214](https://code.dccouncil.gov/us/dc/council/laws/24-214) | 2022-12-21 | Bicycle **stop-as-yield** (proceed through stop signs at safe speed, yielding) and turn-on-red where DDOT signs allow; **restricts motor-vehicle right-on-red** unless DDOT finds it improves safety, and requires a public list of approved turn-on-red locations. Defines "raised intersection" and "road reconstruction." |
+| **STEER (Strengthening Traffic Enforcement, Education, and Responsibility) Amendment Act of 2024** | [D.C. Law 25-161](https://code.dccouncil.gov/us/dc/council/laws/25-161) | 2024 (rollout delayed to ~fall 2025 by budget) | Vehicles accumulating **10 points in any 6-month window become eligible for booting/towing** regardless of unpaid-ticket totals; DMV safe-driving curriculum (fines reducible $100/training hr up to $500); intelligent speed assistance (speed-governor) for drivers convicted of reckless driving; authority to sue out-of-state drivers with major unpaid violations. Lead sponsor: Charles Allen. |
+| **Automated Traffic Enforcement System Revenue Designation Amendment Act of 2022** | [D.C. Law 24-321](https://code.dccouncil.gov/us/dc/council/laws/24-321) | 2022 | Designates automated-enforcement (camera) revenue to fund implementation of the Vision Zero Enhancement Act and Safer Streets Act, including recurring costs. |
+| **Vision Zero Pedestrian and Bicycle Safety Fund** | [§ 50-921.20](https://code.dccouncil.gov/us/dc/council/code/sections/50-921.20) | — | The dedicated fund Vision Zero ped/bike work draws on. |
+
+**Reported (verify before publishing as fact):** Press coverage notes STEER "phase two" lawsuits already filed against MD/VA drivers for a combined ~$425K, and the first court judgment (~$77K) under the Act. Treat dollar figures as research-grade until checked against OAG/court records.
+
+- News context: [STEER Act overview, WTOP](https://wtop.com/local/2024/10/steer-act-cracks-down-on-dangerous-driving-in-dc/) · [Speed-governor requirement, NBC4](https://www.nbcwashington.com/news/local/dc-approves-requiring-speed-governor-devices-on-dangerous-drivers-cars/3537868/) · [Three road-safety bills, Greater Greater Washington](https://ggwash.org/view/72038/the-dc-council-will-consider-revised-a-vision-zero-bill-and-other-road-safety-legislation)
+
+**Product tie-in:** each corridor recommendation can cite the *legal authority* that already exists for it (e.g., a 20 mph road-diet recommendation is backed by the Vision Zero Enhancement Act; right-on-red restrictions by the Safer Streets Act), turning "we recommend X" into "the law already authorizes X — here's where it hasn't been applied yet."
 
 ---
 

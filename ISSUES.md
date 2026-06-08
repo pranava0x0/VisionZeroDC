@@ -6,6 +6,20 @@ _Last updated: 2026-06-07_
 
 ## Open Issues
 
+### [BUG-010] Hotspots map fails to load — invalid Leaflet SRI hash
+- **Severity**: high
+- **Page/Section**: `hotspots.html` / High-Injury Corridors map
+- **Discovered**: 2026-06-07
+- **Status**: resolved
+- **Resolution**: 2026-06-07
+- **Description**: The hotspots map never rendered. The sidebar cards loaded, but the map area showed `Error loading map: L is not defined`. The `<script>` tag for Leaflet 1.9.4 in `hotspots.html` carried a fabricated `integrity` (SRI) hash (`sha256-nMMmRyWjMoJJV9vvKKH8qP8KqJhxxMJC5K9BqwhYBwg=`). The browser computed a different hash for the fetched file, failed the integrity check, and refused to execute `leaflet.js`, so `L` was undefined when `initMap()` ran. `map.html` already used the correct hash; only `hotspots.html` was affected.
+- **Steps to Reproduce**:
+  1. Open `hotspots.html` via a local static server.
+  2. Observe the sidebar loads but the map shows `Error loading map: L is not defined`.
+  3. Console shows `ReferenceError: L is not defined` at `initMap`.
+- **Fix**: Replaced the integrity attribute with the correct subresource hash `sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=` (verified via `curl ... | openssl dgst -sha256 -binary | openssl base64`). Local browser verification confirms Leaflet loads, all 5 corridor polylines render over OpenStreetMap tiles, and corridor selection (card click → map pan/highlight) works.
+- **Regression tests**: `tests/html-integrity.test.mjs` — asserts every remote subresource pins SRI + crossorigin, that a given CDN URL uses the same hash across all HTML files (the direct BUG-010 catch), and that Leaflet pins its known-good published hashes. Also added `tests/hotspots-data.test.mjs` to validate the GeoJSON the map renders (schema, `ksi == injuries + fatalities`, DC-bounds coordinate check that also regresses PR5-001). Verified the consistency test fails when the bad hash is reintroduced. Run with `node --test`.
+
 ### [UAT-004] Excessive page scrolling requires content truncation/disclosure
 - **Severity**: high
 - **Page/Section**: All tabs (Home, Analysis, Solutions)
