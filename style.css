@@ -1335,11 +1335,11 @@ body.violations-visible .violations-source-container {
 .site-nav {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 32px;
+  gap: 16px;
   padding: 18px 40px;
   background: var(--bg);
   border-bottom: 1px solid var(--border);
+  flex-wrap: nowrap;
 }
 .site-nav .nav-brand {
   display: inline-flex;
@@ -1352,10 +1352,14 @@ body.violations-visible .violations-source-container {
   color: var(--text);
   text-decoration: none;
   flex-shrink: 0;
+  white-space: nowrap;
 }
 .site-nav .nav-links {
   display: flex;
   gap: 12px;
+  margin-left: auto;
+  flex-wrap: nowrap;
+  white-space: nowrap;
 }
 .site-nav .nav-links a {
   display: inline-flex;
