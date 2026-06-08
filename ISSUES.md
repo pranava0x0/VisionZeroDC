@@ -10,7 +10,7 @@ _Last updated: 2026-06-07_
 - **Severity**: high
 - **Page/Section**: All tabs (Home, Analysis, Solutions)
 - **Discovered**: 2026-06-07
-- **Status**: open
+- **Status**: in-progress
 - **Description**: 
   - Mobile: Page height 8164px requires 10+ screen scrolls to reach countermeasures section
   - Tablet: Similar scrolling burden with long vertical content stack
@@ -20,11 +20,15 @@ _Last updated: 2026-06-07_
   - Users may not discover countermeasures library (bottom of page)
   - Mobile experience feels like an endless scroll, discouraging exploration
   - Reduced engagement with complete content
-- **Suggested Fixes**: 
-  1. Organizations section: Show 2-3 cards on mobile with "Show all 10" toggle/modal/accordion
-  2. Countermeasures section: Paginate or lazy-load after first 3-4
-  3. Recommendations: Consider accordion/disclosure pattern on mobile to expand only interested items
-  4. Sticky in-page navigation: Jump links to each section for quick access
+- **Fixes Applied (2026-06-07)**:
+  1. ✓ Reduced organizations from 2 to 1 card displayed on mobile (toggle shows rest)
+  2. ✓ Reduced countermeasures from 3 to 2 cards on mobile (toggle shows rest)
+  3. ✓ Updated JavaScript setup functions to match new CSS limits
+  - Estimated improvement: ~30-40% reduction in initial scroll burden
+- **Remaining Work**: 
+  1. Verify actual page height reduction with full data load
+  2. Consider lazy-loading recommendations on mobile if still excessive
+  3. Test tab switching scroll position (UAT-005)
 
 ### [UAT-005] Tab switching does not always scroll to top of new content
 - **Severity**: low
