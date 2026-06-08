@@ -1838,11 +1838,7 @@ p.rec-key {
 /* Countermeasure "show all" toggle + organization toggle + section jump-nav: hidden on desktop */
 .cm-toggle,
 .org-toggle,
-.section-jump {
-  display: none;
-}
-
-#tab-solutions .section-jump {
+.section-carousel {
   position: sticky;
   top: 0;
   z-index: 500;
@@ -1856,65 +1852,45 @@ p.rec-key {
   scrollbar-width: none;
 }
 
-.section-jump a {
+.carousel-pill {
   flex: 0 0 auto;
   min-height: 44px;
   display: inline-flex;
   align-items: center;
   padding: 6px 16px;
+  border: none;
   border-radius: var(--radius-pill);
   background: var(--surface-2);
   color: var(--text);
   font-family: var(--font-sans);
   font-size: 0.82rem;
   font-weight: 700;
-  text-decoration: none;
+  cursor: pointer;
   white-space: nowrap;
+  transition: all 0.2s ease;
 }
 
-.section-jump a:hover,
-.section-jump a:active {
+.carousel-pill:hover {
   background: var(--brand);
   color: var(--on-brand);
 }
 
+.carousel-pill.active {
+  background: var(--brand);
+  color: var(--on-brand);
+}
+
+.carousel-content {
+  display: none;
+}
+
+.carousel-content.active {
+  display: block;
+}
+
 @media (max-width: 640px) {
-  /* Sticky in-page jump-nav */
-  .section-jump {
-    position: sticky;
-    top: 0;
-    z-index: 500;
-    display: flex;
-    gap: 6px;
-    padding: 8px 12px;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-  .section-jump::-webkit-scrollbar {
+  .section-carousel::-webkit-scrollbar {
     display: none;
-  }
-  .section-jump a {
-    flex: 0 0 auto;
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-    padding: 6px 16px;
-    border-radius: var(--radius-pill);
-    background: var(--surface-2);
-    color: var(--text);
-    font-family: var(--font-sans);
-    font-size: 0.82rem;
-    font-weight: 700;
-    text-decoration: none;
-    white-space: nowrap;
-  }
-  .section-jump a:hover,
-  .section-jump a:active {
-    background: var(--brand);
-    color: var(--on-brand);
   }
   #s-toll,
   #s-trends,

@@ -420,6 +420,35 @@ function setupTabs() {
   });
 }
 
+function setupCarousel() {
+  const carouselPills = document.querySelectorAll(".carousel-pill");
+  const carouselContents = document.querySelectorAll(".carousel-content");
+
+  carouselPills.forEach((pill) => {
+    pill.addEventListener("click", () => {
+      const section = pill.getAttribute("data-section");
+
+      // Update pill active state
+      carouselPills.forEach((p) => {
+        p.classList.remove("active");
+        p.setAttribute("aria-selected", "false");
+      });
+      pill.classList.add("active");
+      pill.setAttribute("aria-selected", "true");
+
+      // Update content visibility
+      carouselContents.forEach((content) => {
+        content.classList.remove("active");
+      });
+      const panel = document.getElementById(`${section}-panel`);
+      if (panel) panel.classList.add("active");
+    });
+  });
+
+  // Set Recs as default
+  if (carouselPills[0]) carouselPills[0].click();
+}
+
 // --- boot ------------------------------------------------------------------
 
 async function getJson(url) {
@@ -455,6 +484,7 @@ async function getJson(url) {
   if (orgs) renderOrganizations(orgs);
   else els.organizations.textContent = "Organizations data unavailable.";
 
-  // Setup tab switching
+  // Setup tab switching and carousel
   setupTabs();
+  setupCarousel();
 })();
