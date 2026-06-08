@@ -81,16 +81,16 @@
     },
     {
       "id": "ward8",
-      "name": "Ward 8 Bike Alliance & Conservation Groups",
-      "focus": ["Equity", "Neighborhood infrastructure", "Environmental health"],
-      "description": "Ward-specific organizations prioritizing safer streets and bicycle/pedestrian infrastructure in under-resourced communities.",
+      "name": "Ward 8 Bike Alliance",
+      "focus": ["Equity", "Protected bike lanes", "Ward 8 infrastructure"],
+      "description": "Resident-led Ward 8 group (founded by Marvin Brown of Congress Heights) campaigning for the ward's first protected bike lanes and safer streets east of the river. A cosponsor of the regional Transportation Equity Platform.",
       "initiatives": [
-        "Ward 8 bike network development",
-        "Safe routes to schools",
-        "Parks and trail connectivity",
-        "Community-led safety audits"
+        "Petition for Ward 8's first protected bike lane (Mississippi Ave SE)",
+        "Safe routes east of the river",
+        "Community-led safety advocacy",
+        "Transportation Equity Platform cosponsorship"
       ],
-      "url": "https://dcsafestreetscoalition.org/",
+      "url": "https://waba.org/network/",
       "recommendations": ["equitable-infrastructure", "ward-8-prioritization"]
     },
     {

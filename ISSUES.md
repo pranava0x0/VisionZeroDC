@@ -1,10 +1,26 @@
 # Issues Log
 
-_Last updated: 2026-06-07_
+_Last updated: 2026-06-08_
 
 ---
 
 ## Open Issues
+
+### [DATA-AUDIT-001] Site-wide link & claim audit — dead links and unverified figures
+- **Severity**: high (editorial integrity)
+- **Page/Section**: `index.html` data (recommendations, organizations), `hotspots.html`
+- **Discovered**: 2026-06-08
+- **Status**: resolved
+- **Method**: Extracted every external URL from `index.html`, `map.html`, `hotspots.html`, the site JS, and `data/*.json`, then HTTP-checked each (browser UA to distinguish bot-blocks from real 404s). Read every claim/source pair in `recommendations.json`, `countermeasures.json`, `organizations.json` and cross-checked against `crash-summary.json` provenance.
+- **Findings & fixes**:
+  - **Dead link** `www.hobokennj.gov/departments/traffic-safety-unit` (404) backed a garbled claim ("cuts school-zone crashes by 10–15 mph speed reduction" — nonsensical units). Reworded to a defensible school-zone-package claim; re-sourced to the FHWA Vision Zero Toolkit. (`recommendations.json` rec-school-zone-safety)
+  - **Dead link** `ddot.dc.gov/publication/adaptive-signal-control-plan` (404) backed a fabricated stat ("pedestrian detection achieves 93% accuracy"). Removed the fabricated evidence item; kept the FHWA-sourced, honestly-hedged adaptive-signal claim. (`recommendations.json` rec-adaptive-signals-and-detection)
+  - **Internal inconsistency**: rec-protected-intersections claimed "New York Avenue NE … 427 injuries and 2 fatalities" while `hotspots.geojson` says 438/3. Both are unverified; reworded to a "preliminary corridor screen" framing rather than asserting a precise count as an Open Data DC fact.
+  - **Unverified precise figures** ("~41% of schools have crossing guards" / "59% gap") had only a homepage link. Re-labeled as reported figures pending a primary-source citation.
+  - **Organization with placeholder URL**: "Ward 8 Bike Alliance & Conservation Groups" reused the Safe Streets Coalition URL. Verified the **Ward 8 Bike Alliance** is real (founder Marvin Brown, Congress Heights; Transportation Equity Platform cosponsor); corrected name, description, and URL (`waba.org/network/`). (`organizations.json`)
+  - **Corridor figures provenance**: surfaced the GeoJSON's existing "verification in progress" caveat in the `hotspots.html` footer so per-corridor counts are presented as a preliminary screen, not settled facts.
+- **Verified-real (no change needed)**: DCTEN (`ggwash.org/dcten`, 403 = bot-block), FHWA toolkit & TfL (403 bot-blocks), all other org/source URLs (200). `crash-summary.json` headline numbers have solid provenance (`pipeline/snapshot.py`, live ArcGIS query URLs, honest caveats). `countermeasures.json` already carries a "research-grade until verified" note.
+- **Still open**: replace the interim Wikipedia ward-population denominator and the reported crossing-guard figure with primary-source citations; compute real per-corridor crash counts via an intersection/HIN spatial join (see BACKLOG.md).
 
 ### [BUG-010] Hotspots map fails to load — invalid Leaflet SRI hash
 - **Severity**: high
