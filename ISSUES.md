@@ -16,11 +16,12 @@ _Last updated: 2026-06-08_
   - **Dead link** `www.hobokennj.gov/departments/traffic-safety-unit` (404) backed a garbled claim ("cuts school-zone crashes by 10–15 mph speed reduction" — nonsensical units). Reworded to a defensible school-zone-package claim; re-sourced to the FHWA Vision Zero Toolkit. (`recommendations.json` rec-school-zone-safety)
   - **Dead link** `ddot.dc.gov/publication/adaptive-signal-control-plan` (404) backed a fabricated stat ("pedestrian detection achieves 93% accuracy"). Removed the fabricated evidence item; kept the FHWA-sourced, honestly-hedged adaptive-signal claim. (`recommendations.json` rec-adaptive-signals-and-detection)
   - **Internal inconsistency**: rec-protected-intersections claimed "New York Avenue NE … 427 injuries and 2 fatalities" while `hotspots.geojson` says 438/3. Both are unverified; reworded to a "preliminary corridor screen" framing rather than asserting a precise count as an Open Data DC fact.
-  - **Unverified precise figures** ("~41% of schools have crossing guards" / "59% gap") had only a homepage link. Re-labeled as reported figures pending a primary-source citation.
+  - **Unverified precise figures** ("~41% of schools have crossing guards" / "59% gap") had only a homepage link. **Resolved 2026-06-08**: removed the unsourced percentages entirely and replaced them with the verified DDOT figure (214 crossing-guard posts across 135 schools for 2025-26, per the DDOT School Crossing Guard Program page), noting per-ward coverage is not published; recommendation confidence lowered high→medium since the local gap magnitude is now honestly unquantified. Updated in `recommendations.json`, `HOTSPOTS_AND_POLICIES.md`.
   - **Organization with placeholder URL**: "Ward 8 Bike Alliance & Conservation Groups" reused the Safe Streets Coalition URL. Verified the **Ward 8 Bike Alliance** is real (founder Marvin Brown, Congress Heights; Transportation Equity Platform cosponsor); corrected name, description, and URL (`waba.org/network/`). (`organizations.json`)
   - **Corridor figures provenance**: surfaced the GeoJSON's existing "verification in progress" caveat in the `hotspots.html` footer so per-corridor counts are presented as a preliminary screen, not settled facts.
 - **Verified-real (no change needed)**: DCTEN (`ggwash.org/dcten`, 403 = bot-block), FHWA toolkit & TfL (403 bot-blocks), all other org/source URLs (200). `crash-summary.json` headline numbers have solid provenance (`pipeline/snapshot.py`, live ArcGIS query URLs, honest caveats). `countermeasures.json` already carries a "research-grade until verified" note.
-- **Still open**: replace the interim Wikipedia ward-population denominator and the reported crossing-guard figure with primary-source citations; compute real per-corridor crash counts via an intersection/HIN spatial join (see BACKLOG.md).
+- **Ward-population denominator (2026-06-08, partial)**: removed the bare Wikipedia citation and re-sourced the denominator honestly — values are now labeled ~2022 ward-level estimates on the 2022 ward boundaries (boundary-consistent with crash ward assignment), compiled via a secondary compilation of DC OP / DC Health Matters figures and anchored to the **verified 2020 U.S. Census total of 689,545** (redistricting balanced each ward toward ~86,193, ±5%; both confirmed against DC Office of Planning). The exact 2020-decennial count per *new* (2022) ward was not cheaply extractable from DC OP (PDF/map tables) within budget, and the readily-available 2020 figures are tabulated to the *old* (2012) boundaries, which would bias Wards 7/8 rates — so the boundary-consistent estimates were retained with transparent provenance rather than substituted. Updated `ward-denominators.json`, `crash-summary.json` (metadata only; population values and computed rates unchanged), `recommendations.json`, `llms-full.txt`, `HOTSPOTS_AND_POLICIES.md`.
+- **Still open**: reconfirm each per-ward population value against the DC Office of Planning per-ward tables (or substitute the 2020-Census-on-2022-boundaries decennial counts) to fully retire the secondary-compilation provenance; compute real per-corridor crash counts via an intersection/HIN spatial join (see BACKLOG.md).
 
 ### [BUG-010] Hotspots map fails to load — invalid Leaflet SRI hash
 - **Severity**: high
@@ -65,9 +66,16 @@ _Last updated: 2026-06-08_
 - **Severity**: low
 - **Page/Section**: Tab button navigation
 - **Discovered**: 2026-06-07
-- **Status**: open
-- **Description**: On 375px width, the third tab "How to fix it" text may be partially cut off. Users on very narrow phones might not see the full label.
-- **Suggested Fix**: Either (a) make tabs horizontally scrollable, (b) stack tabs on devices < 480px, or (c) abbreviate "How to fix it" to "Fixes"
+- **Status**: resolved
+- **Resolution**: 2026-06-08 — tab labels were shortened to "Home / Data / Fixes" (fix (c) from the suggested options). Verified at 375px via the browser preview: no tab is clipped (each button's `scrollWidth` ≤ its rendered width) and the `.tabs-nav` does not overflow (scrollWidth == clientWidth == 375). Screenshot confirms all three labels render fully.
+
+### [UAT-007] ANC "Open in email" action below the 44px touch target
+- **Severity**: low (accessibility)
+- **Page/Section**: `anc.html` — resolution draft actions
+- **Discovered**: 2026-06-08 (UAT of the new ANC Safety Brief)
+- **Status**: resolved
+- **Description**: The draft actions row mixes `<button>` (Copy, Print) and an `<a>` ("Open in email", a `mailto:` link). The global `button, select { min-height: 44px }` rule gave the buttons a compliant touch target, but the anchor rendered at ~37.5px tall, under the WCAG 44px minimum used across the site.
+- **Fix**: `.anc-btn` now uses `display: inline-flex; align-items: center; justify-content: center; min-height: 44px;` so every action — button or anchor — meets the touch-target minimum. Confirmed the served stylesheet carries the rule.
 
 ---
 
