@@ -57,11 +57,11 @@
     {
       "id": "rec-school-zone-safety",
       "title": "Close the DC crossing-guard gap and expand school-zone safety programs",
-      "problem": "Only 41% of DC schools have crossing guards; the 59% gap disproportionately affects Wards 7 and 8, where student density is high and crash risk is elevated.",
+      "problem": "By a reported figure, only about 41% of DC schools have crossing guards; that coverage gap falls hardest on Wards 7 and 8, where student density is high and crash risk is elevated.",
       "location_scope": "All DC schools, prioritized by student enrollment and nearby crash history",
       "evidence": [
-        { "claim": "Crossing-guard presence + infrastructure (high-visibility markings, curb extensions, signal timing) cuts school-zone crashes by 10–15 mph speed reduction in test areas.", "source_title": "Hoboken school-safety program evaluation", "source_url": "https://www.hobokennj.gov/departments/traffic-safety-unit" },
-        { "claim": "DC has 59% of schools without crossing-guard coverage; Wards 7 and 8 are most underserved.", "source_title": "DC Department of Transportation school-safety audit", "source_url": "https://ddot.dc.gov/" }
+        { "claim": "School-zone safety packages combine trained crossing guards with engineering (high-visibility crosswalks, curb extensions, leading pedestrian intervals) and 20 mph limits; lower impact speeds sharply raise a struck child's odds of survival.", "source_title": "FHWA Vision Zero Toolkit", "source_url": "https://highways.dot.gov/sites/fhwa.dot.gov/files/2024-04/Vision%20Zero%20Toolkit%20508_0.pdf" },
+        { "claim": "By a reported figure, roughly 59% of DC schools lack crossing-guard coverage, with Wards 7 and 8 most underserved (reported figure — pending a primary-source citation).", "source_title": "Crossing-guard coverage — reported figure, verification pending", "source_url": "https://ddot.dc.gov/page/vision-zero-initiative" }
       ],
       "countermeasure_ids": ["speed_limit_20", "daylighting", "leading_pedestrian_interval"],
       "mechanism": "Combine trained crossing guards at high-volume school crossings with engineering (daylighting, bump-outs, LPI) and low speed limits to create safe passage for children.",
@@ -78,7 +78,7 @@
       "location_scope": "5 pilot corridors: New York Ave NE (4th–Bladensburg), South Capitol St (Southern–MLK), Georgia Ave NW (full length), East Capitol St (full length), Southern Ave SE (select segments)",
       "evidence": [
         { "claim": "Protected intersections (corner islands, setback crossings, dedicated signal phases) reduce fatal/major-injury crashes by 50–70% at peer-city sites (NYC, Seattle, Vancouver).", "source_title": "FHWA Vision Zero Toolkit", "source_url": "https://highways.dot.gov/sites/fhwa.dot.gov/files/2024-04/Vision%20Zero%20Toolkit%20508_0.pdf" },
-        { "claim": "New York Avenue NE has recorded 427 injuries and 2 fatalities since 2022; South Capitol Street has an equal burden.", "source_title": "Crashes in DC (Open Data DC)", "source_url": "https://opendata.dc.gov/datasets/DCGIS::crashes-in-dc" }
+        { "claim": "These five corridors carry a concentrated share of severe crashes in the project's preliminary corridor screen; exact per-corridor counts await an intersection/HIN-level spatial join (see the hotspots analysis).", "source_title": "DC Vision Zero high-injury corridor screen (preliminary)", "source_url": "https://opendata.dc.gov/datasets/DCGIS::crashes-in-dc" }
       ],
       "countermeasure_ids": ["protected_intersection", "leading_pedestrian_interval", "automated_speed_camera"],
       "mechanism": "Redesign conflict points so pedestrians cross in a protected phase with no turning traffic, or cross in refuge islands with reduced conflict exposure. Pair with LPI and speed enforcement.",
@@ -94,8 +94,7 @@
       "problem": "Fixed signal timing does not adapt to real-time demand, creating dilemma zones where drivers rear-end each other and pedestrians get stuck in the roadway. Pedestrian detection is missing at many high-volume crossings.",
       "location_scope": "Major corridors: New York Ave NE, H Street NW/NE, South Capitol Street, Georgia Avenue NW (10–15 intersections)",
       "evidence": [
-        { "claim": "Adaptive signal control + pedestrian detection reduces crashes at busy intersections by 15–25% (research-grade; verify locally before widespread deployment).", "source_title": "FHWA adaptive signal research", "source_url": "https://highways.dot.gov/sites/fhwa.dot.gov/files/2024-04/Vision%20Zero%20Toolkit%20508_0.pdf" },
-        { "claim": "Pedestrian detection achieves 93% accuracy in test environments; extends crossing time for slower pedestrians and detects stuck pedestrians.", "source_title": "DC/Northern Virginia adaptive signal pilot studies", "source_url": "https://ddot.dc.gov/publication/adaptive-signal-control-plan" }
+        { "claim": "Adaptive signal control + pedestrian detection reduces crashes at busy intersections by 15–25% (research-grade; verify locally before widespread deployment).", "source_title": "FHWA adaptive signal research", "source_url": "https://highways.dot.gov/sites/fhwa.dot.gov/files/2024-04/Vision%20Zero%20Toolkit%20508_0.pdf" }
       ],
       "countermeasure_ids": [],
       "mechanism": "Real-time signal timing adjusts to vehicle and pedestrian demand, reducing rear-end crashes and pedestrian-vehicle conflicts at bottleneck intersections.",
