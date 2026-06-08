@@ -41,11 +41,16 @@
     </header>
 
     <main id="main" tabindex="-1">
-      <nav class="section-jump" aria-label="Jump to section">
+      <nav class="tabs-nav" aria-label="Main sections">
+      <button class="tab-button active" data-tab="home" aria-selected="true">Home</button>
+      <button class="tab-button" data-tab="analysis" aria-selected="false">What the data supports</button>
+      <button class="tab-button" data-tab="solutions" aria-selected="false">How to fix it</button>
+    </nav>
+
+    <section id="tab-home" class="tab-panel active">
+      <nav class="section-jump" aria-label="Jump to subsection">
         <a href="#s-toll">Toll</a>
-        <a href="#s-trends">Trends</a>
-        <a href="#s-fixes">Fixes</a>
-        <a href="#s-library">Library</a>
+        <a href="#s-hotspots">Hot spots</a>
       </nav>
 
       <section id="s-toll" class="insights-band" aria-label="Key safety insights" hidden>
@@ -70,6 +75,13 @@
           <p id="hin-context" class="insight-context"></p>
         </article>
       </section>
+    </section>
+
+    <section id="tab-analysis" class="tab-panel">
+      <nav class="section-jump" aria-label="Jump to subsection">
+        <a href="#s-trends">Trends</a>
+        <a href="#s-hotspots">Hot spots</a>
+      </nav>
 
       <section id="s-trends" class="charts-band" aria-label="Trends and who is hurt">
         <article class="chart-card" aria-label="Deaths and serious injuries over time">
@@ -86,6 +98,14 @@
           <p id="mode-caption" class="panel-note"></p>
         </article>
       </section>
+    </section>
+
+    <section id="tab-solutions" class="tab-panel">
+      <nav class="section-jump" aria-label="Jump to subsection">
+        <a href="#s-fixes">Recommendations</a>
+        <a href="#s-orgs">Who's working on this</a>
+        <a href="#s-library">Countermeasures</a>
+      </nav>
 
       <section id="s-fixes" class="recs-section" aria-label="Policy recommendations">
         <p class="section-label">Evidence-backed recommendations</p>
@@ -96,6 +116,15 @@
         <div id="recommendations" class="recs-grid">Loading recommendations…</div>
       </section>
 
+      <section id="s-orgs" class="orgs-section" aria-label="Organizations working on street safety">
+        <p class="section-label">Who's working on this</p>
+        <h2 class="section-heading">DC organizations championing safer streets</h2>
+        <p class="section-intro">
+          Local advocates, nonprofit organizations, and government agencies are driving evidence-backed solutions. Here's who they are and what they're prioritizing.
+        </p>
+        <div id="organizations" class="orgs-grid">Loading organizations…</div>
+      </section>
+
       <section id="s-library" class="countermeasures-section" aria-label="Countermeasure library">
         <p class="section-label">Countermeasure library</p>
         <h2 class="section-heading">Proven fixes and their effects</h2>
@@ -104,6 +133,7 @@
         </p>
         <div id="countermeasures" class="cm-grid">Loading countermeasures…</div>
       </section>
+    </section>
     </main>
 
     <footer class="site-footer">
