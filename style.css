@@ -1335,20 +1335,22 @@ body.violations-visible .violations-source-container {
 .site-nav {
   display: flex;
   align-items: center;
-  gap: 20px;
-  padding: 14px 20px;
+  justify-content: center;
+  gap: clamp(8px, 2vw, 20px);
+  padding: clamp(12px, 2vw, 18px) clamp(16px, 3vw, 40px);
   background: var(--bg);
   border-bottom: 1px solid var(--border);
   flex-wrap: nowrap;
+  min-height: 44px;
 }
 .site-nav .nav-brand {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: clamp(4px, 1vw, 8px);
   font-family: var(--font-display);
   font-weight: 800;
   letter-spacing: -0.01em;
-  font-size: 0.9rem;
+  font-size: clamp(0.8rem, 2vw, 1rem);
   color: var(--text);
   text-decoration: none;
   flex-shrink: 0;
@@ -1356,22 +1358,23 @@ body.violations-visible .violations-source-container {
 }
 .site-nav .nav-links {
   display: flex;
-  gap: 6px;
-  margin-left: auto;
+  gap: clamp(4px, 1.5vw, 12px);
   flex-wrap: nowrap;
-  white-space: nowrap;
+  align-items: center;
+  justify-content: center;
 }
 .site-nav .nav-links a {
   display: inline-flex;
   align-items: center;
   min-height: 40px;
-  padding: 8px 14px;
+  padding: clamp(6px, 1vw, 10px) clamp(10px, 2vw, 18px);
   border-radius: var(--radius-pill);
   color: var(--text-muted);
   text-decoration: none;
-  font-size: 0.85rem;
+  font-size: clamp(0.75rem, 1.5vw, 0.9rem);
   font-weight: 600;
   white-space: nowrap;
+  flex-shrink: 1;
 }
 .site-nav .nav-links a:hover {
   color: var(--text);
