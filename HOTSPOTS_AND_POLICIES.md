@@ -132,7 +132,7 @@ DC experiences ~8,530 injury crashes annually (23 per day). Traffic fatalities h
 
 **Evidence**:
 - Significant speed reduction (10–15 mph) in school zone vicinity
-- **DC gap**: Only 41% of DC schools have crossing guards (59% shortfall)
+- **DC program**: DDOT staffs 214 crossing-guard posts across 135 schools (2025-26); per-ward coverage is not published, so any Ward 7/8 gap is not officially quantified ([DDOT School Crossing Guard Program](https://ddot.dc.gov/page/school-crossing-guard-program))
 - Hoboken model: All schools have crossing guards + infrastructure + real-time speed feedback signs
 
 **Cost**: $100K–$500K per school (varies by infrastructure scope)
@@ -230,7 +230,7 @@ DC experiences ~8,530 injury crashes annually (23 per day). Traffic fatalities h
 ## Data Quality & Next Steps
 
 ### Current Limitations
-- Ward-level population denominators are interim (2022 Wikipedia source; need primary source)
+- Ward-level population denominators are ~2022 ward estimates anchored to the 2020 U.S. Census total (689,545); per-ward values are from a secondary compilation of DC OP / DC Health Matters figures and should be reconfirmed against DC OP per-ward tables
 - Hotspot analysis is ward-grain; exact intersection/segment data requires crashes-to-HIN spatial join (in backlog)
 - Enforcement data is not transparently published by location/demographics
 - Before/after evaluation frameworks are not yet established

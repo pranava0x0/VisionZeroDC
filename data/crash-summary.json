@@ -15,12 +15,12 @@
       "query_url": "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Administrative_Other_Boundaries_WebMercator/MapServer/53/query"
     },
     "population": {
-      "source_title": "Wikipedia ward population table (2022 estimate)",
-      "source_agency": "Wikipedia, citing DC Health Matters / DC Office of Planning",
-      "source_url": "https://en.wikipedia.org/wiki/Wards_of_Washington,_D.C.",
-      "vintage": "2022",
-      "captured_at": "2026-06-07",
-      "note": "2022 ward-level population estimates under the 2022 ward boundaries, summarized on Wikipedia with an attribution to DC Health Matters / DC Office of Planning. Treat as an interim denominator and replace with a direct primary-source citation when available.",
+      "source_title": "DC ward population estimates (2022 ward boundaries), anchored to the 2020 U.S. Census",
+      "source_agency": "DC Office of Planning / DC Health Matters (per-ward estimates); U.S. Census Bureau (2020 decennial total)",
+      "source_url": "https://planning.dc.gov/page/census-and-demographic-data",
+      "vintage": "2022 estimate; 2020 Census anchor",
+      "captured_at": "2026-06-08",
+      "note": "Ward-level population estimates on the current (2022) ward boundaries, used as exposure denominators consistent with the 2022-boundary crash ward assignment. Per-ward values are compiled from DC Office of Planning / DC Health Matters demographic data via a secondary compilation and should be reconfirmed against the DC OP per-ward tables; the 2020 U.S. Census recorded DC's total population at 689,545 and the 2021 ward redistricting balanced each ward toward ~86,193 residents (+/-5%).",
       "by_ward": {
         "Ward 1": 88846,
         "Ward 2": 89518,
@@ -40,7 +40,7 @@
   },
   "caveats": [
     "DC ward boundaries are redrawn each decade toward roughly equal population, so crashes-per-resident varies less across wards than crashes-per-area or crashes-per-road-mile. Treat per-capita ward comparison as weak and prefer per-area until road-mileage / VMT / trip denominators are added (see BACKLOG.md).",
-    "Population denominators are currently taken from a Wikipedia ward table that cites DC Health Matters / DC Office of Planning. Replace with a direct primary-source citation before relying on these rates in final public analysis.",
+    "Per-ward population values are ~2022 ward-level estimates on the 2022 ward boundaries (consistent with the boundaries used to assign crashes to wards), compiled from DC Office of Planning / DC Health Matters figures via a secondary compilation; reconfirm each value against the DC OP per-ward tables before relying on these rates for final public analysis. The authoritative anchor is the 2020 U.S. Census, which recorded DC's total population at 689,545, and the 2021 ward redistricting balanced each ward toward ~86,193 residents (+/-5%).",
     "Population is a 2022 estimate, not a same-year match to every crash window. Rates spanning multiple years use a fixed denominator and are approximate.",
     "Land area is land only where the source distinguishes it; computed polygon area may include some non-land surface. It is an exposure proxy, not an official cadastral measure."
   ],

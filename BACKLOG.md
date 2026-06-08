@@ -4,6 +4,20 @@
 
 ---
 
+## ✅ COMPLETED: Phase 2 — ANC Toolkit, Hotspot Teaser & Source Audit (2026-06-08)
+
+**Context:** Shipped the Phase 2 **[PRIORITY] Option D** (community-led intervention prioritization) and **Option A** (hotspot teaser), plus finished the editorial source audit (DATA-AUDIT-001 residuals) and closed the last UAT issue.
+
+- **Option D — ANC Safety Brief (`anc.html` + `anc.js`).** Ward selector drives a per-ward crash snapshot (crash-summary.json), the high-injury corridors intersecting the ward (hotspots.geojson), and ward-scoped + citywide recommendations (recommendations.json). Generates an **editable, source-grounded resolution draft** with copy / open-in-email (mailto, un-sent) / print actions — the static-site form of a feedback loop (resident → commissioners → DDOT). Deep-linkable via `#ward-N`. Added "For ANCs" to nav across all pages. The draft carries the preliminary/ward-grain caveats into every figure.
+- **Option A — Hotspot teaser on the home tab (`index.html` + `landing.js`).** Top two corridors preview as cards linking to hotspots.html, with the GeoJSON verification caveat surfaced in a note.
+- **Source audit finish (DATA-AUDIT-001).** Removed the fabricated 41%/59% crossing-guard figures and replaced with the verified DDOT figure (214 posts / 135 schools, 2025-26); re-sourced the ward-population denominator off Wikipedia onto an honest DC OP / DC Health Matters compilation anchored to the verified 2020 Census total (689,545); updated recommendations, llms.txt/llms-full.txt, and HOTSPOTS_AND_POLICIES.md. Residual: reconfirm per-ward population against DC OP per-ward tables; compute real per-corridor counts via HIN spatial join.
+- **UAT-006 closed.** Tab labels (Home / Data / Fixes) verified non-clipped at 375px.
+- **Tests:** all 44 node tests + 11 python tests pass; `anc.html` added to the html-integrity SRI guard list.
+
+**Still open from the Phase 2 menu:** Option B (deep-dive co-design with Bread for the City), Option C (before/after intervention projection map layer).
+
+---
+
 ## ✅ COMPLETED: Phase 1 — Hotspots Map & Community Research (2026-06-07)
 
 **Context:** Implemented Phase 1 ideas in chunks with design feedback. Completed hotspot map structure and expanded community/policy research.

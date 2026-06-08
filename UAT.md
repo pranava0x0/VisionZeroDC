@@ -1,12 +1,12 @@
 # UAT Baseline — Vision Zero DC Safety Dashboard
 
 _Created: 2026-05-27_
-_Last run: 2026-06-07 (continued)_
+_Last run: 2026-06-08 (ANC Safety Brief, hotspot teaser, source audit)_
 
 ## Project Info
 - **Stack**: Static HTML/CSS/JavaScript (vanilla, no framework)
 - **Dev server**: `python3 -m http.server 8051` → `http://localhost:8051`
-- **Pages**: `index.html` (landing page with three-tab safety overview; logic in `landing.js`)
+- **Pages**: `index.html` (three-tab safety overview + hotspot teaser; `landing.js`), `map.html` (crash map; `app.js`), `hotspots.html` (high-injury corridors; `hotspots.js`), `anc.html` (ANC Safety Brief; `anc.js` + `src/anc-logic.js`)
 - **Styles**: `style.css` with Sidewalk Labs–inspired design tokens
 - **Data**: baked JSON (`data/crash-summary.json`, `data/countermeasures.json`, `data/recommendations.json`, `data/organizations.json`)
 - **Supporting docs**: `CLAUDE.md` (editorial promise, data principles), `DESIGN.md` (visual system), `BACKLOG.md`, `ISSUES.md`
@@ -91,3 +91,24 @@ _Last run: 2026-06-07 (continued)_
 - [ ] Measure page height reduction after disclosure implementation
 - [ ] Verify countermeasures section becomes accessible
 - [ ] Test deep linking / URL fragments to sections
+
+---
+
+## UAT Run — 2026-06-08 (ANC Safety Brief, hotspot teaser, source audit)
+
+**Environment:** local static server, Claude preview browser. Viewports: desktop + mobile (375px). Method: scripted DOM/interaction checks + screenshots + console-error sweep on every page.
+
+**Scope:** new `anc.html` page, new home-tab hotspot teaser, and a regression sweep of `index.html` / `map.html` / `hotspots.html` after the shared nav gained a "For ANCs" link.
+
+**Flows tested**
+- **Hotspot teaser (home tab):** top 2 corridors render with rank/priority/severity/top-fix, link to `hotspots.html`, and a preliminary-screen caveat note. Verified desktop + mobile (cards stack at ≤720px). No console errors.
+- **ANC Safety Brief:** ward `<select>` drives the brief; deep-link `#ward-N` pre-selects; selecting a ward updates the hash. Verified Ward 7 (3 corridors, ward + citywide recs), Ward 8 (2 corridors), and Ward 3 (no-corridor empty state + citywide-only recs). Resolution draft generates with the editorial caveat baked in; `mailto:` href is well-formed (`subject` + `body`); Copy falls back to manual select in a non-secure context; Print button present. Pure logic now lives in `src/anc-logic.js` (14 unit tests).
+- **Cross-page nav:** "For ANCs" link present and resolving on all four pages.
+- **Regression:** `map.html` and `hotspots.html` still load Leaflet, tiles, and content (hotspots sidebar = 5 corridors) with no console errors.
+- **Responsiveness:** no horizontal overflow at 375px on the new page; corridor/rec grids collapse to one column.
+
+**Findings**
+- **[UAT-007] (fixed)** — the "Open in email" action was a styled `<a>` (~37.5px tall), under the 44px touch-target minimum that the global `button, select` rule gives the other actions. Fixed by giving `.anc-btn` `display:inline-flex` + `min-height:44px` so the anchor variant meets the target too.
+- **By design** — the Copy button uses the async Clipboard API with a "press Cmd/Ctrl+C" fallback; the API is unavailable in non-secure/headless contexts, so the fallback path is the one exercised in preview. Working as intended.
+
+**Result:** all four pages pass; 58 node tests + 11 python tests green.

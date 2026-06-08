@@ -17,6 +17,9 @@ const els = {
   trendCaption: document.querySelector("#trend-caption"),
   modeShare: document.querySelector("#mode-share"),
   modeCaption: document.querySelector("#mode-caption"),
+  corridorBand: document.querySelector("#s-corridors"),
+  corridorCards: document.querySelector("#corridor-cards"),
+  corridorNote: document.querySelector("#corridor-note"),
   recommendations: document.querySelector("#recommendations"),
   organizations: document.querySelector("#organizations"),
   countermeasures: document.querySelector("#countermeasures"),
@@ -449,6 +452,53 @@ function setupCarousel() {
   if (carouselPills[0]) carouselPills[0].click();
 }
 
+// --- Hotspot teaser (top corridors preview) -------------------------------
+
+// Renders the two highest-injury corridors on the home tab as a preview that
+// links into hotspots.html. Per-corridor counts are a preliminary ward-grain
+// screen, so the note surfaces the GeoJSON's verification caveat.
+function renderCorridorTeaser(geojson) {
+  if (!els.corridorBand) return;
+  const feats = (geojson && Array.isArray(geojson.features) ? geojson.features : [])
+    .filter((f) => f && f.properties)
+    .sort((a, b) => (a.properties.rank || 99) - (b.properties.rank || 99));
+  if (!feats.length) return;
+  const top = feats.slice(0, 2);
+
+  els.corridorCards.innerHTML = top
+    .map((f) => {
+      const p = f.properties;
+      const sev = p.severity || {};
+      const fix = (p.recommended_interventions || [])[0];
+      const priority = esc(p.priority || "");
+      const prClass = /urgent/i.test(priority) ? "urgent" : "high";
+      const parts = [];
+      if (Number.isFinite(sev.injuries)) parts.push(`${fmtNum(sev.injuries)} injuries`);
+      if (Number.isFinite(sev.fatalities)) parts.push(`${fmtNum(sev.fatalities)} deaths`);
+      const sevLine = parts.join(" · ") + (sev.period ? ` (${esc(sev.period)})` : "");
+      return (
+        `<a class="corridor-card" href="hotspots.html">` +
+        `<div class="corridor-card-head">` +
+        `<span class="corridor-rank">#${esc(p.rank)}</span>` +
+        (priority ? `<span class="corridor-priority ${prClass}">${priority}</span>` : "") +
+        `</div>` +
+        `<h3 class="corridor-name">${esc(p.corridor_name)}</h3>` +
+        (p.location_scope ? `<p class="corridor-scope">${esc(p.location_scope)}</p>` : "") +
+        `<p class="corridor-sev">${sevLine}</p>` +
+        (fix ? `<p class="corridor-fix">Top fix: ${esc(fix.name)}</p>` : "") +
+        `</a>`
+      );
+    })
+    .join("");
+
+  const caveat =
+    (geojson.metadata && geojson.metadata.caveats) ||
+    "Preliminary corridor screen; counts pending intersection-level verification.";
+  els.corridorNote.textContent =
+    `Showing the ${top.length} highest-injury corridors of ${feats.length}. ${caveat}`;
+  els.corridorBand.hidden = false;
+}
+
 // --- boot ------------------------------------------------------------------
 
 async function getJson(url) {
@@ -471,11 +521,12 @@ async function getJson(url) {
   renderModeShare(summary);
   renderSnapshotStatus(summary);
 
-  // Recommendations + countermeasures + organizations are independent; degrade gracefully.
-  const [library, recs, orgs] = await Promise.all([
+  // Recommendations + countermeasures + organizations + corridors are independent; degrade gracefully.
+  const [library, recs, orgs, hotspots] = await Promise.all([
     getJson("data/countermeasures.json").catch(() => null),
     getJson("data/recommendations.json").catch(() => null),
     getJson("data/organizations.json").catch(() => null),
+    getJson("data/hotspots.geojson").catch(() => null),
   ]);
   if (library) renderCountermeasures(library);
   else els.countermeasures.textContent = "Countermeasure library unavailable.";
@@ -483,6 +534,7 @@ async function getJson(url) {
   else els.recommendations.textContent = "Recommendations unavailable.";
   if (orgs) renderOrganizations(orgs);
   else els.organizations.textContent = "Organizations data unavailable.";
+  if (hotspots) renderCorridorTeaser(hotspots);
 
   // Setup tab switching and carousel
   setupTabs();
