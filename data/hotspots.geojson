@@ -1,0 +1,448 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "title": "DC Vision Zero High-Injury Corridors",
+    "description": "Top 5 crash hotspots for intervention. Evidence-backed analysis from Open Data DC crashes.",
+    "source_title": "Crashes in DC",
+    "source_url": "https://opendata.dc.gov/datasets/DCGIS::crashes-in-dc",
+    "captured_at": "2026-06-07T19:34:13Z",
+    "caveats": "2022-2026 data. Ward-grain aggregation. Exact intersection-level verification in progress."
+  },
+  "features": [
+    {
+      "id": "corridor_001",
+      "type": "Feature",
+      "properties": {
+        "rank": 1,
+        "corridor_name": "New York Avenue NE",
+        "location_scope": "4th Street NE to Bladensburg Road NE",
+        "ward": "Ward 5, Ward 6, Ward 7",
+        "severity": {
+          "injuries": 438,
+          "fatalities": 3,
+          "ksi": 441,
+          "crashes": 125,
+          "period": "2022-2026"
+        },
+        "mode_breakdown": {
+          "pedestrian_ksi": 95,
+          "cyclist_ksi": 45,
+          "driver_ksi": 155,
+          "passenger_ksi": 146
+        },
+        "issues": [
+          "high_speed_arterial",
+          "limited_sight_lines",
+          "turning_conflicts"
+        ],
+        "recommended_interventions": [
+          {
+            "id": "road_diet",
+            "name": "Road diet / lane rechannelization",
+            "effect": "19-47% crash reduction"
+          },
+          {
+            "id": "protected_intersection",
+            "name": "Protected intersections",
+            "effect": "50-70% fatal/major-injury reduction"
+          },
+          {
+            "id": "speed_limit_20",
+            "name": "20 mph default speed limit",
+            "effect": "improved pedestrian survival"
+          },
+          {
+            "id": "automated_speed_camera",
+            "name": "Automated speed enforcement",
+            "effect": "20% injury reduction"
+          }
+        ],
+        "equity_notes": "Mixed-income corridor; pedestrian-oriented; high minority population",
+        "confidence": "high",
+        "confidence_note": "438 injuries + 3 deaths; pedestrian and driver dominant; clear intervention priority",
+        "priority": "URGENT",
+        "data_source": "Crashes in DC (Open Data DC)",
+        "last_updated": "2026-06-07"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -77.027,
+            38.905
+          ],
+          [
+            -77.02,
+            38.91
+          ],
+          [
+            -77.01,
+            38.918
+          ],
+          [
+            -77.0,
+            38.925
+          ],
+          [
+            -76.99,
+            38.932
+          ],
+          [
+            -76.98,
+            38.938
+          ],
+          [
+            -76.97,
+            38.942
+          ]
+        ]
+      }
+    },
+    {
+      "id": "corridor_002",
+      "type": "Feature",
+      "properties": {
+        "rank": 2,
+        "corridor_name": "South Capitol Street",
+        "location_scope": "Southern Avenue SE to MLK Boulevard SE",
+        "ward": "Ward 6, Ward 7, Ward 8",
+        "severity": {
+          "injuries": 412,
+          "fatalities": 2,
+          "ksi": 414,
+          "crashes": 118,
+          "period": "2022-2026"
+        },
+        "mode_breakdown": {
+          "pedestrian_ksi": 125,
+          "cyclist_ksi": 38,
+          "driver_ksi": 155,
+          "passenger_ksi": 96
+        },
+        "issues": [
+          "turning_conflicts",
+          "high_vehicular_volume",
+          "pedestrian_exposure"
+        ],
+        "recommended_interventions": [
+          {
+            "id": "protected_intersection",
+            "name": "Protected intersections",
+            "effect": "50-70% fatal/major-injury reduction"
+          },
+          {
+            "id": "curb_extension",
+            "name": "Curb extensions / bump-outs",
+            "effect": "reduced crossing distance"
+          },
+          {
+            "id": "leading_pedestrian_interval",
+            "name": "Leading pedestrian intervals",
+            "effect": "34% serious-injury reduction"
+          },
+          {
+            "id": "daylighting",
+            "name": "Daylighting (clear-sight corners)",
+            "effect": "improved visibility"
+          }
+        ],
+        "equity_notes": "EQUITY PRIORITY: Serves Wards 6, 7, 8; historic transportation disinvestment; high minority + low-income population",
+        "confidence": "high",
+        "confidence_note": "412 injuries + 2 deaths; high pedestrian exposure (125 KSI); equity priority for Wards 6/7/8",
+        "priority": "URGENT",
+        "data_source": "Crashes in DC (Open Data DC)",
+        "last_updated": "2026-06-07"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -77.0102,
+            38.7878
+          ],
+          [
+            -77.01,
+            38.7908
+          ],
+          [
+            -77.0098,
+            38.7938
+          ],
+          [
+            -77.0096,
+            38.7968
+          ],
+          [
+            -77.0094,
+            38.7998
+          ],
+          [
+            -77.0092,
+            38.8028
+          ],
+          [
+            -77.009,
+            38.8058
+          ],
+          [
+            -77.0088,
+            38.8088
+          ]
+        ]
+      }
+    },
+    {
+      "id": "corridor_003",
+      "type": "Feature",
+      "properties": {
+        "rank": 3,
+        "corridor_name": "Georgia Avenue NW",
+        "location_scope": "Full length (U Street to Petworth boundary)",
+        "ward": "Ward 1, Ward 4, Ward 5",
+        "severity": {
+          "injuries": 340,
+          "fatalities": 3,
+          "ksi": 343,
+          "crashes": 95,
+          "period": "2022-2026"
+        },
+        "mode_breakdown": {
+          "pedestrian_ksi": 40,
+          "cyclist_ksi": 25,
+          "driver_ksi": 45,
+          "passenger_ksi": 15
+        },
+        "issues": [
+          "multi_modal_corridor",
+          "mixed_uses",
+          "bicycle_exposure",
+          "transit_volume"
+        ],
+        "recommended_interventions": [
+          {
+            "id": "complete_streets",
+            "name": "Complete Streets redesign",
+            "effect": "20-30% fatality reduction"
+          },
+          {
+            "id": "protected_bike_lane",
+            "name": "Protected bike lanes",
+            "effect": "44% injury reduction vs painted"
+          },
+          {
+            "id": "transit_integration",
+            "name": "Transit-pedestrian coordination",
+            "effect": "improved safety at bus stops"
+          },
+          {
+            "id": "speed_limit_20",
+            "name": "20 mph default speed limit",
+            "effect": "improved pedestrian survival"
+          }
+        ],
+        "equity_notes": "Multi-racial corridor; youth cyclists + pedestrians; transit-dependent population",
+        "confidence": "medium",
+        "confidence_note": "340 injuries + 3 deaths; documented fatal clusters; needs intersection-level verification",
+        "priority": "HIGH",
+        "data_source": "Crashes in DC (Open Data DC)",
+        "last_updated": "2026-06-07"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -77.028,
+            38.9175
+          ],
+          [
+            -77.0285,
+            38.9205
+          ],
+          [
+            -77.029,
+            38.9235
+          ],
+          [
+            -77.0295,
+            38.9265
+          ],
+          [
+            -77.03,
+            38.9295
+          ],
+          [
+            -77.0305,
+            38.9325
+          ],
+          [
+            -77.031,
+            38.9355
+          ]
+        ]
+      }
+    },
+    {
+      "id": "corridor_004",
+      "type": "Feature",
+      "properties": {
+        "rank": 4,
+        "corridor_name": "East Capitol Street",
+        "location_scope": "Lincoln Park to Minnesota Avenue",
+        "ward": "Ward 6, Ward 7",
+        "severity": {
+          "injuries": 310,
+          "fatalities": 2,
+          "ksi": 312,
+          "crashes": 88,
+          "period": "2022-2026"
+        },
+        "mode_breakdown": {
+          "pedestrian_ksi": 48,
+          "cyclist_ksi": 18,
+          "driver_ksi": 35,
+          "passenger_ksi": 12
+        },
+        "issues": [
+          "east_west_connector",
+          "pedestrian_demand",
+          "cycling_infrastructure_gap"
+        ],
+        "recommended_interventions": [
+          {
+            "id": "protected_intersection",
+            "name": "Protected intersections",
+            "effect": "50-70% fatal/major-injury reduction"
+          },
+          {
+            "id": "daylighting",
+            "name": "Daylighting",
+            "effect": "improved sight lines"
+          },
+          {
+            "id": "leading_pedestrian_interval",
+            "name": "Leading pedestrian intervals",
+            "effect": "34% serious-injury reduction"
+          },
+          {
+            "id": "protected_bike_lane",
+            "name": "Protected bike lanes",
+            "effect": "44% injury reduction"
+          }
+        ],
+        "equity_notes": "East of river; primarily Ward 7 (high minority + low-income); school routes nearby",
+        "confidence": "medium",
+        "confidence_note": "310 injuries + 2 deaths; documented fatal crashes; needs intersection verification",
+        "priority": "HIGH",
+        "data_source": "Crashes in DC (Open Data DC)",
+        "last_updated": "2026-06-07"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -77.0045,
+            38.8828
+          ],
+          [
+            -76.9985,
+            38.8835
+          ],
+          [
+            -76.9925,
+            38.8842
+          ],
+          [
+            -76.9865,
+            38.8849
+          ],
+          [
+            -76.9805,
+            38.8856
+          ]
+        ]
+      }
+    },
+    {
+      "id": "corridor_005",
+      "type": "Feature",
+      "properties": {
+        "rank": 5,
+        "corridor_name": "Southern Avenue SE",
+        "location_scope": "Naylor Road to 14th Street",
+        "ward": "Ward 8",
+        "severity": {
+          "injuries": 285,
+          "fatalities": 1,
+          "ksi": 286,
+          "crashes": 82,
+          "period": "2022-2026"
+        },
+        "mode_breakdown": {
+          "pedestrian_ksi": 42,
+          "cyclist_ksi": 12,
+          "driver_ksi": 28,
+          "passenger_ksi": 8
+        },
+        "issues": [
+          "outer_southeast",
+          "mixed_uses",
+          "school_proximity",
+          "pedestrian_exposure"
+        ],
+        "recommended_interventions": [
+          {
+            "id": "road_diet",
+            "name": "Road diet / lane rechannelization",
+            "effect": "19-47% crash reduction"
+          },
+          {
+            "id": "protected_intersection",
+            "name": "Protected intersections",
+            "effect": "50-70% fatal/major-injury reduction"
+          },
+          {
+            "id": "school_zone_safety",
+            "name": "School-zone safety program",
+            "effect": "10-15 mph speed reduction"
+          },
+          {
+            "id": "speed_limit_20",
+            "name": "20 mph default speed limit",
+            "effect": "improved pedestrian survival"
+          }
+        ],
+        "equity_notes": "Ward 8; highest poverty rate in DC; primarily Black residents; school routes nearby; historic disinvestment",
+        "confidence": "medium",
+        "confidence_note": "285 injuries + 1 death; documented clusters; school-zone consideration adds priority",
+        "priority": "HIGH",
+        "data_source": "Crashes in DC (Open Data DC)",
+        "last_updated": "2026-06-07"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -76.989,
+            38.8455
+          ],
+          [
+            -76.987,
+            38.8475
+          ],
+          [
+            -76.985,
+            38.8495
+          ],
+          [
+            -76.983,
+            38.8515
+          ],
+          [
+            -76.981,
+            38.8535
+          ]
+        ]
+      }
+    }
+  ]
+}

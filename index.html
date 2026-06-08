@@ -16,13 +16,14 @@
       <div class="nav-links">
         <a href="index.html" aria-current="page">Overview</a>
         <a href="map.html">Crash Map</a>
+        <a href="hotspots.html">Hotspots</a>
       </div>
     </nav>
 
     <header class="masthead">
       <div class="masthead-main">
         <div class="title-with-badge">
-          <h1>Toward safer DC streets — <span class="mark">evidence and starting points</span></h1>
+          <h1>Toward safer DC streets</h1>
           <div class="editorial-seal">
             <svg viewBox="0 0 100 100" class="seal-svg" aria-hidden="true">
               <circle cx="50" cy="50" r="48" fill="none" stroke="var(--rule)" stroke-width="2"/>
@@ -91,37 +92,43 @@
     </section>
 
     <section id="tab-solutions" class="tab-panel">
-      <nav class="section-jump" aria-label="Jump to subsection">
-        <a href="#s-fixes">Recs</a>
-        <a href="#s-orgs">Orgs</a>
-        <a href="#s-library">Methods</a>
+      <nav class="section-carousel" aria-label="Solutions subsections" role="tablist">
+        <button class="carousel-pill active" data-section="recs" role="tab" aria-selected="true" aria-controls="recs-panel">Recommendations</button>
+        <button class="carousel-pill" data-section="orgs" role="tab" aria-selected="false" aria-controls="orgs-panel">Organizations</button>
+        <button class="carousel-pill" data-section="methods" role="tab" aria-selected="false" aria-controls="methods-panel">Countermeasure Library</button>
       </nav>
 
-      <section id="s-fixes" class="recs-section" aria-label="Policy recommendations">
-        <p class="section-label">Evidence-backed recommendations</p>
-        <h2 class="section-heading">Recommended interventions</h2>
-        <p class="section-intro">
-          Analyst-drafted starting points for human review — not automated or final policy. Each card shows the pattern that triggered it, the mechanism, an equity check, and how confident the evidence is.
-        </p>
-        <div id="recommendations" class="recs-grid">Loading recommendations…</div>
+      <section id="recs-panel" class="carousel-content active" role="tabpanel" aria-labelledby="recs-tab">
+        <section class="recs-section" aria-label="Policy recommendations">
+          <p class="section-label">Evidence-backed recommendations</p>
+          <h2 class="section-heading">Recommended interventions</h2>
+          <p class="section-intro">
+            Analyst-drafted starting points for human review — not automated or final policy. Each card shows the pattern that triggered it, the mechanism, an equity check, and how confident the evidence is.
+          </p>
+          <div id="recommendations" class="recs-grid">Loading recommendations…</div>
+        </section>
       </section>
 
-      <section id="s-orgs" class="orgs-section" aria-label="Organizations working on street safety">
-        <p class="section-label">Who's working on this</p>
-        <h2 class="section-heading">DC organizations championing safer streets</h2>
-        <p class="section-intro">
-          Local advocates, nonprofit organizations, and government agencies are driving evidence-backed solutions. Here's who they are and what they're prioritizing.
-        </p>
-        <div id="organizations" class="orgs-grid">Loading organizations…</div>
+      <section id="orgs-panel" class="carousel-content" role="tabpanel" aria-labelledby="orgs-tab">
+        <section class="orgs-section" aria-label="Organizations working on street safety">
+          <p class="section-label">Who's working on this</p>
+          <h2 class="section-heading">DC organizations championing safer streets</h2>
+          <p class="section-intro">
+            Local advocates, nonprofit organizations, and government agencies are driving evidence-backed solutions. Here's who they are and what they're prioritizing.
+          </p>
+          <div id="organizations" class="orgs-grid">Loading organizations…</div>
+        </section>
       </section>
 
-      <section id="s-library" class="countermeasures-section" aria-label="Countermeasure library">
-        <p class="section-label">Countermeasure library</p>
-        <h2 class="section-heading">Proven fixes and their effects</h2>
-        <p class="section-intro">
-          A reference of interventions with crash-reduction figures from peer programs. Effect sizes are research-grade until verified against the primary source.
-        </p>
-        <div id="countermeasures" class="cm-grid">Loading countermeasures…</div>
+      <section id="methods-panel" class="carousel-content" role="tabpanel" aria-labelledby="methods-tab">
+        <section class="countermeasures-section" aria-label="Countermeasure library">
+          <p class="section-label">Countermeasure library</p>
+          <h2 class="section-heading">Proven fixes and their effects</h2>
+          <p class="section-intro">
+            A reference of interventions with crash-reduction figures from peer programs. Effect sizes are research-grade until verified against the primary source.
+          </p>
+          <div id="countermeasures" class="cm-grid">Loading countermeasures…</div>
+        </section>
       </section>
     </section>
     </main>

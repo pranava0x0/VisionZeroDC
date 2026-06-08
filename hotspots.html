@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>Vision Zero DC — High-Injury Corridors</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23111111'/%3E%3Ccircle cx='50' cy='50' r='25' fill='%239f1d20'/%3E%3Cline x1='50' y1='10' x2='50' y2='90' stroke='%23ffffff' stroke-width='6'/%3E%3Cline x1='10' y1='50' x2='90' y2='50' stroke='%23ffffff' stroke-width='6'/%3E%3C/svg%3E">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <style>
+      .hotspots-container {
+        display: flex;
+        gap: 20px;
+        padding: 20px;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      #hotspots-map {
+        flex: 1;
+        min-height: 600px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      }
+
+      .hotspots-sidebar {
+        width: 320px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        max-height: 600px;
+        overflow-y: auto;
+      }
+
+      .hotspot-card {
+        background: white;
+        border: 2px solid var(--border);
+        border-radius: 10px;
+        padding: 14px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .hotspot-card:hover {
+        border-color: var(--severity-fatal);
+        background: var(--accent-soft);
+        box-shadow: 0 2px 8px rgba(186, 53, 53, 0.15);
+      }
+
+      .hotspot-card.active {
+        border-color: var(--severity-fatal);
+        background: var(--brand-soft);
+      }
+
+      .hotspot-rank {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-soft);
+        margin-bottom: 4px;
+      }
+
+      .hotspot-name {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 6px;
+      }
+
+      .hotspot-location {
+        font-size: 12px;
+        color: var(--text-muted);
+        margin-bottom: 8px;
+      }
+
+      .hotspot-severity {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 8px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--border-soft);
+      }
+
+      .severity-stat {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .severity-value {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--severity-fatal);
+      }
+
+      .severity-label {
+        font-size: 10px;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: var(--text-soft);
+        letter-spacing: 0.05em;
+      }
+
+      .hotspot-fixes {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .fix-item {
+        font-size: 11px;
+        display: flex;
+        align-items: flex-start;
+        gap: 6px;
+        color: var(--text);
+      }
+
+      .fix-bullet {
+        flex: 0 0 4px;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: var(--link);
+        margin-top: 4px;
+      }
+
+      .priority-badge {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-top: 8px;
+      }
+
+      .priority-badge.urgent {
+        background: var(--accent-soft);
+        color: var(--severity-fatal);
+      }
+
+      .priority-badge.high {
+        background: var(--brand-soft);
+        color: var(--on-brand);
+      }
+
+      /* Leaflet polyline styling */
+      .hotspot-polyline {
+        stroke-width: 4px;
+        opacity: 0.8;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .hotspot-polyline-rank1 {
+        stroke: #ba3535; /* severity-fatal */
+      }
+
+      .hotspot-polyline-rank2 {
+        stroke: #ba3535;
+      }
+
+      .hotspot-polyline-rank3 {
+        stroke: #ff5a00; /* severity-major */
+      }
+
+      .hotspot-polyline-rank4 {
+        stroke: #ff5a00;
+      }
+
+      .hotspot-polyline-rank5 {
+        stroke: #9c7a16; /* severity-minor */
+      }
+
+      /* Mobile responsive */
+      @media (max-width: 900px) {
+        .hotspots-container {
+          flex-direction: column-reverse;
+          padding: 12px;
+          gap: 12px;
+        }
+
+        .hotspots-sidebar {
+          width: 100%;
+          max-height: 400px;
+          flex-direction: column;
+          overflow-y: auto;
+          overflow-x: hidden;
+        }
+
+        .hotspot-card {
+          flex: 0 0 auto;
+        }
+
+        #hotspots-map {
+          min-height: 400px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .hotspots-container {
+          padding: 8px;
+        }
+
+        .hotspots-sidebar {
+          max-height: 300px;
+        }
+
+        #hotspots-map {
+          min-height: 300px;
+        }
+
+        .hotspot-name {
+          font-size: 13px;
+        }
+
+        .hotspot-severity {
+          gap: 12px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <nav class="site-nav" aria-label="Primary">
+      <a href="index.html" class="nav-brand">Vision Zero DC</a>
+      <div class="nav-links">
+        <a href="index.html">Overview</a>
+        <a href="map.html">Crash Map</a>
+        <a href="hotspots.html" aria-current="page">Hotspots</a>
+      </div>
+    </nav>
+
+    <header class="masthead">
+      <div class="masthead-main">
+        <h1>High-Injury Corridors</h1>
+      </div>
+      <p class="source-line">
+        Five priority corridors for intervention, evidence-backed from crash data. Click a corridor to explore recommended fixes.
+      </p>
+    </header>
+
+    <main id="main" tabindex="-1">
+      <div class="hotspots-container">
+        <div id="hotspots-map"></div>
+        <div class="hotspots-sidebar" id="hotspots-sidebar"></div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <span>Data source: Crashes in DC (Open Data DC). Captured June 7, 2026.</span>
+      <span><a href="HOTSPOTS_AND_POLICIES.md" target="_blank">Full hotspot analysis →</a></span>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-nMMmRyWjMoJJV9vvKKH8qP8KqJhxxMJC5K9BqwhYBwg=" crossorigin=""></script>
+    <script src="hotspots.js"></script>
+  </body>
+</html>
