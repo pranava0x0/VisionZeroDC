@@ -186,14 +186,14 @@
 
         .hotspots-sidebar {
           width: 100%;
-          max-height: none;
-          flex-direction: row;
-          overflow-x: auto;
-          overflow-y: hidden;
+          max-height: 400px;
+          flex-direction: column;
+          overflow-y: auto;
+          overflow-x: hidden;
         }
 
         .hotspot-card {
-          flex: 0 0 280px;
+          flex: 0 0 auto;
         }
 
         #hotspots-map {
@@ -206,8 +206,8 @@
           padding: 8px;
         }
 
-        .hotspot-card {
-          flex: 0 0 240px;
+        .hotspots-sidebar {
+          max-height: 300px;
         }
 
         #hotspots-map {
