@@ -367,29 +367,58 @@ function setupOrgToggle(count) {
 
 // --- Tab switching ---------------------------------------------------------
 
+function switchToTab(tabName) {
+  const btn = document.querySelector(`[data-tab="${tabName}"]`);
+  if (!btn) return false;
+
+  // Update buttons
+  els.tabButtons.forEach((b) => {
+    b.classList.remove("active");
+    b.setAttribute("aria-selected", "false");
+  });
+  btn.classList.add("active");
+  btn.setAttribute("aria-selected", "true");
+
+  // Update panels
+  els.tabPanels.forEach((p) => {
+    p.classList.remove("active");
+  });
+  const panel = document.getElementById(`tab-${tabName}`);
+  if (panel) panel.classList.add("active");
+
+  // Update URL hash for deep-linking
+  window.history.replaceState(null, "", `#${tabName}`);
+
+  // Scroll to top of panel
+  panel?.scrollIntoView({ behavior: "smooth", block: "start" });
+  return true;
+}
+
 function setupTabs() {
   els.tabButtons.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       const tabName = btn.getAttribute("data-tab");
-      // Update buttons
-      els.tabButtons.forEach((b) => {
-        b.classList.remove("active");
-        b.setAttribute("aria-selected", "false");
-      });
-      btn.classList.add("active");
-      btn.setAttribute("aria-selected", "true");
-      // Update panels
-      els.tabPanels.forEach((p) => {
-        p.classList.remove("active");
-      });
-      const panel = document.getElementById(`tab-${tabName}`);
-      if (panel) panel.classList.add("active");
-      // Scroll to top of panel
-      panel?.scrollIntoView({ behavior: "smooth", block: "start" });
+      switchToTab(tabName);
     });
   });
-  // Set Home tab as default
-  if (els.tabButtons[0]) els.tabButtons[0].click();
+
+  // Handle deep-linking: check URL hash and navigate to that tab
+  const hash = window.location.hash.slice(1);
+  const validTabs = ["home", "analysis", "solutions"];
+  if (hash && validTabs.includes(hash)) {
+    switchToTab(hash);
+  } else {
+    // Set Home tab as default
+    if (els.tabButtons[0]) els.tabButtons[0].click();
+  }
+
+  // Handle browser back/forward with hash changes
+  window.addEventListener("hashchange", () => {
+    const newHash = window.location.hash.slice(1);
+    if (newHash && validTabs.includes(newHash)) {
+      switchToTab(newHash);
+    }
+  });
 }
 
 // --- boot ------------------------------------------------------------------

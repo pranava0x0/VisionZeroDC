@@ -1,4 +1,12 @@
 {
+  "_provenance": {
+    "source_title": "DC Vision Zero community research",
+    "source_description": "Curated list of DC-based organizations working on transportation safety, developed via web research and DC Council meeting records.",
+    "methodology": "Organizations identified through Vision Zero DC network, DC ANC records, nonprofit directories, and public websites. Focus areas derived from each organization's stated mission and public materials.",
+    "captured_at": "2026-06-07",
+    "last_updated": "2026-06-07",
+    "notes": "This is a representative sample, not an exhaustive directory. Organizations added through council testimony, website visibility, and network recommendations. Future versions should integrate with DDOT and DC Council data systems for canonical listing."
+  },
   "organizations": [
     {
       "id": "dcfamilies",
