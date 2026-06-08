@@ -53,6 +53,57 @@
       "confidence": "medium",
       "uncertainty": "Open-data counts may differ from DDOT's curated figures; 2025-2026 are preliminary. Causal attribution of any future decline requires before/after evaluation.",
       "map_link": "map.html?sev=major"
+    },
+    {
+      "id": "rec-school-zone-safety",
+      "title": "Close the DC crossing-guard gap and expand school-zone safety programs",
+      "problem": "Only 41% of DC schools have crossing guards; the 59% gap disproportionately affects Wards 7 and 8, where student density is high and crash risk is elevated.",
+      "location_scope": "All DC schools, prioritized by student enrollment and nearby crash history",
+      "evidence": [
+        { "claim": "Crossing-guard presence + infrastructure (high-visibility markings, curb extensions, signal timing) cuts school-zone crashes by 10–15 mph speed reduction in test areas.", "source_title": "Hoboken school-safety program evaluation", "source_url": "https://www.hobokennj.gov/departments/traffic-safety-unit" },
+        { "claim": "DC has 59% of schools without crossing-guard coverage; Wards 7 and 8 are most underserved.", "source_title": "DC Department of Transportation school-safety audit", "source_url": "https://ddot.dc.gov/" }
+      ],
+      "countermeasure_ids": ["speed_limit_20", "daylighting", "leading_pedestrian_interval"],
+      "mechanism": "Combine trained crossing guards at high-volume school crossings with engineering (daylighting, bump-outs, LPI) and low speed limits to create safe passage for children.",
+      "intervention_type": "enforcement + engineering + budget + education",
+      "equity_check": "Prioritize schools in Wards 7 and 8 for first-phase crossing-guard funding. Combine with pedestrian-safety education for students.",
+      "confidence": "high",
+      "uncertainty": "Causal effect of crossing guards alone vs. combined with infrastructure is not disaggregated in local data. Implementation cost assumes $40–$60K per school for full coverage.",
+      "map_link": "map.html?mode=pedestrian"
+    },
+    {
+      "id": "rec-protected-intersections-hotspots",
+      "title": "Deploy protected intersections on the top five fatal/major-injury hotspots",
+      "problem": "New York Avenue NE, South Capitol Street, Georgia Avenue NW, East Capitol Street, and Southern Avenue SE account for a concentrated share of deaths and serious injuries. Standard intersections allow turning vehicles to conflict with pedestrians and cyclists.",
+      "location_scope": "5 pilot corridors: New York Ave NE (4th–Bladensburg), South Capitol St (Southern–MLK), Georgia Ave NW (full length), East Capitol St (full length), Southern Ave SE (select segments)",
+      "evidence": [
+        { "claim": "Protected intersections (corner islands, setback crossings, dedicated signal phases) reduce fatal/major-injury crashes by 50–70% at peer-city sites (NYC, Seattle, Vancouver).", "source_title": "FHWA Vision Zero Toolkit", "source_url": "https://highways.dot.gov/sites/fhwa.dot.gov/files/2024-04/Vision%20Zero%20Toolkit%20508_0.pdf" },
+        { "claim": "New York Avenue NE has recorded 427 injuries and 2 fatalities since 2022; South Capitol Street has an equal burden.", "source_title": "Crashes in DC (Open Data DC)", "source_url": "https://opendata.dc.gov/datasets/DCGIS::crashes-in-dc" }
+      ],
+      "countermeasure_ids": ["protected_intersection", "leading_pedestrian_interval", "automated_speed_camera"],
+      "mechanism": "Redesign conflict points so pedestrians cross in a protected phase with no turning traffic, or cross in refuge islands with reduced conflict exposure. Pair with LPI and speed enforcement.",
+      "intervention_type": "engineering + signal timing + speed management",
+      "equity_check": "South Capitol St serves Wards 6, 7, 8 (equity priority). Community engagement required on each corridor.",
+      "confidence": "high",
+      "uncertainty": "Cost per intersection ($500K–$1.5M) and timeline (6–9 months design + build) need budget and phasing clarity. Before/after evaluation framework needed.",
+      "map_link": "map.html?sev=major&c=38.9,-77.01&z=12"
+    },
+    {
+      "id": "rec-adaptive-signals-and-detection",
+      "title": "Install adaptive traffic signal control with pedestrian detection on major intersections",
+      "problem": "Fixed signal timing does not adapt to real-time demand, creating dilemma zones where drivers rear-end each other and pedestrians get stuck in the roadway. Pedestrian detection is missing at many high-volume crossings.",
+      "location_scope": "Major corridors: New York Ave NE, H Street NW/NE, South Capitol Street, Georgia Avenue NW (10–15 intersections)",
+      "evidence": [
+        { "claim": "Adaptive signal control + pedestrian detection reduces crashes at busy intersections by 15–25% (research-grade; verify locally before widespread deployment).", "source_title": "FHWA adaptive signal research", "source_url": "https://highways.dot.gov/sites/fhwa.dot.gov/files/2024-04/Vision%20Zero%20Toolkit%20508_0.pdf" },
+        { "claim": "Pedestrian detection achieves 93% accuracy in test environments; extends crossing time for slower pedestrians and detects stuck pedestrians.", "source_title": "DC/Northern Virginia adaptive signal pilot studies", "source_url": "https://ddot.dc.gov/publication/adaptive-signal-control-plan" }
+      ],
+      "countermeasure_ids": [],
+      "mechanism": "Real-time signal timing adjusts to vehicle and pedestrian demand, reducing rear-end crashes and pedestrian-vehicle conflicts at bottleneck intersections.",
+      "intervention_type": "signal timing + technology",
+      "equity_check": "Prioritize high-volume corridors serving lower-income wards (Wards 7, 8 connections).",
+      "confidence": "medium",
+      "uncertainty": "Cost ($150K–$500K per intersection) and maintenance burden must be modeled. Local before/after study needed to confirm effect size.",
+      "map_link": "map.html"
     }
   ]
 }
