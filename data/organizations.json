@@ -84,6 +84,66 @@
       ],
       "url": "https://dcsafestreetscoalition.org/",
       "recommendations": ["equitable-infrastructure", "ward-8-prioritization"]
+    },
+    {
+      "id": "smartergrowth",
+      "name": "Coalition for Smarter Growth",
+      "focus": ["Walkability", "Transit-oriented", "Regional planning"],
+      "description": "Regional leader advocating for walkable, bikeable, and transit-oriented communities as the most sustainable and equitable way for the Washington DC region to grow.",
+      "initiatives": [
+        "Complete streets advocacy",
+        "Transit-oriented development",
+        "Affordable housing and transportation access",
+        "Vision Zero regional coordination",
+        "Community education on sustainable growth"
+      ],
+      "url": "https://www.smartergrowth.net/",
+      "recommendations": ["complete-streets", "transit-access"]
+    },
+    {
+      "id": "sierraclub",
+      "name": "Sierra Club DC — Sustainable Transportation Committee",
+      "focus": ["Climate action", "Air quality", "Transit equity"],
+      "description": "Regional environmental advocacy focused on decreasing emissions, improving air quality, and increasing traffic safety through transit, biking, and walking infrastructure.",
+      "initiatives": [
+        "Safe bike and pedestrian infrastructure campaigns",
+        "Reliable public transit advocacy",
+        "Vehicle electrification and fleet transition",
+        "Complete streets and smart growth",
+        "Vision Zero regional alignment"
+      ],
+      "url": "https://www.sierraclub.org/dc/sustainable-transportation",
+      "recommendations": ["complete-streets", "speed-management", "transit-access"]
+    },
+    {
+      "id": "capitaltrails",
+      "name": "Capital Trails Coalition",
+      "focus": ["Trail connectivity", "Multimodal access", "Community engagement"],
+      "description": "Coalition working to develop a complete, connected network of regional trails for walking, running, and biking to increase safe active transportation access.",
+      "initiatives": [
+        "DC Trails Network planning",
+        "Missing link identification and closure",
+        "Community trail events and engagement",
+        "Intersection safety for trail users",
+        "East-West trail connectivity focus"
+      ],
+      "url": "https://www.capitaltrailscoalition.org/",
+      "recommendations": ["bike-lanes", "pedestrian-safety", "multimodal-access"]
+    },
+    {
+      "id": "onse",
+      "name": "Office of Neighborhood Safety and Engagement (ONSE)",
+      "focus": ["Violence prevention", "Public health", "Community trust"],
+      "description": "District government office building a community-oriented model for violence prevention and public safety, rooted in public health and neighborhood engagement.",
+      "initiatives": [
+        "Community-based violence intervention",
+        "Neighborhood safety partnerships",
+        "Public health approach to safety",
+        "Community trust and accountability",
+        "Data-driven resource allocation"
+      ],
+      "url": "https://onse.dc.gov/",
+      "recommendations": ["community-engagement", "post-crash-care"]
     }
   ]
 }
