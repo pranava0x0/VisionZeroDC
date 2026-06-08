@@ -9,7 +9,7 @@
       "location_scope": "Wards 7 and 8 (corridor/intersection grain within them)",
       "evidence": [
         { "claim": "The three highest-burden wards account for ~49% of citywide KSI since 2024.", "source_title": "Computed from Crashes in DC", "source_url": "https://opendata.dc.gov/datasets/DCGIS::crashes-in-dc" },
-        { "claim": "Those same wards are home to ~36% of residents using the current interim ward-population denominator.", "source_title": "Ward population (interim) — Wikipedia, citing DC Health Matters / DC Office of Planning", "source_url": "https://en.wikipedia.org/wiki/Wards_of_Washington,_D.C." },
+        { "claim": "Those same three wards (2, 7, and 8) are home to only ~36% of residents (ward population estimates on current boundaries; 2020 U.S. Census total 689,545), underscoring a KSI burden out of proportion to population.", "source_title": "Ward population estimates — DC Office of Planning / DC Health Matters; 2020 U.S. Census total", "source_url": "https://planning.dc.gov/page/census-and-demographic-data" },
         { "claim": "Pedestrians made up ~235 KSI in 2024-present with a high share of deaths, second only to drivers citywide.", "source_title": "Crashes in DC (per-mode fatal/major fields)", "source_url": "https://opendata.dc.gov/datasets/DCGIS::crashes-in-dc" }
       ],
       "countermeasure_ids": ["daylighting", "curb_extension", "leading_pedestrian_interval", "speed_limit_20"],
@@ -57,18 +57,18 @@
     {
       "id": "rec-school-zone-safety",
       "title": "Close the DC crossing-guard gap and expand school-zone safety programs",
-      "problem": "By a reported figure, only about 41% of DC schools have crossing guards; that coverage gap falls hardest on Wards 7 and 8, where student density is high and crash risk is elevated.",
+      "problem": "DDOT staffs 214 crossing-guard posts across 135 schools for the 2025-2026 school year, but coverage is not published by ward, and many school crossings near high-crash corridors in Wards 7 and 8 — where student density and pedestrian crash risk are high — may lack a guarded crossing.",
       "location_scope": "All DC schools, prioritized by student enrollment and nearby crash history",
       "evidence": [
         { "claim": "School-zone safety packages combine trained crossing guards with engineering (high-visibility crosswalks, curb extensions, leading pedestrian intervals) and 20 mph limits; lower impact speeds sharply raise a struck child's odds of survival.", "source_title": "FHWA Vision Zero Toolkit", "source_url": "https://highways.dot.gov/sites/fhwa.dot.gov/files/2024-04/Vision%20Zero%20Toolkit%20508_0.pdf" },
-        { "claim": "By a reported figure, roughly 59% of DC schools lack crossing-guard coverage, with Wards 7 and 8 most underserved (reported figure — pending a primary-source citation).", "source_title": "Crossing-guard coverage — reported figure, verification pending", "source_url": "https://ddot.dc.gov/page/vision-zero-initiative" }
+        { "claim": "DDOT commits crossing-guard coverage to 214 posts over 135 schools across the District for the 2025-2026 school year; per-ward coverage shares are not published, so the size of any gap in Wards 7 and 8 is not officially quantified.", "source_title": "DDOT School Crossing Guard Program", "source_url": "https://ddot.dc.gov/page/school-crossing-guard-program" }
       ],
       "countermeasure_ids": ["speed_limit_20", "daylighting", "leading_pedestrian_interval"],
       "mechanism": "Combine trained crossing guards at high-volume school crossings with engineering (daylighting, bump-outs, LPI) and low speed limits to create safe passage for children.",
       "intervention_type": "enforcement + engineering + budget + education",
       "equity_check": "Prioritize schools in Wards 7 and 8 for first-phase crossing-guard funding. Combine with pedestrian-safety education for students.",
-      "confidence": "high",
-      "uncertainty": "Causal effect of crossing guards alone vs. combined with infrastructure is not disaggregated in local data. Implementation cost assumes $40–$60K per school for full coverage.",
+      "confidence": "medium",
+      "uncertainty": "DDOT does not publish crossing-guard coverage by ward, so the size of any Ward 7/8 gap is unquantified; the case rests on documented school-zone-safety benefits rather than a measured local coverage shortfall. Causal effect of crossing guards alone vs. combined with infrastructure is not disaggregated in local data. Implementation cost assumes $40–$60K per school for full coverage.",
       "map_link": "map.html?mode=pedestrian"
     },
     {
