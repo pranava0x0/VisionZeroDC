@@ -1,7 +1,7 @@
 # UAT Baseline — Vision Zero DC Safety Dashboard
 
 _Created: 2026-05-27_
-_Last run: 2026-06-07_
+_Last run: 2026-06-07 (continued)_
 
 ## Project Info
 - **Stack**: Static HTML/CSS/JavaScript (vanilla, no framework)

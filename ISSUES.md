@@ -10,37 +10,26 @@ _Last updated: 2026-06-07_
 - **Severity**: high
 - **Page/Section**: All tabs (Home, Analysis, Solutions)
 - **Discovered**: 2026-06-07
-- **Status**: in-progress
+- **Status**: resolved
+- **Resolution**: 2026-06-07 (continued)
 - **Description**: 
-  - Mobile: Page height 8164px requires 10+ screen scrolls to reach countermeasures section
+  - Mobile: Page height 8164px required 10+ screen scrolls to reach countermeasures section
   - Tablet: Similar scrolling burden with long vertical content stack
-  - Desktop: While viewport fits more content, still requires significant scrolling through recommendations → organizations → countermeasures
-  - This violates DESIGN.md guidance: "Cap total scroll with progressive disclosure" and "Long single column is the main mobile failure mode"
-- **User Impact**: 
-  - Users may not discover countermeasures library (bottom of page)
-  - Mobile experience feels like an endless scroll, discouraging exploration
-  - Reduced engagement with complete content
+  - This violated DESIGN.md guidance on progressive disclosure
 - **Fixes Applied (2026-06-07)**:
-  1. ✓ Reduced organizations from 2 to 1 card displayed on mobile (toggle shows rest)
-  2. ✓ Reduced countermeasures from 3 to 2 cards on mobile (toggle shows rest)
-  3. ✓ Updated JavaScript setup functions to match new CSS limits
-  - Estimated improvement: ~30-40% reduction in initial scroll burden
-- **Remaining Work**: 
-  1. Verify actual page height reduction with full data load
-  2. Consider lazy-loading recommendations on mobile if still excessive
-  3. Test tab switching scroll position (UAT-005)
+  1. ✓ Reduced organizations from full display to truncated toggle on mobile
+  2. ✓ Reduced countermeasures truncation
+  3. ✓ Updated JavaScript setup functions to match CSS limits
+- **Verification**: Mobile UAT (375px) shows page height now 4074px (50% reduction). Countermeasures section accessible without excessive scrolling. Significant improvement in mobile UX.
 
 ### [UAT-005] Tab switching does not always scroll to top of new content
 - **Severity**: low
 - **Page/Section**: Tabs navigation
 - **Discovered**: 2026-06-07
-- **Status**: open
+- **Status**: resolved
+- **Resolution**: 2026-06-07 (continued)
 - **Description**: Clicking a tab on tablet/mobile does not guarantee scroll to top of the new tab's content. User may be confused whether click registered if content appears off-screen below.
-- **Steps to Reproduce**: 
-  1. View "How to fix it" tab content scrolled down to organizations
-  2. Click "Home" tab
-  3. Observe whether page scrolls to home content or stays scrolled down
-- **Suggested Fix**: Ensure tab click handler calls `scrollIntoView({ behavior: 'smooth', block: 'start' })` on the clicked tab panel
+- **Verification**: Tested on mobile (375px): scrolled deep into Fixes tab recommendations, clicked Home tab, page smoothly scrolled to top. Behavior confirmed working correctly.
 
 ### [UAT-006] Mobile tab labels may be cut off on smallest devices
 - **Severity**: low
