@@ -175,12 +175,7 @@ a:focus-visible,
 }
 
 .section-label::before {
-  content: "";
-  width: 14px;
-  height: 14px;
-  flex-shrink: 0;
-  background: var(--brand);
-  border-radius: 3px;
+  display: none;
 }
 
 .source-line {
