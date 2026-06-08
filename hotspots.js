@@ -16,9 +16,25 @@ const DC_BOUNDS = [
 ];
 
 async function initMap() {
-  // Initialize Leaflet map
+  // Load hotspots GeoJSON first
+  try {
+    console.log('Fetching hotspots.geojson...');
+    const response = await fetch('data/hotspots.geojson');
+    console.log('Fetch response:', response.status, response.ok);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    hotspotsData = await response.json();
+    console.log('Hotspots loaded:', hotspotsData.features.length, 'features');
+  } catch (error) {
+    console.error('Failed to load hotspots data:', error);
+    hotspotsData = null;
+  }
+
+  // Populate sidebar (always, regardless of map)
+  populateSidebar();
+
+  // Try to initialize map (it's OK if this fails)
   if (!document.getElementById('hotspots-map')) {
-    console.error('Map container not found');
+    console.warn('Map container not found');
     return;
   }
 
@@ -32,17 +48,8 @@ async function initMap() {
       maxBounds: DC_BOUNDS
     }).addTo(map);
 
-    // Load hotspots GeoJSON
-    const response = await fetch('data/hotspots.geojson');
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    hotspotsData = await response.json();
-    console.log('Hotspots loaded:', hotspotsData.features.length, 'features');
-
     // Render corridors on map
     renderCorridors();
-
-    // Populate sidebar
-    populateSidebar();
 
     // Select first corridor by default
     selectCorridor(0);
@@ -204,14 +211,5 @@ function getColorByRank(rank) {
   }
 }
 
-// Initialize on page load - wait for Leaflet to be available
-function waitForLeaflet() {
-  if (typeof L !== 'undefined') {
-    initMap();
-  } else {
-    // Leaflet not yet loaded, try again in 100ms
-    setTimeout(waitForLeaflet, 100);
-  }
-}
-
-document.addEventListener('DOMContentLoaded', waitForLeaflet);
+// Initialize on page load (map is optional; sidebar always loads)
+document.addEventListener('DOMContentLoaded', initMap);
