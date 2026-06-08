@@ -198,17 +198,13 @@ function selectCorridor(idx) {
 }
 
 function getColorByRank(rank) {
-  switch(rank) {
-    case 1:
-    case 2:
-      return '#ba3535'; // severity-fatal (dark red)
-    case 3:
-    case 4:
-      return '#ff5a00'; // severity-major (orange)
-    case 5:
-      return '#9c7a16'; // severity-minor (gold)
-    default:
-      return '#505050'; // gray
+  const style = getComputedStyle(document.documentElement);
+  if (rank === 1 || rank === 2) {
+    return style.getPropertyValue('--severity-fatal').trim();
+  } else if (rank === 3 || rank === 4) {
+    return style.getPropertyValue('--severity-major').trim();
+  } else {
+    return style.getPropertyValue('--severity-minor').trim();
   }
 }
 
