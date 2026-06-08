@@ -4,6 +4,53 @@
 
 ---
 
+## ✅ COMPLETED: Phase 1 — Hotspots Map & Community Research (2026-06-07)
+
+**Context:** Implemented Phase 1 ideas in chunks with design feedback. Completed hotspot map structure and expanded community/policy research.
+
+**Phase 1.1 — Hotspot Verification & Interactive Map (Complete)**
+- Built GeoJSON FeatureCollection with 5 priority corridors (New York Ave NE, South Capitol St, Georgia Ave NW, East Capitol St, Southern Ave SE)
+- Each corridor includes: rank, severity (injuries/fatalities/KSI), mode breakdown, recommended interventions with effect sizes, equity notes, confidence level
+- Interactive Leaflet map with polyline visualization, color-coded by severity rank
+- Sidebar corridor cards with minimal profiles (rank, name, location, injuries/deaths, top 2 fixes, priority badge)
+- Responsive layout: side-by-side desktop, stacked mobile with horizontal scroll
+- Error handling for CDN/data loading; production-ready (preview CDN limitation only)
+- **Files:** `hotspots.html`, `hotspots.js`, `data/hotspots.geojson`
+
+**Phase 1.2 — Community Organizations & Policy Expansion (Complete)**
+- 14 community organizations catalogued across 4 tiers:
+  - Tier 1: DC Families for Safe Streets, WABA, Bread for the City
+  - Tier 2: Walk DC, Seniors Age Well, Georgetown Transportation, Transportation Choices Coalition
+  - Tier 3: Black Lives Matter DC, School PTOs, ANCs, DCBAC
+  - Tier 4: Georgetown University, Howard University, Results for America
+- 14 new policy/infrastructure ideas:
+  - Speed & Design (5): Speed-limit harmonization, truck routing curfews, adaptive signals, curb narrowing, modal-priority zones
+  - Enforcement (3): Graduated repeat-speeding penalties, community intersection reporting app, enforcement strike teams
+  - Equity & Access (3): Subsidized transit in high-crash areas, community safety jobs, $500K Transportation Justice Fund
+  - Education (3): Driver-ed integration, employer safety pledges, Vision Zero Champions ambassador program
+- 3-year implementation sequencing (Year 1 quick wins → Year 2 medium lift → Year 3+ sustained)
+- $3.85M/year funding strategy (DDOT $2M, city capital $1M, FHWA $500K, philanthropy $250K, community dev $100K)
+- Messaging templates by audience (Council, community, advocates, business)
+- Vision Zero Oversight Board mechanism with monthly public meetings
+- **Files:** `COMMUNITY_ORGS_EXPANDED.md`
+
+**Phase 1.3 — Navigation Spacing Refinement (Complete)**
+- Increased nav padding: 12px → 18px (vertical breathing room)
+- Increased nav gap: 16px → 24px (item separation)
+- Increased nav-links gap: 6px → 12px
+- Increased link padding: 8px 16px → 10px 18px
+- Added white-space: nowrap to prevent nav-brand wrapping
+- Added flex-shrink: 0 to prevent brand compression
+- **Files:** `style.css`
+
+**Next Steps:**
+1. **Option A:** Hotspot teaser carousel on home page (top 2 corridors preview)
+2. **Option B:** Deep-dive co-design with Bread for the City (1 corridor + 2–3 interventions)
+3. **Option C:** Map comparison layer (before/after intervention projection)
+4. **Option D:** Community-led intervention prioritization (ANC presentations + feedback loop)
+
+---
+
 ## ✅ COMPLETED: PR #4 Review Feedback Integration (2026-06-08)
 
 **Context:** PR #4 merged successfully, but contained three critical gaps identified in review comments that were not addressed before declaring work complete.
