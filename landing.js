@@ -18,8 +18,11 @@ const els = {
   modeShare: document.querySelector("#mode-share"),
   modeCaption: document.querySelector("#mode-caption"),
   recommendations: document.querySelector("#recommendations"),
+  organizations: document.querySelector("#organizations"),
   countermeasures: document.querySelector("#countermeasures"),
   snapshotStatus: document.querySelector("#snapshot-status"),
+  tabButtons: document.querySelectorAll(".tab-button"),
+  tabPanels: document.querySelectorAll(".tab-panel"),
 };
 
 const fmtNum = (v) => new Intl.NumberFormat("en-US").format(v || 0);
@@ -177,7 +180,7 @@ function renderModeShare(summary) {
       const w = Math.round((m.ksi / max) * 100);
       return (
         `<div class="mode-row${m.vulnerable ? " vulnerable" : ""}">` +
-        `<span class="mode-name">${esc(MODE_LABELS[m.mode] || m.mode)}${m.vulnerable ? ' <span class="vru-tag">vulnerable</span>' : ""}</span>` +
+        `<span class="mode-name">${esc(MODE_LABELS[m.mode] || m.mode)}</span>` +
         `<span class="mode-bar"><span class="mode-fill" style="width:${w}%"></span></span>` +
         `<span class="mode-val">${fmtNum(m.ksi)} <span class="mode-pct">${pct}%</span></span>` +
         `</div>`
@@ -251,14 +254,10 @@ function renderRecommendations(recs, library) {
       const evidence = (r.evidence || [])
         .map((e) => `<li>${esc(e.claim)} ${sourceLink(e.source_url, e.source_title)}</li>`)
         .join("");
-      const conf = esc(r.confidence || "medium");
       return (
         `<article class="rec-card">` +
         `<div class="rec-head"><h3>${esc(r.title)}</h3></div>` +
         `<p class="rec-problem">${esc(r.problem)}</p>` +
-        // Confidence stays in the always-visible header so it survives the
-        // mobile collapse to title + problem (recommendation contract).
-        `<p class="rec-confidence"><span class="badge conf-${conf}">${conf} confidence</span></p>` +
         // Detail collapses behind a toggle on mobile; stays open on desktop.
         `<details class="rec-more" open>` +
         `<summary class="rec-more-toggle">Details</summary>` +
@@ -304,6 +303,95 @@ function renderSnapshotStatus(summary) {
   if (stale) els.snapshotStatus.classList.add("stale");
 }
 
+// --- Organizations ---------------------------------------------------------
+
+function renderOrganizations(orgs) {
+  if (!orgs || !orgs.organizations) {
+    els.organizations.textContent = "Organizations data unavailable.";
+    return;
+  }
+  const orgCount = orgs.organizations.length;
+  els.organizations.innerHTML = orgs.organizations
+    .map((org) => {
+      const focusHTML = org.focus
+        .map((f) => `<span class="org-focus-tag">${esc(f)}</span>`)
+        .join("");
+      const initHTML = org.initiatives
+        .map((i) => `<li>${esc(i)}</li>`)
+        .join("");
+      return `
+        <div class="org-card">
+          <div class="org-head">
+            <h3>${esc(org.name)}</h3>
+            <div class="org-focus">${focusHTML}</div>
+          </div>
+          <p class="org-desc">${esc(org.description)}</p>
+          <div class="org-initiatives">
+            <strong>Current work</strong>
+            <ul>${initHTML}</ul>
+          </div>
+          <a href="${esc(org.url)}" class="org-link" target="_blank" rel="noopener noreferrer">
+            Visit ${esc(org.name)} →
+          </a>
+        </div>
+      `;
+    })
+    .join("");
+  setupOrgToggle(orgCount);
+}
+
+// On mobile, show 2 organizations behind a "Show all" toggle.
+function setupOrgToggle(count) {
+  const grid = els.organizations;
+  let btn = document.querySelector(".org-toggle");
+  if (count <= 2) {
+    if (btn) btn.remove();
+    return;
+  }
+  if (!btn) {
+    btn = document.createElement("button");
+    btn.className = "org-toggle";
+    btn.type = "button";
+    btn.setAttribute("aria-controls", grid.id);
+    grid.insertAdjacentElement("afterend", btn);
+    btn.addEventListener("click", () => {
+      const open = grid.classList.toggle("orgs-expanded");
+      btn.setAttribute("aria-expanded", String(open));
+      btn.textContent = open ? "Show fewer" : `Show all ${count} organizations`;
+    });
+  }
+  grid.classList.remove("orgs-expanded");
+  btn.setAttribute("aria-expanded", "false");
+  btn.textContent = `Show all ${count} organizations`;
+}
+
+// --- Tab switching ---------------------------------------------------------
+
+function setupTabs() {
+  els.tabButtons.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const tabName = btn.getAttribute("data-tab");
+      // Update buttons
+      els.tabButtons.forEach((b) => {
+        b.classList.remove("active");
+        b.setAttribute("aria-selected", "false");
+      });
+      btn.classList.add("active");
+      btn.setAttribute("aria-selected", "true");
+      // Update panels
+      els.tabPanels.forEach((p) => {
+        p.classList.remove("active");
+      });
+      const panel = document.getElementById(`tab-${tabName}`);
+      if (panel) panel.classList.add("active");
+      // Scroll to top of panel
+      panel?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+  // Set Home tab as default
+  if (els.tabButtons[0]) els.tabButtons[0].click();
+}
+
 // --- boot ------------------------------------------------------------------
 
 async function getJson(url) {
@@ -326,13 +414,19 @@ async function getJson(url) {
   renderModeShare(summary);
   renderSnapshotStatus(summary);
 
-  // Recommendations + countermeasures are independent; degrade gracefully.
-  const [library, recs] = await Promise.all([
+  // Recommendations + countermeasures + organizations are independent; degrade gracefully.
+  const [library, recs, orgs] = await Promise.all([
     getJson("data/countermeasures.json").catch(() => null),
     getJson("data/recommendations.json").catch(() => null),
+    getJson("data/organizations.json").catch(() => null),
   ]);
   if (library) renderCountermeasures(library);
   else els.countermeasures.textContent = "Countermeasure library unavailable.";
   if (recs) renderRecommendations(recs, library);
   else els.recommendations.textContent = "Recommendations unavailable.";
+  if (orgs) renderOrganizations(orgs);
+  else els.organizations.textContent = "Organizations data unavailable.";
+
+  // Setup tab switching
+  setupTabs();
 })();

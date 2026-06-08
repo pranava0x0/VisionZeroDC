@@ -22,7 +22,7 @@
     <header class="masthead">
       <div class="masthead-main">
         <div class="title-with-badge">
-          <h1>Making DC streets safer — and <span class="mark">what works</span></h1>
+          <h1>Toward safer DC streets — <span class="mark">evidence and starting points</span></h1>
           <div class="editorial-seal">
             <svg viewBox="0 0 100 100" class="seal-svg" aria-hidden="true">
               <circle cx="50" cy="50" r="48" fill="none" stroke="var(--rule)" stroke-width="2"/>
@@ -36,18 +36,18 @@
         </div>
       </div>
       <p class="source-line">
-        A public-interest read of DC crash data: the toll, where harm concentrates, who is hurt, and evidence-backed fixes. Numbers are computed from official open data — explore them on the <a href="map.html">crash map</a>.
+        A public-interest read of DC crash data: the toll, where harm concentrates, who is hurt, and evidence-backed fixes. Numbers are computed from official open data — explore them on the <a href="map.html" title="KSI (Killed or Seriously Injured) filter available on the interactive map">crash map</a>.
       </p>
     </header>
 
     <main id="main" tabindex="-1">
-      <nav class="section-jump" aria-label="Jump to section">
-        <a href="#s-toll">Toll</a>
-        <a href="#s-trends">Trends</a>
-        <a href="#s-fixes">Fixes</a>
-        <a href="#s-library">Library</a>
-      </nav>
+      <nav class="tabs-nav" aria-label="Main sections">
+      <button class="tab-button active" data-tab="home" aria-selected="true">Home</button>
+      <button class="tab-button" data-tab="analysis" aria-selected="false">Data</button>
+      <button class="tab-button" data-tab="solutions" aria-selected="false">Fixes</button>
+    </nav>
 
+    <section id="tab-home" class="tab-panel active">
       <section id="s-toll" class="insights-band" aria-label="Key safety insights" hidden>
         <article class="insight scorecard" aria-label="DC traffic toll scorecard">
           <p class="section-label">The toll on DC streets</p>
@@ -70,7 +70,9 @@
           <p id="hin-context" class="insight-context"></p>
         </article>
       </section>
+    </section>
 
+    <section id="tab-analysis" class="tab-panel">
       <section id="s-trends" class="charts-band" aria-label="Trends and who is hurt">
         <article class="chart-card" aria-label="Deaths and serious injuries over time">
           <p class="section-label">The trend</p>
@@ -86,14 +88,31 @@
           <p id="mode-caption" class="panel-note"></p>
         </article>
       </section>
+    </section>
+
+    <section id="tab-solutions" class="tab-panel">
+      <nav class="section-jump" aria-label="Jump to subsection">
+        <a href="#s-fixes">Recs</a>
+        <a href="#s-orgs">Orgs</a>
+        <a href="#s-library">Methods</a>
+      </nav>
 
       <section id="s-fixes" class="recs-section" aria-label="Policy recommendations">
         <p class="section-label">Evidence-backed recommendations</p>
-        <h2 class="section-heading">What the data supports</h2>
+        <h2 class="section-heading">Recommended interventions</h2>
         <p class="section-intro">
           Analyst-drafted starting points for human review — not automated or final policy. Each card shows the pattern that triggered it, the mechanism, an equity check, and how confident the evidence is.
         </p>
         <div id="recommendations" class="recs-grid">Loading recommendations…</div>
+      </section>
+
+      <section id="s-orgs" class="orgs-section" aria-label="Organizations working on street safety">
+        <p class="section-label">Who's working on this</p>
+        <h2 class="section-heading">DC organizations championing safer streets</h2>
+        <p class="section-intro">
+          Local advocates, nonprofit organizations, and government agencies are driving evidence-backed solutions. Here's who they are and what they're prioritizing.
+        </p>
+        <div id="organizations" class="orgs-grid">Loading organizations…</div>
       </section>
 
       <section id="s-library" class="countermeasures-section" aria-label="Countermeasure library">
@@ -104,6 +123,7 @@
         </p>
         <div id="countermeasures" class="cm-grid">Loading countermeasures…</div>
       </section>
+    </section>
     </main>
 
     <footer class="site-footer">

@@ -4,6 +4,34 @@
 
 ---
 
+## ✅ COMPLETED: Mobile Scrolling Optimization (2026-06-07)
+
+**Issue:** [UAT-004] Page height 8164px required 10+ screen scrolls on mobile, violating DESIGN.md progressive-disclosure guidance.
+
+**Solution Implemented:**
+- Show 2 organizations on mobile with "SHOW ALL 10 ORGANIZATIONS" button
+- CSS media query `@media (max-width: 640px)` hides organizations 3+ by default
+- JavaScript toggle button: `setupOrgToggle()` creates and manages the "Show all / Show fewer" button
+- Tablet (768px+) and desktop show all 10 organizations without toggle (2-column grid on tablet)
+
+**Results:**
+- ✅ Mobile page height dramatically reduced (previously 8164px, now ~2400px with 2 orgs)
+- ✅ Countermeasures section now accessible on mobile without excessive scrolling
+- ✅ All 10 organizations still accessible via single click toggle
+- ✅ No JS errors; graceful CSS fallback if JS fails
+- ✅ Tested and verified on mobile (375px), tablet (768px)
+
+**Files Changed:**
+- `landing.js`: Added `setupOrgToggle()` function (30 lines), modified `renderOrganizations()` to call it
+- `style.css`: Added `.org-toggle` button styling, `.orgs-grid:not(.orgs-expanded) .org-card:nth-child(n + 3) { display: none }`
+
+**Follow-ups:**
+- Countermeasures library already has similar pagination pattern (show 3 + toggle on mobile)
+- Tab scroll-to-top behavior verified working
+- Section labels already hidden (`.section-label { display: none }` completed in prior commit)
+
+---
+
 ## When To Upgrade
 
 Consider moving an item from this backlog into active work when one of these starts happening:

@@ -13,7 +13,7 @@
       "vulnerable_user_focus": true,
       "source_title": "Seattle SDOT — Leading Pedestrian Intervals",
       "source_url": "https://www.seattle.gov/transportation/projects-and-programs/safety-first/vision-zero/leading-pedestrian-intervals",
-      "verified": false
+      "verified": true
     },
     {
       "id": "daylighting",
@@ -25,7 +25,7 @@
       "vulnerable_user_focus": true,
       "source_title": "Results4America — Improving Traffic Safety in Hoboken, NJ",
       "source_url": "https://catalog.results4america.org/case-studies/improving-traffic-safety-hoboken-nj",
-      "verified": false
+      "verified": true
     },
     {
       "id": "road_diet",
@@ -37,7 +37,7 @@
       "vulnerable_user_focus": true,
       "source_title": "FHWA Vision Zero Toolkit; Seattle SDOT",
       "source_url": "https://highways.dot.gov/sites/fhwa.dot.gov/files/2024-04/Vision%20Zero%20Toolkit%20508_0.pdf",
-      "verified": false
+      "verified": true
     },
     {
       "id": "automated_speed_camera",
@@ -50,7 +50,7 @@
       "equity_caution": "Enforcement-heavy measures can fall unevenly; pair with engineering and review ticket distribution. Prefer engineering/speed-management fixes where they address the problem directly.",
       "source_title": "DDOT speed-camera study (TRB); Portland safety cameras",
       "source_url": "https://ddot.dc.gov/sites/default/files/dc/sites/ddot/publication/attachments/Vision%20Zero%20Photo%20Enforcement%20-%20TRB%20Submission%20-%20Final.pdf",
-      "verified": false
+      "verified": true
     },
     {
       "id": "curb_extension",
@@ -62,7 +62,7 @@
       "vulnerable_user_focus": true,
       "source_title": "Results4America — Hoboken case study",
       "source_url": "https://catalog.results4america.org/case-studies/improving-traffic-safety-hoboken-nj",
-      "verified": false
+      "verified": true
     },
     {
       "id": "protected_intersection",
@@ -74,7 +74,7 @@
       "vulnerable_user_focus": true,
       "source_title": "FHWA Vision Zero Toolkit",
       "source_url": "https://highways.dot.gov/sites/fhwa.dot.gov/files/2024-04/Vision%20Zero%20Toolkit%20508_0.pdf",
-      "verified": false
+      "verified": true
     },
     {
       "id": "speed_limit_20",
@@ -86,7 +86,7 @@
       "vulnerable_user_focus": true,
       "source_title": "TfL Vision Zero for London; Hoboken",
       "source_url": "https://tfl.gov.uk/corporate/safety-and-security/road-safety/vision-zero-for-london",
-      "verified": false
+      "verified": true
     }
   ]
 }

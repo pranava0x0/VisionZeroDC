@@ -162,25 +162,11 @@ a:focus-visible,
 }
 
 .section-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin: 0 0 6px;
-  color: var(--text);
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  display: none;
 }
 
 .section-label::before {
-  content: "";
-  width: 14px;
-  height: 14px;
-  flex-shrink: 0;
-  background: var(--brand);
-  border-radius: 3px;
+  display: none;
 }
 
 .source-line {
@@ -195,7 +181,7 @@ a:focus-visible,
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
-  padding: 28px 32px;
+  padding: 12px 32px 28px;
 }
 
 .insight {
@@ -1397,6 +1383,54 @@ body.violations-visible .violations-source-container {
   background: var(--brand);
 }
 
+/* Tab navigation */
+.tabs-nav {
+  display: flex;
+  gap: 2px;
+  padding: 0 32px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.tabs-nav::-webkit-scrollbar {
+  display: none;
+}
+.tab-button {
+  flex: 0 0 auto;
+  min-height: 44px;
+  padding: 12px 24px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+.tab-button:hover {
+  color: var(--text);
+}
+.tab-button.active {
+  color: var(--text);
+  border-bottom-color: var(--brand);
+}
+.tab-button:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: -4px;
+}
+
+/* Tab panels */
+.tab-panel {
+  display: none;
+}
+.tab-panel.active {
+  display: block;
+}
+
 /* Landing: charts band (trend + mode share) */
 .charts-band {
   display: grid;
@@ -1503,8 +1537,9 @@ body.violations-visible .violations-source-container {
   font-size: 0.75rem;
 }
 
-/* Recommendations + countermeasures sections */
+/* Recommendations + organizations + countermeasures sections */
 .recs-section,
+.orgs-section,
 .countermeasures-section {
   padding: 40px 32px;
   border-top: 1px solid var(--border);
@@ -1531,11 +1566,11 @@ body.violations-visible .violations-source-container {
 .rec-card {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
   padding: 24px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  background: var(--surface);
+  background: var(--paper);
   transition: box-shadow 0.15s ease, transform 0.15s ease;
 }
 .rec-card:hover {
@@ -1637,6 +1672,94 @@ p.rec-key {
   border-color: var(--severity-major);
 }
 
+/* Organizations section */
+.orgs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+}
+.org-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--paper);
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+.org-card:hover {
+  box-shadow: 0 6px 22px rgba(26, 26, 26, 0.08);
+}
+.org-head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.org-head h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+.org-focus {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0 0;
+}
+.org-focus-tag {
+  display: inline-block;
+  padding: 4px 10px;
+  background: var(--brand-soft);
+  border: 1px solid var(--brand-strong);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--on-brand);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.org-desc {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+.org-initiatives {
+  margin: 8px 0 0;
+  padding: 12px 0 0;
+  border-top: 1px solid var(--border-soft);
+}
+.org-initiatives strong {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-soft);
+  margin-bottom: 6px;
+}
+.org-initiatives ul {
+  margin: 0;
+  padding: 0 0 0 16px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+.org-initiatives li {
+  margin: 4px 0;
+  color: var(--text-muted);
+}
+.org-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
 /* Countermeasure library */
 .cm-grid {
   display: grid;
@@ -1644,10 +1767,10 @@ p.rec-key {
   gap: 14px;
 }
 .cm-card {
-  padding: 20px;
-  border: 1px solid var(--border-soft);
-  border-radius: var(--radius-sm);
-  background: var(--surface);
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--paper);
 }
 .cm-head {
   display: flex;
@@ -1717,10 +1840,25 @@ p.rec-key {
   }
 }
 
-/* Countermeasure "show all" toggle + section jump-nav: hidden on desktop */
+/* Countermeasure "show all" toggle + organization toggle + section jump-nav: hidden on desktop */
 .cm-toggle,
+.org-toggle,
 .section-jump {
   display: none;
+}
+
+#tab-solutions .section-jump {
+  position: sticky;
+  top: 0;
+  z-index: 500;
+  display: flex;
+  gap: 6px;
+  padding: 8px 12px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
 
 @media (max-width: 640px) {
@@ -1822,6 +1960,35 @@ p.rec-key {
   }
   .cm-toggle:hover,
   .cm-toggle:active {
+    background: var(--brand);
+    border-color: var(--rule);
+  }
+
+  /* Condensed organization list: 2 cards + toggle */
+  .orgs-grid:not(.orgs-expanded) .org-card:nth-child(n + 3) {
+    display: none;
+  }
+  .org-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 14px;
+    min-height: 44px;
+    padding: 10px 18px;
+    border: 2px solid var(--rule);
+    border-radius: var(--radius-pill);
+    background: var(--paper);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+  }
+  .org-toggle:hover,
+  .org-toggle:active {
     background: var(--brand);
     border-color: var(--rule);
   }

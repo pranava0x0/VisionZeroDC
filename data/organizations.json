@@ -1,0 +1,149 @@
+{
+  "organizations": [
+    {
+      "id": "dcfamilies",
+      "name": "DC Families for Safe Streets",
+      "focus": ["Speed control", "Post-crash care", "School safety"],
+      "description": "Advocates for life-saving changes and provides support to those affected by deadly crashes. Focuses on victim support and policy changes that might have prevented deaths.",
+      "initiatives": [
+        "Intelligent Speed Assistance (ISA) deployment",
+        "Motor Vehicle Insurance Modernization",
+        "STEER Amendment Act (repeat speeder accountability)",
+        "#StopSuperSpeeders campaign",
+        "Safer Fleets Challenge for government vehicles"
+      ],
+      "url": "https://dcfamiliesforsafestreets.org/",
+      "recommendations": ["speed-reduction", "school-zone-safety", "vehicle-tech"]
+    },
+    {
+      "id": "dcten",
+      "name": "DC Transportation Equity Network",
+      "focus": ["Equity", "Vulnerable populations", "Transit access"],
+      "description": "Cross-sector coalition committed to ensuring a transportation system that accounts for and protects vulnerable and underserved residents.",
+      "initiatives": [
+        "Transportation Equity Platform",
+        "Investment in pedestrian/bike safety for under-resourced wards",
+        "Micromobility access expansion",
+        "Community engagement in project prioritization"
+      ],
+      "url": "https://ggwash.org/dcten",
+      "recommendations": ["pedestrian-safety", "bike-lanes", "equity-prioritization"]
+    },
+    {
+      "id": "waba",
+      "name": "Washington Area Bicyclist Association (WABA)",
+      "focus": ["Protected bike lanes", "Complete networks", "Infrastructure"],
+      "description": "Transportation advocacy organization focused on completing safe bicycle infrastructure across the region.",
+      "initiatives": [
+        "Protected lane expansion and continuity",
+        "Intersection safety for cyclists",
+        "Bike commuting resources",
+        "Transportation Equity Platform co-sponsorship"
+      ],
+      "url": "https://waba.org/",
+      "recommendations": ["protected-bike-lanes", "intersection-safety-cyclists"]
+    },
+    {
+      "id": "ddot",
+      "name": "DDOT Vision Zero Office",
+      "focus": ["Engineering", "Data", "Implementation", "Speed management"],
+      "description": "The District government's implementation arm for Vision Zero, coordinating across 30+ agencies on crash prevention through data-driven engineering, education, and enforcement.",
+      "initiatives": [
+        "Complete streets design standards",
+        "High Injury Network prioritization",
+        "Crash analysis and hotspot identification",
+        "Bike lane safety rule improvements",
+        "Speed limit reductions on high-risk corridors"
+      ],
+      "url": "https://ddot.dc.gov/page/vision-zero-initiative",
+      "recommendations": ["complete-streets", "speed-limit-reduction", "protected-intersections"]
+    },
+    {
+      "id": "safestreets",
+      "name": "DC Safe Streets Coalition",
+      "focus": ["Community organizing", "Neighborhood advocacy"],
+      "description": "Community-based coalition bringing neighborhoods together to advocate for safer streets and local transportation improvements.",
+      "initiatives": [
+        "Ward-level street safety campaigns",
+        "Community input on infrastructure projects",
+        "Neighborhood hotspot advocacy"
+      ],
+      "url": "https://dcsafestreetscoalition.org/",
+      "recommendations": ["community-engagement", "neighborhood-prioritization"]
+    },
+    {
+      "id": "ward8",
+      "name": "Ward 8 Bike Alliance & Conservation Groups",
+      "focus": ["Equity", "Neighborhood infrastructure", "Environmental health"],
+      "description": "Ward-specific organizations prioritizing safer streets and bicycle/pedestrian infrastructure in under-resourced communities.",
+      "initiatives": [
+        "Ward 8 bike network development",
+        "Safe routes to schools",
+        "Parks and trail connectivity",
+        "Community-led safety audits"
+      ],
+      "url": "https://dcsafestreetscoalition.org/",
+      "recommendations": ["equitable-infrastructure", "ward-8-prioritization"]
+    },
+    {
+      "id": "smartergrowth",
+      "name": "Coalition for Smarter Growth",
+      "focus": ["Walkability", "Transit-oriented", "Regional planning"],
+      "description": "Regional leader advocating for walkable, bikeable, and transit-oriented communities as the most sustainable and equitable way for the Washington DC region to grow.",
+      "initiatives": [
+        "Complete streets advocacy",
+        "Transit-oriented development",
+        "Affordable housing and transportation access",
+        "Vision Zero regional coordination",
+        "Community education on sustainable growth"
+      ],
+      "url": "https://www.smartergrowth.net/",
+      "recommendations": ["complete-streets", "transit-access"]
+    },
+    {
+      "id": "sierraclub",
+      "name": "Sierra Club DC — Sustainable Transportation Committee",
+      "focus": ["Climate action", "Air quality", "Transit equity"],
+      "description": "Regional environmental advocacy focused on decreasing emissions, improving air quality, and increasing traffic safety through transit, biking, and walking infrastructure.",
+      "initiatives": [
+        "Safe bike and pedestrian infrastructure campaigns",
+        "Reliable public transit advocacy",
+        "Vehicle electrification and fleet transition",
+        "Complete streets and smart growth",
+        "Vision Zero regional alignment"
+      ],
+      "url": "https://www.sierraclub.org/dc/sustainable-transportation",
+      "recommendations": ["complete-streets", "speed-management", "transit-access"]
+    },
+    {
+      "id": "capitaltrails",
+      "name": "Capital Trails Coalition",
+      "focus": ["Trail connectivity", "Multimodal access", "Community engagement"],
+      "description": "Coalition working to develop a complete, connected network of regional trails for walking, running, and biking to increase safe active transportation access.",
+      "initiatives": [
+        "DC Trails Network planning",
+        "Missing link identification and closure",
+        "Community trail events and engagement",
+        "Intersection safety for trail users",
+        "East-West trail connectivity focus"
+      ],
+      "url": "https://www.capitaltrailscoalition.org/",
+      "recommendations": ["bike-lanes", "pedestrian-safety", "multimodal-access"]
+    },
+    {
+      "id": "onse",
+      "name": "Office of Neighborhood Safety and Engagement (ONSE)",
+      "focus": ["Violence prevention", "Public health", "Community trust"],
+      "description": "District government office building a community-oriented model for violence prevention and public safety, rooted in public health and neighborhood engagement.",
+      "initiatives": [
+        "Community-based violence intervention",
+        "Neighborhood safety partnerships",
+        "Public health approach to safety",
+        "Community trust and accountability",
+        "Data-driven resource allocation"
+      ],
+      "url": "https://onse.dc.gov/",
+      "recommendations": ["community-engagement", "post-crash-care"]
+    }
+  ]
+}
