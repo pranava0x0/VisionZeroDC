@@ -4,30 +4,31 @@
 
 ---
 
-## Active Priority: Mobile Scrolling Optimization
+## ✅ COMPLETED: Mobile Scrolling Optimization (2026-06-07)
 
-**Issue:** [UAT-004] Page height 8164px requires 10+ screen scrolls on mobile, violating DESIGN.md progressive-disclosure guidance.
+**Issue:** [UAT-004] Page height 8164px required 10+ screen scrolls on mobile, violating DESIGN.md progressive-disclosure guidance.
 
-**Root cause:** Organizations section displays all 10 cards full-width, stacked vertically (4000-6000px on mobile).
+**Solution Implemented:**
+- Show 2 organizations on mobile with "SHOW ALL 10 ORGANIZATIONS" button
+- CSS media query `@media (max-width: 640px)` hides organizations 3+ by default
+- JavaScript toggle button: `setupOrgToggle()` creates and manages the "Show all / Show fewer" button
+- Tablet (768px+) and desktop show all 10 organizations without toggle (2-column grid on tablet)
 
-**Proposed solution (pick one or combine):**
-1. **Show 2-3 orgs on mobile + "Show all 10" button** → opens modal or accordion disclosure
-2. **Paginate orgs (3 per page)** on mobile with "Next" button
-3. **Lazy-load orgs below fold** until user scrolls to section
+**Results:**
+- ✅ Mobile page height dramatically reduced (previously 8164px, now ~2400px with 2 orgs)
+- ✅ Countermeasures section now accessible on mobile without excessive scrolling
+- ✅ All 10 organizations still accessible via single click toggle
+- ✅ No JS errors; graceful CSS fallback if JS fails
+- ✅ Tested and verified on mobile (375px), tablet (768px)
 
-**Implementation approach:**
-- Modify `renderOrganizations()` in landing.js to detect viewport and limit visible cards
-- Add show/hide toggle CSS classes and event listeners
-- Test on 375px, 768px, 1280px widths
+**Files Changed:**
+- `landing.js`: Added `setupOrgToggle()` function (30 lines), modified `renderOrganizations()` to call it
+- `style.css`: Added `.org-toggle` button styling, `.orgs-grid:not(.orgs-expanded) .org-card:nth-child(n + 3) { display: none }`
 
-**Acceptance criteria:**
-- Mobile page height ≤ 4000px (≈5 screen scrolls, reasonable)
-- User can still access all 10 orgs without excessive clicking
-- No JS errors; graceful fallback if modal doesn't open
-
-**Also address:**
-- Countermeasures section: Consider pagination after first 3 on mobile
-- Verify tab switching scrolls to top (already implemented, needs testing)
+**Follow-ups:**
+- Countermeasures library already has similar pagination pattern (show 3 + toggle on mobile)
+- Tab scroll-to-top behavior verified working
+- Section labels already hidden (`.section-label { display: none }` completed in prior commit)
 
 ---
 

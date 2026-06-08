@@ -310,6 +310,7 @@ function renderOrganizations(orgs) {
     els.organizations.textContent = "Organizations data unavailable.";
     return;
   }
+  const orgCount = orgs.organizations.length;
   els.organizations.innerHTML = orgs.organizations
     .map((org) => {
       const focusHTML = org.focus
@@ -336,6 +337,32 @@ function renderOrganizations(orgs) {
       `;
     })
     .join("");
+  setupOrgToggle(orgCount);
+}
+
+// On mobile, show 2 organizations behind a "Show all" toggle.
+function setupOrgToggle(count) {
+  const grid = els.organizations;
+  let btn = document.querySelector(".org-toggle");
+  if (count <= 2) {
+    if (btn) btn.remove();
+    return;
+  }
+  if (!btn) {
+    btn = document.createElement("button");
+    btn.className = "org-toggle";
+    btn.type = "button";
+    btn.setAttribute("aria-controls", grid.id);
+    grid.insertAdjacentElement("afterend", btn);
+    btn.addEventListener("click", () => {
+      const open = grid.classList.toggle("orgs-expanded");
+      btn.setAttribute("aria-expanded", String(open));
+      btn.textContent = open ? "Show fewer" : `Show all ${count} organizations`;
+    });
+  }
+  grid.classList.remove("orgs-expanded");
+  btn.setAttribute("aria-expanded", "false");
+  btn.textContent = `Show all ${count} organizations`;
 }
 
 // --- Tab switching ---------------------------------------------------------
