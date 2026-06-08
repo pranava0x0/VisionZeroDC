@@ -17,20 +17,26 @@ const DC_BOUNDS = [
 
 async function initMap() {
   // Initialize Leaflet map
-  map = L.map('hotspots-map').setView(DC_CENTER, 12);
+  if (!document.getElementById('hotspots-map')) {
+    console.error('Map container not found');
+    return;
+  }
 
-  // Base tiles (OpenStreetMap)
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap contributors',
-    maxZoom: 19,
-    maxBounds: DC_BOUNDS
-  }).addTo(map);
-
-  // Load hotspots GeoJSON
   try {
+    map = L.map('hotspots-map').setView(DC_CENTER, 12);
+
+    // Base tiles (OpenStreetMap)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors',
+      maxZoom: 19,
+      maxBounds: DC_BOUNDS
+    }).addTo(map);
+
+    // Load hotspots GeoJSON
     const response = await fetch('data/hotspots.geojson');
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
     hotspotsData = await response.json();
-    console.log('Hotspots loaded:', hotspotsData);
+    console.log('Hotspots loaded:', hotspotsData.features.length, 'features');
 
     // Render corridors on map
     renderCorridors();
@@ -41,8 +47,11 @@ async function initMap() {
     // Select first corridor by default
     selectCorridor(0);
   } catch (error) {
-    console.error('Error loading hotspots:', error);
-    document.getElementById('hotspots-map').innerHTML = '<p style="padding: 20px; color: red;">Error loading hotspots data.</p>';
+    console.error('Map init error:', error);
+    const container = document.getElementById('hotspots-map');
+    if (container) {
+      container.innerHTML = `<p style="padding: 20px; color: red; font-size: 14px;">Error loading map: ${error.message}</p>`;
+    }
   }
 }
 
@@ -195,5 +204,14 @@ function getColorByRank(rank) {
   }
 }
 
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', initMap);
+// Initialize on page load - wait for Leaflet to be available
+function waitForLeaflet() {
+  if (typeof L !== 'undefined') {
+    initMap();
+  } else {
+    // Leaflet not yet loaded, try again in 100ms
+    setTimeout(waitForLeaflet, 100);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', waitForLeaflet);
