@@ -169,6 +169,7 @@ function createCorridorCard(props, idx) {
 
 function selectCorridor(idx) {
   if (!hotspotsData || !hotspotsData.features[idx]) return;
+  if (!map || typeof L === 'undefined') return; // Guard against Leaflet load failure
 
   // Deselect previous
   if (selectedCorridor !== null) {
