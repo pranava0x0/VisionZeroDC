@@ -332,6 +332,83 @@ Consider moving an item from this backlog into active work when one of these sta
 
 ---
 
+## Hotspots Map Navigation & Clarity
+
+> User feedback (2026-06-07): the hotspots map was "hard to navigate" with "too much zoom/panning." First pass shipped; remaining ideas parked here.
+
+**Shipped 2026-06-07 (`hotspots.html`, `hotspots.js`):**
+- **Calm selection** — selecting a corridor no longer re-zooms. It highlights the polyline + numbered badge + sidebar card, and only *pans* (never zooms) when the corridor is off-screen. The map holds a stable all-corridors overview. This was the direct fix for "too much zoom/panning."
+- **Numbered rank badges** on the map so each corridor is identifiable without clicking.
+- **Headline summary strip** above the map (corridors, total KSI, deaths, crashes, wards) so the key insight is visible before any interaction.
+- **Color legend** (rank → severity tier) pinned to the map.
+- **"Fit all corridors" button** to restore the overview after manual zoom; deferred `fitBounds` + `invalidateSize()` so the initial frame can't over-zoom from a container-size race.
+
+**Parked ideas (not yet built):**
+1. **Optional "focus" toggle** — a per-corridor "zoom to this" affordance for users who *do* want to drill in, kept separate from the default calm click so it's opt-in.
+2. **Sortable corridor table** under the map (sort by KSI, deaths, ward) — better than the map for scanning/ranking, and the accessible fallback when the map can't load. Ties into "First Likely Next Steps" item 2.
+3. **Crash-map deep link per corridor** — "see the underlying crashes" jumps to `map.html` filtered to that corridor's extent (reuse the URL-state module).
+4. **Mode/severity glanceability** — show the ped/cyclist/driver/passenger KSI split on the card or as a small bar, so the "who is being hurt here" insight doesn't require opening the full analysis doc.
+5. **Keyboard navigation** — arrow keys to move between corridors; cards are focusable and announce selection (a11y).
+6. **Reduce summary vertical cost on mobile** — the wrapped summary stacks to several rows on 375px (overlaps the UAT-004 scrolling concern); consider a 2-up compact layout or a collapsible strip.
+
+---
+
+## Hotspots Map Hardening & Resilience
+
+> Surfaced by the BUG-010 fix (2026-06-07): a fabricated Leaflet SRI hash silently broke the hotspots map ("L is not defined"). The map renders the GeoJSON blind, so both the dependency-load path and the data path deserve guards. Regression tests landed in `tests/html-integrity.test.mjs` and `tests/hotspots-data.test.mjs`; these are the product-level follow-ups.
+
+### 1. Graceful CDN / dependency-failure fallback
+
+**Use when:** Leaflet (or its tiles) fails to load — bad SRI, CDN outage, offline, blocked unpkg.
+
+**Approach:** when `typeof L === 'undefined'` after load, swap the map pane for an inline message and keep the sidebar fully usable (it already renders independently). Optionally render a static corridor list/SVG so the page degrades to content rather than a red error string.
+
+**Good for:** resilience; the page stays informative even when the map can't draw.
+
+**Tradeoff:** a little extra fallback UI to maintain; doesn't fix the underlying load failure, only the experience.
+
+### 2. Self-host or pin-and-verify Leaflet
+
+**Use when:** we want to remove the single-point-of-failure on unpkg and the hand-managed SRI hash.
+
+**Approach:** vendor `leaflet.js`/`leaflet.css` into the repo (served from `docs/`/static), or add a tiny `npm`/CI step that recomputes and verifies SRI hashes against the pinned version so a wrong hash can never ship. Document the exact `openssl` recipe used at fix time.
+
+**Good for:** reproducibility, offline dev, supply-chain control (aligns with CLAUDE.md security rules).
+
+**Tradeoff:** vendored assets add repo weight and a manual bump step on version upgrades.
+
+### 3. Corridor profile / detail panel
+
+**Use when:** the sidebar card's "top 2 fixes" isn't enough — users want the full evidence trail per corridor.
+
+**Approach:** on select, expand a detail view with the full intervention list (effect sizes), mode breakdown (ped/cyclist/driver/passenger KSI), equity notes, confidence + confidence_note, and a deep link into `map.html` filtered to that corridor's extent.
+
+**Good for:** turning a hotspot into a defensible, sourced recommendation without leaving the page (the project's "north star").
+
+**Tradeoff:** more layout work and another responsive breakpoint to maintain.
+
+### 4. Intersection-grain hotspots from the live snapshot
+
+**Use when:** the 5 hand-built corridors should be reproducible from data rather than authored once.
+
+**Approach:** extend `pipeline/snapshot.py` to emit corridor/intersection KSI rollups and generate `hotspots.geojson` (or a sibling) from canonical crash records, carrying `source_url`/`captured_at` provenance. Ties into "Newly Surfaced Follow-ups" intersection-grain item.
+
+**Good for:** freshness, provenance, removing the "verification in progress" caveat in the file's metadata.
+
+**Tradeoff:** needs a clean street-centerline join and segment definitions (same dependency as "Add Corridor-Level Views").
+
+### 5. Data-quality CI gate
+
+**Use when:** we want bad map data to fail the build, not the browser.
+
+**Approach:** run `node --test` (now including the hotspots-data + html-integrity suites) in CI on every push; block merge on failure. Add `mode_breakdown`-sums and DC-bounds checks as the canonical validators for any future generated GeoJSON.
+
+**Good for:** catching coordinate-quadrant errors (PR5-001 class) and SRI mismatches (BUG-010 class) before they reach `main`.
+
+**Tradeoff:** requires standing up CI (none configured yet); a documented refresh cadence overlaps with the snapshot-refresh follow-up above.
+
+---
+
 ## Landing Page & Policy Recommendations (peer-city research, 2026-06-07)
 
 Researched how leading programs present crash data and turn it into recommendations: NYC (Vision Zero View), San Francisco, Seattle, Portland, Los Angeles, Chicago, London (TfL), Hoboken/Jersey City NJ, plus FHWA systemic-safety guidance and DC's own DDOT camera study. Sources listed at the end of this section.
