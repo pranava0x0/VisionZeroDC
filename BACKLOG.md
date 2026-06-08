@@ -43,11 +43,11 @@
 - Added flex-shrink: 0 to prevent brand compression
 - **Files:** `style.css`
 
-**Next Steps:**
-1. **Option A:** Hotspot teaser carousel on home page (top 2 corridors preview)
-2. **Option B:** Deep-dive co-design with Bread for the City (1 corridor + 2–3 interventions)
-3. **Option C:** Map comparison layer (before/after intervention projection)
-4. **Option D:** Community-led intervention prioritization (ANC presentations + feedback loop)
+**Next Steps — Priority Order:**
+1. **[PRIORITY] Option D:** Community-led intervention prioritization (ANC presentations + feedback loop)
+2. **Option A:** Hotspot teaser carousel on home page (top 2 corridors preview)
+3. **Option B:** Deep-dive co-design with Bread for the City (1 corridor + 2–3 interventions)
+4. **Option C:** Map comparison layer (before/after intervention projection)
 
 ---
 
