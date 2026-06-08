@@ -1335,7 +1335,7 @@ body.violations-visible .violations-source-container {
 .site-nav {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: clamp(8px, 2vw, 20px);
   padding: clamp(12px, 2vw, 18px) clamp(16px, 3vw, 40px);
   background: var(--bg);
@@ -1361,7 +1361,7 @@ body.violations-visible .violations-source-container {
   gap: clamp(4px, 1.5vw, 12px);
   flex-wrap: nowrap;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
 .site-nav .nav-links a {
   display: inline-flex;
@@ -1843,8 +1843,6 @@ p.rec-key {
 }
 
 /* Countermeasure "show all" toggle + organization toggle + section jump-nav: hidden on desktop */
-.cm-toggle,
-.org-toggle,
 .section-carousel {
   position: sticky;
   top: 0;
@@ -1857,6 +1855,12 @@ p.rec-key {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
+}
+
+/* Hide mobile-only toggles on desktop */
+.cm-toggle,
+.org-toggle {
+  display: none;
 }
 
 .carousel-pill {
@@ -1893,6 +1897,16 @@ p.rec-key {
 
 .carousel-content.active {
   display: block;
+}
+
+/* On desktop: show all carousel-content and hide nav */
+@media (min-width: 641px) {
+  .section-carousel {
+    display: none;
+  }
+  .carousel-content {
+    display: block !important;
+  }
 }
 
 @media (max-width: 640px) {
@@ -1942,7 +1956,7 @@ p.rec-key {
   .cm-toggle {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     width: 100%;
     margin-top: 14px;
     min-height: 44px;
@@ -1971,7 +1985,7 @@ p.rec-key {
   .org-toggle {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     width: 100%;
     margin-top: 14px;
     min-height: 44px;
