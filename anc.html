@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>Vision Zero DC — ANC Safety Brief</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23111111'/%3E%3Ccircle cx='50' cy='50' r='25' fill='%239f1d20'/%3E%3Cline x1='50' y1='10' x2='50' y2='90' stroke='%23ffffff' stroke-width='6'/%3E%3Cline x1='10' y1='50' x2='90' y2='50' stroke='%23ffffff' stroke-width='6'/%3E%3C/svg%3E">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <nav class="site-nav" aria-label="Primary">
+      <a href="index.html" class="nav-brand">Vision Zero DC</a>
+      <div class="nav-links">
+        <a href="index.html">Overview</a>
+        <a href="map.html">Crash Map</a>
+        <a href="hotspots.html">Hotspots</a>
+        <a href="anc.html" aria-current="page">For ANCs</a>
+      </div>
+    </nav>
+
+    <header class="masthead">
+      <div class="masthead-main">
+        <div class="title-with-badge">
+          <h1>Build a safety brief for your ANC</h1>
+        </div>
+      </div>
+      <p class="source-line">
+        Pick a ward to see its crash burden, the high-injury corridors that run through it, and
+        evidence-backed fixes — then draft a resolution to bring to your Advisory Neighborhood Commission.
+        Every figure traces to open DC data; bring the sources, not just the asks.
+      </p>
+    </header>
+
+    <main id="main" tabindex="-1">
+      <section class="anc-controls" aria-label="Choose a ward">
+        <label class="anc-ward-label" for="anc-ward">Your ward</label>
+        <select id="anc-ward" class="anc-ward-select" aria-label="Select a ward">
+          <option value="">Select a ward…</option>
+          <option value="1">Ward 1</option>
+          <option value="2">Ward 2</option>
+          <option value="3">Ward 3</option>
+          <option value="4">Ward 4</option>
+          <option value="5">Ward 5</option>
+          <option value="6">Ward 6</option>
+          <option value="7">Ward 7</option>
+          <option value="8">Ward 8</option>
+        </select>
+        <p class="anc-hint" id="anc-hint">
+          Not sure which ward you're in? Look it up on
+          <a href="https://geocoder.dcgis.dc.gov/" target="_blank" rel="noopener noreferrer">DC's address geocoder</a>.
+        </p>
+      </section>
+
+      <section id="anc-brief" class="anc-brief" hidden>
+        <section class="anc-block" aria-label="Ward crash snapshot">
+          <p class="section-label">The toll in this ward</p>
+          <h2 class="section-heading" id="anc-stats-heading">The toll in this ward</h2>
+          <div id="anc-stats" class="anc-stats"></div>
+          <p id="anc-stats-note" class="panel-note"></p>
+        </section>
+
+        <section class="anc-block" aria-label="High-injury corridors in this ward">
+          <p class="section-label">High-injury corridors here</p>
+          <h2 class="section-heading">High-injury corridors here</h2>
+          <div id="anc-corridors" class="anc-corridors"></div>
+        </section>
+
+        <section class="anc-block" aria-label="Recommended interventions for this ward">
+          <p class="section-label">Evidence-backed asks</p>
+          <h2 class="section-heading">Evidence-backed asks</h2>
+          <div id="anc-recs" class="anc-recs"></div>
+        </section>
+
+        <section class="anc-block anc-draft-block" aria-label="Draft an ANC resolution">
+          <p class="section-label">Draft a resolution</p>
+          <h2 class="anc-draft-heading section-heading">Take it to your commission</h2>
+          <p class="section-intro">
+            A starting draft built from the data above — edit it for your single-member district, then copy it
+            or open it in your email to share with fellow commissioners and DDOT. Nothing is sent automatically.
+          </p>
+          <textarea id="anc-draft" class="anc-draft" rows="18" aria-label="Editable resolution draft" spellcheck="true"></textarea>
+          <div class="anc-draft-actions">
+            <button type="button" id="anc-copy" class="anc-btn">Copy draft</button>
+            <a id="anc-email" class="anc-btn anc-btn-ghost" href="#">Open in email</a>
+            <button type="button" id="anc-print" class="anc-btn anc-btn-ghost">Print this brief</button>
+            <span id="anc-copy-status" class="anc-copy-status" role="status" aria-live="polite"></span>
+          </div>
+          <p class="panel-note">
+            Find your ANC and commissioners at
+            <a href="https://anc.dc.gov/" target="_blank" rel="noopener noreferrer">anc.dc.gov</a>;
+            share Vision Zero feedback with DDOT via
+            <a href="https://visionzero.dc.gov/" target="_blank" rel="noopener noreferrer">visionzero.dc.gov</a>.
+          </p>
+        </section>
+      </section>
+
+      <p id="anc-error" class="anc-error" hidden></p>
+    </main>
+
+    <footer class="site-footer">
+      <span>Data attribution: District Department of Transportation, Metropolitan Police Department, Open Data DC. Ward and per-corridor figures are a preliminary ward-grain screen; see the sources on each card.</span>
+      <span><a href="hotspots.html">High-injury corridors →</a></span>
+    </footer>
+
+    <script src="src/anc-logic.js"></script>
+    <script src="anc.js"></script>
+  </body>
+</html>
