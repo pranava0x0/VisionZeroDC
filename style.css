@@ -1336,8 +1336,8 @@ body.violations-visible .violations-source-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 12px 32px;
+  gap: 24px;
+  padding: 16px 32px;
   background: var(--bg);
   border-bottom: 1px solid var(--border);
 }
