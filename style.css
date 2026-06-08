@@ -1336,8 +1336,8 @@ body.violations-visible .violations-source-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
-  padding: 16px 32px;
+  gap: 32px;
+  padding: 18px 40px;
   background: var(--bg);
   border-bottom: 1px solid var(--border);
 }
@@ -1351,21 +1351,23 @@ body.violations-visible .violations-source-container {
   font-size: 1rem;
   color: var(--text);
   text-decoration: none;
+  flex-shrink: 0;
 }
 .site-nav .nav-links {
   display: flex;
-  gap: 6px;
+  gap: 12px;
 }
 .site-nav .nav-links a {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  padding: 8px 16px;
+  padding: 10px 18px;
   border-radius: var(--radius-pill);
   color: var(--text-muted);
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 600;
+  white-space: nowrap;
 }
 .site-nav .nav-links a:hover {
   color: var(--text);
