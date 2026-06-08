@@ -1957,8 +1957,8 @@ p.rec-key {
     content: "\25B4";
   }
 
-  /* Condensed countermeasure library: 3 cards + toggle */
-  .cm-grid:not(.cm-expanded) .cm-card:nth-child(n + 4) {
+  /* Condensed countermeasure library: 2 cards + toggle on mobile for better scrolling */
+  .cm-grid:not(.cm-expanded) .cm-card:nth-child(n + 3) {
     display: none;
   }
   .cm-toggle {
@@ -1986,8 +1986,8 @@ p.rec-key {
     border-color: var(--rule);
   }
 
-  /* Condensed organization list: 2 cards + toggle */
-  .orgs-grid:not(.orgs-expanded) .org-card:nth-child(n + 3) {
+  /* Condensed organization list: 1 card + toggle on mobile for better scrolling */
+  .orgs-grid:not(.orgs-expanded) .org-card:nth-child(n + 2) {
     display: none;
   }
   .org-toggle {

@@ -214,11 +214,11 @@ function renderCountermeasures(library) {
   setupCmToggle(items.length);
 }
 
-// On mobile, show 3 countermeasures behind a "Show all" toggle.
+// On mobile, show 2 countermeasures behind a "Show all" toggle.
 function setupCmToggle(count) {
   const grid = els.countermeasures;
   let btn = document.querySelector(".cm-toggle");
-  if (count <= 3) {
+  if (count <= 2) {
     if (btn) btn.remove();
     return;
   }
@@ -340,11 +340,11 @@ function renderOrganizations(orgs) {
   setupOrgToggle(orgCount);
 }
 
-// On mobile, show 2 organizations behind a "Show all" toggle.
+// On mobile, show 1 organization behind a "Show all" toggle.
 function setupOrgToggle(count) {
   const grid = els.organizations;
   let btn = document.querySelector(".org-toggle");
-  if (count <= 2) {
+  if (count <= 1) {
     if (btn) btn.remove();
     return;
   }
