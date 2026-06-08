@@ -4,6 +4,46 @@
 
 ---
 
+## ✅ COMPLETED: PR #4 Review Feedback Integration (2026-06-08)
+
+**Context:** PR #4 merged successfully, but contained three critical gaps identified in review comments that were not addressed before declaring work complete.
+
+**Issues Found and Fixed:**
+
+1. **Accessibility Regression** — Tab buttons missing ARIA roles
+   - Added `role="tablist"` to navigation container
+   - Added `role="tab"` to each tab button
+   - Added `aria-controls="tab-{name}"` to link buttons to their panels
+   - Impact: Screen readers now properly announce tab structure and controlled regions
+
+2. **Deep-Linking Broken** — Tabs not syncing with URL hash
+   - Refactored tab switching into reusable `switchToTab(tabName)` function
+   - Added `window.history.replaceState()` to update URL hash on tab click
+   - Added `hashchange` event listener for browser back/forward navigation
+   - Validates hash on page load and navigates to correct tab
+   - Impact: Users can bookmark/share tab-specific URLs (#home, #analysis, #solutions)
+
+3. **Data Provenance Missing** — Static JSON without source documentation
+   - Added `_provenance` metadata block to `data/organizations.json`
+   - Documents: source title, description, methodology, capture date, limitations
+   - Follows CLAUDE.md data principles on source attribution
+   - Impact: Dataset now has full audit trail per project standards
+
+4. **UX Regression** — Tabs scrolled out of view when clicked
+   - Removed `scrollIntoView()` from tab switching logic
+   - Tabs now remain in view as content changes
+   - Impact: Better UX; users see navigation context at all times
+
+**Key Learning:** PR review comments must be read completely and addressed before work is declared done. "Merged" is not the same as "complete." Updated AGENTS.md with guidance on handling PR feedback systematically.
+
+**Files Changed:**
+- `index.html`: Added ARIA attributes
+- `landing.js`: Refactored tab switching, added hash-sync logic
+- `data/organizations.json`: Added provenance metadata
+- `AGENTS.md`: Added PR review feedback section
+
+---
+
 ## ✅ COMPLETED: Mobile Scrolling Optimization (2026-06-07)
 
 **Issue:** [UAT-004] Page height 8164px required 10+ screen scrolls on mobile, violating DESIGN.md progressive-disclosure guidance.

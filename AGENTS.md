@@ -81,6 +81,20 @@ For anything beyond a one-line fix, state the approach before editing. Significa
 - For UI changes, also run the app and click through the affected flow.
 - For data changes, inspect the output diff. A quick skim catches schema drift, broken encodings, unexpected nulls, and runaway file size.
 
+### Handle PR Review Comments
+
+When a PR receives review comments, **do not assume the work is done just because the PR merged:**
+
+- **Read all review comments thoroughly.** Fetch the full review bodies, not just summaries. A review marked "COMMENTED" means it requires action, not just an FYI.
+- **Follow user-provided links explicitly.** When a user gives a direct URL to a PR review, treat that as the authoritative source. Don't skim; read the full text.
+- **Extract a checklist from review feedback.** Before declaring a PR resolved, list each distinct issue the reviewer raised:
+  - Accessibility regression (missing ARIA roles)
+  - Deep-linking broken (hash not syncing)
+  - Data provenance missing (undocumented static JSON)
+  - UX flaw (unwanted scroll behavior)
+- **Address all feedback before considering work complete.** A merged PR is not the end; it's the start of addressing the feedback it received.
+- **Test the feedback, not just the happy path.** Review comments often point to edge cases or UX flows that weren't tested. Verify those specific flows work as intended.
+
 ---
 
 ## Verification Matrix
