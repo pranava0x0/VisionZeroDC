@@ -389,8 +389,7 @@ function switchToTab(tabName) {
   // Update URL hash for deep-linking
   window.history.replaceState(null, "", `#${tabName}`);
 
-  // Scroll to top of panel
-  panel?.scrollIntoView({ behavior: "smooth", block: "start" });
+  // Don't scroll; tab buttons should remain visible and panel content is shown via CSS
   return true;
 }
 
