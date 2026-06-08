@@ -4,6 +4,33 @@
 
 ---
 
+## Active Priority: Mobile Scrolling Optimization
+
+**Issue:** [UAT-004] Page height 8164px requires 10+ screen scrolls on mobile, violating DESIGN.md progressive-disclosure guidance.
+
+**Root cause:** Organizations section displays all 10 cards full-width, stacked vertically (4000-6000px on mobile).
+
+**Proposed solution (pick one or combine):**
+1. **Show 2-3 orgs on mobile + "Show all 10" button** → opens modal or accordion disclosure
+2. **Paginate orgs (3 per page)** on mobile with "Next" button
+3. **Lazy-load orgs below fold** until user scrolls to section
+
+**Implementation approach:**
+- Modify `renderOrganizations()` in landing.js to detect viewport and limit visible cards
+- Add show/hide toggle CSS classes and event listeners
+- Test on 375px, 768px, 1280px widths
+
+**Acceptance criteria:**
+- Mobile page height ≤ 4000px (≈5 screen scrolls, reasonable)
+- User can still access all 10 orgs without excessive clicking
+- No JS errors; graceful fallback if modal doesn't open
+
+**Also address:**
+- Countermeasures section: Consider pagination after first 3 on mobile
+- Verify tab switching scrolls to top (already implemented, needs testing)
+
+---
+
 ## When To Upgrade
 
 Consider moving an item from this backlog into active work when one of these starts happening:
