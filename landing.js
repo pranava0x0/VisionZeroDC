@@ -180,7 +180,7 @@ function renderModeShare(summary) {
       const w = Math.round((m.ksi / max) * 100);
       return (
         `<div class="mode-row${m.vulnerable ? " vulnerable" : ""}">` +
-        `<span class="mode-name">${esc(MODE_LABELS[m.mode] || m.mode)}${m.vulnerable ? ' <span class="vru-tag">vulnerable</span>' : ""}</span>` +
+        `<span class="mode-name">${esc(MODE_LABELS[m.mode] || m.mode)}</span>` +
         `<span class="mode-bar"><span class="mode-fill" style="width:${w}%"></span></span>` +
         `<span class="mode-val">${fmtNum(m.ksi)} <span class="mode-pct">${pct}%</span></span>` +
         `</div>`
