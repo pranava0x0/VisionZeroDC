@@ -1335,8 +1335,8 @@ body.violations-visible .violations-source-container {
 .site-nav {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 18px 40px;
+  gap: 20px;
+  padding: 14px 20px;
   background: var(--bg);
   border-bottom: 1px solid var(--border);
   flex-wrap: nowrap;
@@ -1344,11 +1344,11 @@ body.violations-visible .violations-source-container {
 .site-nav .nav-brand {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   font-family: var(--font-display);
   font-weight: 800;
   letter-spacing: -0.01em;
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: var(--text);
   text-decoration: none;
   flex-shrink: 0;
@@ -1356,7 +1356,7 @@ body.violations-visible .violations-source-container {
 }
 .site-nav .nav-links {
   display: flex;
-  gap: 12px;
+  gap: 6px;
   margin-left: auto;
   flex-wrap: nowrap;
   white-space: nowrap;
@@ -1364,12 +1364,12 @@ body.violations-visible .violations-source-container {
 .site-nav .nav-links a {
   display: inline-flex;
   align-items: center;
-  min-height: 44px;
-  padding: 10px 18px;
+  min-height: 40px;
+  padding: 8px 14px;
   border-radius: var(--radius-pill);
   color: var(--text-muted);
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 600;
   white-space: nowrap;
 }
