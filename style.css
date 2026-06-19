@@ -1492,6 +1492,22 @@ body.violations-visible .violations-source-container {
   background: var(--brand);
 }
 
+/* On narrow phones the brand + 4 links can't fit on one line (they overflowed to
+   ~456px at 375px, forcing whole-page horizontal scroll). Let the link row wrap
+   onto its own full-width line under the brand. Shared nav, so this fixes every
+   page (hotspots, ANC, overview, map) at once. */
+@media (max-width: 480px) {
+  .site-nav {
+    flex-wrap: wrap;
+    row-gap: 8px;
+  }
+  .site-nav .nav-links {
+    flex-basis: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+}
+
 /* Tab navigation */
 .tabs-nav {
   display: flex;
