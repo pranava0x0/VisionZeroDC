@@ -146,6 +146,12 @@ function makeRankIcon(rank) {
 
 // Small color/number key pinned to the map corner.
 function addLegend() {
+  // Derive the gold (rank 5+) band from the corridors actually rendered so the
+  // legend describes the full ranking (getColorByRank lumps every rank >= 5 into
+  // the same colour), and can't drift when TOP_N changes.
+  const ranks = (hotspotsData && hotspotsData.features || []).map(f => f.properties.rank);
+  const maxRank = ranks.length ? Math.max(...ranks) : 5;
+  const goldLabel = maxRank > 5 ? `Rank 5–${maxRank} · high` : 'Rank 5 · high';
   const legend = L.control({ position: 'bottomleft' });
   legend.onAdd = function () {
     const div = L.DomUtil.create('div', 'map-legend');
@@ -153,7 +159,7 @@ function addLegend() {
       <div class="map-legend-title">Priority rank — most to least severe</div>
       <div class="row"><span class="swatch" style="background:${cssVar('--severity-fatal')}"></span> Rank 1–2 · urgent</div>
       <div class="row"><span class="swatch" style="background:${cssVar('--severity-major')}"></span> Rank 3–4 · high</div>
-      <div class="row"><span class="swatch" style="background:${cssVar('--severity-minor')}"></span> Rank 5 · high</div>
+      <div class="row"><span class="swatch" style="background:${cssVar('--severity-minor')}"></span> ${goldLabel}</div>
     `;
     return div;
   };

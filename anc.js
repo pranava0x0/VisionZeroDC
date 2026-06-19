@@ -48,7 +48,12 @@ async function getJson(url) {
 }
 
 // Pure data selectors + draft builder live in src/anc-logic.js (DOM-free, tested).
-const { wardRow, corridorsForWard, recsForWard, buildDraft } = AncLogic;
+const { wardRow, corridorsForWardFromHin, recsForWard, buildDraft } = AncLogic;
+
+// How many ward corridors to show before the "show all" disclosure, and how many
+// to name in the generated resolution draft (kept short so it stays readable).
+const CORRIDORS_VISIBLE = 5;
+const CORRIDORS_IN_DRAFT = 5;
 
 // --- rendering -------------------------------------------------------------
 
@@ -87,42 +92,67 @@ function renderStats(row, n) {
   return { ksi, fatalities: row.fatalities || 0, crashes: row.crashes || 0, label: row._label };
 }
 
+function corridorCardHtml(p) {
+  const sev = p.severity || {};
+  const fixes = (p.recommended_interventions || []).slice(0, 2);
+  const ksi = Number.isFinite(sev.ksi) ? sev.ksi : (sev.fatalities || 0) + (sev.major_injuries || 0);
+  // Lead with KSI (the ranking basis), then deaths + total injured for context.
+  const parts = [`${fmtNum(ksi)} killed/seriously injured`];
+  if (Number.isFinite(sev.fatalities)) parts.push(`${fmtNum(sev.fatalities)} deaths`);
+  if (Number.isFinite(sev.injuries)) parts.push(`${fmtNum(sev.injuries)} injuries`);
+  const sevLine = parts.join(" · ") + (sev.period ? ` (${esc(sev.period)})` : "");
+  const priority = esc(p.priority || "");
+  const prClass = /urgent/i.test(priority) ? "urgent" : "high";
+  return (
+    `<article class="anc-corridor">` +
+    `<div class="anc-corridor-head">` +
+    `<span class="corridor-rank">#${esc(p.rank)}</span>` +
+    (priority ? `<span class="corridor-priority ${prClass}">${priority}</span>` : "") +
+    `</div>` +
+    `<h3 class="corridor-name">${esc(p.corridor_name)}</h3>` +
+    (p.location_scope ? `<p class="corridor-scope">${esc(p.location_scope)}</p>` : "") +
+    `<p class="corridor-sev">${sevLine}</p>` +
+    (fixes.length
+      ? `<ul class="anc-fix-list">` +
+        fixes.map((f) => `<li>${esc(f.name)}${f.effect ? ` <span class="anc-effect">(${esc(f.effect)})</span>` : ""}</li>`).join("") +
+        `</ul>`
+      : "") +
+    `</article>`
+  );
+}
+
 function renderCorridors(corridors, n) {
   if (!corridors.length) {
     els.corridors.innerHTML =
-      `<p class="anc-empty">None of the five citywide high-injury corridors in this screen run through Ward ${esc(n)}. ` +
+      `<p class="anc-empty">No High Injury Network corridors with recorded crashes run through Ward ${esc(n)} in this dataset. ` +
       `That doesn't mean the ward is free of risk — explore block-level patterns on the ` +
       `<a href="map.html">crash map</a>.</p>`;
     return;
   }
-  els.corridors.innerHTML = corridors
-    .map((p) => {
-      const sev = p.severity || {};
-      const fixes = (p.recommended_interventions || []).slice(0, 2);
-      const parts = [];
-      if (Number.isFinite(sev.injuries)) parts.push(`${fmtNum(sev.injuries)} injuries`);
-      if (Number.isFinite(sev.fatalities)) parts.push(`${fmtNum(sev.fatalities)} deaths`);
-      const sevLine = parts.join(" · ") + (sev.period ? ` (${esc(sev.period)})` : "");
-      const priority = esc(p.priority || "");
-      const prClass = /urgent/i.test(priority) ? "urgent" : "high";
-      return (
-        `<article class="anc-corridor">` +
-        `<div class="anc-corridor-head">` +
-        `<span class="corridor-rank">#${esc(p.rank)}</span>` +
-        (priority ? `<span class="corridor-priority ${prClass}">${priority}</span>` : "") +
-        `</div>` +
-        `<h3 class="corridor-name">${esc(p.corridor_name)}</h3>` +
-        (p.location_scope ? `<p class="corridor-scope">${esc(p.location_scope)}</p>` : "") +
-        `<p class="corridor-sev">${sevLine}</p>` +
-        (fixes.length
-          ? `<ul class="anc-fix-list">` +
-            fixes.map((f) => `<li>${esc(f.name)}${f.effect ? ` <span class="anc-effect">(${esc(f.effect)})</span>` : ""}</li>`).join("") +
-            `</ul>`
-          : "") +
-        `</article>`
-      );
-    })
-    .join("");
+  const visible = corridors.slice(0, CORRIDORS_VISIBLE);
+  const hidden = corridors.slice(CORRIDORS_VISIBLE);
+  let html = `<div class="anc-corridor-grid">${visible.map(corridorCardHtml).join("")}</div>`;
+  if (hidden.length) {
+    html +=
+      `<div class="anc-corridor-grid anc-corridor-more" id="anc-corridor-more" hidden>` +
+      hidden.map(corridorCardHtml).join("") +
+      `</div>` +
+      `<button type="button" class="anc-show-all" id="anc-show-all" aria-expanded="false" aria-controls="anc-corridor-more">` +
+      `Show all ${corridors.length} corridors in Ward ${esc(n)}</button>`;
+  }
+  els.corridors.innerHTML = html;
+  if (hidden.length) {
+    const btn = document.querySelector("#anc-show-all");
+    const more = document.querySelector("#anc-corridor-more");
+    btn.addEventListener("click", () => {
+      const open = more.hidden;
+      more.hidden = !open;
+      btn.setAttribute("aria-expanded", String(open));
+      btn.textContent = open
+        ? "Show fewer corridors"
+        : `Show all ${corridors.length} corridors in Ward ${n}`;
+    });
+  }
 }
 
 function renderRecs(groups, n) {
@@ -184,11 +214,11 @@ function wireDraftActions(n) {
 // --- boot ------------------------------------------------------------------
 
 (async function init() {
-  let summary, hotspots, recsDoc;
+  let summary, hinDoc, recsDoc;
   try {
-    [summary, hotspots, recsDoc] = await Promise.all([
+    [summary, hinDoc, recsDoc] = await Promise.all([
       getJson("data/crash-summary.json"),
-      getJson("data/hotspots.geojson").catch(() => ({ features: [] })),
+      getJson("data/hin-corridors.json").catch(() => ({ corridors: [] })),
       getJson("data/recommendations.json").catch(() => ({ recommendations: [] })),
     ]);
   } catch (err) {
@@ -204,11 +234,12 @@ function wireDraftActions(n) {
       return;
     }
     const stats = renderStats(wardRow(summary, n), n);
-    const corridors = corridorsForWard(hotspots, n);
+    const corridors = corridorsForWardFromHin(hinDoc, n);
     const groups = recsForWard(recsDoc, n);
     renderCorridors(corridors, n);
     renderRecs(groups, n);
-    els.draft.value = buildDraft(n, stats, corridors, groups);
+    // The draft names only the top few corridors so the resolution stays readable.
+    els.draft.value = buildDraft(n, stats, corridors.slice(0, CORRIDORS_IN_DRAFT), groups);
     wireDraftActions(n);
     els.brief.hidden = false;
   }

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-06-19T22:20:59Z",
+  "captured_at": "2026-06-19T23:15:04Z",
   "generator": "pipeline/hotspots.py",
   "period": "2022-present",
   "buffer_m": 25.0,
@@ -29,10 +29,46 @@
     "hin_corridors": 77,
     "record_id_field": "CRIMEID"
   },
+  "intervention_catalog": {
+    "road_diet": {
+      "name": "Road diet / lane rechannelization",
+      "effect": "FHWA cites ~19-47% total crash reductions for road diets; Seattle's Nickerson St saw roughly -93% aggressive (top-end) speeding."
+    },
+    "protected_intersection": {
+      "name": "Protected intersections",
+      "effect": "Widely deployed in Vision Zero programs to remove turning conflicts at high-injury intersections; effect varies by site (verify locally)."
+    },
+    "leading_pedestrian_interval": {
+      "name": "Leading pedestrian intervals",
+      "effect": "Seattle reported roughly -34% serious-injury/fatal pedestrian crashes and -48% pedestrian turning collisions at LPI locations."
+    },
+    "curb_extension": {
+      "name": "Curb extensions / bump-outs",
+      "effect": "A standard component of low-cost Vision Zero packages (e.g. Hoboken's 60+ curb extensions) credited in its sustained zero-death record."
+    },
+    "daylighting": {
+      "name": "Daylighting (clear-sight corners)",
+      "effect": "Core to Hoboken NJ's multi-year stretch with zero traffic deaths, deployed at 130+ intersections alongside high-visibility crosswalks and curb extensions."
+    },
+    "protected_bike_lane": {
+      "name": "Protected bike lanes",
+      "effect": "physically separates people biking from traffic"
+    },
+    "automated_speed_camera": {
+      "name": "Automated speed enforcement",
+      "effect": "A DDOT study reported injury crashes falling from 841 to 673 (about -20% injuries) around enforced locations; Portland measured -71% to -93% top-end speeding within 30 days of activation."
+    },
+    "speed_limit_20": {
+      "name": "20 mph default speed limit",
+      "effect": "Part of Hoboken's and London's Vision Zero approach; pedestrian survival probability is far higher in a 20 mph than a 30+ mph impact."
+    }
+  },
   "corridors": [
     {
       "corridor_id": "11040042_1",
       "route_name": "GEORGIA AVE NW",
+      "corridor_name": "Georgia Ave NW",
+      "location_scope": "7th St NW/Florida Ave NW To Chesapeake St NW",
       "from_street": "7TH ST NW/FLORIDA AVE NW",
       "to_street": "CHESAPEAKE ST NW",
       "length_mi": 4.755,
@@ -54,6 +90,24 @@
         "passenger": 4,
         "other": 1
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "4 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "54 KSI concentrated on one arterial"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 57% of KSI"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-01",
@@ -83,6 +137,8 @@
     {
       "corridor_id": "13009362_1",
       "route_name": "ALABAMA AVE SE",
+      "corridor_name": "Alabama Ave SE",
+      "location_scope": "5th St SE To Bowen Rd SE/Burns St SE/Stanley St SE",
       "from_street": "5TH ST SE",
       "to_street": "BOWEN RD SE/BURNS ST SE/STANLEY ST SE",
       "length_mi": 4.18,
@@ -104,6 +160,24 @@
         "passenger": 5,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "2 traffic death(s) on this corridor"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 78% of KSI"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "36 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-03",
@@ -133,6 +207,8 @@
     {
       "corridor_id": "11025152_2",
       "route_name": "CONNECTICUT AVE NW",
+      "corridor_name": "Connecticut Ave NW",
+      "location_scope": "17th St NW/K St NW Service Rd/K St NW To Chevy Chase Cir NW",
       "from_street": "17TH ST NW/K ST NW Service Rd/K ST NW",
       "to_street": "CHEVY CHASE CIR NW",
       "length_mi": 4.926,
@@ -154,6 +230,24 @@
         "passenger": 5,
         "other": 1
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "5 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "36 KSI concentrated on one arterial"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 47% of KSI"
+        },
+        {
+          "id": "leading_pedestrian_interval",
+          "trigger": "pedestrians are 42% of KSI here"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-01",
@@ -183,6 +277,8 @@
     {
       "corridor_id": "12064672_1",
       "route_name": "NEW YORK AVE NE",
+      "corridor_name": "New York Ave NE",
+      "location_scope": "New York Ave NW/N St NE To Eastern Ave NE",
       "from_street": "NEW YORK AVE NW/N ST NE",
       "to_street": "EASTERN AVE NE",
       "length_mi": 3.846,
@@ -203,6 +299,24 @@
         "passenger": 8,
         "other": 1
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "2 traffic death(s) on this corridor"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 72% of KSI"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "29 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-01",
@@ -232,6 +346,8 @@
     {
       "corridor_id": "11001402_2",
       "route_name": "14TH ST NW",
+      "corridor_name": "14th St NW",
+      "location_scope": "Thomas Cir NW To Iowa Ave NW",
       "from_street": "THOMAS CIR NW",
       "to_street": "IOWA AVE NW",
       "length_mi": 2.996,
@@ -254,6 +370,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "1 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "29 KSI concentrated on one arterial"
+        },
+        {
+          "id": "leading_pedestrian_interval",
+          "trigger": "pedestrians are 45% of KSI here"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "13 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-01",
@@ -283,6 +417,8 @@
     {
       "corridor_id": "13069812_1",
       "route_name": "PENNSYLVANIA AVE SE",
+      "corridor_name": "Pennsylvania Ave SE",
+      "location_scope": "Sycamore Dr SE To Unnamed Access Road",
       "from_street": "SYCAMORE DR SE",
       "to_street": "unnamed access road",
       "length_mi": 3.483,
@@ -305,6 +441,24 @@
         "passenger": 4,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "2 traffic death(s) on this corridor"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 85% of KSI"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "26 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-02",
@@ -334,6 +488,8 @@
     {
       "corridor_id": "12015342_1",
       "route_name": "BENNING RD NE",
+      "corridor_name": "Benning Rd NE",
+      "location_scope": "15th St NE/Bladensburg Rd NE/H St NE/Maryland Ave NE To Benning Rd SE/East Capitol St Bn",
       "from_street": "15TH ST NE/BLADENSBURG RD NE/H ST NE/MARYLAND AVE NE",
       "to_street": "BENNING RD SE/EAST CAPITOL ST BN",
       "length_mi": 2.631,
@@ -356,6 +512,24 @@
         "passenger": 2,
         "other": 1
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "5 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "25 KSI concentrated on one arterial"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 60% of KSI"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-02",
@@ -385,6 +559,8 @@
     {
       "corridor_id": "13061162_1",
       "route_name": "MINNESOTA AVE SE",
+      "corridor_name": "Minnesota Ave SE",
+      "location_scope": "Good Hope Rd SE To Martin Luther King Jr Ave SE",
       "from_street": "GOOD HOPE RD SE",
       "to_street": "MARTIN LUTHER KING JR AVE SE",
       "length_mi": 2.389,
@@ -406,6 +582,24 @@
         "passenger": 2,
         "other": 2
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "1 traffic death(s) on this corridor"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 68% of KSI"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "25 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-02",
@@ -435,6 +629,8 @@
     {
       "corridor_id": "13081512_1",
       "route_name": "SOUTHERN AVE SE",
+      "corridor_name": "Southern Ave SE",
+      "location_scope": "Unnamed Access Road/South Capitol St Bn To Naylor Rd SE",
       "from_street": "unnamed access road/SOUTH CAPITOL ST BN",
       "to_street": "NAYLOR RD SE",
       "length_mi": 2.996,
@@ -455,6 +651,24 @@
         "passenger": 5,
         "other": 1
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "3 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "25 KSI concentrated on one arterial"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 52% of KSI"
+        },
+        {
+          "id": "leading_pedestrian_interval",
+          "trigger": "pedestrians are 40% of KSI here"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-01",
@@ -484,6 +698,8 @@
     {
       "corridor_id": "13081512_2",
       "route_name": "SOUTHERN AVE SE",
+      "corridor_name": "Southern Ave SE",
+      "location_scope": "Branch Ave SE To 53rd St SE",
       "from_street": "BRANCH AVE SE",
       "to_street": "53RD ST SE",
       "length_mi": 2.429,
@@ -504,6 +720,24 @@
         "passenger": 4,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "7 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "25 KSI concentrated on one arterial"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 92% of KSI"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-02",
@@ -533,6 +767,8 @@
     {
       "corridor_id": "15065322_1",
       "route_name": "NORTH CAPITOL ST BN",
+      "corridor_name": "North Capitol St Bn",
+      "location_scope": "Louisiana Ave NW/Louisiana Ave NE/Ramp-36000232 To Good Hope Rd SE/Interstate 295 I Bn",
       "from_street": "LOUISIANA AVE NW/LOUISIANA AVE NE/Ramp-36000232",
       "to_street": "GOOD HOPE RD SE/INTERSTATE 295 I BN",
       "length_mi": 3.314,
@@ -554,6 +790,24 @@
         "passenger": 3,
         "other": 2
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "2 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "22 KSI concentrated on one arterial"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 55% of KSI"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-07",
@@ -583,6 +837,8 @@
     {
       "corridor_id": "15031912_5",
       "route_name": "EAST CAPITOL ST BN",
+      "corridor_name": "East Capitol St Bn",
+      "location_scope": "13th St NE/13th St SE To 22nd St SE",
       "from_street": "13TH ST NE/13TH ST SE",
       "to_street": "22ND ST SE",
       "length_mi": 2.945,
@@ -603,6 +859,24 @@
         "passenger": 5,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "3 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "22 KSI concentrated on one arterial"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 64% of KSI"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-01",
@@ -632,6 +906,8 @@
     {
       "corridor_id": "12015992_1",
       "route_name": "BLADENSBURG RD NE",
+      "corridor_name": "Bladensburg Rd NE",
+      "location_scope": "15th St NE/Benning Rd NE/H St NE/Maryland Ave NE To Benning Rd SE/East Capitol St Bn",
       "from_street": "15TH ST NE/BENNING RD NE/H ST NE/MARYLAND AVE NE",
       "to_street": "BENNING RD SE/EAST CAPITOL ST BN",
       "length_mi": 2.573,
@@ -652,6 +928,24 @@
         "passenger": 5,
         "other": 1
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "5 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "20 KSI concentrated on one arterial"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 75% of KSI"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-07",
@@ -681,6 +975,8 @@
     {
       "corridor_id": "11087232_3",
       "route_name": "U ST NW",
+      "corridor_name": "U St NW",
+      "location_scope": "9th St NW/Florida Ave NW To 18th St NW/Vernon St NW",
       "from_street": "9TH ST NW/FLORIDA AVE NW",
       "to_street": "18TH ST NW/VERNON ST NW",
       "length_mi": 0.954,
@@ -702,6 +998,24 @@
         "passenger": 1,
         "other": 1
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "5 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "19 KSI concentrated on one arterial"
+        },
+        {
+          "id": "leading_pedestrian_interval",
+          "trigger": "pedestrians are 42% of KSI here"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 42% of KSI"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-01",
@@ -731,6 +1045,8 @@
     {
       "corridor_id": "11000702_1",
       "route_name": "7TH ST NW",
+      "corridor_name": "7th St NW",
+      "location_scope": "7th St SW To Florida Ave NW/Georgia Ave NW",
       "from_street": "7TH ST SW",
       "to_street": "FLORIDA AVE NW/GEORGIA AVE NW",
       "length_mi": 1.837,
@@ -752,6 +1068,24 @@
         "passenger": 1,
         "other": 3
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "1 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "18 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 33% of KSI"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-05",
@@ -781,6 +1115,8 @@
     {
       "corridor_id": "12061162_1",
       "route_name": "MINNESOTA AVE NE",
+      "corridor_name": "Minnesota Ave NE",
+      "location_scope": "24th St NE To Rhode Island Ave NE",
       "from_street": "24TH ST NE",
       "to_street": "RHODE ISLAND AVE NE",
       "length_mi": 1.194,
@@ -801,6 +1137,24 @@
         "passenger": 0,
         "other": 1
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "4 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "18 KSI concentrated on one arterial"
+        },
+        {
+          "id": "leading_pedestrian_interval",
+          "trigger": "pedestrians are 61% of KSI here"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "11 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-09",
@@ -830,6 +1184,8 @@
     {
       "corridor_id": "12075462_1",
       "route_name": "RHODE ISLAND AVE NE",
+      "corridor_name": "Rhode Island Ave NE",
+      "location_scope": "Rhode Island Ave NW To Jackson St NE/Unnamed Access Road",
       "from_street": "RHODE ISLAND AVE NW",
       "to_street": "JACKSON ST NE/unnamed access road",
       "length_mi": 2.786,
@@ -850,6 +1206,24 @@
         "passenger": 1,
         "other": 1
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "1 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "17 KSI concentrated on one arterial"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 59% of KSI"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-07",
@@ -879,6 +1253,8 @@
     {
       "corridor_id": "11064282_1",
       "route_name": "NEW JERSEY AVE NW",
+      "corridor_name": "New Jersey Ave NW",
+      "location_scope": "Constitution Ave NW To Florida Ave NW",
       "from_street": "CONSTITUTION AVE NW",
       "to_street": "FLORIDA AVE NW",
       "length_mi": 1.619,
@@ -901,6 +1277,24 @@
         "passenger": 2,
         "other": 4
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "4 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "17 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 59% of KSI"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-01",
@@ -930,6 +1324,8 @@
     {
       "corridor_id": "11094052_1",
       "route_name": "WISCONSIN AVE NW",
+      "corridor_name": "Wisconsin Ave NW",
+      "location_scope": "K St NW/Water St NW To Reservoir Rd NW/37th St NW",
       "from_street": "K ST NW/WATER ST NW",
       "to_street": "RESERVOIR RD NW/37TH ST NW",
       "length_mi": 4.3,
@@ -951,6 +1347,24 @@
         "passenger": 0,
         "other": 2
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "14 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "leading_pedestrian_interval",
+          "trigger": "pedestrians are 36% of KSI here"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-03",
@@ -980,6 +1394,8 @@
     {
       "corridor_id": "12031982_1",
       "route_name": "EASTERN AVE NE",
+      "corridor_name": "Eastern Ave NE",
+      "location_scope": "Southern Ave NE To Kenilworth Ave NE",
       "from_street": "SOUTHERN AVE NE",
       "to_street": "KENILWORTH AVE NE",
       "length_mi": 1.897,
@@ -1000,6 +1416,24 @@
         "passenger": 3,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "3 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "13 KSI concentrated on one arterial"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 69% of KSI"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-01",
@@ -1029,6 +1463,8 @@
     {
       "corridor_id": "11059602_2",
       "route_name": "MASSACHUSETTS AVE NW",
+      "corridor_name": "Massachusetts Ave NW",
+      "location_scope": "Mt Vernon Pl NW/9th St NW To Scott Cir NW",
       "from_street": "MT VERNON PL NW/9TH ST NW",
       "to_street": "SCOTT CIR NW",
       "length_mi": 0.716,
@@ -1049,6 +1485,24 @@
         "passenger": 6,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "2 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "13 KSI concentrated on one arterial"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 62% of KSI"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-02-01",
@@ -1078,6 +1532,8 @@
     {
       "corridor_id": "11036722_1",
       "route_name": "FLORIDA AVE NW",
+      "corridor_name": "Florida Ave NW",
+      "location_scope": "Florida Ave NE/North Capitol St Bn To U St NW/9th St NW",
       "from_street": "FLORIDA AVE NE/NORTH CAPITOL ST BN",
       "to_street": "U ST NW/9TH ST NW",
       "length_mi": 0.911,
@@ -1100,6 +1556,24 @@
         "passenger": 1,
         "other": 2
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "1 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "12 KSI concentrated on one arterial"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 58% of KSI"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-03",
@@ -1129,6 +1603,8 @@
     {
       "corridor_id": "11064672_1",
       "route_name": "NEW YORK AVE NW",
+      "corridor_name": "New York Ave NW",
+      "location_scope": "New York Ave NE/N St NE To Mt Vernon Pl NW/7th St NW",
       "from_street": "NEW YORK AVE NE/N ST NE",
       "to_street": "MT VERNON PL NW/7TH ST NW",
       "length_mi": 0.758,
@@ -1151,6 +1627,24 @@
         "passenger": 1,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "3 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "11 KSI concentrated on one arterial"
+        },
+        {
+          "id": "leading_pedestrian_interval",
+          "trigger": "pedestrians are 45% of KSI here"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "5 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-01",
@@ -1180,6 +1674,8 @@
     {
       "corridor_id": "12036722_1",
       "route_name": "FLORIDA AVE NE",
+      "corridor_name": "Florida Ave NE",
+      "location_scope": "Florida Ave NW/North Capitol St Bn To H St NE",
       "from_street": "FLORIDA AVE NW/NORTH CAPITOL ST BN",
       "to_street": "H ST NE",
       "length_mi": 1.528,
@@ -1201,6 +1697,24 @@
         "passenger": 3,
         "other": 2
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 70% of KSI"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "10 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-10",
@@ -1230,6 +1744,8 @@
     {
       "corridor_id": "11057852_3",
       "route_name": "M ST NW",
+      "corridor_name": "M St NW",
+      "location_scope": "Thomas Cir NW/Massachusetts Ave NW Service Rd To Canal Rd NW",
       "from_street": "THOMAS CIR NW/MASSACHUSETTS AVE NW Service Rd",
       "to_street": "CANAL RD NW",
       "length_mi": 2.114,
@@ -1250,6 +1766,24 @@
         "passenger": 0,
         "other": 2
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "10 KSI concentrated on one arterial"
+        },
+        {
+          "id": "leading_pedestrian_interval",
+          "trigger": "pedestrians are 40% of KSI here"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-01",
@@ -1279,6 +1813,8 @@
     {
       "corridor_id": "15081252_1",
       "route_name": "SOUTH CAPITOL ST BN",
+      "corridor_name": "South Capitol St Bn",
+      "location_scope": "Chillum Pl NE/Chillum Pl NW To Eastern Ave NE/Eastern Ave NW",
       "from_street": "CHILLUM PL NE/CHILLUM PL NW",
       "to_street": "EASTERN AVE NE/EASTERN AVE NW",
       "length_mi": 5.071,
@@ -1299,6 +1835,24 @@
         "passenger": 2,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "1 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "10 KSI concentrated on one arterial"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 60% of KSI"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-07",
@@ -1328,6 +1882,8 @@
     {
       "corridor_id": "13057852_1",
       "route_name": "M ST SE",
+      "corridor_name": "M St SE",
+      "location_scope": "Dead End To Branch Ave SE",
       "from_street": "DEAD END",
       "to_street": "BRANCH AVE SE",
       "length_mi": 1.926,
@@ -1348,6 +1904,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "10 KSI concentrated on one arterial"
+        },
+        {
+          "id": "leading_pedestrian_interval",
+          "trigger": "pedestrians are 40% of KSI here"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 40% of KSI"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-06",
@@ -1377,6 +1951,8 @@
     {
       "corridor_id": "12042442_1",
       "route_name": "H ST NE",
+      "corridor_name": "H St NE",
+      "location_scope": "North Capitol St Bn/H St NW To Benning Rd NE/15th St NE/Bladensburg Rd NE/Maryland Ave NE",
       "from_street": "NORTH CAPITOL ST BN/H ST NW",
       "to_street": "BENNING RD NE/15TH ST NE/BLADENSBURG RD NE/MARYLAND AVE NE",
       "length_mi": 1.382,
@@ -1397,6 +1973,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "9 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 44% of KSI"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-06",
@@ -1426,6 +2020,8 @@
     {
       "corridor_id": "13040752_1",
       "route_name": "GOOD HOPE RD SE",
+      "corridor_name": "Good Hope Rd SE",
+      "location_scope": "Anacostia Dr SE To Unnamed Access Road/Alabama Ave SE",
       "from_street": "ANACOSTIA DR SE",
       "to_street": "unnamed access road/ALABAMA AVE SE",
       "length_mi": 1.487,
@@ -1447,6 +2043,24 @@
         "passenger": 0,
         "other": 1
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 67% of KSI"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "9 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-06",
@@ -1476,6 +2090,8 @@
     {
       "corridor_id": "13015342_1",
       "route_name": "BENNING RD SE",
+      "corridor_name": "Benning Rd SE",
+      "location_scope": "Benning Rd NE/East Capitol St Bn To 12th St SE",
       "from_street": "BENNING RD NE/EAST CAPITOL ST BN",
       "to_street": "12TH ST SE",
       "length_mi": 1.028,
@@ -1496,6 +2112,24 @@
         "passenger": 0,
         "other": 1
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "2 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "9 KSI concentrated on one arterial"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 67% of KSI"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-04",
@@ -1525,6 +2159,8 @@
     {
       "corridor_id": "11001402_1",
       "route_name": "14TH ST NW",
+      "corridor_name": "14th St NW",
+      "location_scope": "14th St SW To Thomas Cir NW",
       "from_street": "14TH ST SW",
       "to_street": "THOMAS CIR NW",
       "length_mi": 1.087,
@@ -1545,6 +2181,24 @@
         "passenger": 0,
         "other": 1
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "2 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "8 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "leading_pedestrian_interval",
+          "trigger": "pedestrians are 38% of KSI here"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-21",
@@ -1574,6 +2228,8 @@
     {
       "corridor_id": "11050892_1",
       "route_name": "K ST NW",
+      "corridor_name": "K St NW",
+      "location_scope": "K St NE/North Capitol St Bn To 7th St NW",
       "from_street": "K ST NE/NORTH CAPITOL ST BN",
       "to_street": "7TH ST NW",
       "length_mi": 0.693,
@@ -1595,6 +2251,24 @@
         "passenger": 1,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "1 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "8 KSI concentrated on one arterial"
+        },
+        {
+          "id": "protected_bike_lane",
+          "trigger": "cyclists are 50% of KSI here"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-21",
@@ -1624,6 +2298,8 @@
     {
       "corridor_id": "14057852_1",
       "route_name": "M ST SW",
+      "corridor_name": "M St SW",
+      "location_scope": "Macdill Blvd SW To Tinker St SW",
       "from_street": "MACDILL BLVD SW",
       "to_street": "TINKER ST SW",
       "length_mi": 0.582,
@@ -1644,6 +2320,24 @@
         "passenger": 1,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "1 traffic death(s) on this corridor"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 86% of KSI"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "7 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-02-07",
@@ -1673,6 +2367,8 @@
     {
       "corridor_id": "11059602_1",
       "route_name": "MASSACHUSETTS AVE NW",
+      "corridor_name": "Massachusetts Ave NW",
+      "location_scope": "Massachusetts Ave NE/North Capitol St Bn To K St NW/7th St NW",
       "from_street": "MASSACHUSETTS AVE NE/NORTH CAPITOL ST BN",
       "to_street": "K ST NW/7TH ST NW",
       "length_mi": 0.764,
@@ -1694,6 +2390,24 @@
         "passenger": 1,
         "other": 1
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "6 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 67% of KSI"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-11",
@@ -1723,6 +2437,8 @@
     {
       "corridor_id": "15065322_2",
       "route_name": "NORTH CAPITOL ST BN",
+      "corridor_name": "North Capitol St Bn",
+      "location_scope": "Rock Creek Church Rd NW/Hawaii Ave NE To Mcdonald Pl NE/Blair Rd NW",
       "from_street": "ROCK CREEK CHURCH RD NW/HAWAII AVE NE",
       "to_street": "MCDONALD PL NE/BLAIR RD NW",
       "length_mi": 0.869,
@@ -1744,6 +2460,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "4 KSI concentrated on one arterial"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 75% of KSI"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-03",
@@ -1773,6 +2507,8 @@
     {
       "corridor_id": "11042442_1",
       "route_name": "H ST NW",
+      "corridor_name": "H St NW",
+      "location_scope": "H St NE/North Capitol St Bn To Massachusetts Ave NW/4th St NW",
       "from_street": "H ST NE/NORTH CAPITOL ST BN",
       "to_street": "MASSACHUSETTS AVE NW/4TH ST NW",
       "length_mi": 0.386,
@@ -1793,6 +2529,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 75% of KSI"
+        },
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "4 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-07",
@@ -1822,6 +2576,8 @@
     {
       "corridor_id": "11050892_3",
       "route_name": "K ST NW",
+      "corridor_name": "K St NW",
+      "location_scope": "9th St NW To Water St NW/Wisconsin Ave NW",
       "from_street": "9TH ST NW",
       "to_street": "WATER ST NW/WISCONSIN AVE NW",
       "length_mi": 2.089,
@@ -1842,6 +2598,24 @@
         "passenger": 2,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "leading_pedestrian_interval",
+          "trigger": "pedestrians are 50% of KSI here"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 50% of KSI"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "2 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-13",
@@ -1871,6 +2645,8 @@
     {
       "corridor_id": "11025352_2",
       "route_name": "CONSTITUTION AVE NW",
+      "corridor_name": "Constitution Ave NW",
+      "location_scope": "Pennsylvania Ave NW To Interstate 66 Bn",
       "from_street": "PENNSYLVANIA AVE NW",
       "to_street": "INTERSTATE 66   BN",
       "length_mi": 2.071,
@@ -1891,6 +2667,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 100% of KSI"
+        },
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "2 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-06",
@@ -1920,6 +2714,8 @@
     {
       "corridor_id": "13081512_3",
       "route_name": "SOUTHERN AVE SE",
+      "corridor_name": "Southern Ave SE",
+      "location_scope": "Fitch St SE To Southern Ave NE/East Capitol St Bn",
       "from_street": "FITCH ST SE",
       "to_street": "SOUTHERN AVE NE/EAST CAPITOL ST BN",
       "length_mi": 0.821,
@@ -1940,6 +2736,24 @@
         "passenger": 1,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "1 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "2 KSI concentrated on one arterial"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 100% of KSI"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-05",
@@ -1969,6 +2783,8 @@
     {
       "corridor_id": "11075462_3",
       "route_name": "RHODE ISLAND AVE NW",
+      "corridor_name": "Rhode Island Ave NW",
+      "location_scope": "Scott Cir NW To Connecticut Ave NW/M St NW",
       "from_street": "SCOTT CIR NW",
       "to_street": "CONNECTICUT AVE NW/M ST NW",
       "length_mi": 0.251,
@@ -1989,6 +2805,24 @@
         "passenger": 0,
         "other": 1
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "leading_pedestrian_interval",
+          "trigger": "pedestrians are 50% of KSI here"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "1 pedestrian KSI on this corridor"
+        },
+        {
+          "id": "daylighting",
+          "trigger": "pedestrians are 50% of KSI here"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-02-06",
@@ -2018,6 +2852,8 @@
     {
       "corridor_id": "11078712_1",
       "route_name": "SCOTT CIR NW",
+      "corridor_name": "Scott Cir NW",
+      "location_scope": "Rhode Island Ave NW To Rhode Island Ave NW",
       "from_street": "RHODE ISLAND AVE NW",
       "to_street": "RHODE ISLAND AVE NW",
       "length_mi": 0.117,
@@ -2038,6 +2874,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "protected_bike_lane",
+          "trigger": "cyclists are 100% of KSI here"
+        },
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "1 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-10",
@@ -2067,6 +2921,8 @@
     {
       "corridor_id": "11085732_1",
       "route_name": "THOMAS CIR NW",
+      "corridor_name": "Thomas Cir NW",
+      "location_scope": "14th St NW To 14th St NW",
       "from_street": "14TH ST NW",
       "to_street": "14TH ST NW",
       "length_mi": 0.157,
@@ -2087,6 +2943,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "leading_pedestrian_interval",
+          "trigger": "pedestrians are 100% of KSI here"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "1 pedestrian KSI on this corridor"
+        },
+        {
+          "id": "daylighting",
+          "trigger": "pedestrians are 100% of KSI here"
+        },
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-10",
@@ -2116,6 +2990,8 @@
     {
       "corridor_id": "12043812_1",
       "route_name": "HAWAII AVE NE",
+      "corridor_name": "Hawaii Ave NE",
+      "location_scope": "Rock Creek Church Rd NW/North Capitol St Bn To Taylor St NE",
       "from_street": "ROCK CREEK CHURCH RD NW/NORTH CAPITOL ST BN",
       "to_street": "TAYLOR ST NE",
       "length_mi": 0.664,
@@ -2136,6 +3012,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "leading_pedestrian_interval",
+          "trigger": "pedestrians are 100% of KSI here"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "1 pedestrian KSI on this corridor"
+        },
+        {
+          "id": "daylighting",
+          "trigger": "pedestrians are 100% of KSI here"
+        },
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-04",
@@ -2165,6 +3059,8 @@
     {
       "corridor_id": "11016382_1",
       "route_name": "BLAIR RD NW",
+      "corridor_name": "Blair Rd NW",
+      "location_scope": "Mcdonald Pl NE/North Capitol St Bn To 17th St NW",
       "from_street": "MCDONALD PL NE/NORTH CAPITOL ST BN",
       "to_street": "17TH ST NW",
       "length_mi": 1.705,
@@ -2185,6 +3081,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "leading_pedestrian_interval",
+          "trigger": "pedestrians are 100% of KSI here"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "1 pedestrian KSI on this corridor"
+        },
+        {
+          "id": "daylighting",
+          "trigger": "pedestrians are 100% of KSI here"
+        },
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-11",
@@ -2214,6 +3128,8 @@
     {
       "corridor_id": "11000902_1",
       "route_name": "9TH ST NW",
+      "corridor_name": "9th St NW",
+      "location_scope": "9th St SW To Unnamed Access Road",
       "from_street": "9TH ST SW",
       "to_street": "unnamed access road",
       "length_mi": 2.083,
@@ -2234,6 +3150,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 100% of KSI"
+        },
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "1 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-02-07",
@@ -2257,6 +3191,8 @@
     {
       "corridor_id": "11025352_1",
       "route_name": "CONSTITUTION AVE NW",
+      "corridor_name": "Constitution Ave NW",
+      "location_scope": "Constitution Ave NE/Unnamed Access Road To Pennsylvania Ave NW",
       "from_street": "CONSTITUTION AVE NE/unnamed access road",
       "to_street": "PENNSYLVANIA AVE NW",
       "length_mi": 0.398,
@@ -2278,6 +3214,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-04-27",
@@ -2307,6 +3261,8 @@
     {
       "corridor_id": "12023852_1",
       "route_name": "CLERMONT DR NE",
+      "corridor_name": "Clermont Dr NE",
+      "location_scope": "Fort Dr NE To 53rd St NE",
       "from_street": "FORT DR NE",
       "to_street": "53RD ST NE",
       "length_mi": 0.278,
@@ -2327,6 +3283,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-04-24",
@@ -2356,6 +3330,8 @@
     {
       "corridor_id": "12059602_2",
       "route_name": "MASSACHUSETTS AVE NE",
+      "corridor_name": "Massachusetts Ave NE",
+      "location_scope": "Columbus Cir NE To 4th St NE/C St NE",
       "from_street": "COLUMBUS CIR NE",
       "to_street": "4TH ST NE/C ST NE",
       "length_mi": 0.314,
@@ -2376,6 +3352,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-03-09",
@@ -2405,6 +3399,8 @@
     {
       "corridor_id": "11050892_2",
       "route_name": "K ST NW",
+      "corridor_name": "K St NW",
+      "location_scope": "7th St NW/Massachusetts Ave NW To 9th St NW/New York Ave NW",
       "from_street": "7TH ST NW/MASSACHUSETTS AVE NW",
       "to_street": "9TH ST NW/NEW YORK AVE NW",
       "length_mi": 0.112,
@@ -2425,6 +3421,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-03-30",
@@ -2454,6 +3468,8 @@
     {
       "corridor_id": "12081512_1",
       "route_name": "SOUTHERN AVE NE",
+      "corridor_name": "Southern Ave NE",
+      "location_scope": "Southern Ave SE/East Capitol St Bn To Eastern Ave NE",
       "from_street": "SOUTHERN AVE SE/EAST CAPITOL ST BN",
       "to_street": "EASTERN AVE NE",
       "length_mi": 0.301,
@@ -2474,6 +3490,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-06-12",
@@ -2503,6 +3537,8 @@
     {
       "corridor_id": "12024732A_1",
       "route_name": "COLUMBUS CIR NE",
+      "corridor_name": "Columbus Cir NE",
+      "location_scope": "Columbus Cir NE To Ramp-36005892/Columbus Cir NE",
       "from_street": "COLUMBUS CIR NE",
       "to_street": "Ramp-36005892/COLUMBUS CIR NE",
       "length_mi": 0.145,
@@ -2523,6 +3559,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-04-29",
@@ -2552,6 +3606,8 @@
     {
       "corridor_id": "13035682_1",
       "route_name": "FIRTH STERLING AVE SE",
+      "corridor_name": "Firth Sterling Ave SE",
+      "location_scope": "Howard Rd SE/Ramp-36003432 To South Capitol St Bn/Defense Blvd SW/South Capitol St Bn/Anacostia River Trail SW",
       "from_street": "HOWARD RD SE/Ramp-36003432",
       "to_street": "SOUTH CAPITOL ST BN/DEFENSE BLVD SW/SOUTH CAPITOL ST BN/ANACOSTIA RIVER TRAIL SW",
       "length_mi": 0.444,
@@ -2572,6 +3628,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-11",
@@ -2601,6 +3675,8 @@
     {
       "corridor_id": "12024732_1",
       "route_name": "COLUMBUS CIR NE",
+      "corridor_name": "Columbus Cir NE",
+      "location_scope": "1st St NE/Massachusetts Ave NE To F St NE",
       "from_street": "1ST ST NE/MASSACHUSETTS AVE NE",
       "to_street": "F ST NE",
       "length_mi": 0.257,
@@ -2621,6 +3697,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-11-10",
@@ -2650,6 +3744,8 @@
     {
       "corridor_id": "12059602_1",
       "route_name": "MASSACHUSETTS AVE NE",
+      "corridor_name": "Massachusetts Ave NE",
+      "location_scope": "Massachusetts Ave NW/North Capitol St Bn To 1st St NE/Columbus Cir NE",
       "from_street": "MASSACHUSETTS AVE NW/NORTH CAPITOL ST BN",
       "to_street": "1ST ST NE/COLUMBUS CIR NE",
       "length_mi": 0.082,
@@ -2670,6 +3766,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-07-14",
@@ -2699,6 +3813,8 @@
     {
       "corridor_id": "13035812_1",
       "route_name": "FITCH ST SE",
+      "corridor_name": "Fitch St SE",
+      "location_scope": "51st St SE/G St SE To Southern Ave SE",
       "from_street": "51ST ST SE/G ST SE",
       "to_street": "SOUTHERN AVE SE",
       "length_mi": 0.281,
@@ -2719,6 +3835,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-09-08",
@@ -2742,6 +3876,8 @@
     {
       "corridor_id": "11069812_1",
       "route_name": "PENNSYLVANIA AVE NW",
+      "corridor_name": "Pennsylvania Ave NW",
+      "location_scope": "Peace Monument Cir NW To 15th St NW/E St NW",
       "from_street": "PEACE MONUMENT CIR NW",
       "to_street": "15TH ST NW/E ST NW",
       "length_mi": 1.193,
@@ -2762,6 +3898,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-08-30",
@@ -2783,6 +3937,8 @@
     {
       "corridor_id": "15031912_5",
       "route_name": "EAST CAPITOL ST BN",
+      "corridor_name": "East Capitol St Bn",
+      "location_scope": "13th St NE/13th St SE To 22nd St SE",
       "from_street": "13TH ST NE/13TH ST SE",
       "to_street": "22ND ST SE",
       "length_mi": 2.945,
@@ -2803,6 +3959,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-04-23",
@@ -2825,6 +3999,8 @@
     {
       "corridor_id": "11062592_1",
       "route_name": "MT VERNON PL NW",
+      "corridor_name": "Mt Vernon Pl NW",
+      "location_scope": "7th St NW/New York Ave NW To 9th St NW/Massachusetts Ave NW",
       "from_street": "7TH ST NW/NEW YORK AVE NW",
       "to_street": "9TH ST NW/MASSACHUSETTS AVE NW",
       "length_mi": 0.115,
@@ -2845,6 +4021,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-01-14",
@@ -2874,6 +4068,8 @@
     {
       "corridor_id": "13005302_2",
       "route_name": "53RD ST SE",
+      "corridor_name": "53rd St SE",
+      "location_scope": "Fitch St SE To Southern Ave SE",
       "from_street": "FITCH ST SE",
       "to_street": "SOUTHERN AVE SE",
       "length_mi": 0.091,
@@ -2894,6 +4090,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-07-23",
@@ -2917,6 +4131,8 @@
     {
       "corridor_id": "11025352A_1",
       "route_name": "CONSTITUTION AVE NW",
+      "corridor_name": "Constitution Ave NW",
+      "location_scope": "23rd St NW/Constitution Ave NW To Interstate 66 Bn",
       "from_street": "23RD ST NW/CONSTITUTION AVE NW",
       "to_street": "INTERSTATE 66   BN",
       "length_mi": 0.239,
@@ -2937,6 +4153,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           "2022-06-05",
@@ -2960,6 +4194,8 @@
     {
       "corridor_id": "11057852_3",
       "route_name": "M ST NW",
+      "corridor_name": "M St NW",
+      "location_scope": "Thomas Cir NW/Massachusetts Ave NW Service Rd To Canal Rd NW",
       "from_street": "THOMAS CIR NW/MASSACHUSETTS AVE NW Service Rd",
       "to_street": "CANAL RD NW",
       "length_mi": 2.114,
@@ -2978,6 +4214,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           null,
@@ -2991,6 +4245,8 @@
     {
       "corridor_id": "11064282_1",
       "route_name": "NEW JERSEY AVE NW",
+      "corridor_name": "New Jersey Ave NW",
+      "location_scope": "Constitution Ave NW To Florida Ave NW",
       "from_street": "CONSTITUTION AVE NW",
       "to_street": "FLORIDA AVE NW",
       "length_mi": 1.619,
@@ -3009,6 +4265,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           null,
@@ -3022,6 +4296,8 @@
     {
       "corridor_id": "11025352_2",
       "route_name": "CONSTITUTION AVE NW",
+      "corridor_name": "Constitution Ave NW",
+      "location_scope": "Pennsylvania Ave NW To Interstate 66 Bn",
       "from_street": "PENNSYLVANIA AVE NW",
       "to_street": "INTERSTATE 66   BN",
       "length_mi": 2.071,
@@ -3040,6 +4316,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           null,
@@ -3053,6 +4347,8 @@
     {
       "corridor_id": "11001402_1",
       "route_name": "14TH ST NW",
+      "corridor_name": "14th St NW",
+      "location_scope": "14th St SW To Thomas Cir NW",
       "from_street": "14TH ST SW",
       "to_street": "THOMAS CIR NW",
       "length_mi": 1.087,
@@ -3071,6 +4367,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           null,
@@ -3084,6 +4398,8 @@
     {
       "corridor_id": "11085732_1",
       "route_name": "THOMAS CIR NW",
+      "corridor_name": "Thomas Cir NW",
+      "location_scope": "14th St NW To 14th St NW",
       "from_street": "14TH ST NW",
       "to_street": "14TH ST NW",
       "length_mi": 0.157,
@@ -3102,6 +4418,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           null,
@@ -3115,6 +4449,8 @@
     {
       "corridor_id": "11057852_3",
       "route_name": "M ST NW",
+      "corridor_name": "M St NW",
+      "location_scope": "Thomas Cir NW/Massachusetts Ave NW Service Rd To Canal Rd NW",
       "from_street": "THOMAS CIR NW/MASSACHUSETTS AVE NW Service Rd",
       "to_street": "CANAL RD NW",
       "length_mi": 2.114,
@@ -3133,6 +4469,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           null,
@@ -3146,6 +4500,8 @@
     {
       "corridor_id": "12015992_1",
       "route_name": "BLADENSBURG RD NE",
+      "corridor_name": "Bladensburg Rd NE",
+      "location_scope": "15th St NE/Benning Rd NE/H St NE/Maryland Ave NE To Benning Rd SE/East Capitol St Bn",
       "from_street": "15TH ST NE/BENNING RD NE/H ST NE/MARYLAND AVE NE",
       "to_street": "BENNING RD SE/EAST CAPITOL ST BN",
       "length_mi": 2.573,
@@ -3164,6 +4520,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           null,
@@ -3177,6 +4551,8 @@
     {
       "corridor_id": "15065322_1",
       "route_name": "NORTH CAPITOL ST BN",
+      "corridor_name": "North Capitol St Bn",
+      "location_scope": "Louisiana Ave NW/Louisiana Ave NE/Ramp-36000232 To Good Hope Rd SE/Interstate 295 I Bn",
       "from_street": "LOUISIANA AVE NW/LOUISIANA AVE NE/Ramp-36000232",
       "to_street": "GOOD HOPE RD SE/INTERSTATE 295 I BN",
       "length_mi": 3.314,
@@ -3195,6 +4571,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           null,
@@ -3208,6 +4602,8 @@
     {
       "corridor_id": "11025152_2",
       "route_name": "CONNECTICUT AVE NW",
+      "corridor_name": "Connecticut Ave NW",
+      "location_scope": "17th St NW/K St NW Service Rd/K St NW To Chevy Chase Cir NW",
       "from_street": "17TH ST NW/K ST NW Service Rd/K ST NW",
       "to_street": "CHEVY CHASE CIR NW",
       "length_mi": 4.926,
@@ -3226,6 +4622,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           null,
@@ -3239,6 +4653,8 @@
     {
       "corridor_id": "11057852_3",
       "route_name": "M ST NW",
+      "corridor_name": "M St NW",
+      "location_scope": "Thomas Cir NW/Massachusetts Ave NW Service Rd To Canal Rd NW",
       "from_street": "THOMAS CIR NW/MASSACHUSETTS AVE NW Service Rd",
       "to_street": "CANAL RD NW",
       "length_mi": 2.114,
@@ -3257,6 +4673,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           null,
@@ -3270,6 +4704,8 @@
     {
       "corridor_id": "13035682_1",
       "route_name": "FIRTH STERLING AVE SE",
+      "corridor_name": "Firth Sterling Ave SE",
+      "location_scope": "Howard Rd SE/Ramp-36003432 To South Capitol St Bn/Defense Blvd SW/South Capitol St Bn/Anacostia River Trail SW",
       "from_street": "HOWARD RD SE/Ramp-36003432",
       "to_street": "SOUTH CAPITOL ST BN/DEFENSE BLVD SW/SOUTH CAPITOL ST BN/ANACOSTIA RIVER TRAIL SW",
       "length_mi": 0.444,
@@ -3288,6 +4724,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           null,
@@ -3301,6 +4755,8 @@
     {
       "corridor_id": "11078712_1",
       "route_name": "SCOTT CIR NW",
+      "corridor_name": "Scott Cir NW",
+      "location_scope": "Rhode Island Ave NW To Rhode Island Ave NW",
       "from_street": "RHODE ISLAND AVE NW",
       "to_street": "RHODE ISLAND AVE NW",
       "length_mi": 0.117,
@@ -3319,6 +4775,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           null,
@@ -3332,6 +4806,8 @@
     {
       "corridor_id": "13015342_1",
       "route_name": "BENNING RD SE",
+      "corridor_name": "Benning Rd SE",
+      "location_scope": "Benning Rd NE/East Capitol St Bn To 12th St SE",
       "from_street": "BENNING RD NE/EAST CAPITOL ST BN",
       "to_street": "12TH ST SE",
       "length_mi": 1.028,
@@ -3350,6 +4826,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           null,
@@ -3363,6 +4857,8 @@
     {
       "corridor_id": "13057852_1",
       "route_name": "M ST SE",
+      "corridor_name": "M St SE",
+      "location_scope": "Dead End To Branch Ave SE",
       "from_street": "DEAD END",
       "to_street": "BRANCH AVE SE",
       "length_mi": 1.926,
@@ -3381,6 +4877,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           null,
@@ -3394,6 +4908,8 @@
     {
       "corridor_id": "15031912_5",
       "route_name": "EAST CAPITOL ST BN",
+      "corridor_name": "East Capitol St Bn",
+      "location_scope": "13th St NE/13th St SE To 22nd St SE",
       "from_street": "13TH ST NE/13TH ST SE",
       "to_street": "22ND ST SE",
       "length_mi": 2.945,
@@ -3412,6 +4928,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           null,
@@ -3425,6 +4959,8 @@
     {
       "corridor_id": "13009362_1",
       "route_name": "ALABAMA AVE SE",
+      "corridor_name": "Alabama Ave SE",
+      "location_scope": "5th St SE To Bowen Rd SE/Burns St SE/Stanley St SE",
       "from_street": "5TH ST SE",
       "to_street": "BOWEN RD SE/BURNS ST SE/STANLEY ST SE",
       "length_mi": 4.18,
@@ -3443,6 +4979,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           null,
@@ -3456,6 +5010,8 @@
     {
       "corridor_id": "11040042_1",
       "route_name": "GEORGIA AVE NW",
+      "corridor_name": "Georgia Ave NW",
+      "location_scope": "7th St NW/Florida Ave NW To Chesapeake St NW",
       "from_street": "7TH ST NW/FLORIDA AVE NW",
       "to_street": "CHESAPEAKE ST NW",
       "length_mi": 4.755,
@@ -3474,6 +5030,24 @@
         "passenger": 0,
         "other": 0
       },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
       "audit": {
         "date_range": [
           null,

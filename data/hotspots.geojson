@@ -6,7 +6,7 @@
     "source_title": "Crashes in DC x High Injury Network",
     "source_url": "https://opendata.dc.gov/datasets/DCGIS::crashes-in-dc",
     "hin_source_url": "https://opendata.dc.gov/datasets/high-injury-network",
-    "captured_at": "2026-06-19T22:20:59Z",
+    "captured_at": "2026-06-19T23:15:04Z",
     "method": "Each crash since 2022-01-01 is assigned to the nearest HIN corridor whose centerline passes within 25 m (point-to-segment, local equirectangular projection). KSI = people killed + seriously (major) injured. Injuries = all reported injured people (major + minor). Ward(s) are read from the joined crash records. Each corridor carries an `audit` block (date range, join-distance stats, and a sample of CRIMEID record IDs) and `totals` reports fetched/geocoded/joined/excluded counts so the figures are traceable back to source records. Recommended interventions are a screening suggestion ranked by the corridor's own mode mix and severity (each carries its trigger), not a DDOT plan; effect sizes come from data/countermeasures.json (research-grade until verified).",
     "caveats": "Counts are crashes within 25 m of the DDOT High Injury Network centerline, 2022-present, from the open, police-reported Crashes in DC dataset; they may differ from DDOT's curated figures. Ungeocoded crashes and crashes off the HIN are excluded. A crash near two corridors is assigned to the nearest.",
     "totals": {

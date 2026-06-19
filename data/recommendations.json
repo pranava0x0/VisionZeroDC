@@ -1,6 +1,6 @@
 {
   "_about": "Evidence-backed policy recommendation cards. Each follows the CLAUDE.md recommendation rules (problem, location, evidence, mechanism, intervention, equity check, confidence, uncertainty) and links to proven countermeasures (data/countermeasures.json) plus a filtered map view. These are analyst-drafted starting points for human review, NOT automated or final policy.",
-  "_captured_at": "2026-06-07",
+  "_captured_at": "2026-06-19",
   "recommendations": [
     {
       "id": "rec-east-of-river-pedestrian",
@@ -17,7 +17,7 @@
       "intervention_type": "engineering + signal timing + speed management",
       "equity_check": "Wards 7 and 8 have faced historic transportation disinvestment; investing engineering here addresses a disparate burden. The package is engineering-led, avoiding enforcement-heavy approaches that can fall unevenly.",
       "confidence": "medium",
-      "uncertainty": "Ward grain is coarse; exact corridors need an intersection/HIN-level join. Recent-year counts are preliminary. KSI shares use a fixed population denominator.",
+      "uncertainty": "The specific corridors east of the river are now identified via the crashes×HIN join (see the Hotspots page and data/hin-corridors.json); intersection-level siting within them still needs field review. Recent-year counts are preliminary. KSI shares use a fixed population denominator.",
       "map_link": "map.html?sev=major&mode=pedestrian&c=38.868,-76.97&z=13"
     },
     {
@@ -73,19 +73,20 @@
     },
     {
       "id": "rec-protected-intersections-hotspots",
-      "title": "Deploy protected intersections on the top high-injury corridors",
-      "problem": "Georgia Ave NW, Alabama Ave SE, Connecticut Ave NW, New York Ave NE, and 14th St NW carry the most people killed or seriously injured among DDOT High Injury Network corridors. Standard intersections allow turning vehicles to conflict with pedestrians and cyclists.",
+      "title": "Match each top corridor's lead treatment to its crash mechanism",
+      "problem": "Georgia Ave NW, Alabama Ave SE, Connecticut Ave NW, New York Ave NE, and 14th St NW carry the most people killed or seriously injured among DDOT High Injury Network corridors — but the dominant crash mechanism differs by corridor (e.g. Alabama Ave SE is mostly driver/passenger KSI, while Connecticut Ave NW has a far larger pedestrian share). One treatment does not fit all of them.",
       "location_scope": "Top HIN corridors by KSI: Georgia Ave NW, Alabama Ave SE, Connecticut Ave NW, New York Ave NE, 14th St NW (see the Hotspots page for the full ranking and per-corridor counts)",
       "evidence": [
-        { "claim": "Protected intersections (corner islands, setback crossings, dedicated signal phases) reduce fatal/major-injury crashes by 50–70% at peer-city sites (NYC, Seattle, Vancouver).", "source_title": "FHWA Vision Zero Toolkit", "source_url": "https://highways.dot.gov/sites/fhwa.dot.gov/files/2024-04/Vision%20Zero%20Toolkit%20508_0.pdf" },
-        { "claim": "These corridors are the highest-KSI segments of the DDOT High Injury Network, computed by joining Open Data DC crash records to the HIN (crashes within 25 m of the centerline, 2022-present); per-corridor counts and a record-level audit trail are in data/hin-corridors.json.", "source_title": "DC Vision Zero high-injury corridors (crashes × HIN spatial join)", "source_url": "https://opendata.dc.gov/datasets/DCGIS::crashes-in-dc" }
+        { "claim": "Protected intersections (corner islands, setback crossings, dedicated signal phases) reduce fatal/major-injury crashes by 50–70% at peer-city sites (NYC, Seattle, Vancouver); road diets and speed management address driver/passenger severity where turning conflicts are not the main mechanism.", "source_title": "FHWA Vision Zero Toolkit", "source_url": "https://highways.dot.gov/sites/fhwa.dot.gov/files/2024-04/Vision%20Zero%20Toolkit%20508_0.pdf" },
+        { "claim": "These corridors are the highest-KSI segments of the DDOT High Injury Network, computed by joining Open Data DC crash records to the HIN (crashes within 25 m of the centerline, 2022-present).", "source_title": "Raw source: Crashes in DC (Open Data DC)", "source_url": "https://opendata.dc.gov/datasets/DCGIS::crashes-in-dc" },
+        { "claim": "Each corridor's per-mode KSI, ranked fixes with trigger evidence, and a record-level audit trail (sample crash IDs, join distances) are in the derived file data/hin-corridors.json and shown on the Hotspots page.", "source_title": "Derived corridor data + audit — Hotspots page", "source_url": "https://pranava0x0.github.io/VisionZeroDC/hotspots.html" }
       ],
-      "countermeasure_ids": ["protected_intersection", "leading_pedestrian_interval", "automated_speed_camera"],
-      "mechanism": "Redesign conflict points so pedestrians cross in a protected phase with no turning traffic, or cross in refuge islands with reduced conflict exposure. Pair with LPI and speed enforcement.",
-      "intervention_type": "engineering + signal timing + speed management",
+      "countermeasure_ids": ["protected_intersection", "leading_pedestrian_interval", "daylighting", "road_diet", "automated_speed_camera"],
+      "mechanism": "Lead with the treatment that targets each corridor's dominant harm: protected intersections, leading pedestrian intervals, and daylighting where pedestrian or cyclist KSI drives the toll; road diets and automated speed management where driver/passenger severity dominates. The per-corridor recommended fixes — each tagged with the mode/severity trigger that surfaced it — are generated on the Hotspots page and in data/hin-corridors.json.",
+      "intervention_type": "engineering + signal timing + speed management (corridor-specific)",
       "equity_check": "Alabama Ave SE serves Wards 7 and 8 and Georgia Ave NW spans Wards 1 and 4 (equity priorities). Community engagement required on each corridor.",
       "confidence": "high",
-      "uncertainty": "Per-corridor counts are now data-derived, but cost per intersection ($500K–$1.5M) and timeline (6–9 months design + build) need budget and phasing clarity, and a before/after evaluation framework is still needed.",
+      "uncertainty": "Per-corridor counts and the lead mechanism are now data-derived, but cost per intersection ($500K–$1.5M) and timeline (6–9 months design + build) need budget and phasing clarity, and a before/after evaluation framework is still needed.",
       "map_link": "map.html?sev=major&c=38.9,-77.01&z=12"
     },
     {

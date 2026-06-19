@@ -33,12 +33,56 @@
 
   // Corridors whose `ward` string names Ward n, ordered by rank. The word-boundary
   // match keeps "Ward 7" from also matching "Ward 7" inside a longer number.
+  // (Used for the citywide top-8 GeoJSON; the ANC page uses the fuller selector below.)
   function corridorsForWard(geojson, n) {
     const feats = geojson && Array.isArray(geojson.features) ? geojson.features : [];
     return feats
       .map((f) => f && f.properties)
       .filter((p) => p && typeof p.ward === "string" && new RegExp(`\\bWard ${n}\\b`).test(p.ward))
       .sort((a, b) => (a.rank || 99) - (b.rank || 99));
+  }
+
+  // The ANC inventory: ALL HIN corridors that run through Ward n (from the full
+  // data/hin-corridors.json), ranked by this ward's KSI burden — not just the few
+  // that crack the citywide top 8. Returns objects shaped like the GeoJSON
+  // properties the renderer/draft consume, with interventions resolved from the
+  // doc's shared intervention_catalog and a ward-local rank assigned.
+  function corridorsForWardFromHin(hinDoc, n, opts) {
+    opts = opts || {};
+    const corridors = hinDoc && Array.isArray(hinDoc.corridors) ? hinDoc.corridors : [];
+    const catalog = (hinDoc && hinDoc.intervention_catalog) || {};
+    const period = (hinDoc && hinDoc.period) || "";
+    const wardLabel = "Ward " + n;
+    const mapped = corridors
+      .filter((c) => Array.isArray(c.wards) && c.wards.indexOf(wardLabel) !== -1 && (c.crashes || 0) > 0)
+      .sort(
+        (a, b) =>
+          (b.ksi || 0) - (a.ksi || 0) ||
+          (b.crashes || 0) - (a.crashes || 0) ||
+          String(a.corridor_name || "").localeCompare(String(b.corridor_name || ""))
+      )
+      .map((c, i) => ({
+        corridor_name: c.corridor_name || c.route_name,
+        location_scope: c.location_scope || "",
+        ward: (c.wards || []).join(", "),
+        rank: i + 1, // ward-local rank (this ward's #1, #2, …), not the citywide rank
+        priority: i < 2 || c.tier === 1 ? "URGENT" : "HIGH",
+        severity: {
+          injuries: c.injuries,
+          major_injuries: c.major_injuries,
+          fatalities: c.fatalities,
+          ksi: c.ksi,
+          crashes: c.crashes,
+          period: period,
+        },
+        recommended_interventions: (c.recommended_interventions || []).map((r) => ({
+          id: r.id,
+          name: (catalog[r.id] && catalog[r.id].name) || r.id,
+          effect: (catalog[r.id] && catalog[r.id].effect) || "",
+          trigger: r.trigger || "",
+        })),
+      }));
+    return opts.limit ? mapped.slice(0, opts.limit) : mapped;
   }
 
   // Split recommendations into those that name the ward explicitly and citywide/
@@ -139,5 +183,5 @@
     return lines.join("\n");
   }
 
-  return { wardRow, corridorsForWard, recsForWard, buildDraft };
+  return { wardRow, corridorsForWard, corridorsForWardFromHin, recsForWard, buildDraft };
 });

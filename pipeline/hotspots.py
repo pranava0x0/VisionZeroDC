@@ -482,6 +482,28 @@ def _confidence(crashes: int) -> str:
     return "low"
 
 
+def _location_scope(c: dict[str, Any]) -> str:
+    """Human-readable 'From St to To St' for a corridor (cleaned + title-cased)."""
+    from_street = _clean_street(c["from_street"])
+    to_street = _clean_street(c["to_street"])
+    loc = (
+        f"{from_street} to {to_street}"
+        if from_street and to_street
+        else (from_street or to_street or "corridor extent")
+    )
+    return _titlecase(loc)
+
+
+def _mode_breakdown(c: dict[str, Any]) -> dict[str, int]:
+    m = c["mode_ksi"]
+    return {
+        "pedestrian_ksi": m["pedestrian"],
+        "cyclist_ksi": m["cyclist"],
+        "driver_ksi": m["driver"],
+        "passenger_ksi": m["passenger"],
+    }
+
+
 def build(*, refresh: bool) -> tuple[dict[str, Any], dict[str, Any]]:
     now = dt.datetime.now(dt.timezone.utc)
     captured_at = now.strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -535,6 +557,9 @@ def build(*, refresh: bool) -> tuple[dict[str, Any], dict[str, Any]]:
         "the HIN are excluded. A crash near two corridors is assigned to the nearest."
     )
 
+    # Built once and shared so the all-corridor JSON (consumed by the ANC page)
+    # and the top-N GeoJSON (the map) present the same display fields + fixes.
+    catalog = _intervention_catalog()
     corridors_doc = {
         "schema_version": 1,
         "captured_at": captured_at,
@@ -545,10 +570,15 @@ def build(*, refresh: bool) -> tuple[dict[str, Any], dict[str, Any]]:
         "method": method,
         "caveats": caveats,
         "totals": totals,
+        # Shared once; per-corridor interventions reference these ids + add a trigger,
+        # so the long effect strings aren't duplicated across all 77 corridors.
+        "intervention_catalog": catalog,
         "corridors": [
             {
                 "corridor_id": c["corridor_id"],
                 "route_name": c["route_name"],
+                "corridor_name": _titlecase(c["route_name"]),
+                "location_scope": _location_scope(c),
                 "from_street": _clean_street(c["from_street"]),
                 "to_street": _clean_street(c["to_street"]),
                 "length_mi": c["length_mi"],
@@ -561,25 +591,21 @@ def build(*, refresh: bool) -> tuple[dict[str, Any], dict[str, Any]]:
                 "minor_injuries": c["minor_injuries"],
                 "ksi": c["ksi"],
                 "mode_ksi": c["mode_ksi"],
+                "recommended_interventions": [
+                    {"id": i["id"], "trigger": i["trigger"]}
+                    for i in recommend_interventions(c, catalog)
+                ],
                 "audit": c["audit"],
             }
             for c in joined
         ],
     }
 
-    catalog = _intervention_catalog()
     top = [c for c in joined if c["crashes"] > 0][:TOP_N]
     features = []
     for rank, c in enumerate(top, start=1):
         wards = c["wards"] or ["ward not resolved"]
         priority = "URGENT" if (rank <= 2 or c["tier"] == 1) else "HIGH"
-        from_street = _clean_street(c["from_street"])
-        to_street = _clean_street(c["to_street"])
-        location = (
-            f"{from_street} to {to_street}"
-            if from_street and to_street
-            else (from_street or to_street or "corridor extent")
-        )
         features.append(
             {
                 "id": f"hin_{c['corridor_id']}",
@@ -587,7 +613,7 @@ def build(*, refresh: bool) -> tuple[dict[str, Any], dict[str, Any]]:
                 "properties": {
                     "rank": rank,
                     "corridor_name": _titlecase(c["route_name"]),
-                    "location_scope": _titlecase(location),
+                    "location_scope": _location_scope(c),
                     "ward": ", ".join(wards),
                     "severity": {
                         "injuries": c["injuries"],
@@ -597,12 +623,7 @@ def build(*, refresh: bool) -> tuple[dict[str, Any], dict[str, Any]]:
                         "crashes": c["crashes"],
                         "period": PERIOD_LABEL,
                     },
-                    "mode_breakdown": {
-                        "pedestrian_ksi": c["mode_ksi"]["pedestrian"],
-                        "cyclist_ksi": c["mode_ksi"]["cyclist"],
-                        "driver_ksi": c["mode_ksi"]["driver"],
-                        "passenger_ksi": c["mode_ksi"]["passenger"],
-                    },
+                    "mode_breakdown": _mode_breakdown(c),
                     "recommended_interventions": recommend_interventions(c, catalog),
                     "equity_notes": (
                         f"Serves {', '.join(wards)}. HIN Tier {c['tier']}. Equity context is "
