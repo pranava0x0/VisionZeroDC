@@ -85,7 +85,11 @@ MODE_FIELDS = [
     ("passenger", "FATALPASSENGER", "MAJORINJURIESPASSENGER", "MINORINJURIESPASSENGER", False),
     ("other", "FATALOTHER", "MAJORINJURIESOTHER", "MINORINJURIESOTHER", False),
 ]
-CRASH_FIELDS = ["WARD"] + [f for _, fa, ma, mi, _ in MODE_FIELDS for f in (fa, ma, mi)]
+# Stable identifier + locator fields kept so every corridor count is traceable
+# back to specific crash records (CRIMEID is the dataset's stable per-crash key).
+ID_FIELDS = ["CRIMEID", "REPORTDATE", "ADDRESS"]
+SAMPLE_RECORDS_PER_CORRIDOR = 15  # capped audit sample emitted per corridor
+CRASH_FIELDS = ["WARD"] + ID_FIELDS + [f for _, fa, ma, mi, _ in MODE_FIELDS for f in (fa, ma, mi)]
 
 
 # --- Geometry: local equirectangular projection + point-to-segment ----------
@@ -199,9 +203,13 @@ def fetch_corridors(*, refresh: bool) -> list[dict[str, Any]]:
 # --- Fetch crashes (paginated) ----------------------------------------------
 
 
-def fetch_crashes(*, refresh: bool) -> list[dict[str, Any]]:
-    """Fetch every crash since SINCE with geometry + severity fields, paginated."""
+def fetch_crashes(*, refresh: bool) -> tuple[list[dict[str, Any]], int]:
+    """Fetch every crash since SINCE with geometry + severity fields, paginated.
+
+    Returns (geocoded_crashes, fetched_total) so the caller can report how many
+    records were dropped for missing geometry."""
     crashes: list[dict[str, Any]] = []
+    fetched = 0
     offset = 0
     while True:
         data = snapshot.fetch_json(
@@ -219,6 +227,7 @@ def fetch_crashes(*, refresh: bool) -> list[dict[str, Any]]:
             label=f"crashes offset {offset}",
         )
         feats = data.get("features", [])
+        fetched += len(feats)
         for feat in feats:
             geom = feat.get("geometry") or {}
             x, y = geom.get("x"), geom.get("y")
@@ -228,7 +237,7 @@ def fetch_crashes(*, refresh: bool) -> list[dict[str, Any]]:
         if not data.get("exceededTransferLimit") or not feats:
             break
         offset += PAGE_SIZE
-    return crashes
+    return crashes, fetched
 
 
 # --- Spatial join + aggregation --------------------------------------------
@@ -242,7 +251,23 @@ def _empty_agg() -> dict[str, Any]:
         "minor_injuries": 0,
         "mode_ksi": {label: 0 for label, *_ in MODE_FIELDS},
         "ward_crashes": {},
+        # audit trail: keep enough to trace counts back to source crash records
+        "dist_sum": 0.0,
+        "dist_max": 0.0,
+        "date_min": None,
+        "date_max": None,
+        "sample_record_ids": [],
     }
+
+
+def _epoch_ms_to_date(val: Any) -> str | None:
+    """ArcGIS REPORTDATE is epoch milliseconds; return an ISO date (UTC) or None."""
+    if val is None:
+        return None
+    try:
+        return dt.datetime.fromtimestamp(int(val) / 1000, dt.timezone.utc).strftime("%Y-%m-%d")
+    except (TypeError, ValueError, OverflowError, OSError):
+        return None
 
 
 def _field(attrs: dict[str, Any], name: str) -> int:
@@ -275,8 +300,11 @@ def _crash_severity(attrs: dict[str, Any]) -> dict[str, Any]:
 
 def join_crashes_to_corridors(
     corridors: list[dict[str, Any]], crashes: list[dict[str, Any]]
-) -> list[dict[str, Any]]:
-    """Assign each crash to the nearest corridor within BUFFER_M; aggregate per corridor."""
+) -> tuple[list[dict[str, Any]], int]:
+    """Assign each crash to the nearest corridor within BUFFER_M; aggregate per corridor.
+
+    Returns (corridor_rows, joined_count) so the caller can report how many of the
+    geocoded crashes fell on the HIN vs. were excluded as off-network."""
     # Build segment list in projected metres + a grid index keyed by metre-cell.
     segments: list[tuple[int, float, float, float, float]] = []
     grid: dict[tuple[int, int], list[int]] = {}
@@ -312,7 +340,8 @@ def join_crashes_to_corridors(
                         best_ci = ci
         if best_ci < 0:
             continue
-        sev = _crash_severity(crash["attrs"])
+        attrs = crash["attrs"]
+        sev = _crash_severity(attrs)
         agg = aggs[best_ci]
         agg["crashes"] += 1
         agg["fatalities"] += sev["fatal"]
@@ -320,13 +349,26 @@ def join_crashes_to_corridors(
         agg["minor_injuries"] += sev["minor"]
         for label, k in sev["mode_ksi"].items():
             agg["mode_ksi"][label] += k
-        ward = snapshot._normalize_ward(crash["attrs"].get("WARD"))
+        ward = snapshot._normalize_ward(attrs.get("WARD"))
         agg["ward_crashes"][ward] = agg["ward_crashes"].get(ward, 0) + 1
+        # audit trail
+        agg["dist_sum"] += best_dist
+        agg["dist_max"] = max(agg["dist_max"], best_dist)
+        date = _epoch_ms_to_date(attrs.get("REPORTDATE"))
+        if date:
+            agg["date_min"] = date if agg["date_min"] is None else min(agg["date_min"], date)
+            agg["date_max"] = date if agg["date_max"] is None else max(agg["date_max"], date)
+        crime_id = attrs.get("CRIMEID")
+        if crime_id and len(agg["sample_record_ids"]) < SAMPLE_RECORDS_PER_CORRIDOR:
+            agg["sample_record_ids"].append(crime_id)
 
+    joined = 0
     out: list[dict[str, Any]] = []
     for corr, agg in zip(corridors, aggs):
+        joined += agg["crashes"]
         injuries = agg["major_injuries"] + agg["minor_injuries"]
         ksi = agg["fatalities"] + agg["major_injuries"]
+        mean_dist = round(agg["dist_sum"] / agg["crashes"], 1) if agg["crashes"] else None
         out.append(
             {
                 **corr,
@@ -338,9 +380,15 @@ def join_crashes_to_corridors(
                 "ksi": ksi,
                 "mode_ksi": agg["mode_ksi"],
                 "wards": _ward_list(agg["ward_crashes"]),
+                "audit": {
+                    "date_range": [agg["date_min"], agg["date_max"]],
+                    "mean_join_distance_m": mean_dist,
+                    "max_join_distance_m": round(agg["dist_max"], 1) if agg["crashes"] else None,
+                    "sample_record_ids": agg["sample_record_ids"],
+                },
             }
         )
-    return out
+    return out, joined
 
 
 def _ward_list(ward_crashes: dict[str, int], *, min_share: float = 0.1) -> list[str]:
@@ -386,21 +434,41 @@ def _intervention_catalog() -> dict[str, dict[str, str]]:
 
 
 def recommend_interventions(corr: dict[str, Any], catalog: dict[str, dict[str, str]]) -> list[dict[str, str]]:
-    """Pick interventions from the dominant crash mode. A screening suggestion, not a plan."""
+    """Rank interventions by THIS corridor's mode mix and severity, each tagged with
+    the trigger evidence that surfaced it. A screening suggestion, not a DDOT plan.
+
+    Scoring is driven by the corridor's own KSI composition so different corridors
+    surface different fixes: a pedestrian-heavy corridor leads with crossing
+    treatments, a fatality-heavy one leads with speed management, etc."""
     ksi = max(corr["ksi"], 1)
     mode = corr["mode_ksi"]
-    ped_share = mode.get("pedestrian", 0) / ksi
-    bike_share = mode.get("cyclist", 0) / ksi
-    ids: list[str] = []
-    if ped_share >= 0.15:
-        ids += ["leading_pedestrian_interval", "curb_extension", "daylighting"]
-    if bike_share >= 0.10:
-        ids.append("protected_bike_lane")
-    # arterial speed-management defaults apply to every HIN corridor
-    ids += ["road_diet", "automated_speed_camera", "speed_limit_20", "protected_intersection"]
-    seen: set[str] = set()
-    ordered = [i for i in ids if not (i in seen or seen.add(i))]
-    return [{"id": i, **catalog[i]} for i in ordered[:4]]
+    ped = mode.get("pedestrian", 0)
+    bike = mode.get("cyclist", 0)
+    veh = mode.get("driver", 0) + mode.get("passenger", 0)
+    deaths = corr["fatalities"]
+    ped_share, bike_share, veh_share = ped / ksi, bike / ksi, veh / ksi
+    death_rate = deaths / ksi
+
+    def pct(x: float) -> str:
+        return f"{round(x * 100)}%"
+
+    # (id, score, trigger). Higher score = more relevant to this corridor.
+    candidates = [
+        ("leading_pedestrian_interval", ped_share, f"pedestrians are {pct(ped_share)} of KSI here"),
+        ("curb_extension", ped_share * 0.95, f"{ped} pedestrian KSI on this corridor"),
+        ("daylighting", ped_share * 0.9, f"pedestrians are {pct(ped_share)} of KSI here"),
+        ("protected_bike_lane", bike_share, f"cyclists are {pct(bike_share)} of KSI here"),
+        ("protected_intersection", veh_share * 0.6 + ped_share * 0.4, "turning conflicts: drivers/passengers are " + pct(veh_share) + " of KSI"),
+        ("automated_speed_camera", 0.5 + death_rate, f"{deaths} traffic death(s) on this corridor"),
+        ("road_diet", 0.45 + death_rate * 0.8, f"{corr['ksi']} KSI concentrated on one arterial"),
+        ("speed_limit_20", 0.4, "speed is the key driver of crash severity"),
+    ]
+    # Sort by score desc, stable tie-break by id for determinism.
+    candidates.sort(key=lambda c: (-c[1], c[0]))
+    return [
+        {"id": cid, **catalog[cid], "trigger": trigger}
+        for cid, _score, trigger in candidates[:4]
+    ]
 
 
 # --- Assembly ---------------------------------------------------------------
@@ -418,8 +486,18 @@ def build(*, refresh: bool) -> tuple[dict[str, Any], dict[str, Any]]:
     now = dt.datetime.now(dt.timezone.utc)
     captured_at = now.strftime("%Y-%m-%dT%H:%M:%SZ")
     corridors = fetch_corridors(refresh=refresh)
-    crashes = fetch_crashes(refresh=refresh)
-    joined = join_crashes_to_corridors(corridors, crashes)
+    crashes, fetched = fetch_crashes(refresh=refresh)
+    joined, joined_count = join_crashes_to_corridors(corridors, crashes)
+    geocoded = len(crashes)
+    totals = {
+        "crashes_fetched": fetched,
+        "crashes_geocoded": geocoded,
+        "crashes_ungeocoded": fetched - geocoded,
+        "crashes_joined_to_corridor": joined_count,
+        "crashes_excluded_off_network": geocoded - joined_count,
+        "hin_corridors": len(corridors),
+        "record_id_field": "CRIMEID",
+    }
     # Rank by KSI desc, tie-break by total injuries then crashes (deterministic).
     joined.sort(key=lambda c: (c["ksi"], c["injuries"], c["crashes"]), reverse=True)
 
@@ -442,9 +520,13 @@ def build(*, refresh: bool) -> tuple[dict[str, Any], dict[str, Any]]:
         f"centerline passes within {BUFFER_M:.0f} m (point-to-segment, local "
         "equirectangular projection). KSI = people killed + seriously (major) "
         "injured. Injuries = all reported injured people (major + minor). Ward(s) "
-        "are read from the joined crash records. Recommended interventions are a "
-        "screening suggestion from the dominant crash mode, not a DDOT plan; effect "
-        "sizes come from data/countermeasures.json (research-grade until verified)."
+        "are read from the joined crash records. Each corridor carries an `audit` "
+        "block (date range, join-distance stats, and a sample of CRIMEID record IDs) "
+        "and `totals` reports fetched/geocoded/joined/excluded counts so the figures "
+        "are traceable back to source records. Recommended interventions are a "
+        "screening suggestion ranked by the corridor's own mode mix and severity "
+        "(each carries its trigger), not a DDOT plan; effect sizes come from "
+        "data/countermeasures.json (research-grade until verified)."
     )
     caveats = (
         "Counts are crashes within 25 m of the DDOT High Injury Network centerline, "
@@ -462,12 +544,13 @@ def build(*, refresh: bool) -> tuple[dict[str, Any], dict[str, Any]]:
         "sources": sources,
         "method": method,
         "caveats": caveats,
+        "totals": totals,
         "corridors": [
             {
                 "corridor_id": c["corridor_id"],
                 "route_name": c["route_name"],
-                "from_street": c["from_street"],
-                "to_street": c["to_street"],
+                "from_street": _clean_street(c["from_street"]),
+                "to_street": _clean_street(c["to_street"]),
                 "length_mi": c["length_mi"],
                 "tier": c["tier"],
                 "wards": c["wards"],
@@ -478,6 +561,7 @@ def build(*, refresh: bool) -> tuple[dict[str, Any], dict[str, Any]]:
                 "minor_injuries": c["minor_injuries"],
                 "ksi": c["ksi"],
                 "mode_ksi": c["mode_ksi"],
+                "audit": c["audit"],
             }
             for c in joined
         ],
@@ -533,6 +617,7 @@ def build(*, refresh: bool) -> tuple[dict[str, Any], dict[str, Any]]:
                     "priority": priority,
                     "data_source": "Crashes in DC x DDOT High Injury Network (Open Data DC)",
                     "last_updated": captured_at[:10],
+                    "audit": c["audit"],
                 },
                 "geometry": {"type": "LineString", "coordinates": _simplify(c["path"])},
             }
@@ -552,6 +637,7 @@ def build(*, refresh: bool) -> tuple[dict[str, Any], dict[str, Any]]:
             "captured_at": captured_at,
             "method": method,
             "caveats": caveats,
+            "totals": totals,
         },
         "features": features,
     }

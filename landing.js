@@ -473,8 +473,10 @@ function renderCorridorTeaser(geojson) {
       const priority = esc(p.priority || "");
       const prClass = /urgent/i.test(priority) ? "urgent" : "high";
       const parts = [];
+      // Lead with KSI (the ranking basis), then total injuries for context.
+      if (Number.isFinite(sev.ksi)) parts.push(`${fmtNum(sev.ksi)} killed/seriously injured`);
+      else if (Number.isFinite(sev.fatalities)) parts.push(`${fmtNum(sev.fatalities)} deaths`);
       if (Number.isFinite(sev.injuries)) parts.push(`${fmtNum(sev.injuries)} injuries`);
-      if (Number.isFinite(sev.fatalities)) parts.push(`${fmtNum(sev.fatalities)} deaths`);
       const sevLine = parts.join(" · ") + (sev.period ? ` (${esc(sev.period)})` : "");
       return (
         `<a class="corridor-card" href="hotspots.html">` +

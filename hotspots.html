@@ -169,6 +169,17 @@
         letter-spacing: 0.05em;
       }
 
+      /* KSI is the ranking basis — emphasise it over the context stats. */
+      .severity-stat-ksi .severity-value {
+        font-size: 20px;
+      }
+
+      .hotspot-ksi-breakdown {
+        font-size: 10px;
+        color: var(--text-muted);
+        margin-bottom: 8px;
+      }
+
       .hotspot-modes {
         display: flex;
         align-items: baseline;
@@ -215,6 +226,17 @@
         border-radius: 50%;
         background: var(--link);
         margin-top: 4px;
+      }
+
+      .fix-text {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .fix-trigger {
+        font-size: 10px;
+        color: var(--text-soft);
+        font-style: italic;
       }
 
       .priority-badge {

@@ -82,9 +82,18 @@
       corridors.forEach((p) => {
         const sev = p.severity || {};
         const bits = [];
-        if (Number.isFinite(sev.injuries)) bits.push(`${sev.injuries} injuries`);
-        if (Number.isFinite(sev.fatalities)) bits.push(`${sev.fatalities} deaths`);
-        const detail = bits.join(", ") + (sev.period ? `, ${sev.period}` : "");
+        // Lead with KSI (the ranking basis), make its composition explicit, then
+        // total injured for context.
+        if (Number.isFinite(sev.ksi)) {
+          const comp = [];
+          if (Number.isFinite(sev.fatalities)) comp.push(`${sev.fatalities} killed`);
+          if (Number.isFinite(sev.major_injuries)) comp.push(`${sev.major_injuries} seriously injured`);
+          bits.push(`${sev.ksi} killed or seriously injured${comp.length ? ` (${comp.join(", ")})` : ""}`);
+        } else if (Number.isFinite(sev.fatalities)) {
+          bits.push(`${sev.fatalities} deaths`);
+        }
+        if (Number.isFinite(sev.injuries)) bits.push(`${sev.injuries} total injured`);
+        const detail = bits.join("; ") + (sev.period ? `, ${sev.period}` : "");
         lines.push(
           `  - ${p.corridor_name}${p.location_scope ? ` (${p.location_scope})` : ""}: ${detail} ` +
             `[crashes within 25 m of the DDOT High Injury Network];`

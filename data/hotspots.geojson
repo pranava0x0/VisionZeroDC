@@ -6,9 +6,18 @@
     "source_title": "Crashes in DC x High Injury Network",
     "source_url": "https://opendata.dc.gov/datasets/DCGIS::crashes-in-dc",
     "hin_source_url": "https://opendata.dc.gov/datasets/high-injury-network",
-    "captured_at": "2026-06-19T21:30:03Z",
-    "method": "Each crash since 2022-01-01 is assigned to the nearest HIN corridor whose centerline passes within 25 m (point-to-segment, local equirectangular projection). KSI = people killed + seriously (major) injured. Injuries = all reported injured people (major + minor). Ward(s) are read from the joined crash records. Recommended interventions are a screening suggestion from the dominant crash mode, not a DDOT plan; effect sizes come from data/countermeasures.json (research-grade until verified).",
-    "caveats": "Counts are crashes within 25 m of the DDOT High Injury Network centerline, 2022-present, from the open, police-reported Crashes in DC dataset; they may differ from DDOT's curated figures. Ungeocoded crashes and crashes off the HIN are excluded. A crash near two corridors is assigned to the nearest."
+    "captured_at": "2026-06-19T22:20:59Z",
+    "method": "Each crash since 2022-01-01 is assigned to the nearest HIN corridor whose centerline passes within 25 m (point-to-segment, local equirectangular projection). KSI = people killed + seriously (major) injured. Injuries = all reported injured people (major + minor). Ward(s) are read from the joined crash records. Each corridor carries an `audit` block (date range, join-distance stats, and a sample of CRIMEID record IDs) and `totals` reports fetched/geocoded/joined/excluded counts so the figures are traceable back to source records. Recommended interventions are a screening suggestion ranked by the corridor's own mode mix and severity (each carries its trigger), not a DDOT plan; effect sizes come from data/countermeasures.json (research-grade until verified).",
+    "caveats": "Counts are crashes within 25 m of the DDOT High Injury Network centerline, 2022-present, from the open, police-reported Crashes in DC dataset; they may differ from DDOT's curated figures. Ungeocoded crashes and crashes off the HIN are excluded. A crash near two corridors is assigned to the nearest.",
+    "totals": {
+      "crashes_fetched": 86106,
+      "crashes_geocoded": 86106,
+      "crashes_ungeocoded": 0,
+      "crashes_joined_to_corridor": 29313,
+      "crashes_excluded_off_network": 56793,
+      "hin_corridors": 77,
+      "record_id_field": "CRIMEID"
+    }
   },
   "features": [
     {
@@ -35,24 +44,28 @@
         },
         "recommended_interventions": [
           {
-            "id": "leading_pedestrian_interval",
-            "name": "Leading pedestrian intervals",
-            "effect": "Seattle reported roughly -34% serious-injury/fatal pedestrian crashes and -48% pedestrian turning collisions at LPI locations."
+            "id": "automated_speed_camera",
+            "name": "Automated speed enforcement",
+            "effect": "A DDOT study reported injury crashes falling from 841 to 673 (about -20% injuries) around enforced locations; Portland measured -71% to -93% top-end speeding within 30 days of activation.",
+            "trigger": "4 traffic death(s) on this corridor"
           },
           {
-            "id": "curb_extension",
-            "name": "Curb extensions / bump-outs",
-            "effect": "A standard component of low-cost Vision Zero packages (e.g. Hoboken's 60+ curb extensions) credited in its sustained zero-death record."
+            "id": "road_diet",
+            "name": "Road diet / lane rechannelization",
+            "effect": "FHWA cites ~19-47% total crash reductions for road diets; Seattle's Nickerson St saw roughly -93% aggressive (top-end) speeding.",
+            "trigger": "54 KSI concentrated on one arterial"
           },
           {
-            "id": "daylighting",
-            "name": "Daylighting (clear-sight corners)",
-            "effect": "Core to Hoboken NJ's multi-year stretch with zero traffic deaths, deployed at 130+ intersections alongside high-visibility crosswalks and curb extensions."
+            "id": "protected_intersection",
+            "name": "Protected intersections",
+            "effect": "Widely deployed in Vision Zero programs to remove turning conflicts at high-injury intersections; effect varies by site (verify locally).",
+            "trigger": "turning conflicts: drivers/passengers are 57% of KSI"
           },
           {
-            "id": "protected_bike_lane",
-            "name": "Protected bike lanes",
-            "effect": "physically separates people biking from traffic"
+            "id": "speed_limit_20",
+            "name": "20 mph default speed limit",
+            "effect": "Part of Hoboken's and London's Vision Zero approach; pedestrian survival probability is far higher in a 20 mph than a 30+ mph impact.",
+            "trigger": "speed is the key driver of crash severity"
           }
         ],
         "equity_notes": "Serves Ward 1, Ward 4. HIN Tier 1. Equity context is ward-level; pair with DC Equity Emphasis Areas before prioritizing.",
@@ -60,7 +73,32 @@
         "confidence_note": "2362 crashes joined within 25 m; 54 KSI (4 killed). Counts from Open Data DC; corridor extent per DDOT HIN.",
         "priority": "URGENT",
         "data_source": "Crashes in DC x DDOT High Injury Network (Open Data DC)",
-        "last_updated": "2026-06-19"
+        "last_updated": "2026-06-19",
+        "audit": {
+          "date_range": [
+            "2022-01-01",
+            "2026-06-17"
+          ],
+          "mean_join_distance_m": 1.6,
+          "max_join_distance_m": 24.7,
+          "sample_record_ids": [
+            "30749246009",
+            "30775016073",
+            "30755499231",
+            "30756016872",
+            "30758333597",
+            "30759864468",
+            "31042062349",
+            "30826646624",
+            "30872220113",
+            "31037455656",
+            "31038709438",
+            "31065446843",
+            "31108932216",
+            "31115095797",
+            "31189289816"
+          ]
+        }
       },
       "geometry": {
         "type": "LineString",
@@ -288,24 +326,28 @@
         },
         "recommended_interventions": [
           {
-            "id": "leading_pedestrian_interval",
-            "name": "Leading pedestrian intervals",
-            "effect": "Seattle reported roughly -34% serious-injury/fatal pedestrian crashes and -48% pedestrian turning collisions at LPI locations."
+            "id": "automated_speed_camera",
+            "name": "Automated speed enforcement",
+            "effect": "A DDOT study reported injury crashes falling from 841 to 673 (about -20% injuries) around enforced locations; Portland measured -71% to -93% top-end speeding within 30 days of activation.",
+            "trigger": "2 traffic death(s) on this corridor"
           },
           {
-            "id": "curb_extension",
-            "name": "Curb extensions / bump-outs",
-            "effect": "A standard component of low-cost Vision Zero packages (e.g. Hoboken's 60+ curb extensions) credited in its sustained zero-death record."
-          },
-          {
-            "id": "daylighting",
-            "name": "Daylighting (clear-sight corners)",
-            "effect": "Core to Hoboken NJ's multi-year stretch with zero traffic deaths, deployed at 130+ intersections alongside high-visibility crosswalks and curb extensions."
+            "id": "protected_intersection",
+            "name": "Protected intersections",
+            "effect": "Widely deployed in Vision Zero programs to remove turning conflicts at high-injury intersections; effect varies by site (verify locally).",
+            "trigger": "turning conflicts: drivers/passengers are 78% of KSI"
           },
           {
             "id": "road_diet",
             "name": "Road diet / lane rechannelization",
-            "effect": "FHWA cites ~19-47% total crash reductions for road diets; Seattle's Nickerson St saw roughly -93% aggressive (top-end) speeding."
+            "effect": "FHWA cites ~19-47% total crash reductions for road diets; Seattle's Nickerson St saw roughly -93% aggressive (top-end) speeding.",
+            "trigger": "36 KSI concentrated on one arterial"
+          },
+          {
+            "id": "speed_limit_20",
+            "name": "20 mph default speed limit",
+            "effect": "Part of Hoboken's and London's Vision Zero approach; pedestrian survival probability is far higher in a 20 mph than a 30+ mph impact.",
+            "trigger": "speed is the key driver of crash severity"
           }
         ],
         "equity_notes": "Serves Ward 7, Ward 8. HIN Tier 1. Equity context is ward-level; pair with DC Equity Emphasis Areas before prioritizing.",
@@ -313,7 +355,32 @@
         "confidence_note": "1429 crashes joined within 25 m; 36 KSI (2 killed). Counts from Open Data DC; corridor extent per DDOT HIN.",
         "priority": "URGENT",
         "data_source": "Crashes in DC x DDOT High Injury Network (Open Data DC)",
-        "last_updated": "2026-06-19"
+        "last_updated": "2026-06-19",
+        "audit": {
+          "date_range": [
+            "2022-01-03",
+            "2026-06-15"
+          ],
+          "mean_join_distance_m": 2.1,
+          "max_join_distance_m": 24.6,
+          "sample_record_ids": [
+            "30766286790",
+            "30768971456",
+            "30769225336",
+            "30773642436",
+            "30782221977",
+            "31064359817",
+            "31093260696",
+            "31108566928",
+            "31112000122",
+            "31115353839",
+            "31214459043",
+            "31205182144",
+            "31279939608",
+            "31292517848",
+            "31307567066"
+          ]
+        }
       },
       "geometry": {
         "type": "LineString",
@@ -537,24 +604,28 @@
         },
         "recommended_interventions": [
           {
-            "id": "leading_pedestrian_interval",
-            "name": "Leading pedestrian intervals",
-            "effect": "Seattle reported roughly -34% serious-injury/fatal pedestrian crashes and -48% pedestrian turning collisions at LPI locations."
-          },
-          {
-            "id": "curb_extension",
-            "name": "Curb extensions / bump-outs",
-            "effect": "A standard component of low-cost Vision Zero packages (e.g. Hoboken's 60+ curb extensions) credited in its sustained zero-death record."
-          },
-          {
-            "id": "daylighting",
-            "name": "Daylighting (clear-sight corners)",
-            "effect": "Core to Hoboken NJ's multi-year stretch with zero traffic deaths, deployed at 130+ intersections alongside high-visibility crosswalks and curb extensions."
+            "id": "automated_speed_camera",
+            "name": "Automated speed enforcement",
+            "effect": "A DDOT study reported injury crashes falling from 841 to 673 (about -20% injuries) around enforced locations; Portland measured -71% to -93% top-end speeding within 30 days of activation.",
+            "trigger": "5 traffic death(s) on this corridor"
           },
           {
             "id": "road_diet",
             "name": "Road diet / lane rechannelization",
-            "effect": "FHWA cites ~19-47% total crash reductions for road diets; Seattle's Nickerson St saw roughly -93% aggressive (top-end) speeding."
+            "effect": "FHWA cites ~19-47% total crash reductions for road diets; Seattle's Nickerson St saw roughly -93% aggressive (top-end) speeding.",
+            "trigger": "36 KSI concentrated on one arterial"
+          },
+          {
+            "id": "protected_intersection",
+            "name": "Protected intersections",
+            "effect": "Widely deployed in Vision Zero programs to remove turning conflicts at high-injury intersections; effect varies by site (verify locally).",
+            "trigger": "turning conflicts: drivers/passengers are 47% of KSI"
+          },
+          {
+            "id": "leading_pedestrian_interval",
+            "name": "Leading pedestrian intervals",
+            "effect": "Seattle reported roughly -34% serious-injury/fatal pedestrian crashes and -48% pedestrian turning collisions at LPI locations.",
+            "trigger": "pedestrians are 42% of KSI here"
           }
         ],
         "equity_notes": "Serves Ward 2, Ward 3. HIN Tier 2. Equity context is ward-level; pair with DC Equity Emphasis Areas before prioritizing.",
@@ -562,7 +633,32 @@
         "confidence_note": "1195 crashes joined within 25 m; 36 KSI (5 killed). Counts from Open Data DC; corridor extent per DDOT HIN.",
         "priority": "HIGH",
         "data_source": "Crashes in DC x DDOT High Injury Network (Open Data DC)",
-        "last_updated": "2026-06-19"
+        "last_updated": "2026-06-19",
+        "audit": {
+          "date_range": [
+            "2022-01-01",
+            "2026-06-16"
+          ],
+          "mean_join_distance_m": 1.5,
+          "max_join_distance_m": 24.7,
+          "sample_record_ids": [
+            "30750475810",
+            "31310322218",
+            "31313084616",
+            "31345193083",
+            "31347610613",
+            "31382163783",
+            "31386329040",
+            "31414837235",
+            "31401847929",
+            "31408431068",
+            "31464191571",
+            "31467845878",
+            "31472447697",
+            "31554108156",
+            "31511529589"
+          ]
+        }
       },
       "geometry": {
         "type": "LineString",
@@ -794,24 +890,28 @@
         },
         "recommended_interventions": [
           {
-            "id": "leading_pedestrian_interval",
-            "name": "Leading pedestrian intervals",
-            "effect": "Seattle reported roughly -34% serious-injury/fatal pedestrian crashes and -48% pedestrian turning collisions at LPI locations."
+            "id": "automated_speed_camera",
+            "name": "Automated speed enforcement",
+            "effect": "A DDOT study reported injury crashes falling from 841 to 673 (about -20% injuries) around enforced locations; Portland measured -71% to -93% top-end speeding within 30 days of activation.",
+            "trigger": "2 traffic death(s) on this corridor"
           },
           {
-            "id": "curb_extension",
-            "name": "Curb extensions / bump-outs",
-            "effect": "A standard component of low-cost Vision Zero packages (e.g. Hoboken's 60+ curb extensions) credited in its sustained zero-death record."
-          },
-          {
-            "id": "daylighting",
-            "name": "Daylighting (clear-sight corners)",
-            "effect": "Core to Hoboken NJ's multi-year stretch with zero traffic deaths, deployed at 130+ intersections alongside high-visibility crosswalks and curb extensions."
+            "id": "protected_intersection",
+            "name": "Protected intersections",
+            "effect": "Widely deployed in Vision Zero programs to remove turning conflicts at high-injury intersections; effect varies by site (verify locally).",
+            "trigger": "turning conflicts: drivers/passengers are 72% of KSI"
           },
           {
             "id": "road_diet",
             "name": "Road diet / lane rechannelization",
-            "effect": "FHWA cites ~19-47% total crash reductions for road diets; Seattle's Nickerson St saw roughly -93% aggressive (top-end) speeding."
+            "effect": "FHWA cites ~19-47% total crash reductions for road diets; Seattle's Nickerson St saw roughly -93% aggressive (top-end) speeding.",
+            "trigger": "29 KSI concentrated on one arterial"
+          },
+          {
+            "id": "speed_limit_20",
+            "name": "20 mph default speed limit",
+            "effect": "Part of Hoboken's and London's Vision Zero approach; pedestrian survival probability is far higher in a 20 mph than a 30+ mph impact.",
+            "trigger": "speed is the key driver of crash severity"
           }
         ],
         "equity_notes": "Serves Ward 5. HIN Tier 1. Equity context is ward-level; pair with DC Equity Emphasis Areas before prioritizing.",
@@ -819,7 +919,32 @@
         "confidence_note": "1614 crashes joined within 25 m; 29 KSI (2 killed). Counts from Open Data DC; corridor extent per DDOT HIN.",
         "priority": "URGENT",
         "data_source": "Crashes in DC x DDOT High Injury Network (Open Data DC)",
-        "last_updated": "2026-06-19"
+        "last_updated": "2026-06-19",
+        "audit": {
+          "date_range": [
+            "2022-01-01",
+            "2026-06-13"
+          ],
+          "mean_join_distance_m": 1.6,
+          "max_join_distance_m": 23.6,
+          "sample_record_ids": [
+            "27003676733",
+            "30748608064",
+            "31042065338",
+            "30846030413",
+            "30859916740",
+            "30907674617",
+            "31028619165",
+            "31124465309",
+            "31064296527",
+            "31066038267",
+            "31103628319",
+            "31176655631",
+            "31191819918",
+            "31195447683",
+            "31198463163"
+          ]
+        }
       },
       "geometry": {
         "type": "LineString",
@@ -1023,24 +1148,28 @@
         },
         "recommended_interventions": [
           {
+            "id": "automated_speed_camera",
+            "name": "Automated speed enforcement",
+            "effect": "A DDOT study reported injury crashes falling from 841 to 673 (about -20% injuries) around enforced locations; Portland measured -71% to -93% top-end speeding within 30 days of activation.",
+            "trigger": "1 traffic death(s) on this corridor"
+          },
+          {
+            "id": "road_diet",
+            "name": "Road diet / lane rechannelization",
+            "effect": "FHWA cites ~19-47% total crash reductions for road diets; Seattle's Nickerson St saw roughly -93% aggressive (top-end) speeding.",
+            "trigger": "29 KSI concentrated on one arterial"
+          },
+          {
             "id": "leading_pedestrian_interval",
             "name": "Leading pedestrian intervals",
-            "effect": "Seattle reported roughly -34% serious-injury/fatal pedestrian crashes and -48% pedestrian turning collisions at LPI locations."
+            "effect": "Seattle reported roughly -34% serious-injury/fatal pedestrian crashes and -48% pedestrian turning collisions at LPI locations.",
+            "trigger": "pedestrians are 45% of KSI here"
           },
           {
             "id": "curb_extension",
             "name": "Curb extensions / bump-outs",
-            "effect": "A standard component of low-cost Vision Zero packages (e.g. Hoboken's 60+ curb extensions) credited in its sustained zero-death record."
-          },
-          {
-            "id": "daylighting",
-            "name": "Daylighting (clear-sight corners)",
-            "effect": "Core to Hoboken NJ's multi-year stretch with zero traffic deaths, deployed at 130+ intersections alongside high-visibility crosswalks and curb extensions."
-          },
-          {
-            "id": "protected_bike_lane",
-            "name": "Protected bike lanes",
-            "effect": "physically separates people biking from traffic"
+            "effect": "A standard component of low-cost Vision Zero packages (e.g. Hoboken's 60+ curb extensions) credited in its sustained zero-death record.",
+            "trigger": "13 pedestrian KSI on this corridor"
           }
         ],
         "equity_notes": "Serves Ward 1, Ward 2, Ward 4. HIN Tier 2. Equity context is ward-level; pair with DC Equity Emphasis Areas before prioritizing.",
@@ -1048,7 +1177,32 @@
         "confidence_note": "1280 crashes joined within 25 m; 29 KSI (1 killed). Counts from Open Data DC; corridor extent per DDOT HIN.",
         "priority": "HIGH",
         "data_source": "Crashes in DC x DDOT High Injury Network (Open Data DC)",
-        "last_updated": "2026-06-19"
+        "last_updated": "2026-06-19",
+        "audit": {
+          "date_range": [
+            "2022-01-01",
+            "2026-06-16"
+          ],
+          "mean_join_distance_m": 1.7,
+          "max_join_distance_m": 24.6,
+          "sample_record_ids": [
+            "30749384345",
+            "30750292922",
+            "31040242988",
+            "31041743484",
+            "31088311934",
+            "31112628176",
+            "31116001517",
+            "31129228330",
+            "31201298160",
+            "31202282327",
+            "31302372485",
+            "31303370545",
+            "31303372704",
+            "31345529867",
+            "31316168319"
+          ]
+        }
       },
       "geometry": {
         "type": "LineString",
@@ -1268,24 +1422,28 @@
         },
         "recommended_interventions": [
           {
-            "id": "leading_pedestrian_interval",
-            "name": "Leading pedestrian intervals",
-            "effect": "Seattle reported roughly -34% serious-injury/fatal pedestrian crashes and -48% pedestrian turning collisions at LPI locations."
+            "id": "automated_speed_camera",
+            "name": "Automated speed enforcement",
+            "effect": "A DDOT study reported injury crashes falling from 841 to 673 (about -20% injuries) around enforced locations; Portland measured -71% to -93% top-end speeding within 30 days of activation.",
+            "trigger": "2 traffic death(s) on this corridor"
           },
           {
-            "id": "curb_extension",
-            "name": "Curb extensions / bump-outs",
-            "effect": "A standard component of low-cost Vision Zero packages (e.g. Hoboken's 60+ curb extensions) credited in its sustained zero-death record."
-          },
-          {
-            "id": "daylighting",
-            "name": "Daylighting (clear-sight corners)",
-            "effect": "Core to Hoboken NJ's multi-year stretch with zero traffic deaths, deployed at 130+ intersections alongside high-visibility crosswalks and curb extensions."
+            "id": "protected_intersection",
+            "name": "Protected intersections",
+            "effect": "Widely deployed in Vision Zero programs to remove turning conflicts at high-injury intersections; effect varies by site (verify locally).",
+            "trigger": "turning conflicts: drivers/passengers are 85% of KSI"
           },
           {
             "id": "road_diet",
             "name": "Road diet / lane rechannelization",
-            "effect": "FHWA cites ~19-47% total crash reductions for road diets; Seattle's Nickerson St saw roughly -93% aggressive (top-end) speeding."
+            "effect": "FHWA cites ~19-47% total crash reductions for road diets; Seattle's Nickerson St saw roughly -93% aggressive (top-end) speeding.",
+            "trigger": "26 KSI concentrated on one arterial"
+          },
+          {
+            "id": "speed_limit_20",
+            "name": "20 mph default speed limit",
+            "effect": "Part of Hoboken's and London's Vision Zero approach; pedestrian survival probability is far higher in a 20 mph than a 30+ mph impact.",
+            "trigger": "speed is the key driver of crash severity"
           }
         ],
         "equity_notes": "Serves Ward 6, Ward 7, Ward 8. HIN Tier 1. Equity context is ward-level; pair with DC Equity Emphasis Areas before prioritizing.",
@@ -1293,7 +1451,32 @@
         "confidence_note": "1116 crashes joined within 25 m; 26 KSI (2 killed). Counts from Open Data DC; corridor extent per DDOT HIN.",
         "priority": "URGENT",
         "data_source": "Crashes in DC x DDOT High Injury Network (Open Data DC)",
-        "last_updated": "2026-06-19"
+        "last_updated": "2026-06-19",
+        "audit": {
+          "date_range": [
+            "2022-01-02",
+            "2026-06-12"
+          ],
+          "mean_join_distance_m": 1.9,
+          "max_join_distance_m": 22.1,
+          "sample_record_ids": [
+            "30755427868",
+            "30756756555",
+            "30769539884",
+            "30769639912",
+            "30857139491",
+            "31126676744",
+            "31064149483",
+            "31109402798",
+            "31115673650",
+            "31157468583",
+            "31199549456",
+            "31210930669",
+            "31298938836",
+            "31346088961",
+            "31328019368"
+          ]
+        }
       },
       "geometry": {
         "type": "LineString",
@@ -1501,24 +1684,28 @@
         },
         "recommended_interventions": [
           {
-            "id": "leading_pedestrian_interval",
-            "name": "Leading pedestrian intervals",
-            "effect": "Seattle reported roughly -34% serious-injury/fatal pedestrian crashes and -48% pedestrian turning collisions at LPI locations."
-          },
-          {
-            "id": "curb_extension",
-            "name": "Curb extensions / bump-outs",
-            "effect": "A standard component of low-cost Vision Zero packages (e.g. Hoboken's 60+ curb extensions) credited in its sustained zero-death record."
-          },
-          {
-            "id": "daylighting",
-            "name": "Daylighting (clear-sight corners)",
-            "effect": "Core to Hoboken NJ's multi-year stretch with zero traffic deaths, deployed at 130+ intersections alongside high-visibility crosswalks and curb extensions."
+            "id": "automated_speed_camera",
+            "name": "Automated speed enforcement",
+            "effect": "A DDOT study reported injury crashes falling from 841 to 673 (about -20% injuries) around enforced locations; Portland measured -71% to -93% top-end speeding within 30 days of activation.",
+            "trigger": "5 traffic death(s) on this corridor"
           },
           {
             "id": "road_diet",
             "name": "Road diet / lane rechannelization",
-            "effect": "FHWA cites ~19-47% total crash reductions for road diets; Seattle's Nickerson St saw roughly -93% aggressive (top-end) speeding."
+            "effect": "FHWA cites ~19-47% total crash reductions for road diets; Seattle's Nickerson St saw roughly -93% aggressive (top-end) speeding.",
+            "trigger": "25 KSI concentrated on one arterial"
+          },
+          {
+            "id": "protected_intersection",
+            "name": "Protected intersections",
+            "effect": "Widely deployed in Vision Zero programs to remove turning conflicts at high-injury intersections; effect varies by site (verify locally).",
+            "trigger": "turning conflicts: drivers/passengers are 60% of KSI"
+          },
+          {
+            "id": "speed_limit_20",
+            "name": "20 mph default speed limit",
+            "effect": "Part of Hoboken's and London's Vision Zero approach; pedestrian survival probability is far higher in a 20 mph than a 30+ mph impact.",
+            "trigger": "speed is the key driver of crash severity"
           }
         ],
         "equity_notes": "Serves Ward 5, Ward 6, Ward 7. HIN Tier 1. Equity context is ward-level; pair with DC Equity Emphasis Areas before prioritizing.",
@@ -1526,7 +1713,32 @@
         "confidence_note": "1193 crashes joined within 25 m; 25 KSI (5 killed). Counts from Open Data DC; corridor extent per DDOT HIN.",
         "priority": "URGENT",
         "data_source": "Crashes in DC x DDOT High Injury Network (Open Data DC)",
-        "last_updated": "2026-06-19"
+        "last_updated": "2026-06-19",
+        "audit": {
+          "date_range": [
+            "2022-01-02",
+            "2026-06-09"
+          ],
+          "mean_join_distance_m": 0.7,
+          "max_join_distance_m": 24.8,
+          "sample_record_ids": [
+            "30759445989",
+            "31042297251",
+            "30799211803",
+            "30867059328",
+            "31228991143",
+            "31241460923",
+            "31285073251",
+            "31298154658",
+            "31314861253",
+            "31327654556",
+            "31352567933",
+            "31399462480",
+            "31399665188",
+            "31405123571",
+            "31435450674"
+          ]
+        }
       },
       "geometry": {
         "type": "LineString",
@@ -1742,24 +1954,28 @@
         },
         "recommended_interventions": [
           {
-            "id": "leading_pedestrian_interval",
-            "name": "Leading pedestrian intervals",
-            "effect": "Seattle reported roughly -34% serious-injury/fatal pedestrian crashes and -48% pedestrian turning collisions at LPI locations."
+            "id": "automated_speed_camera",
+            "name": "Automated speed enforcement",
+            "effect": "A DDOT study reported injury crashes falling from 841 to 673 (about -20% injuries) around enforced locations; Portland measured -71% to -93% top-end speeding within 30 days of activation.",
+            "trigger": "1 traffic death(s) on this corridor"
           },
           {
-            "id": "curb_extension",
-            "name": "Curb extensions / bump-outs",
-            "effect": "A standard component of low-cost Vision Zero packages (e.g. Hoboken's 60+ curb extensions) credited in its sustained zero-death record."
-          },
-          {
-            "id": "daylighting",
-            "name": "Daylighting (clear-sight corners)",
-            "effect": "Core to Hoboken NJ's multi-year stretch with zero traffic deaths, deployed at 130+ intersections alongside high-visibility crosswalks and curb extensions."
+            "id": "protected_intersection",
+            "name": "Protected intersections",
+            "effect": "Widely deployed in Vision Zero programs to remove turning conflicts at high-injury intersections; effect varies by site (verify locally).",
+            "trigger": "turning conflicts: drivers/passengers are 68% of KSI"
           },
           {
             "id": "road_diet",
             "name": "Road diet / lane rechannelization",
-            "effect": "FHWA cites ~19-47% total crash reductions for road diets; Seattle's Nickerson St saw roughly -93% aggressive (top-end) speeding."
+            "effect": "FHWA cites ~19-47% total crash reductions for road diets; Seattle's Nickerson St saw roughly -93% aggressive (top-end) speeding.",
+            "trigger": "25 KSI concentrated on one arterial"
+          },
+          {
+            "id": "speed_limit_20",
+            "name": "20 mph default speed limit",
+            "effect": "Part of Hoboken's and London's Vision Zero approach; pedestrian survival probability is far higher in a 20 mph than a 30+ mph impact.",
+            "trigger": "speed is the key driver of crash severity"
           }
         ],
         "equity_notes": "Serves Ward 7, Ward 8. HIN Tier 1. Equity context is ward-level; pair with DC Equity Emphasis Areas before prioritizing.",
@@ -1767,7 +1983,32 @@
         "confidence_note": "819 crashes joined within 25 m; 25 KSI (1 killed). Counts from Open Data DC; corridor extent per DDOT HIN.",
         "priority": "URGENT",
         "data_source": "Crashes in DC x DDOT High Injury Network (Open Data DC)",
-        "last_updated": "2026-06-19"
+        "last_updated": "2026-06-19",
+        "audit": {
+          "date_range": [
+            "2022-01-02",
+            "2026-06-15"
+          ],
+          "mean_join_distance_m": 2.3,
+          "max_join_distance_m": 24.9,
+          "sample_record_ids": [
+            "30751750833",
+            "30752931693",
+            "30761806666",
+            "30773727184",
+            "31104937849",
+            "31112713286",
+            "31116363754",
+            "31214827306",
+            "31201547707",
+            "31203954792",
+            "31211435804",
+            "31241237697",
+            "31345468716",
+            "31341466828",
+            "31351319652"
+          ]
+        }
       },
       "geometry": {
         "type": "LineString",

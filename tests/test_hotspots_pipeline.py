@@ -72,15 +72,27 @@ def test_join_assigns_only_crashes_within_buffer() -> None:
     path = [[-77.00, 38.900], [-77.00, 38.905], [-77.00, 38.910]]
     corridors = [_corridor(path)]
     # One crash essentially on the line (KSI), one ~1km east (off the corridor).
-    on_line = {"lon": -77.0000, "lat": 38.9025, "attrs": {"FATAL_PEDESTRIAN": 1, "MAJORINJURIES_DRIVER": 2, "WARD": "Ward 6"}}
-    far = {"lon": -76.989, "lat": 38.9025, "attrs": {"MAJORINJURIES_DRIVER": 9, "WARD": "Ward 7"}}
-    out = hotspots.join_crashes_to_corridors(corridors, [on_line, far])[0]
-    assert out["crashes"] == 1  # only the on-line crash joined
+    on_line = {"lon": -77.0000, "lat": 38.9025, "attrs": {"FATAL_PEDESTRIAN": 1, "MAJORINJURIES_DRIVER": 2, "WARD": "Ward 6", "CRIMEID": "X1", "REPORTDATE": 1704067200000}}
+    far = {"lon": -76.989, "lat": 38.9025, "attrs": {"MAJORINJURIES_DRIVER": 9, "WARD": "Ward 7", "CRIMEID": "X2"}}
+    rows, joined = hotspots.join_crashes_to_corridors(corridors, [on_line, far])
+    assert joined == 1  # only the on-line crash joined; far one is off-network
+    out = rows[0]
+    assert out["crashes"] == 1
     assert out["fatalities"] == 1
     assert out["major_injuries"] == 2
     assert out["ksi"] == 3  # 1 fatal + 2 major
     assert out["injuries"] == 2  # major + minor, the far crash's 9 excluded
     assert out["wards"] == ["Ward 6"]
+    # audit trail traces the count back to the source record
+    assert out["audit"]["sample_record_ids"] == ["X1"]
+    assert out["audit"]["max_join_distance_m"] is not None and out["audit"]["max_join_distance_m"] <= hotspots.BUFFER_M
+    assert out["audit"]["date_range"][0] == "2024-01-01"  # epoch ms -> ISO date
+
+
+def test_epoch_ms_to_date() -> None:
+    assert hotspots._epoch_ms_to_date(1704067200000) == "2024-01-01"
+    assert hotspots._epoch_ms_to_date(None) is None
+    assert hotspots._epoch_ms_to_date("not-a-number") is None
 
 
 def test_ward_list_filters_by_share_and_sorts() -> None:
@@ -124,16 +136,20 @@ def test_confidence_thresholds() -> None:
 
 def test_recommend_interventions_react_to_mode_and_cap_at_four() -> None:
     catalog = hotspots._intervention_catalog()
-    ped_heavy = {"ksi": 20, "mode_ksi": {"pedestrian": 10, "cyclist": 0, "driver": 5, "passenger": 0, "other": 0}}
+    ped_heavy = {"ksi": 20, "fatalities": 0, "mode_ksi": {"pedestrian": 12, "cyclist": 0, "driver": 4, "passenger": 0, "other": 4}}
     recs = hotspots.recommend_interventions(ped_heavy, catalog)
     assert len(recs) == 4
     ids = [r["id"] for r in recs]
-    assert "leading_pedestrian_interval" in ids  # ped share >= 0.15 triggers ped fixes
+    assert "leading_pedestrian_interval" in ids  # high ped share surfaces ped fixes
     for r in recs:
-        assert r["name"] and r["effect"]  # the data test requires both to render
+        assert r["name"] and r["effect"] and r["trigger"]  # card/draft need all three
 
-    bike_heavy = {"ksi": 20, "mode_ksi": {"pedestrian": 0, "cyclist": 5, "driver": 10, "passenger": 0, "other": 0}}
+    # A genuinely cyclist-dominant corridor surfaces the bike fix near the top.
+    bike_heavy = {"ksi": 18, "fatalities": 0, "mode_ksi": {"pedestrian": 2, "cyclist": 12, "driver": 4, "passenger": 0, "other": 0}}
     assert "protected_bike_lane" in [r["id"] for r in hotspots.recommend_interventions(bike_heavy, catalog)]
+
+    # Triggers differ by corridor (not a fixed package): ped-heavy mentions pedestrians.
+    assert any("pedestrian" in r["trigger"].lower() for r in recs)
 
 
 def main() -> int:

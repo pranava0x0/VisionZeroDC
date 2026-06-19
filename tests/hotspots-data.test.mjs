@@ -81,8 +81,38 @@ test("each feature has at least one well-formed recommended intervention", () =>
       assert.equal(typeof fix.name, "string", `${f.id}: intervention.name`);
       assert.ok(fix.name.trim().length > 0, `${f.id}: empty intervention name`);
       assert.equal(typeof fix.effect, "string", `${f.id}: intervention.effect`);
+      // each fix carries its corridor-specific trigger evidence
+      assert.equal(typeof fix.trigger, "string", `${f.id}: intervention.trigger`);
+      assert.ok(fix.trigger.trim().length > 0, `${f.id}: empty intervention trigger`);
     }
   }
+});
+
+test("every feature carries an audit trail traceable to source records", () => {
+  for (const f of features) {
+    const a = f.properties.audit;
+    assert.ok(a, `${f.id}: missing audit`);
+    assert.ok(Array.isArray(a.sample_record_ids), `${f.id}: sample_record_ids`);
+    assert.ok(a.sample_record_ids.length > 0, `${f.id}: no sample record ids`);
+    assert.ok(Array.isArray(a.date_range) && a.date_range.length === 2, `${f.id}: date_range`);
+    assert.ok(
+      a.max_join_distance_m == null || a.max_join_distance_m <= 30,
+      `${f.id}: join distance ${a.max_join_distance_m} exceeds the buffer`,
+    );
+  }
+});
+
+test("metadata reports pipeline totals (fetched/geocoded/joined/excluded)", () => {
+  const t = geo.metadata && geo.metadata.totals;
+  assert.ok(t, "missing metadata.totals");
+  for (const k of ["crashes_fetched", "crashes_geocoded", "crashes_joined_to_corridor", "crashes_excluded_off_network"]) {
+    assert.equal(typeof t[k], "number", `totals.${k}`);
+  }
+  assert.equal(
+    t.crashes_joined_to_corridor + t.crashes_excluded_off_network,
+    t.crashes_geocoded,
+    "joined + excluded must equal geocoded",
+  );
 });
 
 test("ksi equals fatalities + major_injuries (true killed-or-seriously-injured)", () => {
