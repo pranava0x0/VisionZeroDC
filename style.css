@@ -2263,10 +2263,19 @@ p.rec-key {
   margin-bottom: 12px;
 }
 
+/* Equal-width columns so the three big numbers align on one baseline row and
+   the labels hang beneath them (instead of flex-packing into an uneven, awkward
+   2 + 1 wrap). align-items: start keeps the numbers level even when one label
+   wraps to two lines. */
 .anc-stats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px 36px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px 20px;
+  align-items: start;
+  margin-bottom: 24px;
+  /* keep the three figures visually grouped on wide panels instead of spreading
+     across the full width; still one label line per column at this size */
+  max-width: 620px;
 }
 .anc-figure {
   display: flex;
@@ -2274,9 +2283,9 @@ p.rec-key {
 }
 .anc-figure strong {
   font-family: var(--font-display);
-  font-size: 2.6rem;
+  font-size: clamp(1.9rem, 6vw, 2.6rem);
   font-weight: 800;
-  line-height: 0.95;
+  line-height: 1;
   letter-spacing: -0.02em;
   color: var(--text);
 }
@@ -2284,8 +2293,7 @@ p.rec-key {
   color: var(--severity-fatal);
 }
 .anc-figure span {
-  margin-top: 4px;
-  max-width: 16ch;
+  margin-top: 6px;
   color: var(--text-muted);
   font-size: 0.8rem;
   line-height: 1.3;
@@ -2444,9 +2452,6 @@ p.rec-key {
   .anc-corridors,
   .anc-recs {
     grid-template-columns: 1fr;
-  }
-  .anc-figure strong {
-    font-size: 2rem;
   }
 }
 
