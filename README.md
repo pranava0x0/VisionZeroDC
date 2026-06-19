@@ -6,7 +6,7 @@ Static public-interest tool for reading DC crash data and related safety context
 
 - **`index.html` — Safety Overview (landing).** Accountability scorecard, deaths-vs-injuries trend, who-is-being-hurt mode share, the "where harm concentrates" headline, and evidence-backed policy recommendations + a countermeasure library. Reads the baked snapshot and curated JSON; no map libraries.
 - **`map.html` — Crash Map.** The interactive Leaflet map with date/severity/mode filters, a KSI-only toggle, moving-violations overlay, hot spots, ward crash rates, and per-crash case files. Shareable via URL state.
-- **`hotspots.html` — High-Injury Corridors.** Leaflet map + profile cards for the highest-injury corridors (`data/hotspots.geojson`): severity, mode breakdown, recommended interventions, equity notes, confidence. Per-corridor counts are real — `pipeline/hotspots.py` joins crash records to the DDOT High Injury Network (crashes within 25 m of the centerline, 2022-present).
+- **`hotspots.html` — High-Injury Corridors.** Leaflet map + profile cards for the five highest-injury corridors (`data/hotspots.geojson`): severity, mode breakdown, recommended interventions, equity notes, confidence. Per-corridor counts are a preliminary ward-grain screen.
 - **`anc.html` — ANC Safety Brief.** Community-led prioritization tool: pick a ward to see its crash burden, the corridors that run through it, and ward-scoped + citywide recommendations, then generate an editable, source-grounded resolution draft (copy / open-in-email / print). Static; deep-linkable via `#ward-N`.
 
 A top nav links the two. Recommendation cards on the landing page deep-link into the map with the relevant filters applied.

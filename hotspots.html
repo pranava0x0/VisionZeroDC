@@ -169,17 +169,6 @@
         letter-spacing: 0.05em;
       }
 
-      /* KSI is the ranking basis — emphasise it over the context stats. */
-      .severity-stat-ksi .severity-value {
-        font-size: 20px;
-      }
-
-      .hotspot-ksi-breakdown {
-        font-size: 10px;
-        color: var(--text-muted);
-        margin-bottom: 8px;
-      }
-
       .hotspot-modes {
         display: flex;
         align-items: baseline;
@@ -226,17 +215,6 @@
         border-radius: 50%;
         background: var(--link);
         margin-top: 4px;
-      }
-
-      .fix-text {
-        display: flex;
-        flex-direction: column;
-      }
-
-      .fix-trigger {
-        font-size: 10px;
-        color: var(--text-soft);
-        font-style: italic;
       }
 
       .priority-badge {
@@ -435,7 +413,7 @@
         <h1>High-Injury Corridors</h1>
       </div>
       <p class="source-line">
-        DC's highest-injury corridors, ranked by people killed or seriously injured — computed by joining crash records to DDOT's High Injury Network. Click a corridor to explore recommended fixes.
+        Five priority corridors for intervention, evidence-backed from crash data. Click a corridor to explore recommended fixes.
       </p>
     </header>
 
@@ -448,7 +426,7 @@
     </main>
 
     <footer class="site-footer">
-      <span>Source: Crashes in DC × DDOT High Injury Network (Open Data DC). Per-corridor counts are crashes within 25&nbsp;m of the HIN centerline, 2022–present; KSI = people killed or seriously (major) injured. Counts come from the open, police-reported crash data and may differ from DDOT's curated figures.</span>
+      <span>Source: Crashes in DC (Open Data DC), captured June 7, 2026. Per-corridor counts are a preliminary ward-grain screen pending intersection/HIN-level verification, not settled figures.</span>
       <span><a href="HOTSPOTS_AND_POLICIES.md" target="_blank">Full hotspot analysis →</a></span>
     </footer>
 

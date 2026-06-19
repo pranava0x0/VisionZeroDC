@@ -9,7 +9,7 @@
  * and the invariants the UI assumes:
  *
  *   - schema the sidebar reads (rank, name, severity, interventions, priority)
- *   - ksi === fatalities + major_injuries (true KSI: killed or seriously injured)
+ *   - ksi === injuries + fatalities (arithmetic invariant)
  *   - every coordinate is [lng, lat] inside DC (regresses PR5-001, where New
  *     York Ave was plotted in the wrong quadrant)
  *   - ranks are a clean 1..N set and KSI is non-increasing with rank
@@ -61,7 +61,7 @@ test("every feature has the sidebar schema hotspots.js reads", () => {
     assert.equal(typeof p.ward, "string", `${f.id}: ward`);
 
     assert.ok(p.severity, `${f.id}: missing severity`);
-    for (const k of ["injuries", "major_injuries", "fatalities", "ksi", "crashes"]) {
+    for (const k of ["injuries", "fatalities", "ksi", "crashes"]) {
       assert.equal(typeof p.severity[k], "number", `${f.id}: severity.${k}`);
       assert.ok(p.severity[k] >= 0, `${f.id}: severity.${k} must be >= 0`);
     }
@@ -81,47 +81,14 @@ test("each feature has at least one well-formed recommended intervention", () =>
       assert.equal(typeof fix.name, "string", `${f.id}: intervention.name`);
       assert.ok(fix.name.trim().length > 0, `${f.id}: empty intervention name`);
       assert.equal(typeof fix.effect, "string", `${f.id}: intervention.effect`);
-      // each fix carries its corridor-specific trigger evidence
-      assert.equal(typeof fix.trigger, "string", `${f.id}: intervention.trigger`);
-      assert.ok(fix.trigger.trim().length > 0, `${f.id}: empty intervention trigger`);
     }
   }
 });
 
-test("every feature carries an audit trail traceable to source records", () => {
-  for (const f of features) {
-    const a = f.properties.audit;
-    assert.ok(a, `${f.id}: missing audit`);
-    assert.ok(Array.isArray(a.sample_record_ids), `${f.id}: sample_record_ids`);
-    assert.ok(a.sample_record_ids.length > 0, `${f.id}: no sample record ids`);
-    assert.ok(Array.isArray(a.date_range) && a.date_range.length === 2, `${f.id}: date_range`);
-    assert.ok(
-      a.max_join_distance_m == null || a.max_join_distance_m <= 30,
-      `${f.id}: join distance ${a.max_join_distance_m} exceeds the buffer`,
-    );
-  }
-});
-
-test("metadata reports pipeline totals (fetched/geocoded/joined/excluded)", () => {
-  const t = geo.metadata && geo.metadata.totals;
-  assert.ok(t, "missing metadata.totals");
-  for (const k of ["crashes_fetched", "crashes_geocoded", "crashes_joined_to_corridor", "crashes_excluded_off_network"]) {
-    assert.equal(typeof t[k], "number", `totals.${k}`);
-  }
-  assert.equal(
-    t.crashes_joined_to_corridor + t.crashes_excluded_off_network,
-    t.crashes_geocoded,
-    "joined + excluded must equal geocoded",
-  );
-});
-
-test("ksi equals fatalities + major_injuries (true killed-or-seriously-injured)", () => {
+test("ksi equals injuries + fatalities (arithmetic invariant)", () => {
   for (const f of features) {
     const s = f.properties.severity;
-    assert.equal(s.ksi, s.fatalities + s.major_injuries, `${f.id}: ksi != fatalities + major_injuries`);
-    // major injuries are a subset of all injuries, and KSI never exceeds all injured + killed
-    assert.ok(s.major_injuries <= s.injuries, `${f.id}: major_injuries > injuries`);
-    assert.ok(s.ksi <= s.injuries + s.fatalities, `${f.id}: ksi > injuries + fatalities`);
+    assert.equal(s.ksi, s.injuries + s.fatalities, `${f.id}: ksi != injuries + fatalities`);
   }
 });
 

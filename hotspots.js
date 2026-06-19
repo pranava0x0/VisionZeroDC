@@ -232,36 +232,26 @@ function createCorridorCard(props, idx) {
   const priorityClass = props.priority === 'URGENT' ? 'urgent' : 'high';
   const priorityBadge = `<span class="priority-badge ${priorityClass}">${props.priority}</span>`;
 
-  // KSI is the ranking basis, so lead with it and make its composition explicit
-  // (killed + seriously injured), then total injuries for context.
-  const sev = props.severity || {};
-  const ksi = sev.ksi != null ? sev.ksi : (sev.fatalities || 0) + (sev.major_injuries || 0);
-
   card.innerHTML = `
     <div class="hotspot-rank">Rank #${props.rank}</div>
     <div class="hotspot-name">${props.corridor_name}</div>
     <div class="hotspot-location">${props.location_scope}</div>
     <div class="hotspot-severity">
-      <div class="severity-stat severity-stat-ksi" title="People killed or seriously (major) injured — the basis for this ranking">
-        <span class="severity-value">${ksi}</span>
-        <span class="severity-label">Killed / seriously injured</span>
+      <div class="severity-stat">
+        <span class="severity-value">${props.severity.injuries}</span>
+        <span class="severity-label">Injuries</span>
       </div>
       <div class="severity-stat">
-        <span class="severity-value">${sev.fatalities}</span>
+        <span class="severity-value">${props.severity.fatalities}</span>
         <span class="severity-label">Deaths</span>
       </div>
-      <div class="severity-stat">
-        <span class="severity-value">${sev.injuries}</span>
-        <span class="severity-label">Total injured</span>
-      </div>
     </div>
-    <div class="hotspot-ksi-breakdown">${sev.fatalities} killed · ${sev.major_injuries} seriously injured</div>
     ${modeLine}
     <div class="hotspot-fixes">
       ${fixes.map(fix => `
         <div class="fix-item">
           <span class="fix-bullet"></span>
-          <span class="fix-text">${fix.name}${fix.trigger ? `<span class="fix-trigger">${fix.trigger}</span>` : ''}</span>
+          <span>${fix.name}</span>
         </div>
       `).join('')}
     </div>
