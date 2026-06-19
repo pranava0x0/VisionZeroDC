@@ -6,8 +6,10 @@
  * fetch, and Leaflet so it stays testable and reusable.
  *
  * These selectors decide what data a commissioner sees for their ward and what
- * the generated resolution draft asserts, so the editorial caveats (preliminary,
- * ward-grain) are baked into buildDraft() and guarded by tests/.
+ * the generated resolution draft asserts, so the editorial caveats are baked into
+ * buildDraft() and guarded by tests/. Ward totals come from the ward-grain
+ * crash-summary; per-corridor counts come from the crashes↔HIN spatial join
+ * (data/hotspots.geojson) — the draft labels each accordingly.
  */
 (function (root, factory) {
   const api = factory();
@@ -31,12 +33,56 @@
 
   // Corridors whose `ward` string names Ward n, ordered by rank. The word-boundary
   // match keeps "Ward 7" from also matching "Ward 7" inside a longer number.
+  // (Used for the citywide top-8 GeoJSON; the ANC page uses the fuller selector below.)
   function corridorsForWard(geojson, n) {
     const feats = geojson && Array.isArray(geojson.features) ? geojson.features : [];
     return feats
       .map((f) => f && f.properties)
       .filter((p) => p && typeof p.ward === "string" && new RegExp(`\\bWard ${n}\\b`).test(p.ward))
       .sort((a, b) => (a.rank || 99) - (b.rank || 99));
+  }
+
+  // The ANC inventory: ALL HIN corridors that run through Ward n (from the full
+  // data/hin-corridors.json), ranked by this ward's KSI burden — not just the few
+  // that crack the citywide top 8. Returns objects shaped like the GeoJSON
+  // properties the renderer/draft consume, with interventions resolved from the
+  // doc's shared intervention_catalog and a ward-local rank assigned.
+  function corridorsForWardFromHin(hinDoc, n, opts) {
+    opts = opts || {};
+    const corridors = hinDoc && Array.isArray(hinDoc.corridors) ? hinDoc.corridors : [];
+    const catalog = (hinDoc && hinDoc.intervention_catalog) || {};
+    const period = (hinDoc && hinDoc.period) || "";
+    const wardLabel = "Ward " + n;
+    const mapped = corridors
+      .filter((c) => Array.isArray(c.wards) && c.wards.indexOf(wardLabel) !== -1 && (c.crashes || 0) > 0)
+      .sort(
+        (a, b) =>
+          (b.ksi || 0) - (a.ksi || 0) ||
+          (b.crashes || 0) - (a.crashes || 0) ||
+          String(a.corridor_name || "").localeCompare(String(b.corridor_name || ""))
+      )
+      .map((c, i) => ({
+        corridor_name: c.corridor_name || c.route_name,
+        location_scope: c.location_scope || "",
+        ward: (c.wards || []).join(", "),
+        rank: i + 1, // ward-local rank (this ward's #1, #2, …), not the citywide rank
+        priority: i < 2 || c.tier === 1 ? "URGENT" : "HIGH",
+        severity: {
+          injuries: c.injuries,
+          major_injuries: c.major_injuries,
+          fatalities: c.fatalities,
+          ksi: c.ksi,
+          crashes: c.crashes,
+          period: period,
+        },
+        recommended_interventions: (c.recommended_interventions || []).map((r) => ({
+          id: r.id,
+          name: (catalog[r.id] && catalog[r.id].name) || r.id,
+          effect: (catalog[r.id] && catalog[r.id].effect) || "",
+          trigger: r.trigger || "",
+        })),
+      }));
+    return opts.limit ? mapped.slice(0, opts.limit) : mapped;
   }
 
   // Split recommendations into those that name the ward explicitly and citywide/
@@ -80,12 +126,21 @@
       corridors.forEach((p) => {
         const sev = p.severity || {};
         const bits = [];
-        if (Number.isFinite(sev.injuries)) bits.push(`${sev.injuries} injuries`);
-        if (Number.isFinite(sev.fatalities)) bits.push(`${sev.fatalities} deaths`);
-        const detail = bits.join(", ") + (sev.period ? `, ${sev.period}` : "");
+        // Lead with KSI (the ranking basis), make its composition explicit, then
+        // total injured for context.
+        if (Number.isFinite(sev.ksi)) {
+          const comp = [];
+          if (Number.isFinite(sev.fatalities)) comp.push(`${sev.fatalities} killed`);
+          if (Number.isFinite(sev.major_injuries)) comp.push(`${sev.major_injuries} seriously injured`);
+          bits.push(`${sev.ksi} killed or seriously injured${comp.length ? ` (${comp.join(", ")})` : ""}`);
+        } else if (Number.isFinite(sev.fatalities)) {
+          bits.push(`${sev.fatalities} deaths`);
+        }
+        if (Number.isFinite(sev.injuries)) bits.push(`${sev.injuries} total injured`);
+        const detail = bits.join("; ") + (sev.period ? `, ${sev.period}` : "");
         lines.push(
           `  - ${p.corridor_name}${p.location_scope ? ` (${p.location_scope})` : ""}: ${detail} ` +
-            `[preliminary ward-grain screen];`
+            `[crashes within 25 m of the DDOT High Injury Network];`
         );
       });
       lines.push("");
@@ -117,14 +172,16 @@
       );
     }
     lines.push(`  ${i++}. Requests a DDOT briefing on Vision Zero progress and planned capital projects in Ward ${n};`);
-    lines.push(`  ${i++}. Asks that any per-corridor figures be confirmed against intersection-level records before final action.`);
+    lines.push(`  ${i++}. Asks that these figures be confirmed against DDOT's curated crash records before final action.`);
     lines.push("");
     lines.push(
-      `Sources: "Crashes in DC" (Open Data DC); DC Vision Zero (visionzero.dc.gov). Per-corridor counts are a ` +
-        `preliminary ward-grain screen pending intersection/HIN-level verification, not settled figures.`
+      `Sources: "Crashes in DC" and the DDOT High Injury Network (Open Data DC); DC Vision Zero ` +
+        `(visionzero.dc.gov). Per-corridor counts are crashes within 25 m of the HIN centerline (2022-present); ` +
+        `ward totals are preliminary and ward-grain. Both come from open police-reported data and may differ ` +
+        `from DDOT's curated figures.`
     );
     return lines.join("\n");
   }
 
-  return { wardRow, corridorsForWard, recsForWard, buildDraft };
+  return { wardRow, corridorsForWard, corridorsForWardFromHin, recsForWard, buildDraft };
 });

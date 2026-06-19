@@ -35,9 +35,9 @@ const summary = {
 
 const hotspots = {
   features: [
-    { properties: { rank: 2, corridor_name: "South Capitol Street", ward: "Ward 6, Ward 7, Ward 8", severity: { injuries: 412, fatalities: 2, period: "2022-2026" }, recommended_interventions: [{ name: "Protected intersections" }] } },
-    { properties: { rank: 1, corridor_name: "New York Avenue NE", ward: "Ward 5, Ward 6, Ward 7", severity: { injuries: 438, fatalities: 3, period: "2022-2026" }, recommended_interventions: [{ name: "Road diet / lane rechannelization" }] } },
-    { properties: { rank: 5, corridor_name: "Southern Avenue SE", ward: "Ward 8", severity: { injuries: 200, fatalities: 1, period: "2022-2026" }, recommended_interventions: [] } },
+    { properties: { rank: 2, corridor_name: "South Capitol Street", ward: "Ward 6, Ward 7, Ward 8", severity: { injuries: 412, major_injuries: 34, fatalities: 2, ksi: 36, period: "2022-present" }, recommended_interventions: [{ name: "Protected intersections" }] } },
+    { properties: { rank: 1, corridor_name: "New York Avenue NE", ward: "Ward 5, Ward 6, Ward 7", severity: { injuries: 438, major_injuries: 26, fatalities: 3, ksi: 29, period: "2022-present" }, recommended_interventions: [{ name: "Road diet / lane rechannelization" }] } },
+    { properties: { rank: 5, corridor_name: "Southern Avenue SE", ward: "Ward 8", severity: { injuries: 200, major_injuries: 18, fatalities: 1, ksi: 19, period: "2022-present" }, recommended_interventions: [] } },
   ],
 };
 
@@ -96,6 +96,49 @@ test("corridorsForWard returns [] for a ward with no corridors and for empty inp
   assert.deepEqual(A.corridorsForWard({ features: [] }, 7), []);
 });
 
+// --- corridorsForWardFromHin (full ward inventory) -------------------------
+
+const hinDoc = {
+  period: "2022-present",
+  intervention_catalog: {
+    road_diet: { name: "Road diet / lane rechannelization", effect: "reduces crashes" },
+    leading_pedestrian_interval: { name: "Leading pedestrian intervals", effect: "head start" },
+  },
+  corridors: [
+    { corridor_name: "Small St SE", route_name: "SMALL ST SE", location_scope: "C to D", wards: ["Ward 7"], tier: 2, crashes: 40, injuries: 60, major_injuries: 10, fatalities: 1, ksi: 11, recommended_interventions: [{ id: "leading_pedestrian_interval", trigger: "pedestrians are 50% of KSI here" }] },
+    { corridor_name: "Big Ave SE", route_name: "BIG AVE SE", location_scope: "A to B", wards: ["Ward 7", "Ward 8"], tier: 1, crashes: 100, injuries: 200, major_injuries: 30, fatalities: 4, ksi: 34, recommended_interventions: [{ id: "road_diet", trigger: "4 traffic deaths" }, { id: "mystery_fix", trigger: "x" }] },
+    { corridor_name: "Zero Rd NE", route_name: "ZERO RD NE", wards: ["Ward 7"], tier: 3, crashes: 0, injuries: 0, major_injuries: 0, fatalities: 0, ksi: 0, recommended_interventions: [] },
+    { corridor_name: "Other Ave NW", route_name: "OTHER AVE NW", wards: ["Ward 1"], tier: 2, crashes: 50, injuries: 70, major_injuries: 9, fatalities: 1, ksi: 10, recommended_interventions: [] },
+  ],
+};
+
+test("corridorsForWardFromHin returns all ward corridors ranked by KSI, excluding zero-crash + other wards", () => {
+  const got = A.corridorsForWardFromHin(hinDoc, 7);
+  assert.deepEqual(got.map((c) => c.corridor_name), ["Big Ave SE", "Small St SE"]); // KSI 34 > 11
+  assert.deepEqual(got.map((c) => c.rank), [1, 2]); // ward-local rank
+  assert.equal(got[0].severity.ksi, 34);
+  assert.equal(got[0].severity.period, "2022-present");
+  assert.equal(got[0].ward, "Ward 7, Ward 8");
+});
+
+test("corridorsForWardFromHin resolves interventions from the shared catalog", () => {
+  const top = A.corridorsForWardFromHin(hinDoc, 7)[0];
+  const fix = top.recommended_interventions[0];
+  assert.equal(fix.id, "road_diet");
+  assert.equal(fix.name, "Road diet / lane rechannelization");
+  assert.equal(fix.effect, "reduces crashes");
+  assert.equal(fix.trigger, "4 traffic deaths");
+  // an id not in the catalog falls back to the id as its name (no crash)
+  assert.equal(top.recommended_interventions[1].name, "mystery_fix");
+});
+
+test("corridorsForWardFromHin honors the limit option and handles other wards / empty docs", () => {
+  assert.equal(A.corridorsForWardFromHin(hinDoc, 7, { limit: 1 }).length, 1);
+  assert.deepEqual(A.corridorsForWardFromHin(hinDoc, 1).map((c) => c.corridor_name), ["Other Ave NW"]);
+  assert.deepEqual(A.corridorsForWardFromHin({}, 7), []);
+  assert.deepEqual(A.corridorsForWardFromHin({ corridors: [] }, 5), []);
+});
+
 // --- recsForWard -----------------------------------------------------------
 
 test("recsForWard puts ward-named recs in .ward and citywide ones in .citywide", () => {
@@ -127,11 +170,16 @@ test("buildDraft includes ward stats, corridors, asks, and the source caveat", (
   assert.match(draft, /DRAFT RESOLUTION — Traffic safety in Ward 7/);
   assert.match(draft, /141 people killed or seriously injured and 20 traffic deaths/);
   assert.match(draft, /New York Avenue NE/);
+  // corridor line surfaces KSI + its composition (the ranking basis), not just totals
+  assert.match(draft, /29 killed or seriously injured \(3 killed, 26 seriously injured\)/);
+  assert.match(draft, /438 total injured/);
   assert.match(draft, /East-of-river package/);
   // top corridor's first fix drives the first resolved action, lowercased
   assert.match(draft, /prioritize New York Avenue NE for safety redesign, beginning with road diet/);
-  // editorial caveat must always be present
-  assert.match(draft, /preliminary ward-grain screen pending intersection\/HIN-level verification/);
+  // editorial caveats must always be present: HIN-join basis for corridors,
+  // ward-grain caveat for ward totals
+  assert.match(draft, /crashes within 25 m of the HIN centerline/);
+  assert.match(draft, /ward totals are preliminary and ward-grain/);
 });
 
 test("buildDraft degrades gracefully with no stats and no corridors (citywide recs only)", () => {

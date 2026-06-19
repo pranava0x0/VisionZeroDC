@@ -146,6 +146,12 @@ function makeRankIcon(rank) {
 
 // Small color/number key pinned to the map corner.
 function addLegend() {
+  // Derive the gold (rank 5+) band from the corridors actually rendered so the
+  // legend describes the full ranking (getColorByRank lumps every rank >= 5 into
+  // the same colour), and can't drift when TOP_N changes.
+  const ranks = (hotspotsData && hotspotsData.features || []).map(f => f.properties.rank);
+  const maxRank = ranks.length ? Math.max(...ranks) : 5;
+  const goldLabel = maxRank > 5 ? `Rank 5–${maxRank} · high` : 'Rank 5 · high';
   const legend = L.control({ position: 'bottomleft' });
   legend.onAdd = function () {
     const div = L.DomUtil.create('div', 'map-legend');
@@ -153,7 +159,7 @@ function addLegend() {
       <div class="map-legend-title">Priority rank — most to least severe</div>
       <div class="row"><span class="swatch" style="background:${cssVar('--severity-fatal')}"></span> Rank 1–2 · urgent</div>
       <div class="row"><span class="swatch" style="background:${cssVar('--severity-major')}"></span> Rank 3–4 · high</div>
-      <div class="row"><span class="swatch" style="background:${cssVar('--severity-minor')}"></span> Rank 5 · high</div>
+      <div class="row"><span class="swatch" style="background:${cssVar('--severity-minor')}"></span> ${goldLabel}</div>
     `;
     return div;
   };
@@ -232,26 +238,36 @@ function createCorridorCard(props, idx) {
   const priorityClass = props.priority === 'URGENT' ? 'urgent' : 'high';
   const priorityBadge = `<span class="priority-badge ${priorityClass}">${props.priority}</span>`;
 
+  // KSI is the ranking basis, so lead with it and make its composition explicit
+  // (killed + seriously injured), then total injuries for context.
+  const sev = props.severity || {};
+  const ksi = sev.ksi != null ? sev.ksi : (sev.fatalities || 0) + (sev.major_injuries || 0);
+
   card.innerHTML = `
     <div class="hotspot-rank">Rank #${props.rank}</div>
     <div class="hotspot-name">${props.corridor_name}</div>
     <div class="hotspot-location">${props.location_scope}</div>
     <div class="hotspot-severity">
-      <div class="severity-stat">
-        <span class="severity-value">${props.severity.injuries}</span>
-        <span class="severity-label">Injuries</span>
+      <div class="severity-stat severity-stat-ksi" title="People killed or seriously (major) injured — the basis for this ranking">
+        <span class="severity-value">${ksi}</span>
+        <span class="severity-label">Killed / seriously injured</span>
       </div>
       <div class="severity-stat">
-        <span class="severity-value">${props.severity.fatalities}</span>
+        <span class="severity-value">${sev.fatalities}</span>
         <span class="severity-label">Deaths</span>
       </div>
+      <div class="severity-stat">
+        <span class="severity-value">${sev.injuries}</span>
+        <span class="severity-label">Total injured</span>
+      </div>
     </div>
+    <div class="hotspot-ksi-breakdown">${sev.fatalities} killed · ${sev.major_injuries} seriously injured</div>
     ${modeLine}
     <div class="hotspot-fixes">
       ${fixes.map(fix => `
         <div class="fix-item">
           <span class="fix-bullet"></span>
-          <span>${fix.name}</span>
+          <span class="fix-text">${fix.name}${fix.trigger ? `<span class="fix-trigger">${fix.trigger}</span>` : ''}</span>
         </div>
       `).join('')}
     </div>
