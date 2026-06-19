@@ -6,8 +6,10 @@
  * fetch, and Leaflet so it stays testable and reusable.
  *
  * These selectors decide what data a commissioner sees for their ward and what
- * the generated resolution draft asserts, so the editorial caveats (preliminary,
- * ward-grain) are baked into buildDraft() and guarded by tests/.
+ * the generated resolution draft asserts, so the editorial caveats are baked into
+ * buildDraft() and guarded by tests/. Ward totals come from the ward-grain
+ * crash-summary; per-corridor counts come from the crashes↔HIN spatial join
+ * (data/hotspots.geojson) — the draft labels each accordingly.
  */
 (function (root, factory) {
   const api = factory();
@@ -85,7 +87,7 @@
         const detail = bits.join(", ") + (sev.period ? `, ${sev.period}` : "");
         lines.push(
           `  - ${p.corridor_name}${p.location_scope ? ` (${p.location_scope})` : ""}: ${detail} ` +
-            `[preliminary ward-grain screen];`
+            `[crashes within 25 m of the DDOT High Injury Network];`
         );
       });
       lines.push("");
@@ -117,11 +119,13 @@
       );
     }
     lines.push(`  ${i++}. Requests a DDOT briefing on Vision Zero progress and planned capital projects in Ward ${n};`);
-    lines.push(`  ${i++}. Asks that any per-corridor figures be confirmed against intersection-level records before final action.`);
+    lines.push(`  ${i++}. Asks that these figures be confirmed against DDOT's curated crash records before final action.`);
     lines.push("");
     lines.push(
-      `Sources: "Crashes in DC" (Open Data DC); DC Vision Zero (visionzero.dc.gov). Per-corridor counts are a ` +
-        `preliminary ward-grain screen pending intersection/HIN-level verification, not settled figures.`
+      `Sources: "Crashes in DC" and the DDOT High Injury Network (Open Data DC); DC Vision Zero ` +
+        `(visionzero.dc.gov). Per-corridor counts are crashes within 25 m of the HIN centerline (2022-present); ` +
+        `ward totals are preliminary and ward-grain. Both come from open police-reported data and may differ ` +
+        `from DDOT's curated figures.`
     );
     return lines.join("\n");
   }

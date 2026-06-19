@@ -1,0 +1,1865 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-06-19T21:30:03Z",
+  "generator": "pipeline/hotspots.py",
+  "period": "2022-present",
+  "buffer_m": 25.0,
+  "sources": {
+    "crashes": {
+      "title": "Crashes in DC",
+      "agency": "DDOT / MPD via Open Data DC",
+      "query_url": "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Public_Safety_WebMercator/MapServer/24/query",
+      "page_url": "https://opendata.dc.gov/datasets/DCGIS::crashes-in-dc"
+    },
+    "hin": {
+      "title": "High Injury Network",
+      "agency": "DDOT (moveDC) via Open Data DC",
+      "query_url": "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/MoveDC/MapServer/17/query",
+      "page_url": "https://opendata.dc.gov/datasets/high-injury-network"
+    }
+  },
+  "method": "Each crash since 2022-01-01 is assigned to the nearest HIN corridor whose centerline passes within 25 m (point-to-segment, local equirectangular projection). KSI = people killed + seriously (major) injured. Injuries = all reported injured people (major + minor). Ward(s) are read from the joined crash records. Recommended interventions are a screening suggestion from the dominant crash mode, not a DDOT plan; effect sizes come from data/countermeasures.json (research-grade until verified).",
+  "caveats": "Counts are crashes within 25 m of the DDOT High Injury Network centerline, 2022-present, from the open, police-reported Crashes in DC dataset; they may differ from DDOT's curated figures. Ungeocoded crashes and crashes off the HIN are excluded. A crash near two corridors is assigned to the nearest.",
+  "corridors": [
+    {
+      "corridor_id": "11040042_1",
+      "route_name": "GEORGIA AVE NW",
+      "from_street": "7TH ST NW/FLORIDA AVE NW",
+      "to_street": "CHESAPEAKE ST NW",
+      "length_mi": 4.755,
+      "tier": 1,
+      "wards": [
+        "Ward 1",
+        "Ward 4"
+      ],
+      "crashes": 2362,
+      "injuries": 905,
+      "fatalities": 4,
+      "major_injuries": 50,
+      "minor_injuries": 855,
+      "ksi": 54,
+      "mode_ksi": {
+        "pedestrian": 14,
+        "cyclist": 8,
+        "driver": 27,
+        "passenger": 4,
+        "other": 1
+      }
+    },
+    {
+      "corridor_id": "13009362_1",
+      "route_name": "ALABAMA AVE SE",
+      "from_street": "5TH ST SE",
+      "to_street": "BOWEN RD SE/BURNS ST SE/STANLEY ST SE",
+      "length_mi": 4.18,
+      "tier": 1,
+      "wards": [
+        "Ward 7",
+        "Ward 8"
+      ],
+      "crashes": 1429,
+      "injuries": 568,
+      "fatalities": 2,
+      "major_injuries": 34,
+      "minor_injuries": 534,
+      "ksi": 36,
+      "mode_ksi": {
+        "pedestrian": 8,
+        "cyclist": 0,
+        "driver": 23,
+        "passenger": 5,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "11025152_2",
+      "route_name": "CONNECTICUT AVE NW",
+      "from_street": "17TH ST NW/K ST NW Service Rd/K ST NW",
+      "to_street": "CHEVY CHASE CIR NW",
+      "length_mi": 4.926,
+      "tier": 2,
+      "wards": [
+        "Ward 2",
+        "Ward 3"
+      ],
+      "crashes": 1195,
+      "injuries": 350,
+      "fatalities": 5,
+      "major_injuries": 31,
+      "minor_injuries": 319,
+      "ksi": 36,
+      "mode_ksi": {
+        "pedestrian": 15,
+        "cyclist": 3,
+        "driver": 12,
+        "passenger": 5,
+        "other": 1
+      }
+    },
+    {
+      "corridor_id": "12064672_1",
+      "route_name": "NEW YORK AVE NE",
+      "from_street": "NEW YORK AVE NW/N ST NE",
+      "to_street": "EASTERN AVE NE",
+      "length_mi": 3.846,
+      "tier": 1,
+      "wards": [
+        "Ward 5"
+      ],
+      "crashes": 1614,
+      "injuries": 536,
+      "fatalities": 2,
+      "major_injuries": 27,
+      "minor_injuries": 509,
+      "ksi": 29,
+      "mode_ksi": {
+        "pedestrian": 6,
+        "cyclist": 1,
+        "driver": 13,
+        "passenger": 8,
+        "other": 1
+      }
+    },
+    {
+      "corridor_id": "11001402_2",
+      "route_name": "14TH ST NW",
+      "from_street": "THOMAS CIR NW",
+      "to_street": "IOWA AVE NW",
+      "length_mi": 2.996,
+      "tier": 2,
+      "wards": [
+        "Ward 1",
+        "Ward 2",
+        "Ward 4"
+      ],
+      "crashes": 1280,
+      "injuries": 402,
+      "fatalities": 1,
+      "major_injuries": 28,
+      "minor_injuries": 374,
+      "ksi": 29,
+      "mode_ksi": {
+        "pedestrian": 13,
+        "cyclist": 9,
+        "driver": 7,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "13069812_1",
+      "route_name": "PENNSYLVANIA AVE SE",
+      "from_street": "SYCAMORE DR SE",
+      "to_street": "Driveway-58022292",
+      "length_mi": 3.483,
+      "tier": 1,
+      "wards": [
+        "Ward 6",
+        "Ward 7",
+        "Ward 8"
+      ],
+      "crashes": 1116,
+      "injuries": 447,
+      "fatalities": 2,
+      "major_injuries": 24,
+      "minor_injuries": 423,
+      "ksi": 26,
+      "mode_ksi": {
+        "pedestrian": 4,
+        "cyclist": 0,
+        "driver": 18,
+        "passenger": 4,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "12015342_1",
+      "route_name": "BENNING RD NE",
+      "from_street": "15TH ST NE/BLADENSBURG RD NE/H ST NE/MARYLAND AVE NE",
+      "to_street": "BENNING RD SE/EAST CAPITOL ST BN",
+      "length_mi": 2.631,
+      "tier": 1,
+      "wards": [
+        "Ward 5",
+        "Ward 6",
+        "Ward 7"
+      ],
+      "crashes": 1193,
+      "injuries": 453,
+      "fatalities": 5,
+      "major_injuries": 20,
+      "minor_injuries": 433,
+      "ksi": 25,
+      "mode_ksi": {
+        "pedestrian": 9,
+        "cyclist": 0,
+        "driver": 13,
+        "passenger": 2,
+        "other": 1
+      }
+    },
+    {
+      "corridor_id": "13061162_1",
+      "route_name": "MINNESOTA AVE SE",
+      "from_street": "GOOD HOPE RD SE",
+      "to_street": "MARTIN LUTHER KING JR AVE SE",
+      "length_mi": 2.389,
+      "tier": 1,
+      "wards": [
+        "Ward 7",
+        "Ward 8"
+      ],
+      "crashes": 819,
+      "injuries": 354,
+      "fatalities": 1,
+      "major_injuries": 24,
+      "minor_injuries": 330,
+      "ksi": 25,
+      "mode_ksi": {
+        "pedestrian": 5,
+        "cyclist": 1,
+        "driver": 15,
+        "passenger": 2,
+        "other": 2
+      }
+    },
+    {
+      "corridor_id": "13081512_1",
+      "route_name": "SOUTHERN AVE SE",
+      "from_street": "Driveway-58014302/SOUTH CAPITOL ST BN",
+      "to_street": "NAYLOR RD SE",
+      "length_mi": 2.996,
+      "tier": 1,
+      "wards": [
+        "Ward 8"
+      ],
+      "crashes": 637,
+      "injuries": 320,
+      "fatalities": 3,
+      "major_injuries": 22,
+      "minor_injuries": 298,
+      "ksi": 25,
+      "mode_ksi": {
+        "pedestrian": 10,
+        "cyclist": 1,
+        "driver": 8,
+        "passenger": 5,
+        "other": 1
+      }
+    },
+    {
+      "corridor_id": "13081512_2",
+      "route_name": "SOUTHERN AVE SE",
+      "from_street": "BRANCH AVE SE",
+      "to_street": "53RD ST SE",
+      "length_mi": 2.429,
+      "tier": 1,
+      "wards": [
+        "Ward 7"
+      ],
+      "crashes": 533,
+      "injuries": 293,
+      "fatalities": 7,
+      "major_injuries": 18,
+      "minor_injuries": 275,
+      "ksi": 25,
+      "mode_ksi": {
+        "pedestrian": 2,
+        "cyclist": 0,
+        "driver": 19,
+        "passenger": 4,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "15065322_1",
+      "route_name": "NORTH CAPITOL ST BN",
+      "from_street": "LOUISIANA AVE NW/LOUISIANA AVE NE/Ramp-36000232",
+      "to_street": "GOOD HOPE RD SE/INTERSTATE 295 I BN",
+      "length_mi": 3.314,
+      "tier": 1,
+      "wards": [
+        "Ward 5",
+        "Ward 6"
+      ],
+      "crashes": 1428,
+      "injuries": 536,
+      "fatalities": 2,
+      "major_injuries": 20,
+      "minor_injuries": 516,
+      "ksi": 22,
+      "mode_ksi": {
+        "pedestrian": 8,
+        "cyclist": 0,
+        "driver": 9,
+        "passenger": 3,
+        "other": 2
+      }
+    },
+    {
+      "corridor_id": "15031912_5",
+      "route_name": "EAST CAPITOL ST BN",
+      "from_street": "13TH ST NE/13TH ST SE",
+      "to_street": "22ND ST SE",
+      "length_mi": 2.945,
+      "tier": 3,
+      "wards": [
+        "Ward 7"
+      ],
+      "crashes": 605,
+      "injuries": 340,
+      "fatalities": 3,
+      "major_injuries": 19,
+      "minor_injuries": 321,
+      "ksi": 22,
+      "mode_ksi": {
+        "pedestrian": 8,
+        "cyclist": 0,
+        "driver": 9,
+        "passenger": 5,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "12015992_1",
+      "route_name": "BLADENSBURG RD NE",
+      "from_street": "15TH ST NE/BENNING RD NE/H ST NE/MARYLAND AVE NE",
+      "to_street": "BENNING RD SE/EAST CAPITOL ST BN",
+      "length_mi": 2.573,
+      "tier": 2,
+      "wards": [
+        "Ward 5"
+      ],
+      "crashes": 960,
+      "injuries": 316,
+      "fatalities": 5,
+      "major_injuries": 15,
+      "minor_injuries": 301,
+      "ksi": 20,
+      "mode_ksi": {
+        "pedestrian": 3,
+        "cyclist": 1,
+        "driver": 10,
+        "passenger": 5,
+        "other": 1
+      }
+    },
+    {
+      "corridor_id": "11087232_3",
+      "route_name": "U ST NW",
+      "from_street": "9TH ST NW/FLORIDA AVE NW",
+      "to_street": "18TH ST NW/VERNON ST NW",
+      "length_mi": 0.954,
+      "tier": 1,
+      "wards": [
+        "Ward 1",
+        "Ward 2"
+      ],
+      "crashes": 671,
+      "injuries": 210,
+      "fatalities": 5,
+      "major_injuries": 14,
+      "minor_injuries": 196,
+      "ksi": 19,
+      "mode_ksi": {
+        "pedestrian": 8,
+        "cyclist": 2,
+        "driver": 7,
+        "passenger": 1,
+        "other": 1
+      }
+    },
+    {
+      "corridor_id": "11000702_1",
+      "route_name": "7TH ST NW",
+      "from_street": "7TH ST SW",
+      "to_street": "FLORIDA AVE NW/GEORGIA AVE NW",
+      "length_mi": 1.837,
+      "tier": 2,
+      "wards": [
+        "Ward 1",
+        "Ward 2"
+      ],
+      "crashes": 702,
+      "injuries": 263,
+      "fatalities": 1,
+      "major_injuries": 17,
+      "minor_injuries": 246,
+      "ksi": 18,
+      "mode_ksi": {
+        "pedestrian": 5,
+        "cyclist": 4,
+        "driver": 5,
+        "passenger": 1,
+        "other": 3
+      }
+    },
+    {
+      "corridor_id": "12061162_1",
+      "route_name": "MINNESOTA AVE NE",
+      "from_street": "24TH ST NE",
+      "to_street": "RHODE ISLAND AVE NE",
+      "length_mi": 1.194,
+      "tier": 1,
+      "wards": [
+        "Ward 7"
+      ],
+      "crashes": 761,
+      "injuries": 241,
+      "fatalities": 4,
+      "major_injuries": 14,
+      "minor_injuries": 227,
+      "ksi": 18,
+      "mode_ksi": {
+        "pedestrian": 11,
+        "cyclist": 2,
+        "driver": 4,
+        "passenger": 0,
+        "other": 1
+      }
+    },
+    {
+      "corridor_id": "12075462_1",
+      "route_name": "RHODE ISLAND AVE NE",
+      "from_street": "RHODE ISLAND AVE NW",
+      "to_street": "JACKSON ST NE/Driveway-58014122",
+      "length_mi": 2.786,
+      "tier": 2,
+      "wards": [
+        "Ward 5"
+      ],
+      "crashes": 853,
+      "injuries": 303,
+      "fatalities": 1,
+      "major_injuries": 16,
+      "minor_injuries": 287,
+      "ksi": 17,
+      "mode_ksi": {
+        "pedestrian": 4,
+        "cyclist": 2,
+        "driver": 9,
+        "passenger": 1,
+        "other": 1
+      }
+    },
+    {
+      "corridor_id": "11064282_1",
+      "route_name": "NEW JERSEY AVE NW",
+      "from_street": "CONSTITUTION AVE NW",
+      "to_street": "FLORIDA AVE NW",
+      "length_mi": 1.619,
+      "tier": 2,
+      "wards": [
+        "Ward 2",
+        "Ward 5",
+        "Ward 6"
+      ],
+      "crashes": 553,
+      "injuries": 226,
+      "fatalities": 4,
+      "major_injuries": 13,
+      "minor_injuries": 213,
+      "ksi": 17,
+      "mode_ksi": {
+        "pedestrian": 1,
+        "cyclist": 2,
+        "driver": 8,
+        "passenger": 2,
+        "other": 4
+      }
+    },
+    {
+      "corridor_id": "11094052_1",
+      "route_name": "WISCONSIN AVE NW",
+      "from_street": "K ST NW/WATER ST NW",
+      "to_street": "RESERVOIR RD NW/37TH ST NW",
+      "length_mi": 4.3,
+      "tier": 3,
+      "wards": [
+        "Ward 2",
+        "Ward 3"
+      ],
+      "crashes": 981,
+      "injuries": 249,
+      "fatalities": 0,
+      "major_injuries": 14,
+      "minor_injuries": 235,
+      "ksi": 14,
+      "mode_ksi": {
+        "pedestrian": 5,
+        "cyclist": 2,
+        "driver": 5,
+        "passenger": 0,
+        "other": 2
+      }
+    },
+    {
+      "corridor_id": "12031982_1",
+      "route_name": "EASTERN AVE NE",
+      "from_street": "SOUTHERN AVE NE",
+      "to_street": "KENILWORTH AVE NE",
+      "length_mi": 1.897,
+      "tier": 1,
+      "wards": [
+        "Ward 7"
+      ],
+      "crashes": 1082,
+      "injuries": 371,
+      "fatalities": 3,
+      "major_injuries": 10,
+      "minor_injuries": 361,
+      "ksi": 13,
+      "mode_ksi": {
+        "pedestrian": 3,
+        "cyclist": 1,
+        "driver": 6,
+        "passenger": 3,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "11059602_2",
+      "route_name": "MASSACHUSETTS AVE NW",
+      "from_street": "MT VERNON PL NW/9TH ST NW",
+      "to_street": "SCOTT CIR NW",
+      "length_mi": 0.716,
+      "tier": 2,
+      "wards": [
+        "Ward 2"
+      ],
+      "crashes": 422,
+      "injuries": 133,
+      "fatalities": 2,
+      "major_injuries": 11,
+      "minor_injuries": 122,
+      "ksi": 13,
+      "mode_ksi": {
+        "pedestrian": 3,
+        "cyclist": 2,
+        "driver": 2,
+        "passenger": 6,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "11036722_1",
+      "route_name": "FLORIDA AVE NW",
+      "from_street": "FLORIDA AVE NE/NORTH CAPITOL ST BN",
+      "to_street": "U ST NW/9TH ST NW",
+      "length_mi": 0.911,
+      "tier": 1,
+      "wards": [
+        "Ward 1",
+        "Ward 2",
+        "Ward 5"
+      ],
+      "crashes": 630,
+      "injuries": 202,
+      "fatalities": 1,
+      "major_injuries": 11,
+      "minor_injuries": 191,
+      "ksi": 12,
+      "mode_ksi": {
+        "pedestrian": 2,
+        "cyclist": 1,
+        "driver": 6,
+        "passenger": 1,
+        "other": 2
+      }
+    },
+    {
+      "corridor_id": "11064672_1",
+      "route_name": "NEW YORK AVE NW",
+      "from_street": "NEW YORK AVE NE/N ST NE",
+      "to_street": "MT VERNON PL NW/7TH ST NW",
+      "length_mi": 0.758,
+      "tier": 1,
+      "wards": [
+        "Ward 2",
+        "Ward 5",
+        "Ward 6"
+      ],
+      "crashes": 648,
+      "injuries": 197,
+      "fatalities": 3,
+      "major_injuries": 8,
+      "minor_injuries": 189,
+      "ksi": 11,
+      "mode_ksi": {
+        "pedestrian": 5,
+        "cyclist": 2,
+        "driver": 3,
+        "passenger": 1,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "12036722_1",
+      "route_name": "FLORIDA AVE NE",
+      "from_street": "FLORIDA AVE NW/NORTH CAPITOL ST BN",
+      "to_street": "H ST NE",
+      "length_mi": 1.528,
+      "tier": 1,
+      "wards": [
+        "Ward 5",
+        "Ward 6"
+      ],
+      "crashes": 616,
+      "injuries": 211,
+      "fatalities": 0,
+      "major_injuries": 10,
+      "minor_injuries": 201,
+      "ksi": 10,
+      "mode_ksi": {
+        "pedestrian": 1,
+        "cyclist": 0,
+        "driver": 4,
+        "passenger": 3,
+        "other": 2
+      }
+    },
+    {
+      "corridor_id": "11057852_3",
+      "route_name": "M ST NW",
+      "from_street": "THOMAS CIR NW/MASSACHUSETTS AVE NW Service Rd",
+      "to_street": "CANAL RD NW",
+      "length_mi": 2.114,
+      "tier": 2,
+      "wards": [
+        "Ward 2"
+      ],
+      "crashes": 682,
+      "injuries": 193,
+      "fatalities": 0,
+      "major_injuries": 10,
+      "minor_injuries": 183,
+      "ksi": 10,
+      "mode_ksi": {
+        "pedestrian": 4,
+        "cyclist": 2,
+        "driver": 2,
+        "passenger": 0,
+        "other": 2
+      }
+    },
+    {
+      "corridor_id": "15081252_1",
+      "route_name": "SOUTH CAPITOL ST BN",
+      "from_street": "CHILLUM PL NE/CHILLUM PL NW",
+      "to_street": "EASTERN AVE NE/EASTERN AVE NW",
+      "length_mi": 5.071,
+      "tier": 1,
+      "wards": [
+        "Ward 8"
+      ],
+      "crashes": 513,
+      "injuries": 192,
+      "fatalities": 1,
+      "major_injuries": 9,
+      "minor_injuries": 183,
+      "ksi": 10,
+      "mode_ksi": {
+        "pedestrian": 3,
+        "cyclist": 1,
+        "driver": 4,
+        "passenger": 2,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "13057852_1",
+      "route_name": "M ST SE",
+      "from_street": "DEAD END",
+      "to_street": "BRANCH AVE SE",
+      "length_mi": 1.926,
+      "tier": 3,
+      "wards": [
+        "Ward 6"
+      ],
+      "crashes": 408,
+      "injuries": 149,
+      "fatalities": 0,
+      "major_injuries": 10,
+      "minor_injuries": 139,
+      "ksi": 10,
+      "mode_ksi": {
+        "pedestrian": 4,
+        "cyclist": 2,
+        "driver": 4,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "12042442_1",
+      "route_name": "H ST NE",
+      "from_street": "NORTH CAPITOL ST BN/H ST NW",
+      "to_street": "BENNING RD NE/15TH ST NE/BLADENSBURG RD NE/MARYLAND AVE NE",
+      "length_mi": 1.382,
+      "tier": 1,
+      "wards": [
+        "Ward 6"
+      ],
+      "crashes": 788,
+      "injuries": 273,
+      "fatalities": 0,
+      "major_injuries": 9,
+      "minor_injuries": 264,
+      "ksi": 9,
+      "mode_ksi": {
+        "pedestrian": 2,
+        "cyclist": 3,
+        "driver": 4,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "13040752_1",
+      "route_name": "GOOD HOPE RD SE",
+      "from_street": "ANACOSTIA DR SE",
+      "to_street": "Driveway-58014092/ALABAMA AVE SE",
+      "length_mi": 1.487,
+      "tier": 3,
+      "wards": [
+        "Ward 7",
+        "Ward 8"
+      ],
+      "crashes": 558,
+      "injuries": 170,
+      "fatalities": 0,
+      "major_injuries": 9,
+      "minor_injuries": 161,
+      "ksi": 9,
+      "mode_ksi": {
+        "pedestrian": 2,
+        "cyclist": 0,
+        "driver": 6,
+        "passenger": 0,
+        "other": 1
+      }
+    },
+    {
+      "corridor_id": "13015342_1",
+      "route_name": "BENNING RD SE",
+      "from_street": "BENNING RD NE/EAST CAPITOL ST BN",
+      "to_street": "12TH ST SE",
+      "length_mi": 1.028,
+      "tier": 1,
+      "wards": [
+        "Ward 7"
+      ],
+      "crashes": 340,
+      "injuries": 146,
+      "fatalities": 2,
+      "major_injuries": 7,
+      "minor_injuries": 139,
+      "ksi": 9,
+      "mode_ksi": {
+        "pedestrian": 2,
+        "cyclist": 0,
+        "driver": 6,
+        "passenger": 0,
+        "other": 1
+      }
+    },
+    {
+      "corridor_id": "11001402_1",
+      "route_name": "14TH ST NW",
+      "from_street": "14TH ST SW",
+      "to_street": "THOMAS CIR NW",
+      "length_mi": 1.087,
+      "tier": 2,
+      "wards": [
+        "Ward 2"
+      ],
+      "crashes": 405,
+      "injuries": 147,
+      "fatalities": 2,
+      "major_injuries": 6,
+      "minor_injuries": 141,
+      "ksi": 8,
+      "mode_ksi": {
+        "pedestrian": 3,
+        "cyclist": 2,
+        "driver": 2,
+        "passenger": 0,
+        "other": 1
+      }
+    },
+    {
+      "corridor_id": "11050892_1",
+      "route_name": "K ST NW",
+      "from_street": "K ST NE/NORTH CAPITOL ST BN",
+      "to_street": "7TH ST NW",
+      "length_mi": 0.693,
+      "tier": 3,
+      "wards": [
+        "Ward 2",
+        "Ward 6"
+      ],
+      "crashes": 270,
+      "injuries": 124,
+      "fatalities": 1,
+      "major_injuries": 7,
+      "minor_injuries": 117,
+      "ksi": 8,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 4,
+        "driver": 3,
+        "passenger": 1,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "14057852_1",
+      "route_name": "M ST SW",
+      "from_street": "MACDILL BLVD SW",
+      "to_street": "TINKER ST SW",
+      "length_mi": 0.582,
+      "tier": 3,
+      "wards": [
+        "Ward 6"
+      ],
+      "crashes": 153,
+      "injuries": 48,
+      "fatalities": 1,
+      "major_injuries": 6,
+      "minor_injuries": 42,
+      "ksi": 7,
+      "mode_ksi": {
+        "pedestrian": 1,
+        "cyclist": 0,
+        "driver": 5,
+        "passenger": 1,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "11059602_1",
+      "route_name": "MASSACHUSETTS AVE NW",
+      "from_street": "MASSACHUSETTS AVE NE/NORTH CAPITOL ST BN",
+      "to_street": "K ST NW/7TH ST NW",
+      "length_mi": 0.764,
+      "tier": 2,
+      "wards": [
+        "Ward 2",
+        "Ward 6"
+      ],
+      "crashes": 321,
+      "injuries": 128,
+      "fatalities": 0,
+      "major_injuries": 6,
+      "minor_injuries": 122,
+      "ksi": 6,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 1,
+        "driver": 3,
+        "passenger": 1,
+        "other": 1
+      }
+    },
+    {
+      "corridor_id": "15065322_2",
+      "route_name": "NORTH CAPITOL ST BN",
+      "from_street": "ROCK CREEK CHURCH RD NW/HAWAII AVE NE",
+      "to_street": "MCDONALD PL NE/BLAIR RD NW",
+      "length_mi": 0.869,
+      "tier": 1,
+      "wards": [
+        "Ward 4",
+        "Ward 5"
+      ],
+      "crashes": 377,
+      "injuries": 134,
+      "fatalities": 0,
+      "major_injuries": 4,
+      "minor_injuries": 130,
+      "ksi": 4,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 1,
+        "driver": 3,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "11042442_1",
+      "route_name": "H ST NW",
+      "from_street": "H ST NE/NORTH CAPITOL ST BN",
+      "to_street": "MASSACHUSETTS AVE NW/4TH ST NW",
+      "length_mi": 0.386,
+      "tier": 1,
+      "wards": [
+        "Ward 6"
+      ],
+      "crashes": 154,
+      "injuries": 62,
+      "fatalities": 0,
+      "major_injuries": 4,
+      "minor_injuries": 58,
+      "ksi": 4,
+      "mode_ksi": {
+        "pedestrian": 1,
+        "cyclist": 0,
+        "driver": 3,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "11050892_3",
+      "route_name": "K ST NW",
+      "from_street": "9TH ST NW",
+      "to_street": "WATER ST NW/WISCONSIN AVE NW",
+      "length_mi": 2.089,
+      "tier": 3,
+      "wards": [
+        "Ward 2"
+      ],
+      "crashes": 210,
+      "injuries": 54,
+      "fatalities": 0,
+      "major_injuries": 4,
+      "minor_injuries": 50,
+      "ksi": 4,
+      "mode_ksi": {
+        "pedestrian": 2,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 2,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "11025352_2",
+      "route_name": "CONSTITUTION AVE NW",
+      "from_street": "PENNSYLVANIA AVE NW",
+      "to_street": "INTERSTATE 66   BN",
+      "length_mi": 2.071,
+      "tier": 3,
+      "wards": [
+        "Ward 2"
+      ],
+      "crashes": 196,
+      "injuries": 55,
+      "fatalities": 0,
+      "major_injuries": 2,
+      "minor_injuries": 53,
+      "ksi": 2,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 2,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "13081512_3",
+      "route_name": "SOUTHERN AVE SE",
+      "from_street": "FITCH ST SE",
+      "to_street": "SOUTHERN AVE NE/EAST CAPITOL ST BN",
+      "length_mi": 0.821,
+      "tier": 1,
+      "wards": [
+        "Ward 7"
+      ],
+      "crashes": 102,
+      "injuries": 41,
+      "fatalities": 1,
+      "major_injuries": 1,
+      "minor_injuries": 40,
+      "ksi": 2,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 1,
+        "passenger": 1,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "11075462_3",
+      "route_name": "RHODE ISLAND AVE NW",
+      "from_street": "SCOTT CIR NW",
+      "to_street": "CONNECTICUT AVE NW/M ST NW",
+      "length_mi": 0.251,
+      "tier": 2,
+      "wards": [
+        "Ward 2"
+      ],
+      "crashes": 66,
+      "injuries": 16,
+      "fatalities": 0,
+      "major_injuries": 2,
+      "minor_injuries": 14,
+      "ksi": 2,
+      "mode_ksi": {
+        "pedestrian": 1,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 1
+      }
+    },
+    {
+      "corridor_id": "11078712_1",
+      "route_name": "SCOTT CIR NW",
+      "from_street": "RHODE ISLAND AVE NW",
+      "to_street": "RHODE ISLAND AVE NW",
+      "length_mi": 0.117,
+      "tier": 2,
+      "wards": [
+        "Ward 2"
+      ],
+      "crashes": 111,
+      "injuries": 24,
+      "fatalities": 0,
+      "major_injuries": 1,
+      "minor_injuries": 23,
+      "ksi": 1,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 1,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "11085732_1",
+      "route_name": "THOMAS CIR NW",
+      "from_street": "14TH ST NW",
+      "to_street": "14TH ST NW",
+      "length_mi": 0.157,
+      "tier": 2,
+      "wards": [
+        "Ward 2"
+      ],
+      "crashes": 57,
+      "injuries": 13,
+      "fatalities": 0,
+      "major_injuries": 1,
+      "minor_injuries": 12,
+      "ksi": 1,
+      "mode_ksi": {
+        "pedestrian": 1,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "12043812_1",
+      "route_name": "HAWAII AVE NE",
+      "from_street": "ROCK CREEK CHURCH RD NW/NORTH CAPITOL ST BN",
+      "to_street": "TAYLOR ST NE",
+      "length_mi": 0.664,
+      "tier": 1,
+      "wards": [
+        "Ward 5"
+      ],
+      "crashes": 34,
+      "injuries": 7,
+      "fatalities": 0,
+      "major_injuries": 1,
+      "minor_injuries": 6,
+      "ksi": 1,
+      "mode_ksi": {
+        "pedestrian": 1,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "11016382_1",
+      "route_name": "BLAIR RD NW",
+      "from_street": "MCDONALD PL NE/NORTH CAPITOL ST BN",
+      "to_street": "17TH ST NW",
+      "length_mi": 1.705,
+      "tier": 1,
+      "wards": [
+        "Ward 4"
+      ],
+      "crashes": 30,
+      "injuries": 7,
+      "fatalities": 0,
+      "major_injuries": 1,
+      "minor_injuries": 6,
+      "ksi": 1,
+      "mode_ksi": {
+        "pedestrian": 1,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "11000902_1",
+      "route_name": "9TH ST NW",
+      "from_street": "9TH ST SW",
+      "to_street": "Driveway-58015862",
+      "length_mi": 2.083,
+      "tier": 3,
+      "wards": [
+        "Ward 2"
+      ],
+      "crashes": 9,
+      "injuries": 2,
+      "fatalities": 0,
+      "major_injuries": 1,
+      "minor_injuries": 1,
+      "ksi": 1,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 1,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "11025352_1",
+      "route_name": "CONSTITUTION AVE NW",
+      "from_street": "CONSTITUTION AVE NE/Driveway-58017012",
+      "to_street": "PENNSYLVANIA AVE NW",
+      "length_mi": 0.398,
+      "tier": 3,
+      "wards": [
+        "Ward 2",
+        "Ward 6"
+      ],
+      "crashes": 92,
+      "injuries": 36,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 36,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "12023852_1",
+      "route_name": "CLERMONT DR NE",
+      "from_street": "FORT DR NE",
+      "to_street": "53RD ST NE",
+      "length_mi": 0.278,
+      "tier": 1,
+      "wards": [
+        "Ward 5"
+      ],
+      "crashes": 40,
+      "injuries": 20,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 20,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "12059602_2",
+      "route_name": "MASSACHUSETTS AVE NE",
+      "from_street": "COLUMBUS CIR NE",
+      "to_street": "4TH ST NE/C ST NE",
+      "length_mi": 0.314,
+      "tier": 2,
+      "wards": [
+        "Ward 6"
+      ],
+      "crashes": 48,
+      "injuries": 17,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 17,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "11050892_2",
+      "route_name": "K ST NW",
+      "from_street": "7TH ST NW/MASSACHUSETTS AVE NW",
+      "to_street": "9TH ST NW/NEW YORK AVE NW",
+      "length_mi": 0.112,
+      "tier": 3,
+      "wards": [
+        "Ward 2"
+      ],
+      "crashes": 43,
+      "injuries": 17,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 17,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "12081512_1",
+      "route_name": "SOUTHERN AVE NE",
+      "from_street": "SOUTHERN AVE SE/EAST CAPITOL ST BN",
+      "to_street": "EASTERN AVE NE",
+      "length_mi": 0.301,
+      "tier": 1,
+      "wards": [
+        "Ward 7"
+      ],
+      "crashes": 20,
+      "injuries": 12,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 12,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "12024732A_1",
+      "route_name": "COLUMBUS CIR NE",
+      "from_street": "COLUMBUS CIR NE",
+      "to_street": "Ramp-36005892/COLUMBUS CIR NE",
+      "length_mi": 0.145,
+      "tier": 2,
+      "wards": [
+        "Ward 6"
+      ],
+      "crashes": 53,
+      "injuries": 8,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 8,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "13035682_1",
+      "route_name": "FIRTH STERLING AVE SE",
+      "from_street": "HOWARD RD SE/Ramp-36003432",
+      "to_street": "SOUTH CAPITOL ST BN/DEFENSE BLVD SW/SOUTH CAPITOL ST BN/ANACOSTIA RIVER TRAIL SW",
+      "length_mi": 0.444,
+      "tier": 1,
+      "wards": [
+        "Ward 8"
+      ],
+      "crashes": 19,
+      "injuries": 5,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 5,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "12024732_1",
+      "route_name": "COLUMBUS CIR NE",
+      "from_street": "1ST ST NE/MASSACHUSETTS AVE NE",
+      "to_street": "F ST NE",
+      "length_mi": 0.257,
+      "tier": 2,
+      "wards": [
+        "Ward 6"
+      ],
+      "crashes": 27,
+      "injuries": 4,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 4,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "12059602_1",
+      "route_name": "MASSACHUSETTS AVE NE",
+      "from_street": "MASSACHUSETTS AVE NW/NORTH CAPITOL ST BN",
+      "to_street": "1ST ST NE/COLUMBUS CIR NE",
+      "length_mi": 0.082,
+      "tier": 2,
+      "wards": [
+        "Ward 6"
+      ],
+      "crashes": 21,
+      "injuries": 4,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 4,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "13035812_1",
+      "route_name": "FITCH ST SE",
+      "from_street": "51ST ST SE/G ST SE",
+      "to_street": "SOUTHERN AVE SE",
+      "length_mi": 0.281,
+      "tier": 1,
+      "wards": [
+        "Ward 7"
+      ],
+      "crashes": 9,
+      "injuries": 4,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 4,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "11069812_1",
+      "route_name": "PENNSYLVANIA AVE NW",
+      "from_street": "PEACE MONUMENT CIR NW",
+      "to_street": "15TH ST NW/E ST NW",
+      "length_mi": 1.193,
+      "tier": 3,
+      "wards": [
+        "Ward 6"
+      ],
+      "crashes": 7,
+      "injuries": 4,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 4,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "15031912_5",
+      "route_name": "EAST CAPITOL ST BN",
+      "from_street": "13TH ST NE/13TH ST SE",
+      "to_street": "22ND ST SE",
+      "length_mi": 2.945,
+      "tier": 3,
+      "wards": [
+        "Ward 7"
+      ],
+      "crashes": 8,
+      "injuries": 3,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 3,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "11062592_1",
+      "route_name": "MT VERNON PL NW",
+      "from_street": "7TH ST NW/NEW YORK AVE NW",
+      "to_street": "9TH ST NW/MASSACHUSETTS AVE NW",
+      "length_mi": 0.115,
+      "tier": 2,
+      "wards": [
+        "Ward 2"
+      ],
+      "crashes": 34,
+      "injuries": 2,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 2,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "13005302_2",
+      "route_name": "53RD ST SE",
+      "from_street": "FITCH ST SE",
+      "to_street": "SOUTHERN AVE SE",
+      "length_mi": 0.091,
+      "tier": 1,
+      "wards": [
+        "Ward 7"
+      ],
+      "crashes": 9,
+      "injuries": 1,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 1,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "11025352A_1",
+      "route_name": "CONSTITUTION AVE NW",
+      "from_street": "23RD ST NW/CONSTITUTION AVE NW",
+      "to_street": "INTERSTATE 66   BN",
+      "length_mi": 0.239,
+      "tier": 3,
+      "wards": [
+        "Ward 2"
+      ],
+      "crashes": 9,
+      "injuries": 1,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 1,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "11057852_3",
+      "route_name": "M ST NW",
+      "from_street": "THOMAS CIR NW/MASSACHUSETTS AVE NW Service Rd",
+      "to_street": "CANAL RD NW",
+      "length_mi": 2.114,
+      "tier": 2,
+      "wards": [],
+      "crashes": 0,
+      "injuries": 0,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 0,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "11064282_1",
+      "route_name": "NEW JERSEY AVE NW",
+      "from_street": "CONSTITUTION AVE NW",
+      "to_street": "FLORIDA AVE NW",
+      "length_mi": 1.619,
+      "tier": 2,
+      "wards": [],
+      "crashes": 0,
+      "injuries": 0,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 0,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "11025352_2",
+      "route_name": "CONSTITUTION AVE NW",
+      "from_street": "PENNSYLVANIA AVE NW",
+      "to_street": "INTERSTATE 66   BN",
+      "length_mi": 2.071,
+      "tier": 3,
+      "wards": [],
+      "crashes": 0,
+      "injuries": 0,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 0,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "11001402_1",
+      "route_name": "14TH ST NW",
+      "from_street": "14TH ST SW",
+      "to_street": "THOMAS CIR NW",
+      "length_mi": 1.087,
+      "tier": 2,
+      "wards": [],
+      "crashes": 0,
+      "injuries": 0,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 0,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "11085732_1",
+      "route_name": "THOMAS CIR NW",
+      "from_street": "14TH ST NW",
+      "to_street": "14TH ST NW",
+      "length_mi": 0.157,
+      "tier": 2,
+      "wards": [],
+      "crashes": 0,
+      "injuries": 0,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 0,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "11057852_3",
+      "route_name": "M ST NW",
+      "from_street": "THOMAS CIR NW/MASSACHUSETTS AVE NW Service Rd",
+      "to_street": "CANAL RD NW",
+      "length_mi": 2.114,
+      "tier": 2,
+      "wards": [],
+      "crashes": 0,
+      "injuries": 0,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 0,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "12015992_1",
+      "route_name": "BLADENSBURG RD NE",
+      "from_street": "15TH ST NE/BENNING RD NE/H ST NE/MARYLAND AVE NE",
+      "to_street": "BENNING RD SE/EAST CAPITOL ST BN",
+      "length_mi": 2.573,
+      "tier": 2,
+      "wards": [],
+      "crashes": 0,
+      "injuries": 0,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 0,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "15065322_1",
+      "route_name": "NORTH CAPITOL ST BN",
+      "from_street": "LOUISIANA AVE NW/LOUISIANA AVE NE/Ramp-36000232",
+      "to_street": "GOOD HOPE RD SE/INTERSTATE 295 I BN",
+      "length_mi": 3.314,
+      "tier": 1,
+      "wards": [],
+      "crashes": 0,
+      "injuries": 0,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 0,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "11025152_2",
+      "route_name": "CONNECTICUT AVE NW",
+      "from_street": "17TH ST NW/K ST NW Service Rd/K ST NW",
+      "to_street": "CHEVY CHASE CIR NW",
+      "length_mi": 4.926,
+      "tier": 2,
+      "wards": [],
+      "crashes": 0,
+      "injuries": 0,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 0,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "11057852_3",
+      "route_name": "M ST NW",
+      "from_street": "THOMAS CIR NW/MASSACHUSETTS AVE NW Service Rd",
+      "to_street": "CANAL RD NW",
+      "length_mi": 2.114,
+      "tier": 2,
+      "wards": [],
+      "crashes": 0,
+      "injuries": 0,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 0,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "13035682_1",
+      "route_name": "FIRTH STERLING AVE SE",
+      "from_street": "HOWARD RD SE/Ramp-36003432",
+      "to_street": "SOUTH CAPITOL ST BN/DEFENSE BLVD SW/SOUTH CAPITOL ST BN/ANACOSTIA RIVER TRAIL SW",
+      "length_mi": 0.444,
+      "tier": 1,
+      "wards": [],
+      "crashes": 0,
+      "injuries": 0,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 0,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "11078712_1",
+      "route_name": "SCOTT CIR NW",
+      "from_street": "RHODE ISLAND AVE NW",
+      "to_street": "RHODE ISLAND AVE NW",
+      "length_mi": 0.117,
+      "tier": 2,
+      "wards": [],
+      "crashes": 0,
+      "injuries": 0,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 0,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "13015342_1",
+      "route_name": "BENNING RD SE",
+      "from_street": "BENNING RD NE/EAST CAPITOL ST BN",
+      "to_street": "12TH ST SE",
+      "length_mi": 1.028,
+      "tier": 1,
+      "wards": [],
+      "crashes": 0,
+      "injuries": 0,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 0,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "13057852_1",
+      "route_name": "M ST SE",
+      "from_street": "DEAD END",
+      "to_street": "BRANCH AVE SE",
+      "length_mi": 1.926,
+      "tier": 3,
+      "wards": [],
+      "crashes": 0,
+      "injuries": 0,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 0,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "15031912_5",
+      "route_name": "EAST CAPITOL ST BN",
+      "from_street": "13TH ST NE/13TH ST SE",
+      "to_street": "22ND ST SE",
+      "length_mi": 2.945,
+      "tier": 3,
+      "wards": [],
+      "crashes": 0,
+      "injuries": 0,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 0,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "13009362_1",
+      "route_name": "ALABAMA AVE SE",
+      "from_street": "5TH ST SE",
+      "to_street": "BOWEN RD SE/BURNS ST SE/STANLEY ST SE",
+      "length_mi": 4.18,
+      "tier": 1,
+      "wards": [],
+      "crashes": 0,
+      "injuries": 0,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 0,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    },
+    {
+      "corridor_id": "11040042_1",
+      "route_name": "GEORGIA AVE NW",
+      "from_street": "7TH ST NW/FLORIDA AVE NW",
+      "to_street": "CHESAPEAKE ST NW",
+      "length_mi": 4.755,
+      "tier": 1,
+      "wards": [],
+      "crashes": 0,
+      "injuries": 0,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 0,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      }
+    }
+  ]
+}

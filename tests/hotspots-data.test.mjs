@@ -9,7 +9,7 @@
  * and the invariants the UI assumes:
  *
  *   - schema the sidebar reads (rank, name, severity, interventions, priority)
- *   - ksi === injuries + fatalities (arithmetic invariant)
+ *   - ksi === fatalities + major_injuries (true KSI: killed or seriously injured)
  *   - every coordinate is [lng, lat] inside DC (regresses PR5-001, where New
  *     York Ave was plotted in the wrong quadrant)
  *   - ranks are a clean 1..N set and KSI is non-increasing with rank
@@ -61,7 +61,7 @@ test("every feature has the sidebar schema hotspots.js reads", () => {
     assert.equal(typeof p.ward, "string", `${f.id}: ward`);
 
     assert.ok(p.severity, `${f.id}: missing severity`);
-    for (const k of ["injuries", "fatalities", "ksi", "crashes"]) {
+    for (const k of ["injuries", "major_injuries", "fatalities", "ksi", "crashes"]) {
       assert.equal(typeof p.severity[k], "number", `${f.id}: severity.${k}`);
       assert.ok(p.severity[k] >= 0, `${f.id}: severity.${k} must be >= 0`);
     }
@@ -85,10 +85,13 @@ test("each feature has at least one well-formed recommended intervention", () =>
   }
 });
 
-test("ksi equals injuries + fatalities (arithmetic invariant)", () => {
+test("ksi equals fatalities + major_injuries (true killed-or-seriously-injured)", () => {
   for (const f of features) {
     const s = f.properties.severity;
-    assert.equal(s.ksi, s.injuries + s.fatalities, `${f.id}: ksi != injuries + fatalities`);
+    assert.equal(s.ksi, s.fatalities + s.major_injuries, `${f.id}: ksi != fatalities + major_injuries`);
+    // major injuries are a subset of all injuries, and KSI never exceeds all injured + killed
+    assert.ok(s.major_injuries <= s.injuries, `${f.id}: major_injuries > injuries`);
+    assert.ok(s.ksi <= s.injuries + s.fatalities, `${f.id}: ksi > injuries + fatalities`);
   }
 });
 

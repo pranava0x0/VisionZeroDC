@@ -130,8 +130,10 @@ test("buildDraft includes ward stats, corridors, asks, and the source caveat", (
   assert.match(draft, /East-of-river package/);
   // top corridor's first fix drives the first resolved action, lowercased
   assert.match(draft, /prioritize New York Avenue NE for safety redesign, beginning with road diet/);
-  // editorial caveat must always be present
-  assert.match(draft, /preliminary ward-grain screen pending intersection\/HIN-level verification/);
+  // editorial caveats must always be present: HIN-join basis for corridors,
+  // ward-grain caveat for ward totals
+  assert.match(draft, /crashes within 25 m of the HIN centerline/);
+  assert.match(draft, /ward totals are preliminary and ward-grain/);
 });
 
 test("buildDraft degrades gracefully with no stats and no corridors (citywide recs only)", () => {

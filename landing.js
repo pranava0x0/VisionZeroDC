@@ -455,8 +455,8 @@ function setupCarousel() {
 // --- Hotspot teaser (top corridors preview) -------------------------------
 
 // Renders the two highest-injury corridors on the home tab as a preview that
-// links into hotspots.html. Per-corridor counts are a preliminary ward-grain
-// screen, so the note surfaces the GeoJSON's verification caveat.
+// links into hotspots.html. Per-corridor counts come from the crashes↔HIN join;
+// the note surfaces the GeoJSON's method caveat (buffer + period).
 function renderCorridorTeaser(geojson) {
   if (!els.corridorBand) return;
   const feats = (geojson && Array.isArray(geojson.features) ? geojson.features : [])
