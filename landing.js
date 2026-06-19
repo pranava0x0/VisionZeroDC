@@ -455,8 +455,8 @@ function setupCarousel() {
 // --- Hotspot teaser (top corridors preview) -------------------------------
 
 // Renders the two highest-injury corridors on the home tab as a preview that
-// links into hotspots.html. Per-corridor counts are a preliminary ward-grain
-// screen, so the note surfaces the GeoJSON's verification caveat.
+// links into hotspots.html. Per-corridor counts come from the crashes↔HIN join;
+// the note surfaces the GeoJSON's method caveat (buffer + period).
 function renderCorridorTeaser(geojson) {
   if (!els.corridorBand) return;
   const feats = (geojson && Array.isArray(geojson.features) ? geojson.features : [])
@@ -473,8 +473,10 @@ function renderCorridorTeaser(geojson) {
       const priority = esc(p.priority || "");
       const prClass = /urgent/i.test(priority) ? "urgent" : "high";
       const parts = [];
+      // Lead with KSI (the ranking basis), then total injuries for context.
+      if (Number.isFinite(sev.ksi)) parts.push(`${fmtNum(sev.ksi)} killed/seriously injured`);
+      else if (Number.isFinite(sev.fatalities)) parts.push(`${fmtNum(sev.fatalities)} deaths`);
       if (Number.isFinite(sev.injuries)) parts.push(`${fmtNum(sev.injuries)} injuries`);
-      if (Number.isFinite(sev.fatalities)) parts.push(`${fmtNum(sev.fatalities)} deaths`);
       const sevLine = parts.join(" · ") + (sev.period ? ` (${esc(sev.period)})` : "");
       return (
         `<a class="corridor-card" href="hotspots.html">` +

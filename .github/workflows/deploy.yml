@@ -32,7 +32,9 @@ jobs:
           python-version: '3.12'
 
       - name: Run Python tests
-        run: python3 tests/test_snapshot.py
+        run: |
+          python3 tests/test_snapshot.py
+          python3 tests/test_hotspots_pipeline.py
 
   deploy:
     # Only deploy after tests pass, and never from a pull request.

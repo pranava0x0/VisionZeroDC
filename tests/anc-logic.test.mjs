@@ -35,9 +35,9 @@ const summary = {
 
 const hotspots = {
   features: [
-    { properties: { rank: 2, corridor_name: "South Capitol Street", ward: "Ward 6, Ward 7, Ward 8", severity: { injuries: 412, fatalities: 2, period: "2022-2026" }, recommended_interventions: [{ name: "Protected intersections" }] } },
-    { properties: { rank: 1, corridor_name: "New York Avenue NE", ward: "Ward 5, Ward 6, Ward 7", severity: { injuries: 438, fatalities: 3, period: "2022-2026" }, recommended_interventions: [{ name: "Road diet / lane rechannelization" }] } },
-    { properties: { rank: 5, corridor_name: "Southern Avenue SE", ward: "Ward 8", severity: { injuries: 200, fatalities: 1, period: "2022-2026" }, recommended_interventions: [] } },
+    { properties: { rank: 2, corridor_name: "South Capitol Street", ward: "Ward 6, Ward 7, Ward 8", severity: { injuries: 412, major_injuries: 34, fatalities: 2, ksi: 36, period: "2022-present" }, recommended_interventions: [{ name: "Protected intersections" }] } },
+    { properties: { rank: 1, corridor_name: "New York Avenue NE", ward: "Ward 5, Ward 6, Ward 7", severity: { injuries: 438, major_injuries: 26, fatalities: 3, ksi: 29, period: "2022-present" }, recommended_interventions: [{ name: "Road diet / lane rechannelization" }] } },
+    { properties: { rank: 5, corridor_name: "Southern Avenue SE", ward: "Ward 8", severity: { injuries: 200, major_injuries: 18, fatalities: 1, ksi: 19, period: "2022-present" }, recommended_interventions: [] } },
   ],
 };
 
@@ -127,11 +127,16 @@ test("buildDraft includes ward stats, corridors, asks, and the source caveat", (
   assert.match(draft, /DRAFT RESOLUTION — Traffic safety in Ward 7/);
   assert.match(draft, /141 people killed or seriously injured and 20 traffic deaths/);
   assert.match(draft, /New York Avenue NE/);
+  // corridor line surfaces KSI + its composition (the ranking basis), not just totals
+  assert.match(draft, /29 killed or seriously injured \(3 killed, 26 seriously injured\)/);
+  assert.match(draft, /438 total injured/);
   assert.match(draft, /East-of-river package/);
   // top corridor's first fix drives the first resolved action, lowercased
   assert.match(draft, /prioritize New York Avenue NE for safety redesign, beginning with road diet/);
-  // editorial caveat must always be present
-  assert.match(draft, /preliminary ward-grain screen pending intersection\/HIN-level verification/);
+  // editorial caveats must always be present: HIN-join basis for corridors,
+  // ward-grain caveat for ward totals
+  assert.match(draft, /crashes within 25 m of the HIN centerline/);
+  assert.match(draft, /ward totals are preliminary and ward-grain/);
 });
 
 test("buildDraft degrades gracefully with no stats and no corridors (citywide recs only)", () => {
