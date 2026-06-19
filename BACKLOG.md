@@ -4,19 +4,6 @@
 
 ---
 
-## ✅ COMPLETED: Phase 3 — Real corridor hotspots, scheduled refresh & agent-guidance (2026-06-19)
-
-**Context:** Closed the long-standing "per-corridor counts are a preliminary ward-grain screen" caveat by computing real corridor figures from a crashes↔HIN spatial join, added a scheduled data-refresh pipeline, and folded recent cross-project agent-use practices into AGENTS.md.
-
-- **Crashes↔HIN spatial join (`pipeline/hotspots.py`).** Joins Open Data DC crash records to the 77 DDOT High Injury Network corridors — crashes within 25 m of the centerline, 2022-present. The crash MapServer ignores server-side polyline buffering, so the join is client-side point-to-segment with a metre-space grid index. Emits `data/hin-corridors.json` (all 77 with crashes/injuries/KSI/fatalities + per-mode KSI + wards read off the joined crashes) and regenerates `data/hotspots.geojson` (top 8 by true KSI = fatalities + major injuries, polylines decimated to ≤50 pts, directional-aware title-casing). Recommended interventions are a transparent screening suggestion from the dominant crash mode, with effect sizes pulled from the verified entries in `countermeasures.json`. Top corridors: Georgia Ave NW, Alabama Ave SE, Connecticut Ave NW, New York Ave NE, 14th St NW.
-- **True-KSI semantics.** `hotspots.geojson` `severity` now carries `major_injuries`, and `ksi = fatalities + major_injuries` (was `injuries + fatalities`). `tests/hotspots-data.test.mjs` updated to assert it; `tests/test_hotspots_pipeline.py` (9 tests) covers the join, severity reading, ward resolution, decimation, casing, confidence, and intervention rules.
-- **Scheduled refresh (`.github/workflows/refresh-data.yml`).** Weekly (Mon 09:13 UTC) + manual rerun of both pipelines against live sources; opens a data-refresh PR when `data/` changes (never a direct push to main) so the test gate + a human review catch source-schema drift. `deploy.yml` test job extended to run the new pipeline test.
-- **Agent-guidance refresh (`AGENTS.md`).** Added "Search economics" (grep-the-mechanism ladder; don't double-search; verify a subagent's list against grep), a connectors/anti-fabrication section, and a verification-cadence checklist — distilled from recent FantasyGM / datacentercommunitybenefits / dcelectionstracker / vibe-coding-security practice.
-
-**Still open / follow-ups:** have the ANC brief read `hin-corridors.json` for data-derived per-ward corridor lists; reconfirm per-ward population vs. DC OP tables; optionally expose all 77 corridors as a sortable table; verify the remaining `countermeasures.json` effect sizes.
-
----
-
 ## ✅ COMPLETED: Phase 2 — ANC Toolkit, Hotspot Teaser & Source Audit (2026-06-08)
 
 **Context:** Shipped the Phase 2 **[PRIORITY] Option D** (community-led intervention prioritization) and **Option A** (hotspot teaser), plus finished the editorial source audit (DATA-AUDIT-001 residuals) and closed the last UAT issue.

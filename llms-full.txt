@@ -17,7 +17,7 @@ Editorial promise (see CLAUDE.md): every numeric claim links to a primary source
 
 - index.html — Safety Overview (logic: landing.js). Renders, from crash-summary.json: an accountability scorecard (A2), a deaths-vs-injuries trend (A3), KSI by travel mode (A4), and a "where harm concentrates" headline (A1); plus recommendation cards (from recommendations.json) and a countermeasure library (from countermeasures.json).
 - map.html — Crash Map (logic: app.js). Live Leaflet map querying DC ArcGIS directly, with date/severity/mode/KSI filters, hot spots, ward crash-rate table, moving-violations overlay, and per-crash case files. Filters + map view serialize to the URL query string (date, sev, mode, viol, vmonth, ksi, c=lat,lng, z=zoom).
-- hotspots.html — High-Injury Corridors (logic: hotspots.js). Leaflet map + profile cards for the highest-injury corridors from data/hotspots.geojson (severity, mode breakdown, recommended interventions, equity notes, confidence). Per-corridor counts are real — pipeline/hotspots.py joins crash records to the DDOT High Injury Network (crashes within 25 m of the centerline, 2022-present); full per-corridor data for all 77 HIN corridors is in data/hin-corridors.json.
+- hotspots.html — High-Injury Corridors (logic: hotspots.js). Leaflet map + profile cards for the five highest-injury corridors from data/hotspots.geojson (severity, mode breakdown, recommended interventions, equity notes, confidence). Per-corridor counts are a preliminary ward-grain screen pending intersection/HIN-level verification.
 - anc.html — ANC Safety Brief (logic: anc.js). Community-led prioritization: a ward selector drives a per-ward crash snapshot (from crash-summary.json), the high-injury corridors that intersect the ward (from hotspots.geojson), and ward-scoped + citywide recommendations (from recommendations.json), then generates an editable, source-grounded resolution draft with copy / open-in-email (mailto, un-sent) / print actions. Static, no backend. Deep-linkable via #ward-N.
 - src/crash-logic.js — shared pure logic (severity math, triage score, URL encode/decode), unit-tested in Node.
 
@@ -42,7 +42,7 @@ Top level: `schema_version`, `captured_at` (ISO), `generator`, `sources` (with q
 - The most recent ~2 years are preliminary (reporting lag).
 - Ward population values are ~2022 ward-level estimates on the 2022 ward boundaries (consistent with crash ward assignment), compiled from DC Office of Planning / DC Health Matters figures via a secondary compilation and anchored to the 2020 U.S. Census total of 689,545 (redistricting balanced each ward toward ~86,193, +/-5%); reconfirm each value against the DC OP per-ward tables before final public analysis.
 - Countermeasure effect sizes are transcribed from cited sources and flagged unverified until re-checked.
-- The "where harm concentrates" headline on the Overview page is ward-grain; the stronger street-segment "X% of streets = Y% of KSI" figure still needs the citywide crashes↔HIN share. The per-corridor hotspot counts (hotspots.html, hin-corridors.json) ARE now from a crashes↔High Injury Network spatial join (pipeline/hotspots.py).
+- "Where harm concentrates" is currently ward-grain; the stronger street-segment "X% of streets = Y% of KSI" figure needs a crashes↔High Injury Network spatial join (planned).
 - Moving-violation records are enforcement tickets, not crashes.
 
 ## Regenerating the data

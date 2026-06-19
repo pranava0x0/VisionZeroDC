@@ -30,32 +30,6 @@ Web search and multi-agent deep-research flows are the easiest way to burn a lar
 - **Stop on the first sign of failure.** If searches return junk or a flow stalls, stop and report what you have — do not keep retrying the same expensive path hoping it converges.
 - **Verify before publishing.** Treat scraped figures as research-grade until checked against the primary source (see the editorial promise in CLAUDE.md); don't spend more tokens polishing an unverified number.
 
-### Search economics
-
-A search subagent is not a free "go find it" button. It carries fixed overhead — its own system prompt, the full tool schemas, and a verbose report — and hands back a *summary*, not the code. For a "where is X?" question in this repo (a few thousand lines of JS/Python/HTML), that is the wrong trade. Climb a ladder and stop the moment the question is answered:
-
-1. **`rg`/`grep` for the mechanism, not the concept.** To find every sort, search `\.sort(\|sorted(` — not "the sorting logic." A literal grep is *exhaustive* where a concept-search is not: a semantic agent can silently miss a call site that grep would catch.
-2. **Targeted `Read`** with `offset`/`limit` around the matched lines.
-3. **A subagent only for genuine fan-out** — many whole files, an unknown-shape question across a big tree, or parallel investigations.
-
-- **Don't double-search.** If you grep, don't also spawn an agent for the same question; if you spawn an agent, trust it instead of re-reading the same files. Pick the cheaper tool and commit.
-- **For mechanical "every call site / reference / usage" changes, verify a subagent's list against a grep before acting on it.** Agents report what they noticed; grep reports what exists.
-- **Size before you choose.** `git ls-files '*.py' '*.js' '*.html' | xargs wc -l` is cheaper than guessing how big the search is — state the size, then pick the strategy.
-
-### Connectors and research tooling
-
-When a task warrants a scraper or research connector (e.g. harvesting community/source candidates):
-
-- **Automate only the mechanical parts; never auto-publish.** Output goes to a gitignored staging dir (`data/candidates/` or similar) for human curation. Editorial judgment — stance, quote selection, policy framing — stays with a person.
-- **Bake in anti-fabrication guardrails.** Surface only *verbatim* quote candidates (never paraphrase). If a publication date can't be extracted, leave it `null` and flag it loudly rather than guess. Emit editorial fields that can't be machine-inferred as `null` + a TODO. This is the editorial promise (CLAUDE.md) made operational.
-- **Be polite and idempotent.** Disk cache, a per-host throttle, and 429 backoff — the same network-ethics rules in CLAUDE.md.
-- **Cite around bot-blocks instead of guessing.** When a source 403s to `curl`, pivot to a primary source that returns 200 and add a cross-reference; don't fabricate the figure to fill the gap.
-
-### Verification cadence
-
-- **Verify at three viewports every UI run** — desktop 1280, tablet 768, mobile 375 — and check the tablet breakpoint first; regressions show there before anywhere else.
-- **Define "done" as a concrete, repeatable checklist**, and log a clean pass explicitly. For this repo: tests pass, zero console errors, no failed network requests, no duplicate/future-dated/back-dated data rows, and every source URL resolves (or is marked unavailable). "Zero new bugs found" is a result worth writing down, not silence.
-
 ---
 
 ## Read These First
