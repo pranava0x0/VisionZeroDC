@@ -26,7 +26,9 @@
 - **Scheduled refresh (`.github/workflows/refresh-data.yml`).** Weekly (Mon 09:13 UTC) + manual rerun of both pipelines against live sources; opens a data-refresh PR when `data/` changes (never a direct push to main) so the test gate + a human review catch source-schema drift. `deploy.yml` test job extended to run the new pipeline test.
 - **Agent-guidance refresh (`AGENTS.md`).** Added "Search economics" (grep-the-mechanism ladder; don't double-search; verify a subagent's list against grep), a connectors/anti-fabrication section, and a verification-cadence checklist — distilled from recent FantasyGM / datacentercommunitybenefits / dcelectionstracker / vibe-coding-security practice.
 
-**Still open / follow-ups:** have the ANC brief read `hin-corridors.json` for data-derived per-ward corridor lists; reconfirm per-ward population vs. DC OP tables; optionally expose all 77 corridors as a sortable table; verify the remaining `countermeasures.json` effect sizes.
+**Still open / follow-ups:** have the ANC brief read `hin-corridors.json` for data-derived per-ward corridor lists; reconfirm per-ward population vs. DC OP tables; verify the remaining `countermeasures.json` effect sizes.
+
+**Update 2026-06-22:** the all-77-corridor sortable table is now exposed on `hotspots.html`, backed directly by `data/hin-corridors.json`.
 
 ---
 
@@ -357,7 +359,7 @@ Consider moving an item from this backlog into active work when one of these sta
 ## First Likely Next Steps
 
 1. ~~Add URL-synced filters and map bounds.~~ Done 2026-06-07: filters + map center/zoom mirror to the query string (`app.js` URL-state module).
-2. Add a sortable hotspot table below the map for mobile and tablet. _Partially addressed: a ward crash-rate table now exists; intersection/corridor row tables still pending._
+2. ~~Add a sortable hotspot table below the map for mobile and tablet.~~ Done 2026-06-22: `hotspots.html` now includes an all-77 HIN corridor table sortable by corridor, ward, KSI, deaths, serious injuries, crashes, and mileage.
 3. ~~Add a local data snapshot script for reproducible crash and ward summaries.~~ Done 2026-06-07: `pipeline/snapshot.py` -> `data/crash-summary.json`, with `tests/test_snapshot.py`.
 4. ~~Add denominators for ward comparisons before making any ward risk claims.~~ Done 2026-06-07: ward population + computed land area, surfaced as per-100k and per-sq-mi rates with an explicit "per-area is preferred" caveat. Road-mileage / VMT / trip denominators still open.
 5. Add evidence-card templates for policy recommendations.
@@ -385,7 +387,7 @@ Consider moving an item from this backlog into active work when one of these sta
 
 **Parked ideas (not yet built):**
 1. **Optional "focus" toggle** — a per-corridor "zoom to this" affordance for users who *do* want to drill in, kept separate from the default calm click so it's opt-in.
-2. **Sortable corridor table** under the map (sort by KSI, deaths, ward) — better than the map for scanning/ranking, and the accessible fallback when the map can't load. Ties into "First Likely Next Steps" item 2.
+2. ~~Sortable corridor table~~ — Shipped 2026-06-22 under the map, sortable by KSI, deaths, serious injuries, crashes, ward, and length; backed by the full `hin-corridors.json` inventory.
 3. **Crash-map deep link per corridor** — "see the underlying crashes" jumps to `map.html` filtered to that corridor's extent (reuse the URL-state module).
 4. **Mode/severity glanceability** — show the ped/cyclist/driver/passenger KSI split on the card or as a small bar, so the "who is being hurt here" insight doesn't require opening the full analysis doc.
 5. **Keyboard navigation** — arrow keys to move between corridors; cards are focusable and announce selection (a11y).

@@ -25,6 +25,7 @@ import { dirname, join } from "node:path";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const geo = JSON.parse(readFileSync(join(ROOT, "data/hotspots.geojson"), "utf8"));
+const hin = JSON.parse(readFileSync(join(ROOT, "data/hin-corridors.json"), "utf8"));
 
 // DC bounding box — same extent hotspots.js uses for the map (DC_BOUNDS),
 // expressed as [lng, lat] ranges. A point outside this is a geocoding error.
@@ -173,5 +174,20 @@ test("KSI is non-increasing as rank increases (ranking tracks severity)", () => 
     const prev = byRank[i - 1].properties.severity.ksi;
     const cur = byRank[i].properties.severity.ksi;
     assert.ok(cur <= prev, `rank ${i + 1} has higher KSI (${cur}) than rank ${i} (${prev})`);
+  }
+});
+
+test("full HIN corridor table source has sortable numeric fields for every corridor", () => {
+  assert.equal(hin.schema_version, 1);
+  assert.ok(Array.isArray(hin.corridors));
+  assert.equal(hin.corridors.length, 77, "expected the full DDOT High Injury Network inventory");
+  for (const c of hin.corridors) {
+    assert.equal(typeof c.corridor_name, "string", `${c.corridor_id}: corridor_name`);
+    assert.ok(Array.isArray(c.wards), `${c.corridor_id}: wards`);
+    for (const k of ["ksi", "fatalities", "major_injuries", "crashes", "length_mi"]) {
+      assert.equal(typeof c[k], "number", `${c.corridor_id}: ${k}`);
+      assert.ok(c[k] >= 0, `${c.corridor_id}: ${k} must be >= 0`);
+    }
+    assert.equal(c.ksi, c.fatalities + c.major_injuries, `${c.corridor_id}: ksi`);
   }
 });

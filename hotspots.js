@@ -14,10 +14,12 @@
 
 let map;
 let hotspotsData;
+let hinCorridorsData;
 let corridorLayers = {};
 let corridorMarkers = {};
 let allBounds = null;
 let selectedCorridor = null;
+let corridorTableSort = { key: 'ksi', direction: 'desc' };
 
 // DC map center and bounds
 const DC_CENTER = [38.9072, -77.0369];
@@ -27,19 +29,27 @@ const DC_BOUNDS = [
 ];
 
 async function initMap() {
-  // Load hotspots GeoJSON first
+  // Load hotspots GeoJSON and the full HIN corridor inventory first.
   try {
-    const response = await fetch('data/hotspots.geojson');
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    hotspotsData = await response.json();
+    const [hotspotsResponse, hinResponse] = await Promise.all([
+      fetch('data/hotspots.geojson'),
+      fetch('data/hin-corridors.json')
+    ]);
+    if (!hotspotsResponse.ok) throw new Error(`hotspots HTTP ${hotspotsResponse.status}`);
+    hotspotsData = await hotspotsResponse.json();
+    if (hinResponse.ok) hinCorridorsData = await hinResponse.json();
+    else console.warn('Full HIN corridor table unavailable:', hinResponse.status);
   } catch (error) {
     console.error('Failed to load hotspots data:', error);
     hotspotsData = null;
+    hinCorridorsData = null;
   }
 
   // Sidebar + summary load regardless of whether the map renders.
   populateSidebar();
   renderSummary();
+  renderCorridorTable();
+  wireCorridorTableSort();
 
   // Try to initialize map (it's OK if this fails)
   if (!document.getElementById('hotspots-map')) {
@@ -277,6 +287,98 @@ function createCorridorCard(props, idx) {
   card.addEventListener('click', () => selectCorridor(idx, { scrollCard: false }));
 
   return card;
+}
+
+function renderCorridorTable() {
+  const body = document.getElementById('corridor-table-body');
+  const count = document.getElementById('corridor-table-count');
+  if (!body || !count) return;
+
+  const corridors = hinCorridorsData && Array.isArray(hinCorridorsData.corridors)
+    ? [...hinCorridorsData.corridors]
+    : [];
+
+  if (!corridors.length) {
+    body.innerHTML = '<tr><td colspan="8">Full corridor table unavailable.</td></tr>';
+    count.textContent = '0 corridors';
+    return;
+  }
+
+  corridors.sort(compareCorridors);
+  count.textContent = `${corridors.length} corridors · ${hinCorridorsData.period || 'latest joined period'}`;
+  body.innerHTML = corridors.map((c) => `
+    <tr>
+      <td class="corridor-name-cell">${escapeHtml(c.corridor_name || c.route_name)}</td>
+      <td class="corridor-location-cell">${escapeHtml(c.location_scope || '')}</td>
+      <td class="corridor-wards-cell">${escapeHtml((c.wards || []).join(', ') || 'No joined crashes')}</td>
+      <td class="num lead">${formatNumber(c.ksi)}</td>
+      <td class="num">${formatNumber(c.fatalities)}</td>
+      <td class="num">${formatNumber(c.major_injuries)}</td>
+      <td class="num">${formatNumber(c.crashes)}</td>
+      <td class="num">${formatNumber(c.length_mi, 2)}</td>
+    </tr>
+  `).join('');
+}
+
+function wireCorridorTableSort() {
+  const buttons = document.querySelectorAll('.corridor-sort');
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const key = button.dataset.sort;
+      if (!key) return;
+      if (corridorTableSort.key === key) {
+        corridorTableSort.direction = corridorTableSort.direction === 'asc' ? 'desc' : 'asc';
+      } else {
+        corridorTableSort = { key, direction: numericSortKey(key) ? 'desc' : 'asc' };
+      }
+      buttons.forEach((btn) => btn.removeAttribute('aria-sort'));
+      button.setAttribute('aria-sort', corridorTableSort.direction === 'asc' ? 'ascending' : 'descending');
+      renderCorridorTable();
+    });
+  });
+}
+
+function compareCorridors(a, b) {
+  const key = corridorTableSort.key;
+  const dir = corridorTableSort.direction === 'asc' ? 1 : -1;
+  const av = sortValue(a, key);
+  const bv = sortValue(b, key);
+  let cmp;
+  if (typeof av === 'number' && typeof bv === 'number') {
+    cmp = av - bv;
+  } else {
+    cmp = String(av).localeCompare(String(bv));
+  }
+  if (cmp !== 0) return cmp * dir;
+  cmp = (b.ksi || 0) - (a.ksi || 0);
+  if (cmp !== 0) return cmp;
+  return String(a.corridor_name || '').localeCompare(String(b.corridor_name || ''));
+}
+
+function sortValue(corridor, key) {
+  if (key === 'wards') return (corridor.wards || []).join(', ') || 'No joined crashes';
+  return corridor[key] == null ? '' : corridor[key];
+}
+
+function numericSortKey(key) {
+  return ['ksi', 'fatalities', 'major_injuries', 'crashes', 'length_mi'].includes(key);
+}
+
+function formatNumber(value, digits = 0) {
+  if (!Number.isFinite(value)) return 'n/a';
+  return value.toLocaleString(undefined, {
+    minimumFractionDigits: digits,
+    maximumFractionDigits: digits
+  });
+}
+
+function escapeHtml(value) {
+  return String(value == null ? '' : value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
 }
 
 /**
