@@ -2,7 +2,7 @@
 
 > Public-interest tool that reads official Washington, DC open crash data to show where people are killed or seriously injured on DC streets, who is hurt, and which evidence-backed interventions are best supported. Static site; every number traces to a primary source.
 
-The site has four pages — a Safety Overview (insights + recommendations), an interactive Crash Map, a High-Injury Corridors (Hotspots) view, and an ANC Safety Brief builder — backed by baked JSON generated from Open Data DC by a Python pipeline. Editorial rule: separate observed facts from estimates and judgments; recommendations are transparent evidence cards, never opaque "safety scores." KSI = people Killed or Seriously (major) Injured.
+The site has five pages — a Safety Overview (insights + recommendations), an interactive Crash Map, a High-Injury Corridors (Hotspots) view, an ANC Safety Brief builder, and a Safe Streets Law Tracker — backed by baked JSON generated from Open Data DC plus curated source-linked policy data. Editorial rule: separate observed facts from estimates and judgments; recommendations are transparent evidence cards, never opaque "safety scores." KSI = people Killed or Seriously (major) Injured.
 
 ## Pages
 
@@ -10,6 +10,7 @@ The site has four pages — a Safety Overview (insights + recommendations), an i
 - [Crash Map](https://pranava0x0.github.io/VisionZeroDC/map.html): interactive Leaflet map of geocoded police-reported crashes with date / severity / mode / KSI-only filters, hot spots, ward crash rates with denominators, a moving-violations overlay, and per-crash case files. Filters and map view are URL-shareable.
 - [Hotspots](https://pranava0x0.github.io/VisionZeroDC/hotspots.html): the highest-injury corridors as an interactive Leaflet map plus profile cards (severity, mode breakdown, recommended interventions, equity notes, confidence). Per-corridor counts are real — computed by joining Open Data DC crash records to the DDOT High Injury Network (crashes within 25 m of the corridor centerline, 2022-present); KSI = people killed or seriously (major) injured.
 - [For ANCs](https://pranava0x0.github.io/VisionZeroDC/anc.html): community-led prioritization tool. Pick a ward to see its crash burden, the high-injury corridors that run through it, and ward-scoped + citywide evidence-backed recommendations, then generate an editable, source-grounded resolution draft to bring to an Advisory Neighborhood Commission (copy or open in email; nothing is sent automatically). Deep-linkable via `#ward-N`.
+- [Laws](https://pranava0x0.github.io/VisionZeroDC/laws.html): source-linked tracker for enacted DC safe-streets laws and codified funds. It states what the law text requires and points to delivery audits; it does not claim agency compliance without separate primary records.
 
 ## Data (baked, machine-readable JSON)
 
@@ -18,10 +19,11 @@ The site has four pages — a Safety Overview (insights + recommendations), an i
 - [hin-corridors.json](https://pranava0x0.github.io/VisionZeroDC/data/hin-corridors.json): all 77 DDOT High Injury Network corridors with real crash/injury/KSI/fatality counts and per-mode KSI, from a crashes↔HIN spatial join (2022-present, 25 m buffer). Backs the Hotspots map (top corridors) and the per-ward corridor lists.
 - [countermeasures.json](https://pranava0x0.github.io/VisionZeroDC/data/countermeasures.json): proven traffic-safety interventions with cited crash-reduction effect sizes (flagged unverified until checked against the primary source).
 - [recommendations.json](https://pranava0x0.github.io/VisionZeroDC/data/recommendations.json): evidence-card recommendations (problem, location, evidence + sources, mechanism, equity check, confidence, uncertainty).
+- [legislation.json](https://pranava0x0.github.io/VisionZeroDC/data/legislation.json): verified D.C. Law Library inventory for enacted street-safety laws, requirements, caveats, and delivery-audit pointers.
 
 ## Documentation
 
-- [README](https://pranava0x0.github.io/VisionZeroDC/README.md): how to run locally, the data pipeline, the two pages, and the tests.
+- [README](https://pranava0x0.github.io/VisionZeroDC/README.md): how to run locally, the data pipeline, the pages, and the tests.
 - [CLAUDE.md](https://pranava0x0.github.io/VisionZeroDC/CLAUDE.md): project intent, the editorial promise, data principles, and recommendation rules.
 - [AGENTS.md](https://pranava0x0.github.io/VisionZeroDC/AGENTS.md): operating manual for AI agents, including token and web-search discipline.
 - [DESIGN.md](https://pranava0x0.github.io/VisionZeroDC/DESIGN.md): the visual and UX system.
@@ -32,6 +34,7 @@ The site has four pages — a Safety Overview (insights + recommendations), an i
 - [Open Data DC — Crashes in DC](https://opendata.dc.gov/datasets/DCGIS::crashes-in-dc): the underlying crash dataset.
 - [DDOT Vision Zero](https://visionzero.dc.gov/): DC's official Vision Zero program and curated figures.
 - [DC Vision Zero crash dashboard](https://dcvisionzero.github.io/Crash-Injury-Dashboard/): DDOT's interactive crash/injury dashboard.
+- [D.C. Law Library](https://code.dccouncil.gov/): primary source for enacted DC laws and codified traffic-safety funds.
 
 ## Optional
 

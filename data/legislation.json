@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-06-22",
+  "source_title": "D.C. Law Library",
+  "source_agency": "Council of the District of Columbia",
+  "methodology": "Hand-verified inventory of enacted traffic-safety laws and one codified fund that map to Vision Zero delivery questions. Each record summarizes legal requirements only; implementation status and compliance claims require separate source review.",
+  "caveats": [
+    "This file is not legal advice.",
+    "Dollar figures from press coverage are intentionally excluded until verified against OCFO, OAG, court, or budget primary sources.",
+    "Delivery pointers are tracking prompts, not findings that an agency is compliant or non-compliant."
+  ],
+  "laws": [
+    {
+      "id": "vision-zero-enhancement-2020",
+      "title": "Vision Zero Enhancement Omnibus Amendment Act of 2020",
+      "citation": "D.C. Law 23-158",
+      "effective_date": "2020-12-23",
+      "status": "enacted",
+      "law_url": "https://code.dccouncil.gov/us/dc/council/laws/23-158",
+      "source_title": "D.C. Law Library: D.C. Law 23-158",
+      "summary": "Comprehensive Vision Zero package requiring safety reporting, sidewalk and crosswalk protections, protected bike lane and multimodal-priority triggers during reconstruction, local and collector street speed limits of 20 mph or less, and specified automated-enforcement infrastructure.",
+      "requirements": [
+        "DDOT must submit a Vision Zero infrastructure progress report on the District's top 15 most dangerous corridors for pedestrians and cyclists.",
+        "The corridor report must explain how proposed projects increase safety, improve equitable access to public transportation, support mode-share goals, and decrease motor-vehicle speeds.",
+        "Local and collector streets must have a speed limit of 20 mph or less.",
+        "Right turns on red must be prohibited near specified schools, parks, libraries, playgrounds, Metrorail station entrances, or bike-lane intersections unless DDOT publishes a safety explanation."
+      ],
+      "delivery_pointers": [
+        {
+          "label": "Compare statutory top-15 corridor reporting against the High Injury Network",
+          "href": "hotspots.html",
+          "note": "The current hotspot data ranks DDOT High Injury Network corridors by KSI and can seed an audit of whether the statutory corridor reporting is findable."
+        },
+        {
+          "label": "Use the ANC brief for corridor-specific asks",
+          "href": "anc.html",
+          "note": "The law's reporting standard gives ANCs a concrete question: what safety project is promised for this corridor, and how does it reduce speed or increase safe access?"
+        }
+      ],
+      "tags": ["corridors", "speed management", "protected bike lanes", "right on red", "accountability"]
+    },
+    {
+      "id": "safer-streets-2022",
+      "title": "Safer Streets Amendment Act of 2022",
+      "citation": "D.C. Law 24-214",
+      "effective_date": "2022-12-21",
+      "status": "enacted",
+      "law_url": "https://code.dccouncil.gov/us/dc/council/laws/24-214",
+      "source_title": "D.C. Law Library: D.C. Law 24-214",
+      "summary": "Updates bicycle and intersection rules, including bicycle stop-as-yield provisions, bicycle right-on-red where allowed, and a motor-vehicle right-on-red restriction framework.",
+      "requirements": [
+        "A rider approaching a stop sign may proceed through the intersection at a safe speed after yielding when required by law.",
+        "A rider may make a right turn at a steady red after stopping, checking for immediate hazards, and yielding to pedestrians and lawful traffic.",
+        "Motor-vehicle right turns on red are restricted unless DDOT determines a turn improves safety or traffic flow and posts the required sign.",
+        "DDOT must publish and maintain a list of intersections where right turns on red are allowed."
+      ],
+      "delivery_pointers": [
+        {
+          "label": "Track right-on-red exceptions",
+          "href": "map.html",
+          "note": "Pair crash records near schools, stations, parks, and bike lanes with DDOT's published exception list before making any compliance claim."
+        }
+      ],
+      "tags": ["right on red", "bicycles", "intersections", "public list"]
+    },
+    {
+      "id": "steer-2024",
+      "title": "Strengthening Traffic Enforcement, Education, and Responsibility Amendment Act of 2024",
+      "citation": "D.C. Law 25-161",
+      "effective_date": "2024-04-20",
+      "status": "enacted",
+      "law_url": "https://code.dccouncil.gov/us/dc/council/laws/25-161",
+      "source_title": "D.C. Law Library: D.C. Law 25-161",
+      "summary": "Creates stronger tools for repeat dangerous driving, including booting and towing eligibility, safe-driving education, civil enforcement authority, and an Intelligent Speed Assistance program for qualifying convictions.",
+      "requirements": [
+        "Vehicles with 10 or more points in a 6-month period can become booting- and towing-eligible.",
+        "DMV must establish a safe-driving course tied to fine reductions within statutory limits.",
+        "The District gains authority to pursue certain unpaid moving-violation debts through civil actions.",
+        "DMV must operate an Intelligent Speed Assistance program for people whose reinstatement conditions require enrollment."
+      ],
+      "delivery_pointers": [
+        {
+          "label": "Keep enforcement claims separate from engineering recommendations",
+          "href": "index.html#solutions",
+          "note": "Use STEER as legal authority context, not as a substitute for street-design fixes where the crash pattern points to speed management or infrastructure."
+        }
+      ],
+      "tags": ["repeat dangerous driving", "intelligent speed assistance", "education", "enforcement"]
+    },
+    {
+      "id": "ate-revenue-designation-2022",
+      "title": "Automated Traffic Enforcement System Revenue Designation Amendment Act of 2022",
+      "citation": "D.C. Law 24-321",
+      "effective_date": "2023-03-10",
+      "status": "enacted; fiscal applicability tied to approved budget and financial plan",
+      "law_url": "https://code.dccouncil.gov/us/dc/council/laws/24-321",
+      "source_title": "D.C. Law Library: D.C. Law 24-321",
+      "summary": "Specifies priority uses for the Vision Zero Enhancement Omnibus Amendment Act Implementation Fund, connecting automated-enforcement revenue to implementation of street-safety laws and pedestrian/bicycle safety work.",
+      "requirements": [
+        "Fund money is prioritized for implementing specified sections of the Vision Zero Enhancement Omnibus Amendment Act of 2020.",
+        "Fund money is also prioritized for implementing the Safer Streets Amendment Act of 2022 and Safe Streets for Students provisions.",
+        "Remaining eligible uses include pedestrian and bicycle safety, education, engineering, enforcement, traffic calming, and safe routes."
+      ],
+      "delivery_pointers": [
+        {
+          "label": "Audit revenue-to-safety claims only from budget primary sources",
+          "href": "README.md",
+          "note": "Press-reported camera revenue figures are useful leads, but the site should wait for OCFO or budget source records before displaying dollar totals."
+        }
+      ],
+      "tags": ["automated enforcement", "funding", "budget", "implementation"]
+    },
+    {
+      "id": "vision-zero-ped-bike-fund",
+      "title": "Vision Zero Pedestrian and Bicycle Safety Fund",
+      "citation": "D.C. Code § 50-921.20",
+      "effective_date": null,
+      "status": "codified fund",
+      "law_url": "https://code.dccouncil.gov/us/dc/council/code/sections/50-921.20",
+      "source_title": "D.C. Law Library: D.C. Code § 50-921.20",
+      "summary": "A special fund for pedestrian and bicycle safety that receives specified automated-enforcement fines and DMV fees, and may be used only for safety and quality improvements including education, engineering, enforcement, traffic calming, and safe routes.",
+      "requirements": [
+        "$500,000 per fiscal year from automated traffic enforcement fines is deposited in the fund.",
+        "Specified DMV fees are deposited in the fund.",
+        "The fund must be used solely to enhance pedestrian and bicycle transportation safety and quality."
+      ],
+      "delivery_pointers": [
+        {
+          "label": "Treat this as a funding trail, not a spending finding",
+          "href": "laws.html",
+          "note": "The code creates the fund and allowed uses; actual annual deposits and expenditures need budget and financial records."
+        }
+      ],
+      "tags": ["funding", "pedestrian safety", "bicycle safety", "automated enforcement"]
+    }
+  ]
+}

@@ -8,8 +8,9 @@ Static public-interest tool for reading DC crash data and related safety context
 - **`map.html` — Crash Map.** The interactive Leaflet map with date/severity/mode filters, a KSI-only toggle, moving-violations overlay, hot spots, ward crash rates, and per-crash case files. Shareable via URL state.
 - **`hotspots.html` — High-Injury Corridors.** Leaflet map + profile cards for the highest-injury corridors (`data/hotspots.geojson`): severity, mode breakdown, recommended interventions, equity notes, confidence. Per-corridor counts are real — `pipeline/hotspots.py` joins crash records to the DDOT High Injury Network (crashes within 25 m of the centerline, 2022-present).
 - **`anc.html` — ANC Safety Brief.** Community-led prioritization tool: pick a ward to see its crash burden, the corridors that run through it, and ward-scoped + citywide recommendations, then generate an editable, source-grounded resolution draft (copy / open-in-email / print). Static; deep-linkable via `#ward-N`.
+- **`laws.html` — Safe Streets Law Tracker.** Source-linked inventory of enacted DC street-safety laws and codified funds, with delivery pointers for tracking what was promised versus what is visible in the data.
 
-A top nav links the two. Recommendation cards on the landing page deep-link into the map with the relevant filters applied.
+A top nav links the pages. Recommendation cards on the landing page deep-link into the map with the relevant filters applied.
 
 ## For machine readers (llms.txt)
 
@@ -36,7 +37,7 @@ python3 pipeline/snapshot.py --refresh  # force re-fetch from ArcGIS
 
 This writes [data/crash-summary.json](data/crash-summary.json) (committed and served by the site) with per-ward crash totals, fatalities/injuries, the triage score, and exposure rates for each date window; a citywide `scorecard` and `citywide_by_year` trend; and per-window `ksi_by_mode` — plus full provenance and caveats. Denominators come from [data/ward-denominators.json](data/ward-denominators.json) (population) and computed ward polygon area. Re-runs are idempotent; raw caches live under `data/cache/` and are gitignored.
 
-Two curated (hand-authored, source-linked) files back the recommendations on the landing page: [data/countermeasures.json](data/countermeasures.json) (proven fixes with cited effect sizes; figures are flagged unverified until checked against the primary source) and [data/recommendations.json](data/recommendations.json) (evidence cards following the CLAUDE.md recommendation fields).
+Three curated (hand-authored, source-linked) files back the recommendation and law views: [data/countermeasures.json](data/countermeasures.json) (proven fixes with cited effect sizes; figures are flagged unverified until checked against the primary source), [data/recommendations.json](data/recommendations.json) (evidence cards following the CLAUDE.md recommendation fields), and [data/legislation.json](data/legislation.json) (verified enacted legal authority with delivery-audit pointers).
 
 ## Sharing Views
 

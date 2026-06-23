@@ -10,6 +10,7 @@ Current live numbers are NOT hardcoded here — read them from data/crash-summar
 2. Which corridors, intersections, and modes face the highest risk?
 3. What interventions are best supported by the evidence?
 4. What changed after a policy, camera, redesign, or project?
+5. Which enacted safety laws create authority or promises that can be audited?
 
 Editorial promise (see CLAUDE.md): every numeric claim links to a primary source; separate observed facts from estimates and judgments; recommendations are transparent evidence cards, never opaque scores; avoid victim-blaming language; surface missingness; report wins alongside failures.
 
@@ -19,6 +20,7 @@ Editorial promise (see CLAUDE.md): every numeric claim links to a primary source
 - map.html — Crash Map (logic: app.js). Live Leaflet map querying DC ArcGIS directly, with date/severity/mode/KSI filters, hot spots, ward crash-rate table, moving-violations overlay, and per-crash case files. Filters + map view serialize to the URL query string (date, sev, mode, viol, vmonth, ksi, c=lat,lng, z=zoom).
 - hotspots.html — High-Injury Corridors (logic: hotspots.js). Leaflet map + profile cards for the highest-injury corridors from data/hotspots.geojson (severity, mode breakdown, recommended interventions, equity notes, confidence). Per-corridor counts are real — pipeline/hotspots.py joins crash records to the DDOT High Injury Network (crashes within 25 m of the centerline, 2022-present); full per-corridor data for all 77 HIN corridors is in data/hin-corridors.json.
 - anc.html — ANC Safety Brief (logic: anc.js). Community-led prioritization: a ward selector drives a per-ward crash snapshot (from crash-summary.json), ALL High Injury Network corridors that run through the ward ranked by that ward's KSI (from data/hin-corridors.json, shown top-5 with a "show all" disclosure), and ward-scoped + citywide recommendations (from recommendations.json), then generates an editable, source-grounded resolution draft with copy / open-in-email (mailto, un-sent) / print actions. Static, no backend. Deep-linkable via #ward-N.
+- laws.html — Safe Streets Law Tracker (logic: laws.js, pure logic: src/laws-logic.js). Renders data/legislation.json: enacted DC safe-streets laws and codified funds, what each law text requires, D.C. Law Library source links, and delivery-audit pointers. It does not claim agency compliance without separate primary records.
 - src/crash-logic.js — shared pure logic (severity math, triage score, URL encode/decode), unit-tested in Node.
 
 ## Data dictionary — data/crash-summary.json
@@ -42,6 +44,7 @@ Top level: `schema_version`, `captured_at` (ISO), `generator`, `sources` (with q
 - The most recent ~2 years are preliminary (reporting lag).
 - Ward population values are ~2022 ward-level estimates on the 2022 ward boundaries (consistent with crash ward assignment), compiled from DC Office of Planning / DC Health Matters figures via a secondary compilation and anchored to the 2020 U.S. Census total of 689,545 (redistricting balanced each ward toward ~86,193, +/-5%); reconfirm each value against the DC OP per-ward tables before final public analysis.
 - Countermeasure effect sizes are transcribed from cited sources and flagged unverified until re-checked.
+- Legislation summaries are primary-source legal text summaries, not legal advice and not implementation findings; budget or agency records are needed before publishing compliance or spending claims.
 - The "where harm concentrates" headline on the Overview page is ward-grain; the stronger street-segment "X% of streets = Y% of KSI" figure still needs the citywide crashes↔HIN share. The per-corridor hotspot counts (hotspots.html, hin-corridors.json) ARE now from a crashes↔High Injury Network spatial join (pipeline/hotspots.py).
 - Moving-violation records are enforcement tickets, not crashes.
 
@@ -57,3 +60,4 @@ Top level: `schema_version`, `captured_at` (ISO), `generator`, `sources` (with q
 - DDOT Vision Zero crash analysis: https://visionzero.dc.gov/pages/crash-analysis
 - DC Vision Zero crash dashboard: https://dcvisionzero.github.io/Crash-Injury-Dashboard/
 - Ward 2022 boundaries (DCGIS): .../Administrative_Other_Boundaries_WebMercator/MapServer/53
+- D.C. Law Library: https://code.dccouncil.gov/

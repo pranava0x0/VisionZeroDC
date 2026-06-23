@@ -24,7 +24,7 @@ import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const HTML_FILES = ["index.html", "map.html", "hotspots.html", "anc.html"];
+const HTML_FILES = ["index.html", "map.html", "hotspots.html", "anc.html", "laws.html"];
 
 // Pull a single attribute's value out of a tag's attribute string.
 function attr(tag, name) {

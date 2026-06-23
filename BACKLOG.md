@@ -4,6 +4,19 @@
 
 ---
 
+## ✅ COMPLETED: Safe Streets Law Tracker (2026-06-22)
+
+**Context:** The product already showed crash harm, corridors, and recommendations, but did not track the legal promises DC has enacted for Vision Zero delivery. A bounded source pass against the D.C. Law Library identified enacted laws that map directly to "what was promised vs. delivered."
+
+- **Verified law inventory (`data/legislation.json`).** Added source-linked records for the Vision Zero Enhancement Omnibus Amendment Act of 2020, Safer Streets Amendment Act of 2022, STEER Amendment Act of 2024, Automated Traffic Enforcement System Revenue Designation Amendment Act of 2022, and the Vision Zero Pedestrian and Bicycle Safety Fund. Each record states only what the law text requires and links the D.C. Law Library primary source.
+- **Safe Streets Law Tracker (`laws.html`, `laws.js`, `src/laws-logic.js`).** New static page with tag filters, legal requirement cards, delivery-audit pointers, and caveats that separate legal authority from agency compliance or spending claims.
+- **Top-15 corridor connection.** The Vision Zero Omnibus entry explicitly ties the statutory "top 15 most dangerous corridors" reporting requirement to the existing high-injury corridor view.
+- **Source discipline.** Press-reported automated-enforcement revenue figures remain excluded until verified against OCFO, OAG, court, or budget primary records.
+
+**Follow-ups:** audit DDOT's published corridor reporting against the top HIN corridors; verify camera-revenue and spending figures from OCFO/budget records; track pending active campaign asks separately from enacted law.
+
+---
+
 ## ✅ COMPLETED: Phase 3 — Real corridor hotspots, scheduled refresh & agent-guidance (2026-06-19)
 
 **Context:** Closed the long-standing "per-corridor counts are a preliminary ward-grain screen" caveat by computing real corridor figures from a crashes↔HIN spatial join, added a scheduled data-refresh pipeline, and folded recent cross-project agent-use practices into AGENTS.md.

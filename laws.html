@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>Vision Zero DC — Safe Streets Law Tracker</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23111111'/%3E%3Ccircle cx='50' cy='50' r='25' fill='%239f1d20'/%3E%3Cline x1='50' y1='10' x2='50' y2='90' stroke='%23ffffff' stroke-width='6'/%3E%3Cline x1='10' y1='50' x2='90' y2='50' stroke='%23ffffff' stroke-width='6'/%3E%3C/svg%3E">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <nav class="site-nav" aria-label="Primary">
+      <a href="index.html" class="nav-brand">Vision Zero DC</a>
+      <div class="nav-links">
+        <a href="index.html">Overview</a>
+        <a href="map.html">Crash Map</a>
+        <a href="hotspots.html">Hotspots</a>
+        <a href="anc.html">For ANCs</a>
+        <a href="laws.html" aria-current="page">Laws</a>
+      </div>
+    </nav>
+
+    <header class="masthead">
+      <div class="masthead-main">
+        <div class="title-with-badge">
+          <h1>Safe streets laws, <span class="mark">promises to track</span></h1>
+        </div>
+      </div>
+      <p class="source-line">
+        DC has already enacted major street-safety mandates. This tracker keeps the legal authority next to the delivery question: what did the law require, and where should the public look for implementation evidence?
+      </p>
+    </header>
+
+    <main id="main" tabindex="-1">
+      <section class="laws-summary" aria-label="Law tracker summary">
+        <div class="law-kpi">
+          <strong id="law-count">Loading...</strong>
+          <span>verified legal records</span>
+        </div>
+        <p id="law-source" class="panel-note">Loading source trail...</p>
+      </section>
+
+      <section class="laws-tools" aria-label="Filter laws">
+        <div id="law-filters" class="law-filters"></div>
+      </section>
+
+      <p id="law-error" class="anc-error" hidden></p>
+      <section id="law-grid" class="law-grid" aria-label="Verified safe-streets laws">Loading laws...</section>
+
+      <section class="law-method" aria-label="Method and caveats">
+        <h2>Method</h2>
+        <p>
+          The tracker summarizes enacted text from the D.C. Law Library. It deliberately stops short of saying whether an agency has complied; that requires a separate delivery audit using DDOT, OCFO, OAG, court, or budget records.
+        </p>
+        <ul id="law-caveats"></ul>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Primary source: D.C. Law Library. Implementation claims require separate agency or budget records.</span>
+      <span><a href="hotspots.html">Compare to high-injury corridors</a></span>
+    </footer>
+
+    <script src="src/laws-logic.js"></script>
+    <script src="laws.js"></script>
+  </body>
+</html>
