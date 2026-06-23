@@ -17,6 +17,7 @@ test("law tracker includes the verified enacted laws from the campaign sweep", (
   const ids = doc.laws.map((law) => law.id).sort();
   assert.deepEqual(ids, [
     "ate-revenue-designation-2022",
+    "safe-streets-students-2022",
     "safer-streets-2022",
     "steer-2024",
     "vision-zero-enhancement-2020",

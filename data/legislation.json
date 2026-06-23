@@ -64,6 +64,30 @@
       "tags": ["right on red", "bicycles", "intersections", "public list"]
     },
     {
+      "id": "safe-streets-students-2022",
+      "title": "Safe Streets for Students Amendment Act of 2022",
+      "citation": "D.C. Law 24-285",
+      "effective_date": "2023-03-10",
+      "status": "enacted",
+      "law_url": "https://code.dccouncil.gov/us/dc/council/laws/24-285",
+      "source_title": "D.C. Law Library: D.C. Law 24-285",
+      "summary": "Builds a school-zone safety program: safe-passage staffing and grants, a Safe Routes to School program, a School Streets pilot, a multi-year Safe Streets for Students Master Plan, and lower school-zone speed limits with doubled fines.",
+      "requirements": [
+        "DDOT must operate a Safe Routes to School Program and produce school safety action plans for at least 25 schools per school year.",
+        "A School Streets Pilot Program must run at a minimum of one school per ward.",
+        "A Safe Streets for Students Master Plan must be produced and refreshed on a multi-year cycle.",
+        "School zones must carry a 15 mph speed limit between 6:00 a.m. and 7:00 p.m., with doubled fines for moving violations in school zones."
+      ],
+      "delivery_pointers": [
+        {
+          "label": "Check school-zone fixes against the crash map",
+          "href": "map.html",
+          "note": "The law promises action plans for at least 25 schools a year; pair the school list with nearby crash records before claiming a given school zone is treated."
+        }
+      ],
+      "tags": ["school zones", "safe routes to school", "speed management", "education", "accountability"]
+    },
+    {
       "id": "steer-2024",
       "title": "Strengthening Traffic Enforcement, Education, and Responsibility Amendment Act of 2024",
       "citation": "D.C. Law 25-161",
