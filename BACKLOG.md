@@ -15,6 +15,12 @@
 
 **Follow-ups:** audit DDOT's published corridor reporting against the top HIN corridors; verify camera-revenue and spending figures from OCFO/budget records; track pending active campaign asks separately from enacted law.
 
+**Added 2026-06-23:** Folded in the **Safe Streets for Students Amendment Act of 2022 ([D.C. Law 24-285](https://code.dccouncil.gov/us/dc/council/laws/24-285))** — the enacted school-zone law the inventory was missing (Safe Routes to School, School Streets pilot, 15 mph school zones 6a–7p, ≥25 school action plans/yr). The tracker's `validateLaw` deliberately requires a `code.dccouncil.gov` source, which keeps it scoped to codified law — so these campaign items belong in the "separate from enacted law" follow-up, not in `legislation.json`:
+- **Motor Vehicle Insurance Modernization Act — [Bill 26-0057](https://lims.dccouncil.gov/Legislation/B26-0057)** (introduced 2024, Chairman Mendelson; pending). Updates crash-victim insurance minimums. Source is LIMS, not the Law Library — track as a *pending bill*.
+- **Camera-revenue → safety fund** (DC Families for Safe Streets): direct more automated-enforcement revenue to safety work rather than the general fund. Builds on D.C. Law 24-321 / § 50-921.20; hold dollar figures until OCFO-verified.
+- **Intelligent Speed Assistance (ISA) expansion** (#StopSuperSpeeders): speed-limiting tech beyond STEER's repeat-offender program.
+- A future "pending bills + advocacy asks" surface could render these with their own schema (LIMS/org sources, no `code.dccouncil.gov` requirement) so they stay clearly separated from enacted law.
+
 ---
 
 ## ✅ COMPLETED: Phase 3 — Real corridor hotspots, scheduled refresh & agent-guidance (2026-06-19)
