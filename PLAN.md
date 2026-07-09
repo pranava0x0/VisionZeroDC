@@ -234,6 +234,8 @@ moment on the DC calendar**. Build on `data/legislation.json` (enacted law),
   `code.dccouncil.gov` (keep that guard; it's what keeps enacted law clean).
 - Seed inventory (verify each in LIMS before committing; statuses may have changed):
   - **B26-0057 Motor Vehicle Insurance Modernization** (crash-victim insurance minimums).
+    Confirmed an active DC Families for Safe Streets campaign as of 2026-07 (their
+    advocacy page names it), with a pre-assembled coalition behind it — see D2.
   - Any active successor to camera-revenue designation follow-through (builds on
     D.C. Law 24-321 / § 50-921.20).
   - Intelligent Speed Assistance (ISA) expansion beyond STEER's repeat-offender program —
@@ -253,28 +255,108 @@ moment on the DC calendar**. Build on `data/legislation.json` (enacted law),
 
 Extend `data/organizations.json` (or a new `data/pitch-targets.json`) so every entry has:
 `can_act_on` (which finding types), `channel` (testimony, resolution, meeting, budget ask),
-and `source_url`. Target inventory to verify and complete:
+and `source_url`. The inventory below was **web-verified 2026-07-09** (sources at the end
+of this section); re-check URLs and officeholders at implementation time, but treat names,
+roles, and cadences as confirmed as of that date.
 
-- **Advocacy:** WABA, DC Families for Safe Streets, Washington Area Families for Safe
-  Streets chapters, Greater Greater Washington (amplification), All Walks DC / Walk DC.
-- **Official:** the Council committee with DDOT oversight (verify current committee name +
-  chair for Council Period 26 — do not hardcode from memory), each ward's
-  Councilmember, ANCs (the site already generates resolutions — that's the distribution
-  channel), DDOT Vision Zero Division, Major Crash Review Task Force (public body with
-  open meetings), DC Bicycle Advisory Council & Pedestrian Advisory Council (public
-  bodies residents can join/testify at — verify meeting cadence on open-dc.gov).
-- **Calendar hooks (this is the pitch-timing value):** performance oversight hearings
-  (~Feb–Mar), budget hearings (~Mar–May), BAC/PAC monthly meetings, Major Crash Review
-  Task Force meetings. Add a "when to show up" panel: each finding type mapped to its
+**Official / government:**
+
+- **DC Council Committee on Transportation & the Environment** — chaired by
+  **Charles Allen** in Council Period 26 (Jan 2 – Dec 31, 2026); oversees DDOT among 26
+  agencies. This is the primary legislative venue: performance oversight hearings ran
+  Jan–Feb 2026 (WABA published its DDOT-oversight take 2026-01-22 — a model for how
+  advocacy groups consume oversight season), budget oversight ~Mar–May (DDOT's FY2026
+  budget hearing is on ddot.dc.gov).
+- **DDOT Vision Zero Office + Highway Safety Office (HSO)** — HSO sits within DDOT's
+  Project Delivery Administration – Vision Zero, is NHTSA-grant-funded, runs the
+  **United We Go** public campaign (unitedwegodc.com), and hosts the **2026 Mobility
+  Safety Summit** — a direct pitch/demo venue for this tool. The Deputy Mayor for
+  Operations & Infrastructure (DMOI) page confirms the org placement.
+- **Bicycle Advisory Council (BAC)** — official public body advising Mayor/Council;
+  meets 1st Wednesday of odd months, 6–8 pm, One Judiciary Square rm 1117; open to the
+  public; members testify at oversight hearings.
+- **Pedestrian Advisory Council (PAC)** — general-body meetings 4th Monday monthly,
+  6:30–8:30 pm; open to the public (listed on open-dc.gov; walkdcwalk.org is its site).
+- **Multimodal Accessibility Advisory Council** — named coalition partner on the
+  insurance-modernization push; verify meeting cadence.
+- **Major Crash Review Task Force** — already in CLAUDE.md's source inventory
+  (open-dc.gov public body); reviews all fatal crashes.
+- Each ward's Councilmember and the ANCs — the site's resolution generator is the
+  distribution channel; note the **ANC Vision Zero Caucus was revived in fall 2025**
+  (WABA organizing) — a purpose-built audience for the ANC brief page.
+
+**Advocacy / coalition (pro-safety):**
+
+- **DC Families for Safe Streets** (dcfamiliesforsafestreets.org, @SafeStreetsDC) — the
+  flagship alignment. Their three current campaigns map 1:1 onto this project:
+  (1) **B26-0057 insurance modernization** → our pending-bills surface;
+  (2) **Intelligent Speed Assistance** → same;
+  (3) **"Fund & Implement Safe Streets Legislation"** — their listed laws (STEER, Safer
+  Streets, Safe Streets for Students, ATE Revenue Designation, Vision Zero Omnibus) are
+  almost exactly `data/legislation.json`. **Our law tracker + delivery-audit pointers are
+  ready-made evidence infrastructure for their existing campaign — lead the first pitch
+  here.** National partners: Families for Safe Streets (NYC), Vision Zero Network,
+  America Walks.
+- **WABA** (waba.org) — testifies every oversight/budget season; publishes annual
+  "DDOT oversight take" posts; hosts the **Washington Region Vision Zero Summit**;
+  organizes the ANC VZ Caucus revival. Second pitch target.
+- **The insurance-reform coalition around B26-0057** (per WABA advocacy pages): WABA,
+  DC Families for Safe Streets, DC PAC, MADD, DC Multimodal Accessibility Council,
+  Institute for Safer Trucking, Truck Safety Coalition, BAC — a pre-assembled audience
+  for any crash-severity/KSI findings.
+- **Broader network for amplification:** Greater Greater Washington (ggwash.org),
+  Coalition for Smarter Growth, DC Transportation Equity Network, Bike Walk & Bus PAC,
+  Washington Parks and People.
+
+**Opposition landscape (know before pitching):** the similarly-named
+**"DC Safe Streets Coalition" (dcsafestreetscoalition.org) is a bike-lane *opposition*
+group** — neighbors organizing against DDOT protected-bike-lane projects (17th St NW,
+Kansas Ave, Missouri Ave, Taylor St) and for e-bike regulation. Do not conflate it with
+the pro-safety "Safe Streets for All" framing it references. Two implications: (a) name
+collision — always link the exact org URL in `organizations.json` entries; (b) their
+stated concerns (congestion, ADA compliance, business access) are the counter-arguments
+pitch kits should anticipate with data, not dismiss.
+
+- **Calendar hooks (this is the pitch-timing value):** performance oversight
+  (~Jan–Feb), budget hearings (~Mar–May), BAC 1st-Wed-odd-months, PAC 4th-Monday,
+  Major Crash Review Task Force meetings, HSO Mobility Safety Summit, WABA's regional
+  Vision Zero Summit. Add a "when to show up" panel: each finding type mapped to its
   venue and season.
+
+*D2 verification sources (captured 2026-07-09):* [Council Period 26 committees](https://dccouncil.gov/committees-for-council-period-25/),
+[Charles Allen committee page](https://www.charlesallenward6.com/committee),
+[ACLU-DC committee explainer](https://www.acludc.org/news/who-dc-council-committees-2025-2026/),
+[DDOT FY2026 budget hearing](https://ddot.dc.gov/release/fiscal-year-2026-budget-oversight-hearing),
+[WABA DDOT oversight 2026](https://waba.org/2026/01/22/ddot-oversight-2026/),
+[WABA advocacy](https://waba.org/campaign/advocacy/),
+[HSO page](https://visionzero.dc.gov/pages/highway-safety-office),
+[United We Go](https://www.unitedwegodc.com/),
+[DMOI VZ/HSO page](https://dmoi.dc.gov/page/vision-zero-office-and-highway-safety-office),
+[BAC on open-dc.gov](https://www.open-dc.gov/public-bodies/bicycle-advisory-council-bac),
+[PAC on open-dc.gov](https://www.open-dc.gov/meeting/dc-pedestrian-advisory-council),
+[DC FSS advocacy](https://dcfamiliesforsafestreets.org/advocacy/),
+[DC Safe Streets Coalition (opposition)](https://dcsafestreetscoalition.org/).
 
 ### D3. Pitch kits — the connective deliverable
 
 For each shipped A-finding, a one-page, print-friendly brief (reuse the ANC resolution
 generator pattern): headline number with source links, the map view deep-link, the specific
 ask, the recipient (from D2), and the calendar moment. Static, generated from the baked
-JSON — no new dependencies. Acceptance: Pranava can print/email a brief for (say) the
-warnings analysis to a specific ANC or the oversight committee without editing HTML.
+JSON — no new dependencies. Each kit should also carry a short "anticipated objections"
+block (congestion, business access, ADA concerns — the documented arguments of the
+bike-lane-opposition groups in D2) answered with data, not rhetoric. Acceptance: Pranava
+can print/email a brief for (say) the warnings analysis to a specific ANC, the
+Transportation & Environment Committee, or DC FSS without editing HTML.
+
+**First-pitch sequence (from the D2 verification pass):**
+1. **DC Families for Safe Streets** — offer the law tracker + delivery-audit as evidence
+   infrastructure for their "Fund & Implement" campaign (1:1 overlap with
+   `data/legislation.json`).
+2. **WABA** — time it to their oversight-season prep (their annual DDOT-oversight post
+   lands in January); the enforcement-mismatch and warnings findings are testimony-grade.
+3. **ANC Vision Zero Caucus** — the ANC brief page is purpose-built for this audience.
+4. **HSO Mobility Safety Summit / WABA regional VZ Summit** — demo venues for the tool
+   itself.
 
 ### D4. Recommendation-engine tie-in
 
