@@ -1133,6 +1133,264 @@ body.violations-visible .violations-source-container {
   }
 }
 
+/* ---- Policy surfaces: lineage, pending bills, pitch targets (Workstream D) ---- */
+.law-lineage,
+.law-pending,
+.law-pitch {
+  margin: 0 0 8px;
+  padding: 24px 32px;
+  border-top: 1px solid var(--border);
+}
+
+.law-lineage h2,
+.law-pending h2,
+.law-pitch h2 {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+}
+
+.law-pitch h3 {
+  margin: 22px 0 10px;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+
+.section-head-badged {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.unverified-badge {
+  padding: 3px 8px;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-pill);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.lineage-list {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.lineage-item {
+  display: flex;
+  gap: 16px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+
+.lineage-year {
+  flex: 0 0 auto;
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--accent);
+}
+
+.lineage-title {
+  margin: 0;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.lineage-promise {
+  margin: 4px 0 0;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.lineage-enacted {
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-2);
+  color: var(--text-soft);
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.bills-grid,
+.pitch-targets {
+  display: grid;
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.bill-card,
+.pitch-card {
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+
+.bill-card-head,
+.pitch-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.bill-number {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.bill-card h3 {
+  margin: 6px 0 0;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  line-height: 1.15;
+}
+
+.bill-status {
+  flex: 0 0 auto;
+  padding: 5px 9px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--surface-2);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.bill-status-unverified {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.bill-summary {
+  margin: 12px 0 0;
+  line-height: 1.5;
+}
+
+.bill-note {
+  margin: 10px 0 0;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.bill-card-foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-soft);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+
+.pitch-group + .pitch-group {
+  margin-top: 8px;
+}
+
+.pitch-name {
+  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+
+.pitch-channels {
+  flex: 0 0 auto;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  text-align: right;
+}
+
+.pitch-role {
+  margin: 10px 0 0;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.pitch-seq {
+  margin: 10px 0 0;
+  padding-left: 22px;
+  line-height: 1.55;
+}
+
+.pitch-seq li + li {
+  margin-top: 8px;
+}
+
+.pitch-calendar {
+  margin: 10px 0 0;
+  padding-left: 20px;
+  line-height: 1.5;
+}
+
+.pitch-calendar li + li {
+  margin-top: 8px;
+}
+
+.cal-season {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.pitch-opposition {
+  margin: 18px 0 0;
+  padding: 14px 16px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  line-height: 1.5;
+}
+
+@media (max-width: 720px) {
+  .law-lineage,
+  .law-pending,
+  .law-pitch {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .pitch-card-head,
+  .bill-card-head {
+    display: grid;
+  }
+
+  .pitch-channels {
+    text-align: left;
+  }
+}
+
 .leaflet-container {
   overflow: hidden;
   font-family: var(--font-sans);

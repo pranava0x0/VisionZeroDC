@@ -49,6 +49,31 @@
       <p id="law-error" class="anc-error" hidden></p>
       <section id="law-grid" class="law-grid" aria-label="Verified safe-streets laws">Loading laws...</section>
 
+      <section class="law-lineage" aria-label="Ten-year arc of DC street-safety law">
+        <h2>Ten-year arc</h2>
+        <p class="panel-note" id="lineage-note"></p>
+        <ol id="law-lineage-list" class="lineage-list"></ol>
+      </section>
+
+      <section class="law-pending" aria-label="Pending and proposed legislation">
+        <div class="section-head-badged">
+          <h2>Pending &amp; proposed</h2>
+          <span class="unverified-badge" title="Statuses are advocacy-campaign references, not yet LIMS-confirmed">status unverified</span>
+        </div>
+        <p class="panel-note" id="bills-note"></p>
+        <div id="bills-grid" class="bills-grid"></div>
+      </section>
+
+      <section class="law-pitch" aria-label="Who can act and when to show up">
+        <h2>Who can act — and when to show up</h2>
+        <p class="panel-note" id="pitch-note"></p>
+        <div id="pitch-first" class="pitch-first"></div>
+        <div id="pitch-targets" class="pitch-targets"></div>
+        <h3>When to show up</h3>
+        <ul id="pitch-calendar" class="pitch-calendar"></ul>
+        <p id="pitch-opposition" class="pitch-opposition"></p>
+      </section>
+
       <section class="law-method" aria-label="Method and caveats">
         <h2>Method</h2>
         <p>
@@ -64,6 +89,8 @@
     </footer>
 
     <script src="src/laws-logic.js"></script>
+    <script src="src/bills-logic.js"></script>
+    <script src="src/pitch-targets-logic.js"></script>
     <script src="laws.js"></script>
   </body>
 </html>

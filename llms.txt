@@ -10,7 +10,7 @@ The site has five pages — a Safety Overview (insights + recommendations), an i
 - [Crash Map](https://pranava0x0.github.io/VisionZeroDC/map.html): interactive Leaflet map of geocoded police-reported crashes with date / severity / mode / KSI-only filters, hot spots, ward crash rates with denominators, a moving-violations overlay, and per-crash case files. Filters and map view are URL-shareable.
 - [Hotspots](https://pranava0x0.github.io/VisionZeroDC/hotspots.html): the highest-injury corridors as an interactive Leaflet map plus profile cards and an all-77-corridor sortable table (KSI, deaths, serious injuries, crashes, wards, mileage). Per-corridor counts are real — computed by joining Open Data DC crash records to the DDOT High Injury Network (crashes within 25 m of the corridor centerline, 2022-present); KSI = people killed or seriously (major) injured.
 - [For ANCs](https://pranava0x0.github.io/VisionZeroDC/anc.html): community-led prioritization tool. Pick a ward to see its crash burden, the high-injury corridors that run through it, and ward-scoped + citywide evidence-backed recommendations, then generate an editable, source-grounded resolution draft to bring to an Advisory Neighborhood Commission (copy or open in email; nothing is sent automatically). Deep-linkable via `#ward-N`.
-- [Laws](https://pranava0x0.github.io/VisionZeroDC/laws.html): source-linked tracker for enacted DC safe-streets laws and codified funds. It states what the law text requires and points to delivery audits; it does not claim agency compliance without separate primary records.
+- [Laws](https://pranava0x0.github.io/VisionZeroDC/laws.html): source-linked tracker for enacted DC safe-streets laws and codified funds. It states what the law text requires and points to delivery audits; it does not claim agency compliance without separate primary records. Also carries a ten-year law-lineage panel, a "Pending & Proposed" bills surface (LIMS-sourced, statuses badge-gated as unverified until confirmed), and a coalition / pitch-target surface (who can act on which finding, the channel, and the DC calendar moment) with the bike-lane-opposition landscape flagged.
 
 ## Data (baked, machine-readable JSON)
 
@@ -20,6 +20,8 @@ The site has five pages — a Safety Overview (insights + recommendations), an i
 - [countermeasures.json](https://pranava0x0.github.io/VisionZeroDC/data/countermeasures.json): proven traffic-safety interventions with cited crash-reduction effect sizes (flagged unverified until checked against the primary source).
 - [recommendations.json](https://pranava0x0.github.io/VisionZeroDC/data/recommendations.json): evidence-card recommendations (problem, location, evidence + sources, mechanism, equity check, confidence, uncertainty).
 - [legislation.json](https://pranava0x0.github.io/VisionZeroDC/data/legislation.json): verified D.C. Law Library inventory for enacted street-safety laws, requirements, caveats, and delivery-audit pointers.
+- [bills.json](https://pranava0x0.github.io/VisionZeroDC/data/bills.json): pending & proposed street-safety legislation, sourced to DC Council LIMS and kept separate from enacted law. Every bill carries a freshness date and an explicit `status_verified` flag (statuses are advocacy-campaign references until LIMS-confirmed). Includes the ten-year enacted-law lineage.
+- [pitch-targets.json](https://pranava0x0.github.io/VisionZeroDC/data/pitch-targets.json): coalition & pitch-target inventory (web-verified 2026-07-09) — government bodies, pro-safety advocacy coalitions, and the bike-lane-opposition landscape, each with `can_act_on` finding types, channel, DC calendar hooks, and a source URL.
 
 ## Documentation
 
@@ -28,6 +30,9 @@ The site has five pages — a Safety Overview (insights + recommendations), an i
 - [AGENTS.md](https://pranava0x0.github.io/VisionZeroDC/AGENTS.md): operating manual for AI agents, including token and web-search discipline.
 - [DESIGN.md](https://pranava0x0.github.io/VisionZeroDC/DESIGN.md): the visual and UX system.
 - [BACKLOG.md](https://pranava0x0.github.io/VisionZeroDC/BACKLOG.md): roadmap, peer-city research, and shipped items.
+- [PLAN.md](https://pranava0x0.github.io/VisionZeroDC/PLAN.md): the next-phase implementation plan (novel accountability data, performance, deployment, coalitions).
+- [DEPLOYMENT.md](https://pranava0x0.github.io/VisionZeroDC/DEPLOYMENT.md): hosting decision doc — stay on GitHub Pages; pre-registered triggers for a Cloudflare Pages move.
+- [PERF.md](https://pranava0x0.github.io/VisionZeroDC/PERF.md): performance baseline, per-page budget, and the responsive-sweep log.
 
 ## Authoritative sources
 
