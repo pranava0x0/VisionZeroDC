@@ -1,0 +1,172 @@
+{
+  "_provenance": {
+    "schema_version": 1,
+    "source_title": "Vision Zero DC coalition & pitch-target inventory",
+    "source_description": "Named recipients who can act on this project's findings, the channel they act through, and the DC calendar moment to reach them. Government bodies, pro-safety advocacy coalitions, and the opposition landscape to anticipate.",
+    "methodology": "Web-verified 2026-07-09 during PLAN.md Workstream D2. Every entry links its primary source URL. Officeholders, roles, and meeting cadences were confirmed as of that date; re-check names and URLs before pitching. This is a pitch-routing tool, not an endorsement or an exhaustive directory.",
+    "captured_at": "2026-07-09",
+    "last_verified": "2026-07-09",
+    "council_period": "Council Period 26 (Jan 2 – Dec 31, 2026)",
+    "caveats": [
+      "Officeholders and committee assignments change; re-verify the chair and committee scope each Council period.",
+      "Meeting cadences are the published recurring schedule; individual meetings get cancelled or moved — check the body's own calendar before showing up.",
+      "'can_act_on' maps a target to this project's finding types; it does not claim the target has taken a position on any specific finding.",
+      "The opposition landscape is included so pitches anticipate documented counter-arguments with data, not to disparage residents raising real concerns (congestion, ADA access, business impact)."
+    ]
+  },
+  "finding_types": [
+    { "id": "warnings", "label": "311 warnings → later crashes (A1)" },
+    { "id": "camera-evaluation", "label": "Per-camera before/after (A2)" },
+    { "id": "enforcement-mismatch", "label": "Enforcement–harm mismatch (A3)" },
+    { "id": "memo-delivery", "label": "Fatal-crash memo delivery audit (A4)" },
+    { "id": "school-safety", "label": "Children/seniors near schools (A5)" },
+    { "id": "law-delivery", "label": "Enacted-law delivery tracking" },
+    { "id": "pending-bills", "label": "Pending & proposed legislation" }
+  ],
+  "targets": [
+    {
+      "id": "council-committee-transportation-environment",
+      "name": "DC Council Committee on Transportation & the Environment",
+      "type": "government",
+      "role": "Primary legislative venue. Chaired by Charles Allen in Council Period 26; oversees DDOT among 26 agencies. Performance oversight hearings ran Jan–Feb 2026; budget oversight ~Mar–May.",
+      "can_act_on": ["warnings", "enforcement-mismatch", "memo-delivery", "law-delivery", "pending-bills", "camera-evaluation", "school-safety"],
+      "channels": ["testimony", "oversight questions", "budget ask"],
+      "calendar_hooks": ["performance-oversight", "budget-oversight"],
+      "source_url": "https://www.charlesallenward6.com/committee"
+    },
+    {
+      "id": "ddot-vision-zero-hso",
+      "name": "DDOT Vision Zero Office + Highway Safety Office (HSO)",
+      "type": "government",
+      "role": "HSO sits within DDOT's Project Delivery Administration – Vision Zero, is NHTSA-grant-funded, runs the 'United We Go' campaign, and hosts the 2026 Mobility Safety Summit — a direct demo venue for this tool.",
+      "can_act_on": ["warnings", "camera-evaluation", "enforcement-mismatch", "memo-delivery", "school-safety"],
+      "channels": ["meeting", "tool demo", "data sharing"],
+      "calendar_hooks": ["hso-mobility-safety-summit"],
+      "source_url": "https://dmoi.dc.gov/page/vision-zero-office-and-highway-safety-office"
+    },
+    {
+      "id": "bicycle-advisory-council",
+      "name": "Bicycle Advisory Council (BAC)",
+      "type": "government",
+      "role": "Official public body advising the Mayor and Council. Members testify at oversight hearings.",
+      "can_act_on": ["enforcement-mismatch", "law-delivery", "pending-bills", "memo-delivery"],
+      "channels": ["meeting", "testimony"],
+      "calendar_hooks": ["bac-first-wednesday-odd-months"],
+      "source_url": "https://www.open-dc.gov/public-bodies/bicycle-advisory-council-bac"
+    },
+    {
+      "id": "pedestrian-advisory-council",
+      "name": "Pedestrian Advisory Council (PAC)",
+      "type": "government",
+      "role": "Official public body advising the Mayor and Council on pedestrian safety. Named partner on the insurance-modernization push.",
+      "can_act_on": ["warnings", "school-safety", "law-delivery", "pending-bills"],
+      "channels": ["meeting", "testimony"],
+      "calendar_hooks": ["pac-fourth-monday-monthly"],
+      "source_url": "https://www.open-dc.gov/meeting/dc-pedestrian-advisory-council"
+    },
+    {
+      "id": "major-crash-review-task-force",
+      "name": "Major Crash Review Task Force",
+      "type": "government",
+      "role": "Independent public body reviewing all fatal crashes; includes MPD, DDOT, OP, DMV, BAC, PAC, MAAC. Directly relevant to the memo-delivery audit.",
+      "can_act_on": ["memo-delivery", "warnings"],
+      "channels": ["meeting", "data sharing"],
+      "calendar_hooks": ["major-crash-review-meetings"],
+      "source_url": "https://www.open-dc.gov/public-bodies/major-crash-review-task-force"
+    },
+    {
+      "id": "anc-vision-zero-caucus",
+      "name": "ANC Vision Zero Caucus + ward Councilmembers",
+      "type": "government",
+      "role": "The ANC Vision Zero Caucus was revived in fall 2025 (WABA organizing) — a purpose-built audience for the ANC brief page. Each ward's Councilmember and ANCs are reachable via the site's resolution generator.",
+      "can_act_on": ["warnings", "enforcement-mismatch", "school-safety", "memo-delivery", "law-delivery"],
+      "channels": ["resolution", "meeting"],
+      "calendar_hooks": ["anc-monthly-meetings"],
+      "source_url": "https://waba.org/campaign/advocacy/"
+    },
+    {
+      "id": "dc-families-for-safe-streets",
+      "name": "DC Families for Safe Streets",
+      "type": "advocacy",
+      "role": "Flagship alignment. Three current campaigns map 1:1 onto this project: B26-0057 insurance modernization, Intelligent Speed Assistance, and 'Fund & Implement Safe Streets Legislation' (their listed laws are almost exactly data/legislation.json). Our law tracker + delivery-audit pointers are ready-made evidence infrastructure for their existing campaign — lead the first pitch here.",
+      "can_act_on": ["law-delivery", "pending-bills", "warnings", "enforcement-mismatch", "camera-evaluation", "school-safety", "memo-delivery"],
+      "channels": ["evidence infrastructure", "coalition", "testimony"],
+      "calendar_hooks": ["performance-oversight", "budget-oversight"],
+      "pitch_rank": 1,
+      "source_url": "https://dcfamiliesforsafestreets.org/advocacy/"
+    },
+    {
+      "id": "waba",
+      "name": "Washington Area Bicyclist Association (WABA)",
+      "type": "advocacy",
+      "role": "Testifies every oversight/budget season; publishes an annual 'DDOT oversight take' each January; hosts the Washington Region Vision Zero Summit; organized the ANC VZ Caucus revival. The enforcement-mismatch and warnings findings are testimony-grade.",
+      "can_act_on": ["enforcement-mismatch", "warnings", "law-delivery", "pending-bills", "memo-delivery"],
+      "channels": ["testimony", "publication", "coalition"],
+      "calendar_hooks": ["performance-oversight", "budget-oversight", "waba-regional-vz-summit"],
+      "pitch_rank": 2,
+      "source_url": "https://waba.org/2026/01/22/ddot-oversight-2026/"
+    },
+    {
+      "id": "b26-0057-insurance-coalition",
+      "name": "Insurance-reform coalition around B26-0057",
+      "type": "advocacy",
+      "role": "Pre-assembled audience per WABA advocacy pages: WABA, DC Families for Safe Streets, DC PAC, MADD, DC Multimodal Accessibility Council, Institute for Safer Trucking, Truck Safety Coalition, BAC. A ready audience for any crash-severity / KSI findings.",
+      "can_act_on": ["pending-bills", "warnings", "school-safety"],
+      "channels": ["coalition", "testimony"],
+      "calendar_hooks": ["performance-oversight", "budget-oversight"],
+      "source_url": "https://waba.org/campaign/advocacy/"
+    },
+    {
+      "id": "amplification-network",
+      "name": "Amplification network",
+      "type": "advocacy",
+      "role": "Reach beyond the core coalition: Greater Greater Washington, Coalition for Smarter Growth, DC Transportation Equity Network, Bike Walk & Bus PAC, Washington Parks and People.",
+      "can_act_on": ["warnings", "enforcement-mismatch", "law-delivery", "pending-bills"],
+      "channels": ["publication", "coalition"],
+      "calendar_hooks": [],
+      "source_url": "https://ggwash.org/"
+    },
+    {
+      "id": "dc-safe-streets-coalition-opposition",
+      "name": "DC Safe Streets Coalition (bike-lane opposition — name collision)",
+      "type": "opposition",
+      "role": "NOT a pro-safety group despite the name. Neighbors organizing against DDOT protected-bike-lane projects (17th St NW, Kansas Ave, Missouri Ave, Taylor St) and for e-bike regulation. Two implications: (a) name collision — always link the exact org URL; (b) their stated concerns (congestion, ADA compliance, business access) are the counter-arguments pitch kits should anticipate with data, not dismiss.",
+      "can_act_on": [],
+      "channels": ["counter-arguments to anticipate"],
+      "anticipated_objections": ["congestion", "ADA compliance", "business/curb access"],
+      "calendar_hooks": [],
+      "source_url": "https://dcsafestreetscoalition.org/"
+    }
+  ],
+  "calendar_hooks": [
+    { "id": "performance-oversight", "label": "Council performance oversight hearings", "season": "~Jan–Feb", "note": "DDOT among the agencies reviewed; advocacy groups (WABA) publish oversight takes in January." },
+    { "id": "budget-oversight", "label": "Council budget oversight hearings", "season": "~Mar–May", "note": "DDOT FY budget hearing scheduled on ddot.dc.gov; the window to attach a budget ask to a finding.", "source_url": "https://ddot.dc.gov/release/fiscal-year-2026-budget-oversight-hearing" },
+    { "id": "bac-first-wednesday-odd-months", "label": "Bicycle Advisory Council meeting", "season": "1st Wednesday of odd months, 6–8 pm", "note": "One Judiciary Square rm 1117; open to the public.", "source_url": "https://www.open-dc.gov/public-bodies/bicycle-advisory-council-bac" },
+    { "id": "pac-fourth-monday-monthly", "label": "Pedestrian Advisory Council general meeting", "season": "4th Monday monthly, 6:30–8:30 pm", "note": "Open to the public.", "source_url": "https://www.open-dc.gov/meeting/dc-pedestrian-advisory-council" },
+    { "id": "major-crash-review-meetings", "label": "Major Crash Review Task Force", "season": "Per the task force calendar", "note": "Reviews all fatal crashes.", "source_url": "https://www.open-dc.gov/public-bodies/major-crash-review-task-force" },
+    { "id": "hso-mobility-safety-summit", "label": "HSO 2026 Mobility Safety Summit", "season": "2026 (date per HSO)", "note": "A direct pitch/demo venue for this tool.", "source_url": "https://visionzero.dc.gov/pages/highway-safety-office" },
+    { "id": "waba-regional-vz-summit", "label": "WABA Washington Region Vision Zero Summit", "season": "Per WABA", "note": "Regional demo/testimony venue.", "source_url": "https://waba.org/campaign/advocacy/" },
+    { "id": "anc-monthly-meetings", "label": "ANC monthly meetings", "season": "Monthly, per ANC", "note": "The site's resolution generator is the distribution channel; ANC Vision Zero Caucus revived fall 2025." }
+  ],
+  "first_pitch_sequence": [
+    { "rank": 1, "target_id": "dc-families-for-safe-streets", "why": "Offer the law tracker + delivery-audit as evidence infrastructure for their 'Fund & Implement' campaign — 1:1 overlap with data/legislation.json. Needs no new A-finding to start." },
+    { "rank": 2, "target_id": "waba", "why": "Time it to oversight-season prep (their annual DDOT-oversight post lands in January); enforcement-mismatch and warnings findings are testimony-grade." },
+    { "rank": 3, "target_id": "anc-vision-zero-caucus", "why": "The ANC brief page is purpose-built for this audience." },
+    { "rank": 4, "target_id": "ddot-vision-zero-hso", "why": "HSO Mobility Safety Summit / WABA regional VZ Summit are demo venues for the tool itself." }
+  ],
+  "sources": [
+    { "label": "Council Period 26 committees", "url": "https://dccouncil.gov/committees-for-council-period-25/" },
+    { "label": "Charles Allen committee page", "url": "https://www.charlesallenward6.com/committee" },
+    { "label": "ACLU-DC committee explainer", "url": "https://www.acludc.org/news/who-dc-council-committees-2025-2026/" },
+    { "label": "DDOT FY2026 budget hearing", "url": "https://ddot.dc.gov/release/fiscal-year-2026-budget-oversight-hearing" },
+    { "label": "WABA DDOT oversight 2026", "url": "https://waba.org/2026/01/22/ddot-oversight-2026/" },
+    { "label": "WABA advocacy", "url": "https://waba.org/campaign/advocacy/" },
+    { "label": "HSO page", "url": "https://visionzero.dc.gov/pages/highway-safety-office" },
+    { "label": "United We Go", "url": "https://www.unitedwegodc.com/" },
+    { "label": "DMOI VZ/HSO page", "url": "https://dmoi.dc.gov/page/vision-zero-office-and-highway-safety-office" },
+    { "label": "BAC on open-dc.gov", "url": "https://www.open-dc.gov/public-bodies/bicycle-advisory-council-bac" },
+    { "label": "PAC on open-dc.gov", "url": "https://www.open-dc.gov/meeting/dc-pedestrian-advisory-council" },
+    { "label": "DC FSS advocacy", "url": "https://dcfamiliesforsafestreets.org/advocacy/" },
+    { "label": "DC Safe Streets Coalition (opposition)", "url": "https://dcsafestreetscoalition.org/" }
+  ]
+}

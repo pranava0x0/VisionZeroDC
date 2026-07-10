@@ -1,0 +1,126 @@
+{
+  "_provenance": {
+    "schema_version": 1,
+    "source_title": "DC Council pending & proposed street-safety legislation",
+    "source_agency": "DC Council via the Legislative Information Management System (LIMS)",
+    "source_description": "Bills introduced or pending in the current Council period that bear on street safety. Deliberately SEPARATE from data/legislation.json (enacted law), whose validator requires a code.dccouncil.gov URL. Pending bills live in LIMS and change status frequently, so every entry carries a freshness date and an explicit status-verification flag.",
+    "methodology": "Seed inventory drawn from PLAN.md Workstream D1 (advocacy-campaign references as of 2026-07). Bill numbers, statuses, committee assignments, and hearing dates are NOT yet re-confirmed against LIMS in this pass — each entry is flagged status_verified:false until a bounded LIMS lookup confirms it. Do not present any status as fact until verified.",
+    "captured_at": "2026-07-09",
+    "council_period": "Council Period 26 (Jan 2 – Dec 31, 2026)",
+    "lims_search_url": "https://lims.dccouncil.gov/searchresult",
+    "caveats": [
+      "Statuses shown are advocacy-campaign references, not LIMS-confirmed as of capture. Every card is marked 'status unverified' until a LIMS lookup confirms bill number, committee, and hearing dates.",
+      "Pending bills expire at the end of a Council period if not enacted; a bill listed here may have been reintroduced under a new number.",
+      "This surface tracks legislative intent, not delivery — an introduced bill is a proposal, not a promise kept.",
+      "Nothing here should be cited as enacted law; enacted mandates live in the Safe Streets Law Tracker (legislation.json), sourced to the D.C. Law Library."
+    ]
+  },
+  "bills": [
+    {
+      "id": "b26-0057-insurance-modernization",
+      "bill_number": "B26-0057",
+      "title": "Motor Vehicle Insurance Modernization",
+      "summary": "Raises crash-victim insurance minimums so people injured or killed by drivers are less likely to face catastrophic uncovered costs.",
+      "status": "introduced",
+      "status_verified": false,
+      "status_note": "Named as an active DC Families for Safe Streets campaign as of 2026-07 with a pre-assembled coalition (WABA, DC FSS, DC PAC, MADD, DC Multimodal Accessibility Council, Institute for Safer Trucking, Truck Safety Coalition, BAC). Confirm bill number, committee, and hearing schedule in LIMS.",
+      "committee": null,
+      "lims_url": "https://lims.dccouncil.gov/Legislation/B26-0057",
+      "campaign": "Motor Vehicle Insurance Modernization",
+      "campaign_url": "https://dcfamiliesforsafestreets.org/advocacy/",
+      "tags": ["post-crash care", "insurance", "coalition"]
+    },
+    {
+      "id": "isa-expansion",
+      "bill_number": null,
+      "title": "Intelligent Speed Assistance (ISA) expansion",
+      "summary": "Expand Intelligent Speed Assistance beyond STEER's repeat-offender program toward broader deployment. Advocacy handle: #StopSuperSpeeders.",
+      "status": "proposed / campaign",
+      "status_verified": false,
+      "status_note": "Active DC Families for Safe Streets campaign as of 2026-07. Bill number not yet identified — run a bounded LIMS search for the current ISA-expansion vehicle before presenting a number.",
+      "committee": null,
+      "lims_url": "https://lims.dccouncil.gov/searchresult",
+      "campaign": "Intelligent Speed Assistance",
+      "campaign_url": "https://dcfamiliesforsafestreets.org/advocacy/",
+      "tags": ["speed management", "technology"]
+    },
+    {
+      "id": "ate-revenue-followthrough",
+      "bill_number": null,
+      "title": "Automated-enforcement revenue designation follow-through",
+      "summary": "Any active successor measure ensuring automated-enforcement (camera) revenue is designated to safety programs, building on D.C. Law 24-321 / § 50-921.20.",
+      "status": "watch",
+      "status_verified": false,
+      "status_note": "Placeholder for a successor/oversight measure to the enacted ATE Revenue Designation. Confirm whether a live bill exists in Council Period 26 via LIMS; if none, keep as an oversight watch item, not a bill.",
+      "committee": null,
+      "lims_url": "https://lims.dccouncil.gov/searchresult",
+      "campaign": "Fund & Implement Safe Streets Legislation",
+      "campaign_url": "https://dcfamiliesforsafestreets.org/advocacy/",
+      "tags": ["enforcement", "budget", "accountability"]
+    }
+  ],
+  "lineage": {
+    "label": "Ten-year arc of DC street-safety law",
+    "note": "The legislative lineage this project's accountability work sits on. Enacted entries link to the Safe Streets Law Tracker; earlier entries are listed for context and are flagged where their exact citation still needs verification.",
+    "entries": [
+      {
+        "year": 2014,
+        "short_title": "Vision Zero Act of 2014",
+        "core_promise": "Established DC's Vision Zero commitment to eliminate traffic fatalities and serious injuries.",
+        "in_tracker": false,
+        "law_id": null,
+        "citation": null,
+        "needs_verification": true
+      },
+      {
+        "year": 2016,
+        "short_title": "Bicycle and Pedestrian Safety Amendment Act of 2016",
+        "core_promise": "Strengthened protections for people biking and walking, including contributory-negligence and safety-infrastructure provisions.",
+        "in_tracker": false,
+        "law_id": null,
+        "citation": null,
+        "needs_verification": true
+      },
+      {
+        "year": 2020,
+        "short_title": "Vision Zero Enhancement Omnibus Amendment Act of 2020",
+        "core_promise": "Top-15 dangerous-corridor safety reporting, 20 mph local/collector speed limits, right-on-red restrictions near sensitive uses.",
+        "in_tracker": true,
+        "law_id": "vision-zero-enhancement-2020",
+        "needs_verification": false
+      },
+      {
+        "year": 2022,
+        "short_title": "Safe Streets for Students Amendment Act of 2022",
+        "core_promise": "School-zone safety measures: School Streets pilots, 15 mph zones, school-safety action plans.",
+        "in_tracker": true,
+        "law_id": "safe-streets-students-2022",
+        "needs_verification": false
+      },
+      {
+        "year": 2022,
+        "short_title": "Safer Streets Amendment Act of 2022",
+        "core_promise": "Right-on-red and daylighting-style protections advancing pedestrian safety at intersections.",
+        "in_tracker": true,
+        "law_id": "safer-streets-2022",
+        "needs_verification": false
+      },
+      {
+        "year": 2022,
+        "short_title": "Automated Traffic Enforcement Revenue Designation",
+        "core_promise": "Designated automated-enforcement revenue toward safety purposes.",
+        "in_tracker": true,
+        "law_id": "ate-revenue-designation-2022",
+        "needs_verification": false
+      },
+      {
+        "year": 2024,
+        "short_title": "STEER Amendment Act of 2024",
+        "core_promise": "Repeat-speeder accountability, including an Intelligent Speed Assistance program for the most dangerous drivers.",
+        "in_tracker": true,
+        "law_id": "steer-2024",
+        "needs_verification": false
+      }
+    ]
+  }
+}

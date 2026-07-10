@@ -4,6 +4,26 @@
 
 ---
 
+## ✅ COMPLETED: PLAN.md phase — deployment doc, policy/coalition surfaces, perf baseline (2026-07-09)
+
+**Context:** First implementation pass on [PLAN.md](PLAN.md). Shipped the milestones that are fully specified and fabrication-free; the live-data Workstream-A pipelines are scoped below as deferred because they require real Open Data DC seed queries and spatial joins on sensitive crash data (the project's #1 rule forbids synthesizing those numbers).
+
+- **M8 — [DEPLOYMENT.md](DEPLOYMENT.md).** Decision doc (zero code): decision matrix, pre-registered recommendation to stay on GitHub Pages with named triggers for a Cloudflare Pages move, and a migration runbook that preserves the test gate, llms.txt, and the weekly refresh PR flow.
+- **D1 — Pending bills + ten-year lineage.** `data/bills.json` (LIMS-sourced, deliberately separate from `legislation.json`; every status `status_verified:false` and badge-gated until LIMS-confirmed) with the seed inventory (B26-0057 insurance modernization, ISA expansion, ATE-revenue follow-through) and a ten-year enacted-law lineage. Rendered as "Pending & Proposed" + a "Ten-year arc" panel on `laws.html`. Validator `src/bills-logic.js` enforces the LIMS/enacted separation; `tests/bills-data.test.mjs`.
+- **D2 — Coalition / pitch-target surface.** `data/pitch-targets.json` (web-verified 2026-07-09, every entry source-linked) — government bodies, pro-safety coalitions, and the bike-lane-*opposition* landscape flagged (name collision with the pro-safety framing). Each target maps to the finding types it `can_act_on`, its channel, and its DC calendar hook. Rendered as "Who can act — and when to show up" with a first-pitch sequence (lead with DC Families for Safe Streets) on `laws.html`. Validator `src/pitch-targets-logic.js`; `tests/pitch-targets-data.test.mjs`.
+- **M1 — [PERF.md](PERF.md) baseline + responsive sweep.** Asset-weight baseline table, per-page budget, and a 375/768/1280 px responsive sweep across all five pages (no page-level horizontal-overflow defects; laws.html policy surfaces verified to wrap/reflow via DOM computed-style inspection). Field Lighthouse method documented for reproducible capture.
+
+**Deferred (Workstream A — the flagship novel-data findings; each is its own PR with fixtures + a seed query first):**
+- **A1 "The District was warned"** — 311 traffic-safety requests joined to subsequent KSI crashes (`pipeline/warnings.py` → `data/warnings.json`). Needs: catalog-API discovery of the current 311 / Traffic Safety Investigations dataset IDs, a seed query to confirm `SERVICECODE`/`SERVICETYPEID` codes, then reuse of the 25 m grid index in `pipeline/hotspots.py`. Small-count suppression; correlation-only framing.
+- **A2 per-camera before/after** — `pipeline/cameras.py` → `data/camera-evaluations.json`. Needs: Automated Safety Cameras + Violation-Count-By-Month schema check (activation date or first-violation-month proxy), ≥12-month pre/post windows, regression-to-mean caveats, small-count suppression.
+- **A3 enforcement–harm mismatch** — per-HIN-corridor moving violations vs. KSI, plus ward enforcement-burden equity column. Reuses the `hin-corridors.json` join but requires baking a real citywide moving-violations→corridor spatial join (14+ monthly MapServers) — a bounded but non-trivial fetch; seed with `returnCountOnly` before committing.
+- **A4 fatal-crash memo delivery audit** — curated `data/memo-audit.json` from a bounded scrape of the DDOT memo index (10 most recent), human-verified delivery. Most manual; do last.
+- **A5 children/seniors near schools** — KSI under 18 within ~500 ft of school points, aggregated with suppression; extends the laws page against D.C. Law 24-285.
+- **D3 pitch kits** — print-friendly one-pagers generated per shipped A-finding (the DC FSS "evidence infrastructure" pitch #1 can ship now off the existing law tracker; the rest wait on A-findings).
+- **B2/B3/M7 map-perf work** — canvas markers / viewport feature cap, lazy map init, preconnect hints; guided by the PERF.md baseline.
+
+---
+
 ## ✅ COMPLETED: Safe Streets Law Tracker (2026-06-22)
 
 **Context:** The product already showed crash harm, corridors, and recommendations, but did not track the legal promises DC has enacted for Vision Zero delivery. A bounded source pass against the D.C. Law Library identified enacted laws that map directly to "what was promised vs. delivered."
