@@ -6,15 +6,15 @@
     "source_title": "Crashes in DC x High Injury Network",
     "source_url": "https://opendata.dc.gov/datasets/DCGIS::crashes-in-dc",
     "hin_source_url": "https://opendata.dc.gov/datasets/high-injury-network",
-    "captured_at": "2026-07-06T12:57:49Z",
+    "captured_at": "2026-10-19T16:25:48Z",
     "method": "Each crash since 2022-01-01 is assigned to the nearest HIN corridor whose centerline passes within 25 m (point-to-segment, local equirectangular projection). KSI = people killed + seriously (major) injured. Injuries = all reported injured people (major + minor). Ward(s) are read from the joined crash records. Each corridor carries an `audit` block (date range, join-distance stats, and a sample of CRIMEID record IDs) and `totals` reports fetched/geocoded/joined/excluded counts so the figures are traceable back to source records. Recommended interventions are a screening suggestion ranked by the corridor's own mode mix and severity (each carries its trigger), not a DDOT plan; effect sizes come from data/countermeasures.json (research-grade until verified).",
     "caveats": "Counts are crashes within 25 m of the DDOT High Injury Network centerline, 2022-present, from the open, police-reported Crashes in DC dataset; they may differ from DDOT's curated figures. Ungeocoded crashes and crashes off the HIN are excluded. A crash near two corridors is assigned to the nearest.",
     "totals": {
-      "crashes_fetched": 86929,
-      "crashes_geocoded": 86929,
+      "crashes_fetched": 92163,
+      "crashes_geocoded": 92163,
       "crashes_ungeocoded": 0,
-      "crashes_joined_to_corridor": 29589,
-      "crashes_excluded_off_network": 57340,
+      "crashes_joined_to_corridor": 31389,
+      "crashes_excluded_off_network": 60774,
       "hin_corridors": 77,
       "record_id_field": "CRIMEID"
     }
@@ -29,31 +29,31 @@
         "location_scope": "7th St NW/Florida Ave NW To Chesapeake St NW",
         "ward": "Ward 1, Ward 4",
         "severity": {
-          "injuries": 917,
-          "major_injuries": 51,
-          "fatalities": 4,
-          "ksi": 55,
-          "crashes": 2387,
+          "injuries": 982,
+          "major_injuries": 55,
+          "fatalities": 6,
+          "ksi": 61,
+          "crashes": 2539,
           "period": "2022-present"
         },
         "mode_breakdown": {
-          "pedestrian_ksi": 14,
+          "pedestrian_ksi": 16,
           "cyclist_ksi": 8,
-          "driver_ksi": 27,
-          "passenger_ksi": 4
+          "driver_ksi": 29,
+          "passenger_ksi": 5
         },
         "recommended_interventions": [
           {
             "id": "automated_speed_camera",
             "name": "Automated speed enforcement",
             "effect": "A DDOT study reported injury crashes falling from 841 to 673 (about -20% injuries) around enforced locations; Portland measured -71% to -93% top-end speeding within 30 days of activation.",
-            "trigger": "4 traffic death(s) on this corridor"
+            "trigger": "6 traffic death(s) on this corridor"
           },
           {
             "id": "road_diet",
             "name": "Road diet / lane rechannelization",
             "effect": "FHWA cites ~19-47% total crash reductions for road diets; Seattle's Nickerson St saw roughly -93% aggressive (top-end) speeding.",
-            "trigger": "55 KSI concentrated on one arterial"
+            "trigger": "61 KSI concentrated on one arterial"
           },
           {
             "id": "protected_intersection",
@@ -70,14 +70,14 @@
         ],
         "equity_notes": "Serves Ward 1, Ward 4. HIN Tier 1. Equity context is ward-level; pair with DC Equity Emphasis Areas before prioritizing.",
         "confidence": "high",
-        "confidence_note": "2387 crashes joined within 25 m; 55 KSI (4 killed). Counts from Open Data DC; corridor extent per DDOT HIN.",
+        "confidence_note": "2539 crashes joined within 25 m; 61 KSI (6 killed). Counts from Open Data DC; corridor extent per DDOT HIN.",
         "priority": "URGENT",
         "data_source": "Crashes in DC x DDOT High Injury Network (Open Data DC)",
-        "last_updated": "2026-07-06",
+        "last_updated": "2026-10-19",
         "audit": {
           "date_range": [
             "2022-01-01",
-            "2026-07-04"
+            "2026-10-17"
           ],
           "mean_join_distance_m": 1.6,
           "max_join_distance_m": 24.7,
@@ -88,14 +88,14 @@
             "30756016872",
             "30758333597",
             "30759864468",
-            "31037455656",
-            "31038709438",
             "31042062349",
             "30826646624",
             "30872220113",
-            "31115095797",
+            "31037455656",
+            "31038709438",
             "31065446843",
             "31108932216",
+            "31115095797",
             "31189289816"
           ]
         }
@@ -311,17 +311,17 @@
         "location_scope": "17th St NW/K St NW Service Rd/K St NW To Chevy Chase Cir NW",
         "ward": "Ward 2, Ward 3",
         "severity": {
-          "injuries": 361,
-          "major_injuries": 33,
+          "injuries": 389,
+          "major_injuries": 36,
           "fatalities": 7,
-          "ksi": 40,
-          "crashes": 1205,
+          "ksi": 43,
+          "crashes": 1285,
           "period": "2022-present"
         },
         "mode_breakdown": {
-          "pedestrian_ksi": 15,
+          "pedestrian_ksi": 16,
           "cyclist_ksi": 3,
-          "driver_ksi": 14,
+          "driver_ksi": 16,
           "passenger_ksi": 7
         },
         "recommended_interventions": [
@@ -335,13 +335,13 @@
             "id": "road_diet",
             "name": "Road diet / lane rechannelization",
             "effect": "FHWA cites ~19-47% total crash reductions for road diets; Seattle's Nickerson St saw roughly -93% aggressive (top-end) speeding.",
-            "trigger": "40 KSI concentrated on one arterial"
+            "trigger": "43 KSI concentrated on one arterial"
           },
           {
             "id": "protected_intersection",
             "name": "Protected intersections",
             "effect": "Widely deployed in Vision Zero programs to remove turning conflicts at high-injury intersections; effect varies by site (verify locally).",
-            "trigger": "turning conflicts: drivers/passengers are 52% of KSI"
+            "trigger": "turning conflicts: drivers/passengers are 53% of KSI"
           },
           {
             "id": "speed_limit_20",
@@ -352,25 +352,25 @@
         ],
         "equity_notes": "Serves Ward 2, Ward 3. HIN Tier 2. Equity context is ward-level; pair with DC Equity Emphasis Areas before prioritizing.",
         "confidence": "high",
-        "confidence_note": "1205 crashes joined within 25 m; 40 KSI (7 killed). Counts from Open Data DC; corridor extent per DDOT HIN.",
+        "confidence_note": "1285 crashes joined within 25 m; 43 KSI (7 killed). Counts from Open Data DC; corridor extent per DDOT HIN.",
         "priority": "URGENT",
         "data_source": "Crashes in DC x DDOT High Injury Network (Open Data DC)",
-        "last_updated": "2026-07-06",
+        "last_updated": "2026-10-19",
         "audit": {
           "date_range": [
             "2022-01-01",
-            "2026-07-03"
+            "2026-10-17"
           ],
           "mean_join_distance_m": 1.5,
           "max_join_distance_m": 24.7,
           "sample_record_ids": [
             "30750475810",
             "31310322218",
-            "31345193083",
             "31313084616",
+            "31345193083",
+            "31347610613",
             "31382163783",
             "31386329040",
-            "31347610613",
             "31414837235",
             "31401847929",
             "31408431068",
@@ -597,11 +597,11 @@
         "location_scope": "5th St SE To Bowen Rd SE/Burns St SE/Stanley St SE",
         "ward": "Ward 7, Ward 8",
         "severity": {
-          "injuries": 572,
+          "injuries": 598,
           "major_injuries": 34,
           "fatalities": 2,
           "ksi": 36,
-          "crashes": 1437,
+          "crashes": 1501,
           "period": "2022-present"
         },
         "mode_breakdown": {
@@ -638,33 +638,33 @@
         ],
         "equity_notes": "Serves Ward 7, Ward 8. HIN Tier 1. Equity context is ward-level; pair with DC Equity Emphasis Areas before prioritizing.",
         "confidence": "high",
-        "confidence_note": "1437 crashes joined within 25 m; 36 KSI (2 killed). Counts from Open Data DC; corridor extent per DDOT HIN.",
+        "confidence_note": "1501 crashes joined within 25 m; 36 KSI (2 killed). Counts from Open Data DC; corridor extent per DDOT HIN.",
         "priority": "URGENT",
         "data_source": "Crashes in DC x DDOT High Injury Network (Open Data DC)",
-        "last_updated": "2026-07-06",
+        "last_updated": "2026-10-19",
         "audit": {
           "date_range": [
             "2022-01-03",
-            "2026-07-01"
+            "2026-10-15"
           ],
           "mean_join_distance_m": 2.0,
           "max_join_distance_m": 24.6,
           "sample_record_ids": [
+            "30766286790",
             "30768971456",
             "30769225336",
             "30773642436",
-            "30766286790",
             "30782221977",
-            "31115353839",
             "31064359817",
             "31093260696",
             "31108566928",
             "31112000122",
-            "31205182144",
+            "31115353839",
             "31214459043",
-            "31307567066",
+            "31205182144",
             "31279939608",
-            "31292517848"
+            "31292517848",
+            "31307567066"
           ]
         }
       },
@@ -867,282 +867,24 @@
       }
     },
     {
-      "id": "hin_12064672_1",
-      "type": "Feature",
-      "properties": {
-        "rank": 4,
-        "corridor_name": "New York Ave NE",
-        "location_scope": "New York Ave NW/N St NE To Eastern Ave NE",
-        "ward": "Ward 5",
-        "severity": {
-          "injuries": 542,
-          "major_injuries": 27,
-          "fatalities": 2,
-          "ksi": 29,
-          "crashes": 1627,
-          "period": "2022-present"
-        },
-        "mode_breakdown": {
-          "pedestrian_ksi": 6,
-          "cyclist_ksi": 1,
-          "driver_ksi": 13,
-          "passenger_ksi": 8
-        },
-        "recommended_interventions": [
-          {
-            "id": "automated_speed_camera",
-            "name": "Automated speed enforcement",
-            "effect": "A DDOT study reported injury crashes falling from 841 to 673 (about -20% injuries) around enforced locations; Portland measured -71% to -93% top-end speeding within 30 days of activation.",
-            "trigger": "2 traffic death(s) on this corridor"
-          },
-          {
-            "id": "protected_intersection",
-            "name": "Protected intersections",
-            "effect": "Widely deployed in Vision Zero programs to remove turning conflicts at high-injury intersections; effect varies by site (verify locally).",
-            "trigger": "turning conflicts: drivers/passengers are 72% of KSI"
-          },
-          {
-            "id": "road_diet",
-            "name": "Road diet / lane rechannelization",
-            "effect": "FHWA cites ~19-47% total crash reductions for road diets; Seattle's Nickerson St saw roughly -93% aggressive (top-end) speeding.",
-            "trigger": "29 KSI concentrated on one arterial"
-          },
-          {
-            "id": "speed_limit_20",
-            "name": "20 mph default speed limit",
-            "effect": "Part of Hoboken's and London's Vision Zero approach; pedestrian survival probability is far higher in a 20 mph than a 30+ mph impact.",
-            "trigger": "speed is the key driver of crash severity"
-          }
-        ],
-        "equity_notes": "Serves Ward 5. HIN Tier 1. Equity context is ward-level; pair with DC Equity Emphasis Areas before prioritizing.",
-        "confidence": "high",
-        "confidence_note": "1627 crashes joined within 25 m; 29 KSI (2 killed). Counts from Open Data DC; corridor extent per DDOT HIN.",
-        "priority": "URGENT",
-        "data_source": "Crashes in DC x DDOT High Injury Network (Open Data DC)",
-        "last_updated": "2026-07-06",
-        "audit": {
-          "date_range": [
-            "2022-01-01",
-            "2026-07-03"
-          ],
-          "mean_join_distance_m": 1.6,
-          "max_join_distance_m": 23.6,
-          "sample_record_ids": [
-            "27003676733",
-            "30748608064",
-            "31028619165",
-            "31042065338",
-            "30846030413",
-            "30859916740",
-            "30907674617",
-            "31124465309",
-            "31064296527",
-            "31066038267",
-            "31103628319",
-            "31176655631",
-            "31191819918",
-            "31195447683",
-            "31198463163"
-          ]
-        }
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            -77.00906,
-            38.90736
-          ],
-          [
-            -77.00719,
-            38.90801
-          ],
-          [
-            -77.00477,
-            38.90885
-          ],
-          [
-            -76.99838,
-            38.91104
-          ],
-          [
-            -76.99728,
-            38.91142
-          ],
-          [
-            -76.99371,
-            38.91267
-          ],
-          [
-            -76.99264,
-            38.91305
-          ],
-          [
-            -76.99175,
-            38.91336
-          ],
-          [
-            -76.99074,
-            38.91372
-          ],
-          [
-            -76.98912,
-            38.91426
-          ],
-          [
-            -76.98569,
-            38.91545
-          ],
-          [
-            -76.98393,
-            38.91606
-          ],
-          [
-            -76.9813,
-            38.91698
-          ],
-          [
-            -76.9802,
-            38.91719
-          ],
-          [
-            -76.97934,
-            38.91721
-          ],
-          [
-            -76.97753,
-            38.91725
-          ],
-          [
-            -76.9761,
-            38.91728
-          ],
-          [
-            -76.97472,
-            38.9173
-          ],
-          [
-            -76.97369,
-            38.91732
-          ],
-          [
-            -76.97252,
-            38.91734
-          ],
-          [
-            -76.97145,
-            38.91739
-          ],
-          [
-            -76.96954,
-            38.91737
-          ],
-          [
-            -76.9664,
-            38.91724
-          ],
-          [
-            -76.96472,
-            38.91711
-          ],
-          [
-            -76.96413,
-            38.91707
-          ],
-          [
-            -76.96156,
-            38.91695
-          ],
-          [
-            -76.95918,
-            38.91685
-          ],
-          [
-            -76.95856,
-            38.91685
-          ],
-          [
-            -76.95815,
-            38.91689
-          ],
-          [
-            -76.95772,
-            38.91699
-          ],
-          [
-            -76.95678,
-            38.91736
-          ],
-          [
-            -76.95527,
-            38.9181
-          ],
-          [
-            -76.9544,
-            38.91852
-          ],
-          [
-            -76.95355,
-            38.91891
-          ],
-          [
-            -76.9531,
-            38.91906
-          ],
-          [
-            -76.95261,
-            38.91919
-          ],
-          [
-            -76.95211,
-            38.91923
-          ],
-          [
-            -76.95161,
-            38.91923
-          ],
-          [
-            -76.95099,
-            38.91921
-          ],
-          [
-            -76.94886,
-            38.91888
-          ],
-          [
-            -76.94695,
-            38.91857
-          ],
-          [
-            -76.94411,
-            38.91812
-          ],
-          [
-            -76.94129,
-            38.91813
-          ]
-        ]
-      }
-    },
-    {
       "id": "hin_11001402_2",
       "type": "Feature",
       "properties": {
-        "rank": 5,
+        "rank": 4,
         "corridor_name": "14th St NW",
         "location_scope": "Thomas Cir NW To Iowa Ave NW",
         "ward": "Ward 1, Ward 2, Ward 4",
         "severity": {
-          "injuries": 411,
-          "major_injuries": 28,
+          "injuries": 445,
+          "major_injuries": 33,
           "fatalities": 1,
-          "ksi": 29,
-          "crashes": 1298,
+          "ksi": 34,
+          "crashes": 1382,
           "period": "2022-present"
         },
         "mode_breakdown": {
-          "pedestrian_ksi": 13,
-          "cyclist_ksi": 9,
+          "pedestrian_ksi": 15,
+          "cyclist_ksi": 12,
           "driver_ksi": 7,
           "passenger_ksi": 0
         },
@@ -1157,31 +899,31 @@
             "id": "road_diet",
             "name": "Road diet / lane rechannelization",
             "effect": "FHWA cites ~19-47% total crash reductions for road diets; Seattle's Nickerson St saw roughly -93% aggressive (top-end) speeding.",
-            "trigger": "29 KSI concentrated on one arterial"
+            "trigger": "34 KSI concentrated on one arterial"
           },
           {
             "id": "leading_pedestrian_interval",
             "name": "Leading pedestrian intervals",
             "effect": "Seattle reported roughly -34% serious-injury/fatal pedestrian crashes and -48% pedestrian turning collisions at LPI locations.",
-            "trigger": "pedestrians are 45% of KSI here"
+            "trigger": "pedestrians are 44% of KSI here"
           },
           {
             "id": "curb_extension",
             "name": "Curb extensions / bump-outs",
             "effect": "A standard component of low-cost Vision Zero packages (e.g. Hoboken's 60+ curb extensions) credited in its sustained zero-death record.",
-            "trigger": "13 pedestrian KSI on this corridor"
+            "trigger": "15 pedestrian KSI on this corridor"
           }
         ],
         "equity_notes": "Serves Ward 1, Ward 2, Ward 4. HIN Tier 2. Equity context is ward-level; pair with DC Equity Emphasis Areas before prioritizing.",
         "confidence": "high",
-        "confidence_note": "1298 crashes joined within 25 m; 29 KSI (1 killed). Counts from Open Data DC; corridor extent per DDOT HIN.",
+        "confidence_note": "1382 crashes joined within 25 m; 34 KSI (1 killed). Counts from Open Data DC; corridor extent per DDOT HIN.",
         "priority": "HIGH",
         "data_source": "Crashes in DC x DDOT High Injury Network (Open Data DC)",
-        "last_updated": "2026-07-06",
+        "last_updated": "2026-10-19",
         "audit": {
           "date_range": [
             "2022-01-01",
-            "2026-07-04"
+            "2026-10-15"
           ],
           "mean_join_distance_m": 1.7,
           "max_join_distance_m": 24.6,
@@ -1190,17 +932,17 @@
             "30750292922",
             "31040242988",
             "31041743484",
-            "31116001517",
             "31088311934",
             "31112628176",
+            "31116001517",
             "31129228330",
             "31201298160",
             "31202282327",
+            "31302372485",
             "31303370545",
             "31303372704",
-            "31302372485",
-            "31342910860",
-            "31345529867"
+            "31345529867",
+            "31316168319"
           ]
         }
       },
@@ -1399,570 +1141,26 @@
       }
     },
     {
-      "id": "hin_13069812_1",
-      "type": "Feature",
-      "properties": {
-        "rank": 6,
-        "corridor_name": "Pennsylvania Ave SE",
-        "location_scope": "Sycamore Dr SE To Unnamed Access Road",
-        "ward": "Ward 6, Ward 7, Ward 8",
-        "severity": {
-          "injuries": 453,
-          "major_injuries": 24,
-          "fatalities": 2,
-          "ksi": 26,
-          "crashes": 1130,
-          "period": "2022-present"
-        },
-        "mode_breakdown": {
-          "pedestrian_ksi": 4,
-          "cyclist_ksi": 0,
-          "driver_ksi": 18,
-          "passenger_ksi": 4
-        },
-        "recommended_interventions": [
-          {
-            "id": "automated_speed_camera",
-            "name": "Automated speed enforcement",
-            "effect": "A DDOT study reported injury crashes falling from 841 to 673 (about -20% injuries) around enforced locations; Portland measured -71% to -93% top-end speeding within 30 days of activation.",
-            "trigger": "2 traffic death(s) on this corridor"
-          },
-          {
-            "id": "protected_intersection",
-            "name": "Protected intersections",
-            "effect": "Widely deployed in Vision Zero programs to remove turning conflicts at high-injury intersections; effect varies by site (verify locally).",
-            "trigger": "turning conflicts: drivers/passengers are 85% of KSI"
-          },
-          {
-            "id": "road_diet",
-            "name": "Road diet / lane rechannelization",
-            "effect": "FHWA cites ~19-47% total crash reductions for road diets; Seattle's Nickerson St saw roughly -93% aggressive (top-end) speeding.",
-            "trigger": "26 KSI concentrated on one arterial"
-          },
-          {
-            "id": "speed_limit_20",
-            "name": "20 mph default speed limit",
-            "effect": "Part of Hoboken's and London's Vision Zero approach; pedestrian survival probability is far higher in a 20 mph than a 30+ mph impact.",
-            "trigger": "speed is the key driver of crash severity"
-          }
-        ],
-        "equity_notes": "Serves Ward 6, Ward 7, Ward 8. HIN Tier 1. Equity context is ward-level; pair with DC Equity Emphasis Areas before prioritizing.",
-        "confidence": "high",
-        "confidence_note": "1130 crashes joined within 25 m; 26 KSI (2 killed). Counts from Open Data DC; corridor extent per DDOT HIN.",
-        "priority": "URGENT",
-        "data_source": "Crashes in DC x DDOT High Injury Network (Open Data DC)",
-        "last_updated": "2026-07-06",
-        "audit": {
-          "date_range": [
-            "2022-01-02",
-            "2026-07-03"
-          ],
-          "mean_join_distance_m": 1.9,
-          "max_join_distance_m": 22.1,
-          "sample_record_ids": [
-            "30769539884",
-            "30769639912",
-            "30755427868",
-            "30756756555",
-            "30857139491",
-            "31115673650",
-            "31126676744",
-            "31064149483",
-            "31109402798",
-            "31210930669",
-            "31157468583",
-            "31199549456",
-            "31298938836",
-            "31346088961",
-            "31328019368"
-          ]
-        }
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            -76.98508,
-            38.88015
-          ],
-          [
-            -76.98282,
-            38.87924
-          ],
-          [
-            -76.98148,
-            38.87867
-          ],
-          [
-            -76.98042,
-            38.87811
-          ],
-          [
-            -76.97629,
-            38.87601
-          ],
-          [
-            -76.97562,
-            38.87568
-          ],
-          [
-            -76.97475,
-            38.87529
-          ],
-          [
-            -76.97412,
-            38.87503
-          ],
-          [
-            -76.97341,
-            38.87474
-          ],
-          [
-            -76.973,
-            38.87456
-          ],
-          [
-            -76.97283,
-            38.87448
-          ],
-          [
-            -76.9727,
-            38.87442
-          ],
-          [
-            -76.97212,
-            38.87415
-          ],
-          [
-            -76.97146,
-            38.87385
-          ],
-          [
-            -76.97125,
-            38.87375
-          ],
-          [
-            -76.97065,
-            38.87347
-          ],
-          [
-            -76.96959,
-            38.87305
-          ],
-          [
-            -76.96938,
-            38.87296
-          ],
-          [
-            -76.96924,
-            38.8729
-          ],
-          [
-            -76.96907,
-            38.87283
-          ],
-          [
-            -76.96847,
-            38.8726
-          ],
-          [
-            -76.96768,
-            38.87228
-          ],
-          [
-            -76.96682,
-            38.87193
-          ],
-          [
-            -76.96655,
-            38.87182
-          ],
-          [
-            -76.96543,
-            38.87136
-          ],
-          [
-            -76.96467,
-            38.87105
-          ],
-          [
-            -76.96327,
-            38.87048
-          ],
-          [
-            -76.962,
-            38.86996
-          ],
-          [
-            -76.96021,
-            38.86923
-          ],
-          [
-            -76.95869,
-            38.86861
-          ],
-          [
-            -76.95842,
-            38.8685
-          ],
-          [
-            -76.95722,
-            38.86801
-          ],
-          [
-            -76.95633,
-            38.86764
-          ],
-          [
-            -76.95575,
-            38.86741
-          ],
-          [
-            -76.95405,
-            38.86671
-          ],
-          [
-            -76.95324,
-            38.86638
-          ],
-          [
-            -76.95288,
-            38.86624
-          ],
-          [
-            -76.95222,
-            38.86597
-          ],
-          [
-            -76.95147,
-            38.86566
-          ],
-          [
-            -76.95025,
-            38.86517
-          ],
-          [
-            -76.94981,
-            38.86498
-          ],
-          [
-            -76.94896,
-            38.86464
-          ],
-          [
-            -76.94754,
-            38.86405
-          ],
-          [
-            -76.94667,
-            38.86371
-          ]
-        ]
-      }
-    },
-    {
-      "id": "hin_13081512_2",
-      "type": "Feature",
-      "properties": {
-        "rank": 7,
-        "corridor_name": "Southern Ave SE",
-        "location_scope": "Branch Ave SE To 53rd St SE",
-        "ward": "Ward 7",
-        "severity": {
-          "injuries": 298,
-          "major_injuries": 19,
-          "fatalities": 7,
-          "ksi": 26,
-          "crashes": 539,
-          "period": "2022-present"
-        },
-        "mode_breakdown": {
-          "pedestrian_ksi": 2,
-          "cyclist_ksi": 0,
-          "driver_ksi": 20,
-          "passenger_ksi": 4
-        },
-        "recommended_interventions": [
-          {
-            "id": "automated_speed_camera",
-            "name": "Automated speed enforcement",
-            "effect": "A DDOT study reported injury crashes falling from 841 to 673 (about -20% injuries) around enforced locations; Portland measured -71% to -93% top-end speeding within 30 days of activation.",
-            "trigger": "7 traffic death(s) on this corridor"
-          },
-          {
-            "id": "road_diet",
-            "name": "Road diet / lane rechannelization",
-            "effect": "FHWA cites ~19-47% total crash reductions for road diets; Seattle's Nickerson St saw roughly -93% aggressive (top-end) speeding.",
-            "trigger": "26 KSI concentrated on one arterial"
-          },
-          {
-            "id": "protected_intersection",
-            "name": "Protected intersections",
-            "effect": "Widely deployed in Vision Zero programs to remove turning conflicts at high-injury intersections; effect varies by site (verify locally).",
-            "trigger": "turning conflicts: drivers/passengers are 92% of KSI"
-          },
-          {
-            "id": "speed_limit_20",
-            "name": "20 mph default speed limit",
-            "effect": "Part of Hoboken's and London's Vision Zero approach; pedestrian survival probability is far higher in a 20 mph than a 30+ mph impact.",
-            "trigger": "speed is the key driver of crash severity"
-          }
-        ],
-        "equity_notes": "Serves Ward 7. HIN Tier 1. Equity context is ward-level; pair with DC Equity Emphasis Areas before prioritizing.",
-        "confidence": "high",
-        "confidence_note": "539 crashes joined within 25 m; 26 KSI (7 killed). Counts from Open Data DC; corridor extent per DDOT HIN.",
-        "priority": "URGENT",
-        "data_source": "Crashes in DC x DDOT High Injury Network (Open Data DC)",
-        "last_updated": "2026-07-06",
-        "audit": {
-          "date_range": [
-            "2022-01-02",
-            "2026-07-03"
-          ],
-          "mean_join_distance_m": 3.6,
-          "max_join_distance_m": 24.9,
-          "sample_record_ids": [
-            "30757608287",
-            "30825787285",
-            "31064177710",
-            "31064497479",
-            "31214915438",
-            "31200446399",
-            "31301902010",
-            "31417384970",
-            "31460390019",
-            "31518534979",
-            "31517738665",
-            "31596211189",
-            "31597400148",
-            "31608561451",
-            "31625773468"
-          ]
-        }
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            -76.95811,
-            38.85492
-          ],
-          [
-            -76.95723,
-            38.8556
-          ],
-          [
-            -76.95677,
-            38.85596
-          ],
-          [
-            -76.95622,
-            38.85638
-          ],
-          [
-            -76.95565,
-            38.85683
-          ],
-          [
-            -76.95493,
-            38.85739
-          ],
-          [
-            -76.95462,
-            38.85763
-          ],
-          [
-            -76.95389,
-            38.8582
-          ],
-          [
-            -76.95369,
-            38.85835
-          ],
-          [
-            -76.95327,
-            38.85868
-          ],
-          [
-            -76.95257,
-            38.85922
-          ],
-          [
-            -76.95245,
-            38.85932
-          ],
-          [
-            -76.95232,
-            38.85942
-          ],
-          [
-            -76.95172,
-            38.85988
-          ],
-          [
-            -76.95018,
-            38.86108
-          ],
-          [
-            -76.94956,
-            38.86156
-          ],
-          [
-            -76.94899,
-            38.862
-          ],
-          [
-            -76.94802,
-            38.86277
-          ],
-          [
-            -76.94742,
-            38.86323
-          ],
-          [
-            -76.94676,
-            38.86375
-          ],
-          [
-            -76.94623,
-            38.86416
-          ],
-          [
-            -76.9456,
-            38.86465
-          ],
-          [
-            -76.9447,
-            38.86536
-          ],
-          [
-            -76.94382,
-            38.86605
-          ],
-          [
-            -76.94309,
-            38.86661
-          ],
-          [
-            -76.94237,
-            38.86717
-          ],
-          [
-            -76.94145,
-            38.86789
-          ],
-          [
-            -76.94086,
-            38.86835
-          ],
-          [
-            -76.94034,
-            38.86876
-          ],
-          [
-            -76.93959,
-            38.86934
-          ],
-          [
-            -76.93893,
-            38.86986
-          ],
-          [
-            -76.93832,
-            38.87034
-          ],
-          [
-            -76.93743,
-            38.87103
-          ],
-          [
-            -76.93669,
-            38.8716
-          ],
-          [
-            -76.93637,
-            38.87186
-          ],
-          [
-            -76.93595,
-            38.87218
-          ],
-          [
-            -76.93534,
-            38.87265
-          ],
-          [
-            -76.93482,
-            38.87306
-          ],
-          [
-            -76.93422,
-            38.87353
-          ],
-          [
-            -76.93315,
-            38.87436
-          ],
-          [
-            -76.93245,
-            38.87491
-          ],
-          [
-            -76.93148,
-            38.87566
-          ],
-          [
-            -76.93104,
-            38.87601
-          ],
-          [
-            -76.93007,
-            38.87676
-          ],
-          [
-            -76.92943,
-            38.87726
-          ],
-          [
-            -76.92807,
-            38.87832
-          ],
-          [
-            -76.92637,
-            38.87964
-          ],
-          [
-            -76.92626,
-            38.87974
-          ],
-          [
-            -76.92623,
-            38.87979
-          ]
-        ]
-      }
-    },
-    {
       "id": "hin_12015342_1",
       "type": "Feature",
       "properties": {
-        "rank": 8,
+        "rank": 5,
         "corridor_name": "Benning Rd NE",
         "location_scope": "15th St NE/Bladensburg Rd NE/H St NE/Maryland Ave NE To Benning Rd SE/East Capitol St Bn",
         "ward": "Ward 5, Ward 6, Ward 7",
         "severity": {
-          "injuries": 459,
-          "major_injuries": 20,
+          "injuries": 509,
+          "major_injuries": 27,
           "fatalities": 5,
-          "ksi": 25,
-          "crashes": 1202,
+          "ksi": 32,
+          "crashes": 1288,
           "period": "2022-present"
         },
         "mode_breakdown": {
-          "pedestrian_ksi": 9,
-          "cyclist_ksi": 0,
-          "driver_ksi": 13,
-          "passenger_ksi": 2
+          "pedestrian_ksi": 11,
+          "cyclist_ksi": 2,
+          "driver_ksi": 14,
+          "passenger_ksi": 4
         },
         "recommended_interventions": [
           {
@@ -1975,13 +1173,13 @@
             "id": "road_diet",
             "name": "Road diet / lane rechannelization",
             "effect": "FHWA cites ~19-47% total crash reductions for road diets; Seattle's Nickerson St saw roughly -93% aggressive (top-end) speeding.",
-            "trigger": "25 KSI concentrated on one arterial"
+            "trigger": "32 KSI concentrated on one arterial"
           },
           {
             "id": "protected_intersection",
             "name": "Protected intersections",
             "effect": "Widely deployed in Vision Zero programs to remove turning conflicts at high-injury intersections; effect varies by site (verify locally).",
-            "trigger": "turning conflicts: drivers/passengers are 60% of KSI"
+            "trigger": "turning conflicts: drivers/passengers are 56% of KSI"
           },
           {
             "id": "speed_limit_20",
@@ -1992,14 +1190,14 @@
         ],
         "equity_notes": "Serves Ward 5, Ward 6, Ward 7. HIN Tier 1. Equity context is ward-level; pair with DC Equity Emphasis Areas before prioritizing.",
         "confidence": "high",
-        "confidence_note": "1202 crashes joined within 25 m; 25 KSI (5 killed). Counts from Open Data DC; corridor extent per DDOT HIN.",
+        "confidence_note": "1288 crashes joined within 25 m; 32 KSI (5 killed). Counts from Open Data DC; corridor extent per DDOT HIN.",
         "priority": "URGENT",
         "data_source": "Crashes in DC x DDOT High Injury Network (Open Data DC)",
-        "last_updated": "2026-07-06",
+        "last_updated": "2026-10-19",
         "audit": {
           "date_range": [
             "2022-01-02",
-            "2026-07-04"
+            "2026-10-16"
           ],
           "mean_join_distance_m": 0.7,
           "max_join_distance_m": 24.8,
@@ -2208,6 +1406,812 @@
           [
             -76.93755,
             38.88978
+          ]
+        ]
+      }
+    },
+    {
+      "id": "hin_12064672_1",
+      "type": "Feature",
+      "properties": {
+        "rank": 6,
+        "corridor_name": "New York Ave NE",
+        "location_scope": "New York Ave NW/N St NE To Eastern Ave NE",
+        "ward": "Ward 5",
+        "severity": {
+          "injuries": 574,
+          "major_injuries": 28,
+          "fatalities": 3,
+          "ksi": 31,
+          "crashes": 1717,
+          "period": "2022-present"
+        },
+        "mode_breakdown": {
+          "pedestrian_ksi": 7,
+          "cyclist_ksi": 2,
+          "driver_ksi": 13,
+          "passenger_ksi": 8
+        },
+        "recommended_interventions": [
+          {
+            "id": "automated_speed_camera",
+            "name": "Automated speed enforcement",
+            "effect": "A DDOT study reported injury crashes falling from 841 to 673 (about -20% injuries) around enforced locations; Portland measured -71% to -93% top-end speeding within 30 days of activation.",
+            "trigger": "3 traffic death(s) on this corridor"
+          },
+          {
+            "id": "road_diet",
+            "name": "Road diet / lane rechannelization",
+            "effect": "FHWA cites ~19-47% total crash reductions for road diets; Seattle's Nickerson St saw roughly -93% aggressive (top-end) speeding.",
+            "trigger": "31 KSI concentrated on one arterial"
+          },
+          {
+            "id": "protected_intersection",
+            "name": "Protected intersections",
+            "effect": "Widely deployed in Vision Zero programs to remove turning conflicts at high-injury intersections; effect varies by site (verify locally).",
+            "trigger": "turning conflicts: drivers/passengers are 68% of KSI"
+          },
+          {
+            "id": "speed_limit_20",
+            "name": "20 mph default speed limit",
+            "effect": "Part of Hoboken's and London's Vision Zero approach; pedestrian survival probability is far higher in a 20 mph than a 30+ mph impact.",
+            "trigger": "speed is the key driver of crash severity"
+          }
+        ],
+        "equity_notes": "Serves Ward 5. HIN Tier 1. Equity context is ward-level; pair with DC Equity Emphasis Areas before prioritizing.",
+        "confidence": "high",
+        "confidence_note": "1717 crashes joined within 25 m; 31 KSI (3 killed). Counts from Open Data DC; corridor extent per DDOT HIN.",
+        "priority": "URGENT",
+        "data_source": "Crashes in DC x DDOT High Injury Network (Open Data DC)",
+        "last_updated": "2026-10-19",
+        "audit": {
+          "date_range": [
+            "2022-01-01",
+            "2026-10-17"
+          ],
+          "mean_join_distance_m": 1.6,
+          "max_join_distance_m": 24.8,
+          "sample_record_ids": [
+            "27003676733",
+            "30748608064",
+            "31042065338",
+            "30846030413",
+            "30859916740",
+            "30907674617",
+            "31028619165",
+            "31124465309",
+            "31064296527",
+            "31066038267",
+            "31103628319",
+            "31176655631",
+            "31191819918",
+            "31195447683",
+            "31198463163"
+          ]
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -77.00906,
+            38.90736
+          ],
+          [
+            -77.00719,
+            38.90801
+          ],
+          [
+            -77.00477,
+            38.90885
+          ],
+          [
+            -76.99838,
+            38.91104
+          ],
+          [
+            -76.99728,
+            38.91142
+          ],
+          [
+            -76.99371,
+            38.91267
+          ],
+          [
+            -76.99264,
+            38.91305
+          ],
+          [
+            -76.99175,
+            38.91336
+          ],
+          [
+            -76.99074,
+            38.91372
+          ],
+          [
+            -76.98912,
+            38.91426
+          ],
+          [
+            -76.98569,
+            38.91545
+          ],
+          [
+            -76.98393,
+            38.91606
+          ],
+          [
+            -76.9813,
+            38.91698
+          ],
+          [
+            -76.9802,
+            38.91719
+          ],
+          [
+            -76.97934,
+            38.91721
+          ],
+          [
+            -76.97753,
+            38.91725
+          ],
+          [
+            -76.9761,
+            38.91728
+          ],
+          [
+            -76.97472,
+            38.9173
+          ],
+          [
+            -76.97369,
+            38.91732
+          ],
+          [
+            -76.97252,
+            38.91734
+          ],
+          [
+            -76.97145,
+            38.91739
+          ],
+          [
+            -76.96954,
+            38.91737
+          ],
+          [
+            -76.9664,
+            38.91724
+          ],
+          [
+            -76.96472,
+            38.91711
+          ],
+          [
+            -76.96413,
+            38.91707
+          ],
+          [
+            -76.96156,
+            38.91695
+          ],
+          [
+            -76.95918,
+            38.91685
+          ],
+          [
+            -76.95856,
+            38.91685
+          ],
+          [
+            -76.95815,
+            38.91689
+          ],
+          [
+            -76.95772,
+            38.91699
+          ],
+          [
+            -76.95678,
+            38.91736
+          ],
+          [
+            -76.95527,
+            38.9181
+          ],
+          [
+            -76.9544,
+            38.91852
+          ],
+          [
+            -76.95355,
+            38.91891
+          ],
+          [
+            -76.9531,
+            38.91906
+          ],
+          [
+            -76.95261,
+            38.91919
+          ],
+          [
+            -76.95211,
+            38.91923
+          ],
+          [
+            -76.95161,
+            38.91923
+          ],
+          [
+            -76.95099,
+            38.91921
+          ],
+          [
+            -76.94886,
+            38.91888
+          ],
+          [
+            -76.94695,
+            38.91857
+          ],
+          [
+            -76.94411,
+            38.91812
+          ],
+          [
+            -76.94129,
+            38.91813
+          ]
+        ]
+      }
+    },
+    {
+      "id": "hin_13069812_1",
+      "type": "Feature",
+      "properties": {
+        "rank": 7,
+        "corridor_name": "Pennsylvania Ave SE",
+        "location_scope": "Sycamore Dr SE To Unnamed Access Road",
+        "ward": "Ward 6, Ward 7, Ward 8",
+        "severity": {
+          "injuries": 483,
+          "major_injuries": 26,
+          "fatalities": 2,
+          "ksi": 28,
+          "crashes": 1192,
+          "period": "2022-present"
+        },
+        "mode_breakdown": {
+          "pedestrian_ksi": 5,
+          "cyclist_ksi": 0,
+          "driver_ksi": 19,
+          "passenger_ksi": 4
+        },
+        "recommended_interventions": [
+          {
+            "id": "automated_speed_camera",
+            "name": "Automated speed enforcement",
+            "effect": "A DDOT study reported injury crashes falling from 841 to 673 (about -20% injuries) around enforced locations; Portland measured -71% to -93% top-end speeding within 30 days of activation.",
+            "trigger": "2 traffic death(s) on this corridor"
+          },
+          {
+            "id": "protected_intersection",
+            "name": "Protected intersections",
+            "effect": "Widely deployed in Vision Zero programs to remove turning conflicts at high-injury intersections; effect varies by site (verify locally).",
+            "trigger": "turning conflicts: drivers/passengers are 82% of KSI"
+          },
+          {
+            "id": "road_diet",
+            "name": "Road diet / lane rechannelization",
+            "effect": "FHWA cites ~19-47% total crash reductions for road diets; Seattle's Nickerson St saw roughly -93% aggressive (top-end) speeding.",
+            "trigger": "28 KSI concentrated on one arterial"
+          },
+          {
+            "id": "speed_limit_20",
+            "name": "20 mph default speed limit",
+            "effect": "Part of Hoboken's and London's Vision Zero approach; pedestrian survival probability is far higher in a 20 mph than a 30+ mph impact.",
+            "trigger": "speed is the key driver of crash severity"
+          }
+        ],
+        "equity_notes": "Serves Ward 6, Ward 7, Ward 8. HIN Tier 1. Equity context is ward-level; pair with DC Equity Emphasis Areas before prioritizing.",
+        "confidence": "high",
+        "confidence_note": "1192 crashes joined within 25 m; 28 KSI (2 killed). Counts from Open Data DC; corridor extent per DDOT HIN.",
+        "priority": "URGENT",
+        "data_source": "Crashes in DC x DDOT High Injury Network (Open Data DC)",
+        "last_updated": "2026-10-19",
+        "audit": {
+          "date_range": [
+            "2022-01-02",
+            "2026-10-13"
+          ],
+          "mean_join_distance_m": 1.9,
+          "max_join_distance_m": 22.1,
+          "sample_record_ids": [
+            "30755427868",
+            "30756756555",
+            "30769539884",
+            "30769639912",
+            "30857139491",
+            "31126676744",
+            "31064149483",
+            "31109402798",
+            "31115673650",
+            "31157468583",
+            "31199549456",
+            "31210930669",
+            "31298938836",
+            "31346088961",
+            "31328019368"
+          ]
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -76.98508,
+            38.88015
+          ],
+          [
+            -76.98282,
+            38.87924
+          ],
+          [
+            -76.98148,
+            38.87867
+          ],
+          [
+            -76.98042,
+            38.87811
+          ],
+          [
+            -76.97629,
+            38.87601
+          ],
+          [
+            -76.97562,
+            38.87568
+          ],
+          [
+            -76.97475,
+            38.87529
+          ],
+          [
+            -76.97412,
+            38.87503
+          ],
+          [
+            -76.97341,
+            38.87474
+          ],
+          [
+            -76.973,
+            38.87456
+          ],
+          [
+            -76.97283,
+            38.87448
+          ],
+          [
+            -76.9727,
+            38.87442
+          ],
+          [
+            -76.97212,
+            38.87415
+          ],
+          [
+            -76.97146,
+            38.87385
+          ],
+          [
+            -76.97125,
+            38.87375
+          ],
+          [
+            -76.97065,
+            38.87347
+          ],
+          [
+            -76.96959,
+            38.87305
+          ],
+          [
+            -76.96938,
+            38.87296
+          ],
+          [
+            -76.96924,
+            38.8729
+          ],
+          [
+            -76.96907,
+            38.87283
+          ],
+          [
+            -76.96847,
+            38.8726
+          ],
+          [
+            -76.96768,
+            38.87228
+          ],
+          [
+            -76.96682,
+            38.87193
+          ],
+          [
+            -76.96655,
+            38.87182
+          ],
+          [
+            -76.96543,
+            38.87136
+          ],
+          [
+            -76.96467,
+            38.87105
+          ],
+          [
+            -76.96327,
+            38.87048
+          ],
+          [
+            -76.962,
+            38.86996
+          ],
+          [
+            -76.96021,
+            38.86923
+          ],
+          [
+            -76.95869,
+            38.86861
+          ],
+          [
+            -76.95842,
+            38.8685
+          ],
+          [
+            -76.95722,
+            38.86801
+          ],
+          [
+            -76.95633,
+            38.86764
+          ],
+          [
+            -76.95575,
+            38.86741
+          ],
+          [
+            -76.95405,
+            38.86671
+          ],
+          [
+            -76.95324,
+            38.86638
+          ],
+          [
+            -76.95288,
+            38.86624
+          ],
+          [
+            -76.95222,
+            38.86597
+          ],
+          [
+            -76.95147,
+            38.86566
+          ],
+          [
+            -76.95025,
+            38.86517
+          ],
+          [
+            -76.94981,
+            38.86498
+          ],
+          [
+            -76.94896,
+            38.86464
+          ],
+          [
+            -76.94754,
+            38.86405
+          ],
+          [
+            -76.94667,
+            38.86371
+          ]
+        ]
+      }
+    },
+    {
+      "id": "hin_13081512_1",
+      "type": "Feature",
+      "properties": {
+        "rank": 8,
+        "corridor_name": "Southern Ave SE",
+        "location_scope": "Unnamed Access Road/South Capitol St Bn To Naylor Rd SE",
+        "ward": "Ward 8",
+        "severity": {
+          "injuries": 327,
+          "major_injuries": 24,
+          "fatalities": 3,
+          "ksi": 27,
+          "crashes": 664,
+          "period": "2022-present"
+        },
+        "mode_breakdown": {
+          "pedestrian_ksi": 10,
+          "cyclist_ksi": 2,
+          "driver_ksi": 9,
+          "passenger_ksi": 5
+        },
+        "recommended_interventions": [
+          {
+            "id": "automated_speed_camera",
+            "name": "Automated speed enforcement",
+            "effect": "A DDOT study reported injury crashes falling from 841 to 673 (about -20% injuries) around enforced locations; Portland measured -71% to -93% top-end speeding within 30 days of activation.",
+            "trigger": "3 traffic death(s) on this corridor"
+          },
+          {
+            "id": "road_diet",
+            "name": "Road diet / lane rechannelization",
+            "effect": "FHWA cites ~19-47% total crash reductions for road diets; Seattle's Nickerson St saw roughly -93% aggressive (top-end) speeding.",
+            "trigger": "27 KSI concentrated on one arterial"
+          },
+          {
+            "id": "protected_intersection",
+            "name": "Protected intersections",
+            "effect": "Widely deployed in Vision Zero programs to remove turning conflicts at high-injury intersections; effect varies by site (verify locally).",
+            "trigger": "turning conflicts: drivers/passengers are 52% of KSI"
+          },
+          {
+            "id": "speed_limit_20",
+            "name": "20 mph default speed limit",
+            "effect": "Part of Hoboken's and London's Vision Zero approach; pedestrian survival probability is far higher in a 20 mph than a 30+ mph impact.",
+            "trigger": "speed is the key driver of crash severity"
+          }
+        ],
+        "equity_notes": "Serves Ward 8. HIN Tier 1. Equity context is ward-level; pair with DC Equity Emphasis Areas before prioritizing.",
+        "confidence": "high",
+        "confidence_note": "664 crashes joined within 25 m; 27 KSI (3 killed). Counts from Open Data DC; corridor extent per DDOT HIN.",
+        "priority": "URGENT",
+        "data_source": "Crashes in DC x DDOT High Injury Network (Open Data DC)",
+        "last_updated": "2026-10-19",
+        "audit": {
+          "date_range": [
+            "2022-01-01",
+            "2026-10-17"
+          ],
+          "mean_join_distance_m": 4.7,
+          "max_join_distance_m": 23.9,
+          "sample_record_ids": [
+            "29692558994",
+            "30750229814",
+            "30753489057",
+            "30770553798",
+            "30783832429",
+            "31119782705",
+            "31115071620",
+            "31128070052",
+            "31216386217",
+            "31152970384",
+            "31194874558",
+            "31208415775",
+            "31306805612",
+            "31346087448",
+            "31388868654"
+          ]
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -77.00132,
+            38.82129
+          ],
+          [
+            -77.00112,
+            38.82144
+          ],
+          [
+            -77.00098,
+            38.82154
+          ],
+          [
+            -77.00083,
+            38.82166
+          ],
+          [
+            -77.00073,
+            38.82174
+          ],
+          [
+            -77.00062,
+            38.82181
+          ],
+          [
+            -76.99939,
+            38.82276
+          ],
+          [
+            -76.99883,
+            38.82319
+          ],
+          [
+            -76.99817,
+            38.82371
+          ],
+          [
+            -76.99787,
+            38.82394
+          ],
+          [
+            -76.99773,
+            38.82404
+          ],
+          [
+            -76.99759,
+            38.82414
+          ],
+          [
+            -76.9974,
+            38.82426
+          ],
+          [
+            -76.99722,
+            38.8244
+          ],
+          [
+            -76.99654,
+            38.82492
+          ],
+          [
+            -76.99584,
+            38.82547
+          ],
+          [
+            -76.99502,
+            38.82611
+          ],
+          [
+            -76.9941,
+            38.82683
+          ],
+          [
+            -76.99321,
+            38.82753
+          ],
+          [
+            -76.99276,
+            38.82788
+          ],
+          [
+            -76.99202,
+            38.82845
+          ],
+          [
+            -76.99128,
+            38.82903
+          ],
+          [
+            -76.99069,
+            38.8295
+          ],
+          [
+            -76.99035,
+            38.82976
+          ],
+          [
+            -76.98904,
+            38.83078
+          ],
+          [
+            -76.98822,
+            38.83142
+          ],
+          [
+            -76.98733,
+            38.83211
+          ],
+          [
+            -76.98647,
+            38.83279
+          ],
+          [
+            -76.98565,
+            38.83343
+          ],
+          [
+            -76.98492,
+            38.83399
+          ],
+          [
+            -76.98368,
+            38.83496
+          ],
+          [
+            -76.98236,
+            38.836
+          ],
+          [
+            -76.98025,
+            38.83765
+          ],
+          [
+            -76.97751,
+            38.83979
+          ],
+          [
+            -76.97695,
+            38.84022
+          ],
+          [
+            -76.97566,
+            38.84123
+          ],
+          [
+            -76.97466,
+            38.84201
+          ],
+          [
+            -76.97319,
+            38.84316
+          ],
+          [
+            -76.97257,
+            38.84364
+          ],
+          [
+            -76.97193,
+            38.84414
+          ],
+          [
+            -76.97109,
+            38.84479
+          ],
+          [
+            -76.97044,
+            38.8453
+          ],
+          [
+            -76.96991,
+            38.84571
+          ],
+          [
+            -76.96871,
+            38.84665
+          ],
+          [
+            -76.96698,
+            38.84799
+          ],
+          [
+            -76.9656,
+            38.84907
+          ],
+          [
+            -76.96509,
+            38.84947
+          ],
+          [
+            -76.9635,
+            38.85071
+          ],
+          [
+            -76.96235,
+            38.85161
+          ],
+          [
+            -76.96197,
+            38.85193
           ]
         ]
       }
