@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_at": "2026-07-06T12:57:49Z",
+  "captured_at": "2026-11-02T19:26:33Z",
   "generator": "pipeline/hotspots.py",
   "period": "2022-present",
   "buffer_m": 25.0,
@@ -21,11 +21,11 @@
   "method": "Each crash since 2022-01-01 is assigned to the nearest HIN corridor whose centerline passes within 25 m (point-to-segment, local equirectangular projection). KSI = people killed + seriously (major) injured. Injuries = all reported injured people (major + minor). Ward(s) are read from the joined crash records. Each corridor carries an `audit` block (date range, join-distance stats, and a sample of CRIMEID record IDs) and `totals` reports fetched/geocoded/joined/excluded counts so the figures are traceable back to source records. Recommended interventions are a screening suggestion ranked by the corridor's own mode mix and severity (each carries its trigger), not a DDOT plan; effect sizes come from data/countermeasures.json (research-grade until verified).",
   "caveats": "Counts are crashes within 25 m of the DDOT High Injury Network centerline, 2022-present, from the open, police-reported Crashes in DC dataset; they may differ from DDOT's curated figures. Ungeocoded crashes and crashes off the HIN are excluded. A crash near two corridors is assigned to the nearest.",
   "totals": {
-    "crashes_fetched": 86929,
-    "crashes_geocoded": 86929,
+    "crashes_fetched": 92923,
+    "crashes_geocoded": 92923,
     "crashes_ungeocoded": 0,
-    "crashes_joined_to_corridor": 29589,
-    "crashes_excluded_off_network": 57340,
+    "crashes_joined_to_corridor": 31663,
+    "crashes_excluded_off_network": 61260,
     "hin_corridors": 77,
     "record_id_field": "CRIMEID"
   },
@@ -77,27 +77,27 @@
         "Ward 1",
         "Ward 4"
       ],
-      "crashes": 2387,
-      "injuries": 917,
-      "fatalities": 4,
-      "major_injuries": 51,
-      "minor_injuries": 866,
-      "ksi": 55,
+      "crashes": 2554,
+      "injuries": 989,
+      "fatalities": 6,
+      "major_injuries": 56,
+      "minor_injuries": 933,
+      "ksi": 62,
       "mode_ksi": {
-        "pedestrian": 14,
+        "pedestrian": 16,
         "cyclist": 8,
-        "driver": 27,
-        "passenger": 4,
-        "other": 2
+        "driver": 30,
+        "passenger": 5,
+        "other": 3
       },
       "recommended_interventions": [
         {
           "id": "automated_speed_camera",
-          "trigger": "4 traffic death(s) on this corridor"
+          "trigger": "6 traffic death(s) on this corridor"
         },
         {
           "id": "road_diet",
-          "trigger": "55 KSI concentrated on one arterial"
+          "trigger": "62 KSI concentrated on one arterial"
         },
         {
           "id": "protected_intersection",
@@ -111,7 +111,7 @@
       "audit": {
         "date_range": [
           "2022-01-01",
-          "2026-07-04"
+          "2026-10-31"
         ],
         "mean_join_distance_m": 1.6,
         "max_join_distance_m": 24.7,
@@ -122,14 +122,14 @@
           "30756016872",
           "30758333597",
           "30759864468",
+          "30872220113",
+          "31042062349",
           "31037455656",
           "31038709438",
-          "31042062349",
           "30826646624",
-          "30872220113",
           "31115095797",
-          "31065446843",
           "31108932216",
+          "31065446843",
           "31189289816"
         ]
       }
@@ -147,18 +147,18 @@
         "Ward 2",
         "Ward 3"
       ],
-      "crashes": 1205,
-      "injuries": 361,
+      "crashes": 1289,
+      "injuries": 391,
       "fatalities": 7,
-      "major_injuries": 33,
-      "minor_injuries": 328,
-      "ksi": 40,
+      "major_injuries": 37,
+      "minor_injuries": 354,
+      "ksi": 44,
       "mode_ksi": {
-        "pedestrian": 15,
+        "pedestrian": 16,
         "cyclist": 3,
-        "driver": 14,
+        "driver": 16,
         "passenger": 7,
-        "other": 1
+        "other": 2
       },
       "recommended_interventions": [
         {
@@ -167,7 +167,7 @@
         },
         {
           "id": "road_diet",
-          "trigger": "40 KSI concentrated on one arterial"
+          "trigger": "44 KSI concentrated on one arterial"
         },
         {
           "id": "protected_intersection",
@@ -181,26 +181,26 @@
       "audit": {
         "date_range": [
           "2022-01-01",
-          "2026-07-03"
+          "2026-10-25"
         ],
         "mean_join_distance_m": 1.5,
         "max_join_distance_m": 24.7,
         "sample_record_ids": [
           "30750475810",
           "31310322218",
-          "31345193083",
           "31313084616",
+          "31347610613",
+          "31345193083",
           "31382163783",
           "31386329040",
-          "31347610613",
+          "31408431068",
           "31414837235",
           "31401847929",
-          "31408431068",
+          "31472447697",
           "31464191571",
           "31467845878",
-          "31472447697",
-          "31554108156",
-          "31511529589"
+          "31517582392",
+          "31558470092"
         ]
       }
     },
@@ -217,14 +217,14 @@
         "Ward 7",
         "Ward 8"
       ],
-      "crashes": 1437,
-      "injuries": 572,
+      "crashes": 1512,
+      "injuries": 605,
       "fatalities": 2,
-      "major_injuries": 34,
-      "minor_injuries": 538,
-      "ksi": 36,
+      "major_injuries": 35,
+      "minor_injuries": 570,
+      "ksi": 37,
       "mode_ksi": {
-        "pedestrian": 8,
+        "pedestrian": 9,
         "cyclist": 0,
         "driver": 23,
         "passenger": 5,
@@ -237,11 +237,11 @@
         },
         {
           "id": "protected_intersection",
-          "trigger": "turning conflicts: drivers/passengers are 78% of KSI"
+          "trigger": "turning conflicts: drivers/passengers are 76% of KSI"
         },
         {
           "id": "road_diet",
-          "trigger": "36 KSI concentrated on one arterial"
+          "trigger": "37 KSI concentrated on one arterial"
         },
         {
           "id": "speed_limit_20",
@@ -251,95 +251,26 @@
       "audit": {
         "date_range": [
           "2022-01-03",
-          "2026-07-01"
+          "2026-10-29"
         ],
         "mean_join_distance_m": 2.0,
         "max_join_distance_m": 24.6,
         "sample_record_ids": [
+          "30766286790",
           "30768971456",
           "30769225336",
-          "30773642436",
-          "30766286790",
           "30782221977",
-          "31115353839",
+          "30773642436",
           "31064359817",
           "31093260696",
-          "31108566928",
           "31112000122",
+          "31115353839",
+          "31108566928",
           "31205182144",
           "31214459043",
           "31307567066",
           "31279939608",
           "31292517848"
-        ]
-      }
-    },
-    {
-      "corridor_id": "12064672_1",
-      "route_name": "NEW YORK AVE NE",
-      "corridor_name": "New York Ave NE",
-      "location_scope": "New York Ave NW/N St NE To Eastern Ave NE",
-      "from_street": "NEW YORK AVE NW/N ST NE",
-      "to_street": "EASTERN AVE NE",
-      "length_mi": 3.846,
-      "tier": 1,
-      "wards": [
-        "Ward 5"
-      ],
-      "crashes": 1627,
-      "injuries": 542,
-      "fatalities": 2,
-      "major_injuries": 27,
-      "minor_injuries": 515,
-      "ksi": 29,
-      "mode_ksi": {
-        "pedestrian": 6,
-        "cyclist": 1,
-        "driver": 13,
-        "passenger": 8,
-        "other": 1
-      },
-      "recommended_interventions": [
-        {
-          "id": "automated_speed_camera",
-          "trigger": "2 traffic death(s) on this corridor"
-        },
-        {
-          "id": "protected_intersection",
-          "trigger": "turning conflicts: drivers/passengers are 72% of KSI"
-        },
-        {
-          "id": "road_diet",
-          "trigger": "29 KSI concentrated on one arterial"
-        },
-        {
-          "id": "speed_limit_20",
-          "trigger": "speed is the key driver of crash severity"
-        }
-      ],
-      "audit": {
-        "date_range": [
-          "2022-01-01",
-          "2026-07-03"
-        ],
-        "mean_join_distance_m": 1.6,
-        "max_join_distance_m": 23.6,
-        "sample_record_ids": [
-          "27003676733",
-          "30748608064",
-          "31028619165",
-          "31042065338",
-          "30846030413",
-          "30859916740",
-          "30907674617",
-          "31124465309",
-          "31064296527",
-          "31066038267",
-          "31103628319",
-          "31176655631",
-          "31191819918",
-          "31195447683",
-          "31198463163"
         ]
       }
     },
@@ -357,15 +288,15 @@
         "Ward 2",
         "Ward 4"
       ],
-      "crashes": 1298,
-      "injuries": 411,
+      "crashes": 1392,
+      "injuries": 452,
       "fatalities": 1,
-      "major_injuries": 28,
-      "minor_injuries": 383,
-      "ksi": 29,
+      "major_injuries": 32,
+      "minor_injuries": 420,
+      "ksi": 33,
       "mode_ksi": {
-        "pedestrian": 13,
-        "cyclist": 9,
+        "pedestrian": 15,
+        "cyclist": 11,
         "driver": 7,
         "passenger": 0,
         "other": 0
@@ -377,7 +308,7 @@
         },
         {
           "id": "road_diet",
-          "trigger": "29 KSI concentrated on one arterial"
+          "trigger": "33 KSI concentrated on one arterial"
         },
         {
           "id": "leading_pedestrian_interval",
@@ -385,172 +316,32 @@
         },
         {
           "id": "curb_extension",
-          "trigger": "13 pedestrian KSI on this corridor"
+          "trigger": "15 pedestrian KSI on this corridor"
         }
       ],
       "audit": {
         "date_range": [
           "2022-01-01",
-          "2026-07-04"
+          "2026-10-31"
         ],
         "mean_join_distance_m": 1.7,
         "max_join_distance_m": 24.6,
         "sample_record_ids": [
           "30749384345",
           "30750292922",
-          "31040242988",
           "31041743484",
-          "31116001517",
-          "31088311934",
+          "31040242988",
           "31112628176",
           "31129228330",
+          "31116001517",
+          "31088311934",
           "31201298160",
           "31202282327",
+          "31302372485",
           "31303370545",
           "31303372704",
-          "31302372485",
           "31342910860",
           "31345529867"
-        ]
-      }
-    },
-    {
-      "corridor_id": "13069812_1",
-      "route_name": "PENNSYLVANIA AVE SE",
-      "corridor_name": "Pennsylvania Ave SE",
-      "location_scope": "Sycamore Dr SE To Unnamed Access Road",
-      "from_street": "SYCAMORE DR SE",
-      "to_street": "unnamed access road",
-      "length_mi": 3.483,
-      "tier": 1,
-      "wards": [
-        "Ward 6",
-        "Ward 7",
-        "Ward 8"
-      ],
-      "crashes": 1130,
-      "injuries": 453,
-      "fatalities": 2,
-      "major_injuries": 24,
-      "minor_injuries": 429,
-      "ksi": 26,
-      "mode_ksi": {
-        "pedestrian": 4,
-        "cyclist": 0,
-        "driver": 18,
-        "passenger": 4,
-        "other": 0
-      },
-      "recommended_interventions": [
-        {
-          "id": "automated_speed_camera",
-          "trigger": "2 traffic death(s) on this corridor"
-        },
-        {
-          "id": "protected_intersection",
-          "trigger": "turning conflicts: drivers/passengers are 85% of KSI"
-        },
-        {
-          "id": "road_diet",
-          "trigger": "26 KSI concentrated on one arterial"
-        },
-        {
-          "id": "speed_limit_20",
-          "trigger": "speed is the key driver of crash severity"
-        }
-      ],
-      "audit": {
-        "date_range": [
-          "2022-01-02",
-          "2026-07-03"
-        ],
-        "mean_join_distance_m": 1.9,
-        "max_join_distance_m": 22.1,
-        "sample_record_ids": [
-          "30769539884",
-          "30769639912",
-          "30755427868",
-          "30756756555",
-          "30857139491",
-          "31115673650",
-          "31126676744",
-          "31064149483",
-          "31109402798",
-          "31210930669",
-          "31157468583",
-          "31199549456",
-          "31298938836",
-          "31346088961",
-          "31328019368"
-        ]
-      }
-    },
-    {
-      "corridor_id": "13081512_2",
-      "route_name": "SOUTHERN AVE SE",
-      "corridor_name": "Southern Ave SE",
-      "location_scope": "Branch Ave SE To 53rd St SE",
-      "from_street": "BRANCH AVE SE",
-      "to_street": "53RD ST SE",
-      "length_mi": 2.429,
-      "tier": 1,
-      "wards": [
-        "Ward 7"
-      ],
-      "crashes": 539,
-      "injuries": 298,
-      "fatalities": 7,
-      "major_injuries": 19,
-      "minor_injuries": 279,
-      "ksi": 26,
-      "mode_ksi": {
-        "pedestrian": 2,
-        "cyclist": 0,
-        "driver": 20,
-        "passenger": 4,
-        "other": 0
-      },
-      "recommended_interventions": [
-        {
-          "id": "automated_speed_camera",
-          "trigger": "7 traffic death(s) on this corridor"
-        },
-        {
-          "id": "road_diet",
-          "trigger": "26 KSI concentrated on one arterial"
-        },
-        {
-          "id": "protected_intersection",
-          "trigger": "turning conflicts: drivers/passengers are 92% of KSI"
-        },
-        {
-          "id": "speed_limit_20",
-          "trigger": "speed is the key driver of crash severity"
-        }
-      ],
-      "audit": {
-        "date_range": [
-          "2022-01-02",
-          "2026-07-03"
-        ],
-        "mean_join_distance_m": 3.6,
-        "max_join_distance_m": 24.9,
-        "sample_record_ids": [
-          "30757608287",
-          "30825787285",
-          "31064177710",
-          "31064497479",
-          "31214915438",
-          "31200446399",
-          "31301902010",
-          "31417384970",
-          "31460390019",
-          "31518534979",
-          "31517738665",
-          "31596211189",
-          "31597400148",
-          "31608561451",
-          "31625773468"
         ]
       }
     },
@@ -568,17 +359,17 @@
         "Ward 6",
         "Ward 7"
       ],
-      "crashes": 1202,
-      "injuries": 459,
+      "crashes": 1301,
+      "injuries": 514,
       "fatalities": 5,
-      "major_injuries": 20,
-      "minor_injuries": 439,
-      "ksi": 25,
+      "major_injuries": 27,
+      "minor_injuries": 487,
+      "ksi": 32,
       "mode_ksi": {
-        "pedestrian": 9,
-        "cyclist": 0,
-        "driver": 13,
-        "passenger": 2,
+        "pedestrian": 11,
+        "cyclist": 2,
+        "driver": 14,
+        "passenger": 4,
         "other": 1
       },
       "recommended_interventions": [
@@ -588,11 +379,11 @@
         },
         {
           "id": "road_diet",
-          "trigger": "25 KSI concentrated on one arterial"
+          "trigger": "32 KSI concentrated on one arterial"
         },
         {
           "id": "protected_intersection",
-          "trigger": "turning conflicts: drivers/passengers are 60% of KSI"
+          "trigger": "turning conflicts: drivers/passengers are 56% of KSI"
         },
         {
           "id": "speed_limit_20",
@@ -602,26 +393,374 @@
       "audit": {
         "date_range": [
           "2022-01-02",
-          "2026-07-04"
+          "2026-10-31"
         ],
         "mean_join_distance_m": 0.7,
         "max_join_distance_m": 24.8,
         "sample_record_ids": [
           "30759445989",
+          "30867059328",
           "31042297251",
           "30799211803",
-          "30867059328",
           "31228991143",
           "31241460923",
-          "31285073251",
           "31298154658",
+          "31285073251",
           "31314861253",
           "31327654556",
           "31352567933",
+          "31405123571",
           "31399462480",
           "31399665188",
-          "31405123571",
-          "31435450674"
+          "31444112935"
+        ]
+      }
+    },
+    {
+      "corridor_id": "12064672_1",
+      "route_name": "NEW YORK AVE NE",
+      "corridor_name": "New York Ave NE",
+      "location_scope": "New York Ave NW/N St NE To Eastern Ave NE",
+      "from_street": "NEW YORK AVE NW/N ST NE",
+      "to_street": "EASTERN AVE NE",
+      "length_mi": 3.846,
+      "tier": 1,
+      "wards": [
+        "Ward 5"
+      ],
+      "crashes": 1741,
+      "injuries": 583,
+      "fatalities": 3,
+      "major_injuries": 28,
+      "minor_injuries": 555,
+      "ksi": 31,
+      "mode_ksi": {
+        "pedestrian": 7,
+        "cyclist": 2,
+        "driver": 13,
+        "passenger": 8,
+        "other": 1
+      },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "3 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "31 KSI concentrated on one arterial"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 68% of KSI"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
+      "audit": {
+        "date_range": [
+          "2022-01-01",
+          "2026-10-31"
+        ],
+        "mean_join_distance_m": 1.7,
+        "max_join_distance_m": 24.8,
+        "sample_record_ids": [
+          "27003676733",
+          "30748608064",
+          "30859916740",
+          "31028619165",
+          "31042065338",
+          "31064296527",
+          "30907674617",
+          "30846030413",
+          "31103628319",
+          "31124465309",
+          "31066038267",
+          "31200868497",
+          "31176655631",
+          "31191819918",
+          "31195447683"
+        ]
+      }
+    },
+    {
+      "corridor_id": "13069812_1",
+      "route_name": "PENNSYLVANIA AVE SE",
+      "corridor_name": "Pennsylvania Ave SE",
+      "location_scope": "Sycamore Dr SE To Unnamed Access Road",
+      "from_street": "SYCAMORE DR SE",
+      "to_street": "unnamed access road",
+      "length_mi": 3.483,
+      "tier": 1,
+      "wards": [
+        "Ward 6",
+        "Ward 7",
+        "Ward 8"
+      ],
+      "crashes": 1199,
+      "injuries": 487,
+      "fatalities": 2,
+      "major_injuries": 26,
+      "minor_injuries": 461,
+      "ksi": 28,
+      "mode_ksi": {
+        "pedestrian": 5,
+        "cyclist": 0,
+        "driver": 19,
+        "passenger": 4,
+        "other": 0
+      },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "2 traffic death(s) on this corridor"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 82% of KSI"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "28 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
+      "audit": {
+        "date_range": [
+          "2022-01-02",
+          "2026-10-30"
+        ],
+        "mean_join_distance_m": 1.8,
+        "max_join_distance_m": 22.1,
+        "sample_record_ids": [
+          "30769539884",
+          "30769639912",
+          "30755427868",
+          "30756756555",
+          "31064149483",
+          "30857139491",
+          "31115673650",
+          "31126676744",
+          "31157468583",
+          "31109402798",
+          "31199549456",
+          "31210930669",
+          "31298938836",
+          "31346088961",
+          "31337533304"
+        ]
+      }
+    },
+    {
+      "corridor_id": "13081512_1",
+      "route_name": "SOUTHERN AVE SE",
+      "corridor_name": "Southern Ave SE",
+      "location_scope": "Unnamed Access Road/South Capitol St Bn To Naylor Rd SE",
+      "from_street": "unnamed access road/SOUTH CAPITOL ST BN",
+      "to_street": "NAYLOR RD SE",
+      "length_mi": 2.996,
+      "tier": 1,
+      "wards": [
+        "Ward 8"
+      ],
+      "crashes": 666,
+      "injuries": 329,
+      "fatalities": 3,
+      "major_injuries": 24,
+      "minor_injuries": 305,
+      "ksi": 27,
+      "mode_ksi": {
+        "pedestrian": 10,
+        "cyclist": 2,
+        "driver": 9,
+        "passenger": 5,
+        "other": 1
+      },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "3 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "27 KSI concentrated on one arterial"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 52% of KSI"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
+      "audit": {
+        "date_range": [
+          "2022-01-01",
+          "2026-10-25"
+        ],
+        "mean_join_distance_m": 4.7,
+        "max_join_distance_m": 23.9,
+        "sample_record_ids": [
+          "29692558994",
+          "30750229814",
+          "30770553798",
+          "30783832429",
+          "30753489057",
+          "31115071620",
+          "31128070052",
+          "31152970384",
+          "31119782705",
+          "31216386217",
+          "31208415775",
+          "31194874558",
+          "31306805612",
+          "31346087448",
+          "31348627361"
+        ]
+      }
+    },
+    {
+      "corridor_id": "13081512_2",
+      "route_name": "SOUTHERN AVE SE",
+      "corridor_name": "Southern Ave SE",
+      "location_scope": "Branch Ave SE To 53rd St SE",
+      "from_street": "BRANCH AVE SE",
+      "to_street": "53RD ST SE",
+      "length_mi": 2.429,
+      "tier": 1,
+      "wards": [
+        "Ward 7"
+      ],
+      "crashes": 572,
+      "injuries": 318,
+      "fatalities": 8,
+      "major_injuries": 19,
+      "minor_injuries": 299,
+      "ksi": 27,
+      "mode_ksi": {
+        "pedestrian": 3,
+        "cyclist": 0,
+        "driver": 20,
+        "passenger": 4,
+        "other": 0
+      },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "8 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "27 KSI concentrated on one arterial"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 89% of KSI"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
+      "audit": {
+        "date_range": [
+          "2022-01-02",
+          "2026-10-29"
+        ],
+        "mean_join_distance_m": 3.5,
+        "max_join_distance_m": 24.9,
+        "sample_record_ids": [
+          "30757608287",
+          "31064177710",
+          "30825787285",
+          "31064497479",
+          "31200446399",
+          "31214915438",
+          "31301902010",
+          "31417384970",
+          "31460390019",
+          "31517738665",
+          "31518534979",
+          "31597400148",
+          "31596211189",
+          "31608561451",
+          "31625773468"
+        ]
+      }
+    },
+    {
+      "corridor_id": "15065322_1",
+      "route_name": "NORTH CAPITOL ST BN",
+      "corridor_name": "North Capitol St Bn",
+      "location_scope": "Louisiana Ave NW/Louisiana Ave NE/Ramp-36000232 To Good Hope Rd SE/Interstate 295 I Bn",
+      "from_street": "LOUISIANA AVE NW/LOUISIANA AVE NE/Ramp-36000232",
+      "to_street": "GOOD HOPE RD SE/INTERSTATE 295 I BN",
+      "length_mi": 3.314,
+      "tier": 1,
+      "wards": [
+        "Ward 5",
+        "Ward 6"
+      ],
+      "crashes": 1543,
+      "injuries": 582,
+      "fatalities": 2,
+      "major_injuries": 23,
+      "minor_injuries": 559,
+      "ksi": 25,
+      "mode_ksi": {
+        "pedestrian": 11,
+        "cyclist": 0,
+        "driver": 9,
+        "passenger": 3,
+        "other": 2
+      },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "2 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "25 KSI concentrated on one arterial"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 48% of KSI"
+        },
+        {
+          "id": "leading_pedestrian_interval",
+          "trigger": "pedestrians are 44% of KSI here"
+        }
+      ],
+      "audit": {
+        "date_range": [
+          "2022-01-07",
+          "2026-10-28"
+        ],
+        "mean_join_distance_m": 0.9,
+        "max_join_distance_m": 24.5,
+        "sample_record_ids": [
+          "31022278912",
+          "31063040438",
+          "31125327729",
+          "31115718666",
+          "31207239683",
+          "31208794410",
+          "31308513828",
+          "31291772707",
+          "31294668518",
+          "31335249534",
+          "31340289596",
+          "31341750460",
+          "31326232591",
+          "31355350863",
+          "31408225590"
         ]
       }
     },
@@ -638,11 +777,11 @@
         "Ward 7",
         "Ward 8"
       ],
-      "crashes": 825,
-      "injuries": 357,
+      "crashes": 867,
+      "injuries": 380,
       "fatalities": 1,
       "major_injuries": 24,
-      "minor_injuries": 333,
+      "minor_injuries": 356,
       "ksi": 25,
       "mode_ksi": {
         "pedestrian": 5,
@@ -672,165 +811,26 @@
       "audit": {
         "date_range": [
           "2022-01-02",
-          "2026-06-21"
+          "2026-10-30"
         ],
         "mean_join_distance_m": 2.3,
         "max_join_distance_m": 24.9,
         "sample_record_ids": [
-          "30773727184",
           "30751750833",
-          "30752931693",
+          "30773727184",
           "30761806666",
-          "31116363754",
+          "30752931693",
           "31104937849",
           "31112713286",
+          "31116363754",
+          "31203954792",
+          "31241237697",
           "31211435804",
           "31214827306",
           "31201547707",
-          "31203954792",
-          "31241237697",
           "31341466828",
           "31345468716",
           "31351319652"
-        ]
-      }
-    },
-    {
-      "corridor_id": "13081512_1",
-      "route_name": "SOUTHERN AVE SE",
-      "corridor_name": "Southern Ave SE",
-      "location_scope": "Unnamed Access Road/South Capitol St Bn To Naylor Rd SE",
-      "from_street": "unnamed access road/SOUTH CAPITOL ST BN",
-      "to_street": "NAYLOR RD SE",
-      "length_mi": 2.996,
-      "tier": 1,
-      "wards": [
-        "Ward 8"
-      ],
-      "crashes": 642,
-      "injuries": 322,
-      "fatalities": 3,
-      "major_injuries": 22,
-      "minor_injuries": 300,
-      "ksi": 25,
-      "mode_ksi": {
-        "pedestrian": 10,
-        "cyclist": 1,
-        "driver": 8,
-        "passenger": 5,
-        "other": 1
-      },
-      "recommended_interventions": [
-        {
-          "id": "automated_speed_camera",
-          "trigger": "3 traffic death(s) on this corridor"
-        },
-        {
-          "id": "road_diet",
-          "trigger": "25 KSI concentrated on one arterial"
-        },
-        {
-          "id": "protected_intersection",
-          "trigger": "turning conflicts: drivers/passengers are 52% of KSI"
-        },
-        {
-          "id": "leading_pedestrian_interval",
-          "trigger": "pedestrians are 40% of KSI here"
-        }
-      ],
-      "audit": {
-        "date_range": [
-          "2022-01-01",
-          "2026-07-03"
-        ],
-        "mean_join_distance_m": 4.7,
-        "max_join_distance_m": 23.9,
-        "sample_record_ids": [
-          "29692558994",
-          "30770553798",
-          "30750229814",
-          "30753489057",
-          "30783832429",
-          "31115071620",
-          "31119782705",
-          "31208415775",
-          "31216386217",
-          "31128070052",
-          "31152970384",
-          "31194874558",
-          "31306805612",
-          "31346087448",
-          "31388868654"
-        ]
-      }
-    },
-    {
-      "corridor_id": "15065322_1",
-      "route_name": "NORTH CAPITOL ST BN",
-      "corridor_name": "North Capitol St Bn",
-      "location_scope": "Louisiana Ave NW/Louisiana Ave NE/Ramp-36000232 To Good Hope Rd SE/Interstate 295 I Bn",
-      "from_street": "LOUISIANA AVE NW/LOUISIANA AVE NE/Ramp-36000232",
-      "to_street": "GOOD HOPE RD SE/INTERSTATE 295 I BN",
-      "length_mi": 3.314,
-      "tier": 1,
-      "wards": [
-        "Ward 5",
-        "Ward 6"
-      ],
-      "crashes": 1436,
-      "injuries": 542,
-      "fatalities": 2,
-      "major_injuries": 20,
-      "minor_injuries": 522,
-      "ksi": 22,
-      "mode_ksi": {
-        "pedestrian": 8,
-        "cyclist": 0,
-        "driver": 9,
-        "passenger": 3,
-        "other": 2
-      },
-      "recommended_interventions": [
-        {
-          "id": "automated_speed_camera",
-          "trigger": "2 traffic death(s) on this corridor"
-        },
-        {
-          "id": "road_diet",
-          "trigger": "22 KSI concentrated on one arterial"
-        },
-        {
-          "id": "protected_intersection",
-          "trigger": "turning conflicts: drivers/passengers are 55% of KSI"
-        },
-        {
-          "id": "speed_limit_20",
-          "trigger": "speed is the key driver of crash severity"
-        }
-      ],
-      "audit": {
-        "date_range": [
-          "2022-01-07",
-          "2026-06-28"
-        ],
-        "mean_join_distance_m": 1.0,
-        "max_join_distance_m": 24.5,
-        "sample_record_ids": [
-          "31022278912",
-          "31115718666",
-          "31125327729",
-          "31063040438",
-          "31207239683",
-          "31208794410",
-          "31308513828",
-          "31291772707",
-          "31294668518",
-          "31341750460",
-          "31326232591",
-          "31335249534",
-          "31340289596",
-          "31355350863",
-          "31408225590"
         ]
       }
     },
@@ -846,11 +846,11 @@
       "wards": [
         "Ward 7"
       ],
-      "crashes": 608,
-      "injuries": 342,
+      "crashes": 658,
+      "injuries": 362,
       "fatalities": 3,
       "major_injuries": 19,
-      "minor_injuries": 323,
+      "minor_injuries": 343,
       "ksi": 22,
       "mode_ksi": {
         "pedestrian": 8,
@@ -880,9 +880,9 @@
       "audit": {
         "date_range": [
           "2022-01-01",
-          "2026-07-02"
+          "2026-10-27"
         ],
-        "mean_join_distance_m": 3.1,
+        "mean_join_distance_m": 3.0,
         "max_join_distance_m": 24.9,
         "sample_record_ids": [
           "30751805956",
@@ -894,8 +894,8 @@
           "31346534560",
           "31351207819",
           "31422755721",
-          "31553960222",
           "31554448070",
+          "31553960222",
           "31615940701",
           "31622487518",
           "31624963831",
@@ -915,14 +915,14 @@
       "wards": [
         "Ward 5"
       ],
-      "crashes": 972,
-      "injuries": 320,
-      "fatalities": 5,
+      "crashes": 1047,
+      "injuries": 351,
+      "fatalities": 6,
       "major_injuries": 15,
-      "minor_injuries": 305,
-      "ksi": 20,
+      "minor_injuries": 336,
+      "ksi": 21,
       "mode_ksi": {
-        "pedestrian": 3,
+        "pedestrian": 4,
         "cyclist": 1,
         "driver": 10,
         "passenger": 5,
@@ -931,15 +931,15 @@
       "recommended_interventions": [
         {
           "id": "automated_speed_camera",
-          "trigger": "5 traffic death(s) on this corridor"
+          "trigger": "6 traffic death(s) on this corridor"
         },
         {
           "id": "road_diet",
-          "trigger": "20 KSI concentrated on one arterial"
+          "trigger": "21 KSI concentrated on one arterial"
         },
         {
           "id": "protected_intersection",
-          "trigger": "turning conflicts: drivers/passengers are 75% of KSI"
+          "trigger": "turning conflicts: drivers/passengers are 71% of KSI"
         },
         {
           "id": "speed_limit_20",
@@ -949,7 +949,7 @@
       "audit": {
         "date_range": [
           "2022-01-07",
-          "2026-07-04"
+          "2026-10-30"
         ],
         "mean_join_distance_m": 0.4,
         "max_join_distance_m": 21.6,
@@ -968,7 +968,76 @@
           "31640542321",
           "31668708900",
           "31653261055",
-          "31714824837"
+          "31723942234"
+        ]
+      }
+    },
+    {
+      "corridor_id": "12061162_1",
+      "route_name": "MINNESOTA AVE NE",
+      "corridor_name": "Minnesota Ave NE",
+      "location_scope": "24th St NE To Rhode Island Ave NE",
+      "from_street": "24TH ST NE",
+      "to_street": "RHODE ISLAND AVE NE",
+      "length_mi": 1.194,
+      "tier": 1,
+      "wards": [
+        "Ward 7"
+      ],
+      "crashes": 816,
+      "injuries": 267,
+      "fatalities": 4,
+      "major_injuries": 17,
+      "minor_injuries": 250,
+      "ksi": 21,
+      "mode_ksi": {
+        "pedestrian": 14,
+        "cyclist": 2,
+        "driver": 4,
+        "passenger": 0,
+        "other": 1
+      },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "4 traffic death(s) on this corridor"
+        },
+        {
+          "id": "leading_pedestrian_interval",
+          "trigger": "pedestrians are 67% of KSI here"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "14 pedestrian KSI on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "21 KSI concentrated on one arterial"
+        }
+      ],
+      "audit": {
+        "date_range": [
+          "2022-01-09",
+          "2026-10-29"
+        ],
+        "mean_join_distance_m": 0.5,
+        "max_join_distance_m": 23.2,
+        "sample_record_ids": [
+          "31042271159",
+          "31310073200",
+          "31309842188",
+          "31343303829",
+          "31330579310",
+          "31367877532",
+          "31388235535",
+          "31355529135",
+          "31415497069",
+          "31418168024",
+          "31414618575",
+          "31434529260",
+          "31517819709",
+          "31518055290",
+          "31570292585"
         ]
       }
     },
@@ -985,15 +1054,15 @@
         "Ward 1",
         "Ward 2"
       ],
-      "crashes": 676,
-      "injuries": 211,
+      "crashes": 721,
+      "injuries": 223,
       "fatalities": 5,
-      "major_injuries": 14,
-      "minor_injuries": 197,
-      "ksi": 19,
+      "major_injuries": 15,
+      "minor_injuries": 208,
+      "ksi": 20,
       "mode_ksi": {
         "pedestrian": 8,
-        "cyclist": 2,
+        "cyclist": 3,
         "driver": 7,
         "passenger": 1,
         "other": 1
@@ -1005,40 +1074,40 @@
         },
         {
           "id": "road_diet",
-          "trigger": "19 KSI concentrated on one arterial"
+          "trigger": "20 KSI concentrated on one arterial"
         },
         {
           "id": "leading_pedestrian_interval",
-          "trigger": "pedestrians are 42% of KSI here"
+          "trigger": "pedestrians are 40% of KSI here"
         },
         {
           "id": "protected_intersection",
-          "trigger": "turning conflicts: drivers/passengers are 42% of KSI"
+          "trigger": "turning conflicts: drivers/passengers are 40% of KSI"
         }
       ],
       "audit": {
         "date_range": [
           "2022-01-01",
-          "2026-07-02"
+          "2026-10-30"
         ],
-        "mean_join_distance_m": 7.7,
+        "mean_join_distance_m": 7.5,
         "max_join_distance_m": 24.9,
         "sample_record_ids": [
           "30748927442",
-          "31036753178",
           "30783896558",
-          "31065915018",
+          "31036753178",
           "31112458554",
-          "31221007122",
+          "31065915018",
           "31203722854",
-          "31294916253",
+          "31221007122",
           "31298812532",
+          "31294916253",
           "31367608909",
+          "31395919770",
           "31386944756",
           "31412771847",
           "31415930998",
-          "31416079667",
-          "31395919770"
+          "31416079667"
         ]
       }
     },
@@ -1055,15 +1124,15 @@
         "Ward 1",
         "Ward 2"
       ],
-      "crashes": 706,
-      "injuries": 265,
+      "crashes": 763,
+      "injuries": 288,
       "fatalities": 1,
-      "major_injuries": 17,
-      "minor_injuries": 248,
-      "ksi": 18,
+      "major_injuries": 18,
+      "minor_injuries": 270,
+      "ksi": 19,
       "mode_ksi": {
         "pedestrian": 5,
-        "cyclist": 4,
+        "cyclist": 5,
         "driver": 5,
         "passenger": 1,
         "other": 3
@@ -1075,7 +1144,7 @@
         },
         {
           "id": "road_diet",
-          "trigger": "18 KSI concentrated on one arterial"
+          "trigger": "19 KSI concentrated on one arterial"
         },
         {
           "id": "speed_limit_20",
@@ -1083,13 +1152,13 @@
         },
         {
           "id": "protected_intersection",
-          "trigger": "turning conflicts: drivers/passengers are 33% of KSI"
+          "trigger": "turning conflicts: drivers/passengers are 32% of KSI"
         }
       ],
       "audit": {
         "date_range": [
           "2022-01-05",
-          "2026-06-26"
+          "2026-10-29"
         ],
         "mean_join_distance_m": 4.0,
         "max_join_distance_m": 23.6,
@@ -1101,152 +1170,14 @@
           "31192730878",
           "31328509309",
           "31330433520",
+          "31459834922",
           "31451462029",
           "31428928404",
           "31435520758",
-          "31459834922",
           "31570626899",
           "31613594262",
           "31688455674",
           "31681204501"
-        ]
-      }
-    },
-    {
-      "corridor_id": "12061162_1",
-      "route_name": "MINNESOTA AVE NE",
-      "corridor_name": "Minnesota Ave NE",
-      "location_scope": "24th St NE To Rhode Island Ave NE",
-      "from_street": "24TH ST NE",
-      "to_street": "RHODE ISLAND AVE NE",
-      "length_mi": 1.194,
-      "tier": 1,
-      "wards": [
-        "Ward 7"
-      ],
-      "crashes": 768,
-      "injuries": 245,
-      "fatalities": 4,
-      "major_injuries": 14,
-      "minor_injuries": 231,
-      "ksi": 18,
-      "mode_ksi": {
-        "pedestrian": 11,
-        "cyclist": 2,
-        "driver": 4,
-        "passenger": 0,
-        "other": 1
-      },
-      "recommended_interventions": [
-        {
-          "id": "automated_speed_camera",
-          "trigger": "4 traffic death(s) on this corridor"
-        },
-        {
-          "id": "road_diet",
-          "trigger": "18 KSI concentrated on one arterial"
-        },
-        {
-          "id": "leading_pedestrian_interval",
-          "trigger": "pedestrians are 61% of KSI here"
-        },
-        {
-          "id": "curb_extension",
-          "trigger": "11 pedestrian KSI on this corridor"
-        }
-      ],
-      "audit": {
-        "date_range": [
-          "2022-01-09",
-          "2026-07-01"
-        ],
-        "mean_join_distance_m": 0.5,
-        "max_join_distance_m": 23.2,
-        "sample_record_ids": [
-          "31042271159",
-          "31309842188",
-          "31310073200",
-          "31343303829",
-          "31330579310",
-          "31367877532",
-          "31388235535",
-          "31355529135",
-          "31414618575",
-          "31415497069",
-          "31418168024",
-          "31434529260",
-          "31517819709",
-          "31518055290",
-          "31570292585"
-        ]
-      }
-    },
-    {
-      "corridor_id": "12075462_1",
-      "route_name": "RHODE ISLAND AVE NE",
-      "corridor_name": "Rhode Island Ave NE",
-      "location_scope": "Rhode Island Ave NW To Jackson St NE/Unnamed Access Road",
-      "from_street": "RHODE ISLAND AVE NW",
-      "to_street": "JACKSON ST NE/unnamed access road",
-      "length_mi": 2.786,
-      "tier": 2,
-      "wards": [
-        "Ward 5"
-      ],
-      "crashes": 864,
-      "injuries": 306,
-      "fatalities": 1,
-      "major_injuries": 16,
-      "minor_injuries": 290,
-      "ksi": 17,
-      "mode_ksi": {
-        "pedestrian": 4,
-        "cyclist": 2,
-        "driver": 9,
-        "passenger": 1,
-        "other": 1
-      },
-      "recommended_interventions": [
-        {
-          "id": "automated_speed_camera",
-          "trigger": "1 traffic death(s) on this corridor"
-        },
-        {
-          "id": "road_diet",
-          "trigger": "17 KSI concentrated on one arterial"
-        },
-        {
-          "id": "protected_intersection",
-          "trigger": "turning conflicts: drivers/passengers are 59% of KSI"
-        },
-        {
-          "id": "speed_limit_20",
-          "trigger": "speed is the key driver of crash severity"
-        }
-      ],
-      "audit": {
-        "date_range": [
-          "2022-01-07",
-          "2026-07-03"
-        ],
-        "mean_join_distance_m": 1.4,
-        "max_join_distance_m": 24.8,
-        "sample_record_ids": [
-          "30822707396",
-          "31115801665",
-          "31117026375",
-          "31118218071",
-          "31045985548",
-          "31185023697",
-          "31307512843",
-          "31309118254",
-          "31286568460",
-          "31302095767",
-          "31410718115",
-          "31415727595",
-          "31396285963",
-          "31446821149",
-          "31418588660"
         ]
       }
     },
@@ -1264,16 +1195,16 @@
         "Ward 5",
         "Ward 6"
       ],
-      "crashes": 559,
-      "injuries": 229,
+      "crashes": 608,
+      "injuries": 251,
       "fatalities": 4,
-      "major_injuries": 13,
-      "minor_injuries": 216,
-      "ksi": 17,
+      "major_injuries": 15,
+      "minor_injuries": 236,
+      "ksi": 19,
       "mode_ksi": {
         "pedestrian": 1,
-        "cyclist": 2,
-        "driver": 8,
+        "cyclist": 3,
+        "driver": 9,
         "passenger": 2,
         "other": 4
       },
@@ -1284,7 +1215,7 @@
         },
         {
           "id": "road_diet",
-          "trigger": "17 KSI concentrated on one arterial"
+          "trigger": "19 KSI concentrated on one arterial"
         },
         {
           "id": "speed_limit_20",
@@ -1292,32 +1223,101 @@
         },
         {
           "id": "protected_intersection",
-          "trigger": "turning conflicts: drivers/passengers are 59% of KSI"
+          "trigger": "turning conflicts: drivers/passengers are 58% of KSI"
         }
       ],
       "audit": {
         "date_range": [
           "2022-01-01",
-          "2026-07-02"
+          "2026-10-27"
         ],
         "mean_join_distance_m": 0.7,
-        "max_join_distance_m": 21.3,
+        "max_join_distance_m": 24.8,
         "sample_record_ids": [
           "30749519859",
           "31307497963",
           "31346848004",
           "31347818114",
+          "31460181533",
           "31452323808",
           "31441587192",
           "31479609874",
-          "31460181533",
           "31471916060",
           "31513354190",
           "31647007592",
           "31651622813",
-          "31676091602",
           "31682921513",
+          "31676091602",
           "31721338034"
+        ]
+      }
+    },
+    {
+      "corridor_id": "12075462_1",
+      "route_name": "RHODE ISLAND AVE NE",
+      "corridor_name": "Rhode Island Ave NE",
+      "location_scope": "Rhode Island Ave NW To Jackson St NE/Unnamed Access Road",
+      "from_street": "RHODE ISLAND AVE NW",
+      "to_street": "JACKSON ST NE/unnamed access road",
+      "length_mi": 2.786,
+      "tier": 2,
+      "wards": [
+        "Ward 5"
+      ],
+      "crashes": 921,
+      "injuries": 324,
+      "fatalities": 1,
+      "major_injuries": 17,
+      "minor_injuries": 307,
+      "ksi": 18,
+      "mode_ksi": {
+        "pedestrian": 4,
+        "cyclist": 2,
+        "driver": 10,
+        "passenger": 1,
+        "other": 1
+      },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "1 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "18 KSI concentrated on one arterial"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 61% of KSI"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
+      "audit": {
+        "date_range": [
+          "2022-01-07",
+          "2026-10-29"
+        ],
+        "mean_join_distance_m": 1.3,
+        "max_join_distance_m": 24.8,
+        "sample_record_ids": [
+          "31045985548",
+          "30822707396",
+          "31115801665",
+          "31117026375",
+          "31118218071",
+          "31185023697",
+          "31302095767",
+          "31307512843",
+          "31309118254",
+          "31286568460",
+          "31396285963",
+          "31410718115",
+          "31415727595",
+          "31418588660",
+          "31446821149"
         ]
       }
     },
@@ -1334,18 +1334,18 @@
         "Ward 2",
         "Ward 3"
       ],
-      "crashes": 992,
-      "injuries": 255,
+      "crashes": 1063,
+      "injuries": 275,
       "fatalities": 0,
-      "major_injuries": 14,
-      "minor_injuries": 241,
-      "ksi": 14,
+      "major_injuries": 15,
+      "minor_injuries": 260,
+      "ksi": 15,
       "mode_ksi": {
         "pedestrian": 5,
         "cyclist": 2,
         "driver": 5,
         "passenger": 0,
-        "other": 2
+        "other": 3
       },
       "recommended_interventions": [
         {
@@ -1354,7 +1354,7 @@
         },
         {
           "id": "road_diet",
-          "trigger": "14 KSI concentrated on one arterial"
+          "trigger": "15 KSI concentrated on one arterial"
         },
         {
           "id": "speed_limit_20",
@@ -1362,32 +1362,172 @@
         },
         {
           "id": "leading_pedestrian_interval",
-          "trigger": "pedestrians are 36% of KSI here"
+          "trigger": "pedestrians are 33% of KSI here"
         }
       ],
       "audit": {
         "date_range": [
           "2022-01-03",
-          "2026-07-01"
+          "2026-10-30"
         ],
         "mean_join_distance_m": 0.9,
         "max_join_distance_m": 22.5,
         "sample_record_ids": [
+          "30767567105",
           "30770554638",
           "30777504876",
-          "30767567105",
-          "31126458745",
           "31043225793",
-          "31092170584",
-          "31211956435",
+          "31126458745",
           "31128248670",
+          "31092170584",
           "31227513997",
+          "31211956435",
           "31292036403",
           "31292620747",
           "31315793160",
           "31328116120",
-          "31411154574",
-          "31396327725"
+          "31396327725",
+          "31410339804"
+        ]
+      }
+    },
+    {
+      "corridor_id": "11036722_1",
+      "route_name": "FLORIDA AVE NW",
+      "corridor_name": "Florida Ave NW",
+      "location_scope": "Florida Ave NE/North Capitol St Bn To U St NW/9th St NW",
+      "from_street": "FLORIDA AVE NE/NORTH CAPITOL ST BN",
+      "to_street": "U ST NW/9TH ST NW",
+      "length_mi": 0.911,
+      "tier": 1,
+      "wards": [
+        "Ward 1",
+        "Ward 2",
+        "Ward 5"
+      ],
+      "crashes": 687,
+      "injuries": 220,
+      "fatalities": 1,
+      "major_injuries": 13,
+      "minor_injuries": 207,
+      "ksi": 14,
+      "mode_ksi": {
+        "pedestrian": 3,
+        "cyclist": 1,
+        "driver": 6,
+        "passenger": 2,
+        "other": 2
+      },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "1 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "14 KSI concentrated on one arterial"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 57% of KSI"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
+      "audit": {
+        "date_range": [
+          "2022-01-03",
+          "2026-10-31"
+        ],
+        "mean_join_distance_m": 1.8,
+        "max_join_distance_m": 23.7,
+        "sample_record_ids": [
+          "30758068121",
+          "31345078255",
+          "31328524677",
+          "31349553181",
+          "31411513535",
+          "31415638070",
+          "31442431710",
+          "31426618545",
+          "31469930068",
+          "31478333943",
+          "31548647189",
+          "31516130826",
+          "31570451314",
+          "31615514094",
+          "31612189288"
+        ]
+      }
+    },
+    {
+      "corridor_id": "15081252_1",
+      "route_name": "SOUTH CAPITOL ST BN",
+      "corridor_name": "South Capitol St Bn",
+      "location_scope": "Chillum Pl NE/Chillum Pl NW To Eastern Ave NE/Eastern Ave NW",
+      "from_street": "CHILLUM PL NE/CHILLUM PL NW",
+      "to_street": "EASTERN AVE NE/EASTERN AVE NW",
+      "length_mi": 5.071,
+      "tier": 1,
+      "wards": [
+        "Ward 8"
+      ],
+      "crashes": 545,
+      "injuries": 206,
+      "fatalities": 1,
+      "major_injuries": 13,
+      "minor_injuries": 193,
+      "ksi": 14,
+      "mode_ksi": {
+        "pedestrian": 5,
+        "cyclist": 1,
+        "driver": 5,
+        "passenger": 2,
+        "other": 1
+      },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "1 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "14 KSI concentrated on one arterial"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 50% of KSI"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        }
+      ],
+      "audit": {
+        "date_range": [
+          "2022-01-07",
+          "2026-10-29"
+        ],
+        "mean_join_distance_m": 1.6,
+        "max_join_distance_m": 24.5,
+        "sample_record_ids": [
+          "30903509058",
+          "30857056256",
+          "31204891356",
+          "31238370149",
+          "31389328575",
+          "31410474667",
+          "31418889897",
+          "31413396226",
+          "31415078416",
+          "31396654711",
+          "31438248602",
+          "31438902010",
+          "31465615845",
+          "31557105711",
+          "31589592859"
         ]
       }
     },
@@ -1403,11 +1543,11 @@
       "wards": [
         "Ward 7"
       ],
-      "crashes": 1087,
-      "injuries": 370,
+      "crashes": 1137,
+      "injuries": 393,
       "fatalities": 3,
       "major_injuries": 10,
-      "minor_injuries": 360,
+      "minor_injuries": 383,
       "ksi": 13,
       "mode_ksi": {
         "pedestrian": 3,
@@ -1437,24 +1577,24 @@
       "audit": {
         "date_range": [
           "2022-01-01",
-          "2026-07-02"
+          "2026-10-31"
         ],
         "mean_join_distance_m": 2.7,
         "max_join_distance_m": 24.3,
         "sample_record_ids": [
           "30750159674",
           "30757915395",
-          "30784123569",
           "31042463487",
           "31063711825",
-          "31207277541",
+          "30784123569",
           "31162839786",
+          "31207277541",
           "31285047340",
           "31296098358",
           "31343764671",
           "31345287280",
-          "31355531095",
           "31351413723",
+          "31355531095",
           "31406387185",
           "31428318600"
         ]
@@ -1472,11 +1612,11 @@
       "wards": [
         "Ward 2"
       ],
-      "crashes": 428,
-      "injuries": 136,
+      "crashes": 467,
+      "injuries": 150,
       "fatalities": 2,
       "major_injuries": 11,
-      "minor_injuries": 125,
+      "minor_injuries": 139,
       "ksi": 13,
       "mode_ksi": {
         "pedestrian": 3,
@@ -1506,9 +1646,9 @@
       "audit": {
         "date_range": [
           "2022-02-01",
-          "2026-06-30"
+          "2026-10-30"
         ],
-        "mean_join_distance_m": 0.9,
+        "mean_join_distance_m": 1.0,
         "max_join_distance_m": 20.0,
         "sample_record_ids": [
           "27950439348",
@@ -1520,54 +1660,53 @@
           "31670954902",
           "31738845277",
           "31955010886",
-          "31996131148",
           "32000811924",
-          "32226025172",
+          "31996131148",
           "32195581565",
+          "32226025172",
           "32491924456",
           "32497577312"
         ]
       }
     },
     {
-      "corridor_id": "11036722_1",
-      "route_name": "FLORIDA AVE NW",
-      "corridor_name": "Florida Ave NW",
-      "location_scope": "Florida Ave NE/North Capitol St Bn To U St NW/9th St NW",
-      "from_street": "FLORIDA AVE NE/NORTH CAPITOL ST BN",
-      "to_street": "U ST NW/9TH ST NW",
-      "length_mi": 0.911,
+      "corridor_id": "12036722_1",
+      "route_name": "FLORIDA AVE NE",
+      "corridor_name": "Florida Ave NE",
+      "location_scope": "Florida Ave NW/North Capitol St Bn To H St NE",
+      "from_street": "FLORIDA AVE NW/NORTH CAPITOL ST BN",
+      "to_street": "H ST NE",
+      "length_mi": 1.528,
       "tier": 1,
       "wards": [
-        "Ward 1",
-        "Ward 2",
-        "Ward 5"
+        "Ward 5",
+        "Ward 6"
       ],
-      "crashes": 638,
-      "injuries": 204,
-      "fatalities": 1,
+      "crashes": 669,
+      "injuries": 232,
+      "fatalities": 0,
       "major_injuries": 11,
-      "minor_injuries": 193,
-      "ksi": 12,
+      "minor_injuries": 221,
+      "ksi": 11,
       "mode_ksi": {
-        "pedestrian": 2,
-        "cyclist": 1,
-        "driver": 6,
-        "passenger": 1,
+        "pedestrian": 1,
+        "cyclist": 0,
+        "driver": 5,
+        "passenger": 3,
         "other": 2
       },
       "recommended_interventions": [
         {
           "id": "automated_speed_camera",
-          "trigger": "1 traffic death(s) on this corridor"
-        },
-        {
-          "id": "road_diet",
-          "trigger": "12 KSI concentrated on one arterial"
+          "trigger": "0 traffic death(s) on this corridor"
         },
         {
           "id": "protected_intersection",
-          "trigger": "turning conflicts: drivers/passengers are 58% of KSI"
+          "trigger": "turning conflicts: drivers/passengers are 73% of KSI"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "11 KSI concentrated on one arterial"
         },
         {
           "id": "speed_limit_20",
@@ -1576,27 +1715,27 @@
       ],
       "audit": {
         "date_range": [
-          "2022-01-03",
-          "2026-07-02"
+          "2022-01-10",
+          "2026-10-29"
         ],
-        "mean_join_distance_m": 1.8,
-        "max_join_distance_m": 23.7,
+        "mean_join_distance_m": 2.3,
+        "max_join_distance_m": 24.1,
         "sample_record_ids": [
-          "30758068121",
-          "31345078255",
-          "31328524677",
-          "31349553181",
-          "31411513535",
-          "31415638070",
-          "31426618545",
-          "31442431710",
-          "31478333943",
-          "31469930068",
-          "31548647189",
-          "31516130826",
-          "31570451314",
-          "31612189288",
-          "31615514094"
+          "31091719285",
+          "31180244215",
+          "31191698158",
+          "31194939522",
+          "31297669617",
+          "31305209191",
+          "31306266238",
+          "31308829262",
+          "31346090356",
+          "31389392053",
+          "31396356323",
+          "31381487233",
+          "31410220797",
+          "31414528048",
+          "31396916542"
         ]
       }
     },
@@ -1614,11 +1753,11 @@
         "Ward 5",
         "Ward 6"
       ],
-      "crashes": 655,
-      "injuries": 201,
+      "crashes": 694,
+      "injuries": 218,
       "fatalities": 3,
       "major_injuries": 8,
-      "minor_injuries": 193,
+      "minor_injuries": 210,
       "ksi": 11,
       "mode_ksi": {
         "pedestrian": 5,
@@ -1648,7 +1787,7 @@
       "audit": {
         "date_range": [
           "2022-01-01",
-          "2026-06-30"
+          "2026-10-23"
         ],
         "mean_join_distance_m": 2.2,
         "max_join_distance_m": 21.3,
@@ -1657,156 +1796,17 @@
           "30766179851",
           "31039699976",
           "31112851743",
-          "31206023611",
           "31199635714",
           "31200071909",
+          "31206023611",
           "31343890449",
           "31315603641",
           "31385329508",
-          "31454922875",
           "31459238297",
+          "31454922875",
           "31433901692",
           "31436074925",
           "31604436477"
-        ]
-      }
-    },
-    {
-      "corridor_id": "15081252_1",
-      "route_name": "SOUTH CAPITOL ST BN",
-      "corridor_name": "South Capitol St Bn",
-      "location_scope": "Chillum Pl NE/Chillum Pl NW To Eastern Ave NE/Eastern Ave NW",
-      "from_street": "CHILLUM PL NE/CHILLUM PL NW",
-      "to_street": "EASTERN AVE NE/EASTERN AVE NW",
-      "length_mi": 5.071,
-      "tier": 1,
-      "wards": [
-        "Ward 8"
-      ],
-      "crashes": 516,
-      "injuries": 193,
-      "fatalities": 1,
-      "major_injuries": 10,
-      "minor_injuries": 183,
-      "ksi": 11,
-      "mode_ksi": {
-        "pedestrian": 3,
-        "cyclist": 1,
-        "driver": 5,
-        "passenger": 2,
-        "other": 0
-      },
-      "recommended_interventions": [
-        {
-          "id": "automated_speed_camera",
-          "trigger": "1 traffic death(s) on this corridor"
-        },
-        {
-          "id": "road_diet",
-          "trigger": "11 KSI concentrated on one arterial"
-        },
-        {
-          "id": "protected_intersection",
-          "trigger": "turning conflicts: drivers/passengers are 64% of KSI"
-        },
-        {
-          "id": "speed_limit_20",
-          "trigger": "speed is the key driver of crash severity"
-        }
-      ],
-      "audit": {
-        "date_range": [
-          "2022-01-07",
-          "2026-07-02"
-        ],
-        "mean_join_distance_m": 1.7,
-        "max_join_distance_m": 24.5,
-        "sample_record_ids": [
-          "30857056256",
-          "30903509058",
-          "31204891356",
-          "31238370149",
-          "31389328575",
-          "31410474667",
-          "31413396226",
-          "31415078416",
-          "31396654711",
-          "31418889897",
-          "31438248602",
-          "31438902010",
-          "31465615845",
-          "31589592859",
-          "31557105711"
-        ]
-      }
-    },
-    {
-      "corridor_id": "12036722_1",
-      "route_name": "FLORIDA AVE NE",
-      "corridor_name": "Florida Ave NE",
-      "location_scope": "Florida Ave NW/North Capitol St Bn To H St NE",
-      "from_street": "FLORIDA AVE NW/NORTH CAPITOL ST BN",
-      "to_street": "H ST NE",
-      "length_mi": 1.528,
-      "tier": 1,
-      "wards": [
-        "Ward 5",
-        "Ward 6"
-      ],
-      "crashes": 620,
-      "injuries": 212,
-      "fatalities": 0,
-      "major_injuries": 10,
-      "minor_injuries": 202,
-      "ksi": 10,
-      "mode_ksi": {
-        "pedestrian": 1,
-        "cyclist": 0,
-        "driver": 4,
-        "passenger": 3,
-        "other": 2
-      },
-      "recommended_interventions": [
-        {
-          "id": "automated_speed_camera",
-          "trigger": "0 traffic death(s) on this corridor"
-        },
-        {
-          "id": "protected_intersection",
-          "trigger": "turning conflicts: drivers/passengers are 70% of KSI"
-        },
-        {
-          "id": "road_diet",
-          "trigger": "10 KSI concentrated on one arterial"
-        },
-        {
-          "id": "speed_limit_20",
-          "trigger": "speed is the key driver of crash severity"
-        }
-      ],
-      "audit": {
-        "date_range": [
-          "2022-01-10",
-          "2026-06-23"
-        ],
-        "mean_join_distance_m": 2.4,
-        "max_join_distance_m": 24.1,
-        "sample_record_ids": [
-          "31091719285",
-          "31180244215",
-          "31191698158",
-          "31194939522",
-          "31305209191",
-          "31306266238",
-          "31308829262",
-          "31297669617",
-          "31346090356",
-          "31381487233",
-          "31389392053",
-          "31414528048",
-          "31396356323",
-          "31396916542",
-          "31402259031"
         ]
       }
     },
@@ -1822,14 +1822,14 @@
       "wards": [
         "Ward 2"
       ],
-      "crashes": 691,
-      "injuries": 196,
+      "crashes": 744,
+      "injuries": 210,
       "fatalities": 0,
-      "major_injuries": 10,
-      "minor_injuries": 186,
-      "ksi": 10,
+      "major_injuries": 11,
+      "minor_injuries": 199,
+      "ksi": 11,
       "mode_ksi": {
-        "pedestrian": 4,
+        "pedestrian": 5,
         "cyclist": 2,
         "driver": 2,
         "passenger": 0,
@@ -1841,24 +1841,24 @@
           "trigger": "0 traffic death(s) on this corridor"
         },
         {
-          "id": "road_diet",
-          "trigger": "10 KSI concentrated on one arterial"
-        },
-        {
           "id": "leading_pedestrian_interval",
-          "trigger": "pedestrians are 40% of KSI here"
+          "trigger": "pedestrians are 45% of KSI here"
         },
         {
-          "id": "speed_limit_20",
-          "trigger": "speed is the key driver of crash severity"
+          "id": "road_diet",
+          "trigger": "11 KSI concentrated on one arterial"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "5 pedestrian KSI on this corridor"
         }
       ],
       "audit": {
         "date_range": [
           "2022-01-01",
-          "2026-07-03"
+          "2026-10-30"
         ],
-        "mean_join_distance_m": 11.4,
+        "mean_join_distance_m": 11.0,
         "max_join_distance_m": 24.9,
         "sample_record_ids": [
           "30594251793",
@@ -1866,154 +1866,16 @@
           "30755378105",
           "31064666394",
           "31067311340",
+          "31348893339",
           "31315562772",
           "31315784883",
           "31315867716",
           "31388875734",
-          "31348893339",
           "31420168980",
           "31462985618",
           "31553646887",
           "31559993514",
           "31606380963"
-        ]
-      }
-    },
-    {
-      "corridor_id": "13057852_1",
-      "route_name": "M ST SE",
-      "corridor_name": "M St SE",
-      "location_scope": "Dead End To Branch Ave SE",
-      "from_street": "DEAD END",
-      "to_street": "BRANCH AVE SE",
-      "length_mi": 1.926,
-      "tier": 3,
-      "wards": [
-        "Ward 6"
-      ],
-      "crashes": 418,
-      "injuries": 157,
-      "fatalities": 0,
-      "major_injuries": 10,
-      "minor_injuries": 147,
-      "ksi": 10,
-      "mode_ksi": {
-        "pedestrian": 4,
-        "cyclist": 2,
-        "driver": 4,
-        "passenger": 0,
-        "other": 0
-      },
-      "recommended_interventions": [
-        {
-          "id": "automated_speed_camera",
-          "trigger": "0 traffic death(s) on this corridor"
-        },
-        {
-          "id": "road_diet",
-          "trigger": "10 KSI concentrated on one arterial"
-        },
-        {
-          "id": "leading_pedestrian_interval",
-          "trigger": "pedestrians are 40% of KSI here"
-        },
-        {
-          "id": "protected_intersection",
-          "trigger": "turning conflicts: drivers/passengers are 40% of KSI"
-        }
-      ],
-      "audit": {
-        "date_range": [
-          "2022-01-06",
-          "2026-07-02"
-        ],
-        "mean_join_distance_m": 1.2,
-        "max_join_distance_m": 21.1,
-        "sample_record_ids": [
-          "31041687207",
-          "30824558932",
-          "31345913696",
-          "31327819721",
-          "31612679129",
-          "31600360383",
-          "31628946064",
-          "31671770803",
-          "32031943006",
-          "32201261177",
-          "32206459203",
-          "32449958126",
-          "32538080375",
-          "32542460482",
-          "32543026962"
-        ]
-      }
-    },
-    {
-      "corridor_id": "12042442_1",
-      "route_name": "H ST NE",
-      "corridor_name": "H St NE",
-      "location_scope": "North Capitol St Bn/H St NW To Benning Rd NE/15th St NE/Bladensburg Rd NE/Maryland Ave NE",
-      "from_street": "NORTH CAPITOL ST BN/H ST NW",
-      "to_street": "BENNING RD NE/15TH ST NE/BLADENSBURG RD NE/MARYLAND AVE NE",
-      "length_mi": 1.382,
-      "tier": 1,
-      "wards": [
-        "Ward 6"
-      ],
-      "crashes": 790,
-      "injuries": 274,
-      "fatalities": 0,
-      "major_injuries": 9,
-      "minor_injuries": 265,
-      "ksi": 9,
-      "mode_ksi": {
-        "pedestrian": 2,
-        "cyclist": 3,
-        "driver": 4,
-        "passenger": 0,
-        "other": 0
-      },
-      "recommended_interventions": [
-        {
-          "id": "automated_speed_camera",
-          "trigger": "0 traffic death(s) on this corridor"
-        },
-        {
-          "id": "road_diet",
-          "trigger": "9 KSI concentrated on one arterial"
-        },
-        {
-          "id": "speed_limit_20",
-          "trigger": "speed is the key driver of crash severity"
-        },
-        {
-          "id": "protected_intersection",
-          "trigger": "turning conflicts: drivers/passengers are 44% of KSI"
-        }
-      ],
-      "audit": {
-        "date_range": [
-          "2022-01-06",
-          "2026-06-21"
-        ],
-        "mean_join_distance_m": 0.7,
-        "max_join_distance_m": 25.0,
-        "sample_record_ids": [
-          "30800325803",
-          "31108787421",
-          "31295190335",
-          "31329479311",
-          "31386073795",
-          "31348787380",
-          "31413325880",
-          "31480428960",
-          "31461111448",
-          "31534908773",
-          "31556883721",
-          "31610797451",
-          "31615789661",
-          "31629110244",
-          "31664205812"
         ]
       }
     },
@@ -2030,18 +1892,18 @@
         "Ward 7",
         "Ward 8"
       ],
-      "crashes": 566,
-      "injuries": 174,
+      "crashes": 606,
+      "injuries": 193,
       "fatalities": 0,
-      "major_injuries": 9,
-      "minor_injuries": 165,
-      "ksi": 9,
+      "major_injuries": 11,
+      "minor_injuries": 182,
+      "ksi": 11,
       "mode_ksi": {
         "pedestrian": 2,
-        "cyclist": 0,
+        "cyclist": 1,
         "driver": 6,
         "passenger": 0,
-        "other": 1
+        "other": 2
       },
       "recommended_interventions": [
         {
@@ -2049,12 +1911,81 @@
           "trigger": "0 traffic death(s) on this corridor"
         },
         {
+          "id": "road_diet",
+          "trigger": "11 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
           "id": "protected_intersection",
-          "trigger": "turning conflicts: drivers/passengers are 67% of KSI"
+          "trigger": "turning conflicts: drivers/passengers are 55% of KSI"
+        }
+      ],
+      "audit": {
+        "date_range": [
+          "2022-01-06",
+          "2026-10-29"
+        ],
+        "mean_join_distance_m": 7.3,
+        "max_join_distance_m": 25.0,
+        "sample_record_ids": [
+          "26904124859",
+          "30954787845",
+          "31025726397",
+          "31200262936",
+          "31210154584",
+          "31168485901",
+          "31312311199",
+          "31369955757",
+          "31403930074",
+          "31468910014",
+          "31557771142",
+          "31567107572",
+          "31614109796",
+          "31692827314",
+          "31712530278"
+        ]
+      }
+    },
+    {
+      "corridor_id": "13057852_1",
+      "route_name": "M ST SE",
+      "corridor_name": "M St SE",
+      "location_scope": "Dead End To Branch Ave SE",
+      "from_street": "DEAD END",
+      "to_street": "BRANCH AVE SE",
+      "length_mi": 1.926,
+      "tier": 3,
+      "wards": [
+        "Ward 6"
+      ],
+      "crashes": 449,
+      "injuries": 161,
+      "fatalities": 0,
+      "major_injuries": 11,
+      "minor_injuries": 150,
+      "ksi": 11,
+      "mode_ksi": {
+        "pedestrian": 4,
+        "cyclist": 2,
+        "driver": 5,
+        "passenger": 0,
+        "other": 0
+      },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
         },
         {
           "id": "road_diet",
-          "trigger": "9 KSI concentrated on one arterial"
+          "trigger": "11 KSI concentrated on one arterial"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 45% of KSI"
         },
         {
           "id": "speed_limit_20",
@@ -2064,26 +1995,95 @@
       "audit": {
         "date_range": [
           "2022-01-06",
-          "2026-07-02"
+          "2026-10-18"
         ],
-        "mean_join_distance_m": 7.5,
+        "mean_join_distance_m": 1.2,
+        "max_join_distance_m": 21.1,
+        "sample_record_ids": [
+          "31041687207",
+          "30824558932",
+          "31345913696",
+          "31327819721",
+          "31600360383",
+          "31612679129",
+          "31628946064",
+          "31671770803",
+          "32031943006",
+          "32201261177",
+          "32206459203",
+          "32449958126",
+          "32542460482",
+          "32543026962",
+          "32538080375"
+        ]
+      }
+    },
+    {
+      "corridor_id": "12042442_1",
+      "route_name": "H ST NE",
+      "corridor_name": "H St NE",
+      "location_scope": "North Capitol St Bn/H St NW To Benning Rd NE/15th St NE/Bladensburg Rd NE/Maryland Ave NE",
+      "from_street": "NORTH CAPITOL ST BN/H ST NW",
+      "to_street": "BENNING RD NE/15TH ST NE/BLADENSBURG RD NE/MARYLAND AVE NE",
+      "length_mi": 1.382,
+      "tier": 1,
+      "wards": [
+        "Ward 6"
+      ],
+      "crashes": 834,
+      "injuries": 290,
+      "fatalities": 0,
+      "major_injuries": 10,
+      "minor_injuries": 280,
+      "ksi": 10,
+      "mode_ksi": {
+        "pedestrian": 3,
+        "cyclist": 3,
+        "driver": 4,
+        "passenger": 0,
+        "other": 0
+      },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "10 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 40% of KSI"
+        }
+      ],
+      "audit": {
+        "date_range": [
+          "2022-01-06",
+          "2026-10-25"
+        ],
+        "mean_join_distance_m": 0.7,
         "max_join_distance_m": 25.0,
         "sample_record_ids": [
-          "26904124859",
-          "31025726397",
-          "30954787845",
-          "31210154584",
-          "31168485901",
-          "31200262936",
-          "31312311199",
-          "31369955757",
-          "31403930074",
-          "31468910014",
-          "31557771142",
-          "31567107572",
-          "31614109796",
-          "31692827314",
-          "31717626435"
+          "30800325803",
+          "31108787421",
+          "31295190335",
+          "31348787380",
+          "31329479311",
+          "31386073795",
+          "31413325880",
+          "31461111448",
+          "31480428960",
+          "31556883721",
+          "31534908773",
+          "31610797451",
+          "31615789661",
+          "31629110244",
+          "31664205812"
         ]
       }
     },
@@ -2099,11 +2099,11 @@
       "wards": [
         "Ward 7"
       ],
-      "crashes": 345,
-      "injuries": 148,
+      "crashes": 366,
+      "injuries": 161,
       "fatalities": 2,
       "major_injuries": 7,
-      "minor_injuries": 141,
+      "minor_injuries": 154,
       "ksi": 9,
       "mode_ksi": {
         "pedestrian": 2,
@@ -2133,10 +2133,10 @@
       "audit": {
         "date_range": [
           "2022-01-04",
-          "2026-06-25"
+          "2026-10-31"
         ],
-        "mean_join_distance_m": 2.4,
-        "max_join_distance_m": 21.2,
+        "mean_join_distance_m": 2.5,
+        "max_join_distance_m": 24.6,
         "sample_record_ids": [
           "30770363622",
           "30777803250",
@@ -2168,11 +2168,11 @@
       "wards": [
         "Ward 2"
       ],
-      "crashes": 408,
-      "injuries": 147,
+      "crashes": 434,
+      "injuries": 152,
       "fatalities": 2,
       "major_injuries": 6,
-      "minor_injuries": 141,
+      "minor_injuries": 146,
       "ksi": 8,
       "mode_ksi": {
         "pedestrian": 3,
@@ -2202,14 +2202,14 @@
       "audit": {
         "date_range": [
           "2022-01-21",
-          "2026-07-01"
+          "2026-10-30"
         ],
-        "mean_join_distance_m": 3.2,
+        "mean_join_distance_m": 3.3,
         "max_join_distance_m": 24.7,
         "sample_record_ids": [
           "31326334215",
-          "31468463171",
           "31470402053",
+          "31468463171",
           "31511483759",
           "31603685713",
           "31696452447",
@@ -2238,11 +2238,11 @@
         "Ward 2",
         "Ward 6"
       ],
-      "crashes": 273,
-      "injuries": 126,
+      "crashes": 301,
+      "injuries": 135,
       "fatalities": 1,
       "major_injuries": 7,
-      "minor_injuries": 119,
+      "minor_injuries": 128,
       "ksi": 8,
       "mode_ksi": {
         "pedestrian": 0,
@@ -2272,7 +2272,7 @@
       "audit": {
         "date_range": [
           "2022-01-21",
-          "2026-06-27"
+          "2026-10-29"
         ],
         "mean_join_distance_m": 0.2,
         "max_join_distance_m": 0.5,
@@ -2289,9 +2289,9 @@
           "32585930233",
           "32652846614",
           "32932651309",
+          "32987177381",
           "33063152839",
-          "33079922057",
-          "32987177381"
+          "33079922057"
         ]
       }
     },
@@ -2307,14 +2307,14 @@
       "wards": [
         "Ward 6"
       ],
-      "crashes": 154,
-      "injuries": 49,
+      "crashes": 172,
+      "injuries": 60,
       "fatalities": 1,
-      "major_injuries": 6,
-      "minor_injuries": 43,
-      "ksi": 7,
+      "major_injuries": 7,
+      "minor_injuries": 53,
+      "ksi": 8,
       "mode_ksi": {
-        "pedestrian": 1,
+        "pedestrian": 2,
         "cyclist": 0,
         "driver": 5,
         "passenger": 1,
@@ -2326,12 +2326,12 @@
           "trigger": "1 traffic death(s) on this corridor"
         },
         {
-          "id": "protected_intersection",
-          "trigger": "turning conflicts: drivers/passengers are 86% of KSI"
+          "id": "road_diet",
+          "trigger": "8 KSI concentrated on one arterial"
         },
         {
-          "id": "road_diet",
-          "trigger": "7 KSI concentrated on one arterial"
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 75% of KSI"
         },
         {
           "id": "speed_limit_20",
@@ -2341,9 +2341,9 @@
       "audit": {
         "date_range": [
           "2022-02-07",
-          "2026-07-03"
+          "2026-10-15"
         ],
-        "mean_join_distance_m": 10.1,
+        "mean_join_distance_m": 9.7,
         "max_join_distance_m": 25.0,
         "sample_record_ids": [
           "31520281255",
@@ -2351,8 +2351,8 @@
           "34093409773",
           "34207117400",
           "34275449416",
-          "34629498031",
           "34623005714",
+          "34629498031",
           "34970368157",
           "34993430783",
           "35091053368",
@@ -2377,11 +2377,11 @@
         "Ward 2",
         "Ward 6"
       ],
-      "crashes": 324,
-      "injuries": 128,
+      "crashes": 353,
+      "injuries": 135,
       "fatalities": 0,
       "major_injuries": 6,
-      "minor_injuries": 122,
+      "minor_injuries": 129,
       "ksi": 6,
       "mode_ksi": {
         "pedestrian": 0,
@@ -2411,10 +2411,10 @@
       "audit": {
         "date_range": [
           "2022-01-11",
-          "2026-06-26"
+          "2026-10-28"
         ],
-        "mean_join_distance_m": 2.5,
-        "max_join_distance_m": 17.7,
+        "mean_join_distance_m": 2.4,
+        "max_join_distance_m": 20.2,
         "sample_record_ids": [
           "31112266277",
           "31165875050",
@@ -2430,7 +2430,76 @@
           "31628550427",
           "31680061620",
           "31740532037",
-          "32018036338"
+          "32037319117"
+        ]
+      }
+    },
+    {
+      "corridor_id": "11050892_3",
+      "route_name": "K ST NW",
+      "corridor_name": "K St NW",
+      "location_scope": "9th St NW To Water St NW/Wisconsin Ave NW",
+      "from_street": "9TH ST NW",
+      "to_street": "WATER ST NW/WISCONSIN AVE NW",
+      "length_mi": 2.089,
+      "tier": 3,
+      "wards": [
+        "Ward 2"
+      ],
+      "crashes": 245,
+      "injuries": 68,
+      "fatalities": 0,
+      "major_injuries": 5,
+      "minor_injuries": 63,
+      "ksi": 5,
+      "mode_ksi": {
+        "pedestrian": 2,
+        "cyclist": 0,
+        "driver": 1,
+        "passenger": 2,
+        "other": 0
+      },
+      "recommended_interventions": [
+        {
+          "id": "protected_intersection",
+          "trigger": "turning conflicts: drivers/passengers are 60% of KSI"
+        },
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "5 KSI concentrated on one arterial"
+        },
+        {
+          "id": "leading_pedestrian_interval",
+          "trigger": "pedestrians are 40% of KSI here"
+        }
+      ],
+      "audit": {
+        "date_range": [
+          "2022-01-13",
+          "2026-10-31"
+        ],
+        "mean_join_distance_m": 2.5,
+        "max_join_distance_m": 20.5,
+        "sample_record_ids": [
+          "31449285407",
+          "31481929576",
+          "31690901038",
+          "32167017483",
+          "32514030673",
+          "32868922119",
+          "32931349534",
+          "32950753377",
+          "33440237701",
+          "33440405718",
+          "33715345038",
+          "33914046151",
+          "33903958469",
+          "33981937480",
+          "34521602224"
         ]
       }
     },
@@ -2447,11 +2516,11 @@
         "Ward 4",
         "Ward 5"
       ],
-      "crashes": 377,
-      "injuries": 134,
+      "crashes": 408,
+      "injuries": 140,
       "fatalities": 0,
       "major_injuries": 4,
-      "minor_injuries": 130,
+      "minor_injuries": 136,
       "ksi": 4,
       "mode_ksi": {
         "pedestrian": 0,
@@ -2481,13 +2550,13 @@
       "audit": {
         "date_range": [
           "2022-01-03",
-          "2026-06-14"
+          "2026-10-31"
         ],
-        "mean_join_distance_m": 1.4,
+        "mean_join_distance_m": 1.3,
         "max_join_distance_m": 23.7,
         "sample_record_ids": [
-          "30755933552",
           "30781575553",
+          "30755933552",
           "31112195877",
           "31210401087",
           "31189921237",
@@ -2500,7 +2569,7 @@
           "31686187772",
           "31720515868",
           "31732447398",
-          "31944047517"
+          "31919556342"
         ]
       }
     },
@@ -2516,11 +2585,11 @@
       "wards": [
         "Ward 6"
       ],
-      "crashes": 155,
-      "injuries": 62,
+      "crashes": 167,
+      "injuries": 65,
       "fatalities": 0,
       "major_injuries": 4,
-      "minor_injuries": 58,
+      "minor_injuries": 61,
       "ksi": 4,
       "mode_ksi": {
         "pedestrian": 1,
@@ -2550,9 +2619,9 @@
       "audit": {
         "date_range": [
           "2022-01-07",
-          "2026-06-28"
+          "2026-10-22"
         ],
-        "mean_join_distance_m": 4.1,
+        "mean_join_distance_m": 3.9,
         "max_join_distance_m": 22.4,
         "sample_record_ids": [
           "30885436014",
@@ -2574,75 +2643,6 @@
       }
     },
     {
-      "corridor_id": "11050892_3",
-      "route_name": "K ST NW",
-      "corridor_name": "K St NW",
-      "location_scope": "9th St NW To Water St NW/Wisconsin Ave NW",
-      "from_street": "9TH ST NW",
-      "to_street": "WATER ST NW/WISCONSIN AVE NW",
-      "length_mi": 2.089,
-      "tier": 3,
-      "wards": [
-        "Ward 2"
-      ],
-      "crashes": 210,
-      "injuries": 55,
-      "fatalities": 0,
-      "major_injuries": 4,
-      "minor_injuries": 51,
-      "ksi": 4,
-      "mode_ksi": {
-        "pedestrian": 2,
-        "cyclist": 0,
-        "driver": 0,
-        "passenger": 2,
-        "other": 0
-      },
-      "recommended_interventions": [
-        {
-          "id": "automated_speed_camera",
-          "trigger": "0 traffic death(s) on this corridor"
-        },
-        {
-          "id": "leading_pedestrian_interval",
-          "trigger": "pedestrians are 50% of KSI here"
-        },
-        {
-          "id": "protected_intersection",
-          "trigger": "turning conflicts: drivers/passengers are 50% of KSI"
-        },
-        {
-          "id": "curb_extension",
-          "trigger": "2 pedestrian KSI on this corridor"
-        }
-      ],
-      "audit": {
-        "date_range": [
-          "2022-01-13",
-          "2026-06-30"
-        ],
-        "mean_join_distance_m": 2.7,
-        "max_join_distance_m": 20.5,
-        "sample_record_ids": [
-          "31449285407",
-          "31481929576",
-          "31690901038",
-          "32167017483",
-          "32514030673",
-          "32868922119",
-          "32931349534",
-          "32950753377",
-          "33440237701",
-          "33440405718",
-          "33715345038",
-          "33914046151",
-          "33903958469",
-          "33981937480",
-          "34296336801"
-        ]
-      }
-    },
-    {
       "corridor_id": "11025352_2",
       "route_name": "CONSTITUTION AVE NW",
       "corridor_name": "Constitution Ave NW",
@@ -2654,11 +2654,11 @@
       "wards": [
         "Ward 2"
       ],
-      "crashes": 198,
-      "injuries": 55,
+      "crashes": 218,
+      "injuries": 60,
       "fatalities": 0,
       "major_injuries": 2,
-      "minor_injuries": 53,
+      "minor_injuries": 58,
       "ksi": 2,
       "mode_ksi": {
         "pedestrian": 0,
@@ -2688,9 +2688,9 @@
       "audit": {
         "date_range": [
           "2022-01-06",
-          "2026-06-18"
+          "2026-10-23"
         ],
-        "mean_join_distance_m": 5.0,
+        "mean_join_distance_m": 4.8,
         "max_join_distance_m": 23.0,
         "sample_record_ids": [
           "30783342287",
@@ -2704,8 +2704,8 @@
           "32212362822",
           "32447723612",
           "32573225151",
-          "32776527375",
           "32667915790",
+          "32776527375",
           "32966899185",
           "33743107363"
         ]
@@ -2723,11 +2723,11 @@
       "wards": [
         "Ward 7"
       ],
-      "crashes": 103,
-      "injuries": 41,
+      "crashes": 108,
+      "injuries": 43,
       "fatalities": 1,
       "major_injuries": 1,
-      "minor_injuries": 40,
+      "minor_injuries": 42,
       "ksi": 2,
       "mode_ksi": {
         "pedestrian": 0,
@@ -2757,22 +2757,22 @@
       "audit": {
         "date_range": [
           "2022-01-05",
-          "2026-06-27"
+          "2026-10-20"
         ],
-        "mean_join_distance_m": 7.6,
+        "mean_join_distance_m": 7.7,
         "max_join_distance_m": 24.7,
         "sample_record_ids": [
           "30782180535",
           "31470945208",
           "31676053553",
-          "31706113012",
           "31724159648",
+          "31706113012",
           "31726782483",
           "32045045494",
           "32585332003",
           "32928289145",
-          "33629930238",
           "33593636859",
+          "33629930238",
           "33834228655",
           "34551288171",
           "34541297996",
@@ -2792,11 +2792,11 @@
       "wards": [
         "Ward 2"
       ],
-      "crashes": 66,
-      "injuries": 16,
+      "crashes": 74,
+      "injuries": 20,
       "fatalities": 0,
       "major_injuries": 2,
-      "minor_injuries": 14,
+      "minor_injuries": 18,
       "ksi": 2,
       "mode_ksi": {
         "pedestrian": 1,
@@ -2826,7 +2826,7 @@
       "audit": {
         "date_range": [
           "2022-02-06",
-          "2026-05-22"
+          "2026-10-14"
         ],
         "mean_join_distance_m": 0.2,
         "max_join_distance_m": 0.5,
@@ -2841,8 +2841,8 @@
           "35272566324",
           "35783482008",
           "36132120636",
-          "37098643778",
           "37104854221",
+          "37098643778",
           "37769677446",
           "40720443475",
           "41150352514"
@@ -2861,7 +2861,7 @@
       "wards": [
         "Ward 2"
       ],
-      "crashes": 115,
+      "crashes": 118,
       "injuries": 25,
       "fatalities": 0,
       "major_injuries": 1,
@@ -2895,9 +2895,9 @@
       "audit": {
         "date_range": [
           "2022-01-10",
-          "2026-07-03"
+          "2026-09-15"
         ],
-        "mean_join_distance_m": 11.8,
+        "mean_join_distance_m": 11.7,
         "max_join_distance_m": 24.2,
         "sample_record_ids": [
           "31120545466",
@@ -2930,7 +2930,7 @@
       "wards": [
         "Ward 2"
       ],
-      "crashes": 58,
+      "crashes": 63,
       "injuries": 13,
       "fatalities": 0,
       "major_injuries": 1,
@@ -2964,7 +2964,7 @@
       "audit": {
         "date_range": [
           "2022-01-10",
-          "2026-07-02"
+          "2026-09-19"
         ],
         "mean_join_distance_m": 0.2,
         "max_join_distance_m": 0.3,
@@ -2999,7 +2999,7 @@
       "wards": [
         "Ward 5"
       ],
-      "crashes": 34,
+      "crashes": 35,
       "injuries": 7,
       "fatalities": 0,
       "major_injuries": 1,
@@ -3033,9 +3033,9 @@
       "audit": {
         "date_range": [
           "2022-01-04",
-          "2026-05-09"
+          "2026-07-05"
         ],
-        "mean_join_distance_m": 7.8,
+        "mean_join_distance_m": 7.5,
         "max_join_distance_m": 17.5,
         "sample_record_ids": [
           "30772707493",
@@ -3068,7 +3068,7 @@
       "wards": [
         "Ward 4"
       ],
-      "crashes": 30,
+      "crashes": 31,
       "injuries": 7,
       "fatalities": 0,
       "major_injuries": 1,
@@ -3102,7 +3102,7 @@
       "audit": {
         "date_range": [
           "2022-01-11",
-          "2026-04-20"
+          "2026-09-02"
         ],
         "mean_join_distance_m": 0.9,
         "max_join_distance_m": 22.3,
@@ -3137,11 +3137,11 @@
       "wards": [
         "Ward 2"
       ],
-      "crashes": 10,
-      "injuries": 2,
+      "crashes": 14,
+      "injuries": 3,
       "fatalities": 0,
       "major_injuries": 1,
-      "minor_injuries": 1,
+      "minor_injuries": 2,
       "ksi": 1,
       "mode_ksi": {
         "pedestrian": 0,
@@ -3171,7 +3171,7 @@
       "audit": {
         "date_range": [
           "2022-02-07",
-          "2026-06-16"
+          "2026-10-01"
         ],
         "mean_join_distance_m": 0.4,
         "max_join_distance_m": 0.4,
@@ -3185,7 +3185,11 @@
           "62464035429",
           "66572532294",
           "66894324696",
-          "71038597886"
+          "71038597886",
+          "72261484457",
+          "72361594114",
+          "72481123939",
+          "73678929150"
         ]
       }
     },
@@ -3202,11 +3206,11 @@
         "Ward 2",
         "Ward 6"
       ],
-      "crashes": 95,
-      "injuries": 37,
+      "crashes": 104,
+      "injuries": 42,
       "fatalities": 0,
       "major_injuries": 0,
-      "minor_injuries": 37,
+      "minor_injuries": 42,
       "ksi": 0,
       "mode_ksi": {
         "pedestrian": 0,
@@ -3236,14 +3240,14 @@
       "audit": {
         "date_range": [
           "2022-04-27",
-          "2026-07-01"
+          "2026-10-29"
         ],
-        "mean_join_distance_m": 3.3,
-        "max_join_distance_m": 5.6,
+        "mean_join_distance_m": 3.5,
+        "max_join_distance_m": 21.5,
         "sample_record_ids": [
           "33114072209",
-          "34968163505",
           "34955305024",
+          "34968163505",
           "36930336547",
           "37159389432",
           "40691428248",
@@ -3271,11 +3275,11 @@
       "wards": [
         "Ward 5"
       ],
-      "crashes": 40,
-      "injuries": 20,
+      "crashes": 46,
+      "injuries": 24,
       "fatalities": 0,
       "major_injuries": 0,
-      "minor_injuries": 20,
+      "minor_injuries": 24,
       "ksi": 0,
       "mode_ksi": {
         "pedestrian": 0,
@@ -3305,10 +3309,10 @@
       "audit": {
         "date_range": [
           "2022-04-24",
-          "2026-06-07"
+          "2026-10-16"
         ],
-        "mean_join_distance_m": 0.1,
-        "max_join_distance_m": 0.3,
+        "mean_join_distance_m": 0.3,
+        "max_join_distance_m": 9.6,
         "sample_record_ids": [
           "33066778733",
           "34274630728",
@@ -3329,6 +3333,75 @@
       }
     },
     {
+      "corridor_id": "11050892_2",
+      "route_name": "K ST NW",
+      "corridor_name": "K St NW",
+      "location_scope": "7th St NW/Massachusetts Ave NW To 9th St NW/New York Ave NW",
+      "from_street": "7TH ST NW/MASSACHUSETTS AVE NW",
+      "to_street": "9TH ST NW/NEW YORK AVE NW",
+      "length_mi": 0.112,
+      "tier": 3,
+      "wards": [
+        "Ward 2"
+      ],
+      "crashes": 47,
+      "injuries": 19,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 19,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
+      "audit": {
+        "date_range": [
+          "2022-03-30",
+          "2026-10-18"
+        ],
+        "mean_join_distance_m": 0.2,
+        "max_join_distance_m": 0.3,
+        "sample_record_ids": [
+          "32565761302",
+          "37971460584",
+          "44421473355",
+          "44882366301",
+          "48751747491",
+          "48978739667",
+          "50939908497",
+          "50944921652",
+          "50985196687",
+          "51115009618",
+          "51167248544",
+          "51345846201",
+          "51524121007",
+          "51545437775",
+          "52200857464"
+        ]
+      }
+    },
+    {
       "corridor_id": "12059602_2",
       "route_name": "MASSACHUSETTS AVE NE",
       "corridor_name": "Massachusetts Ave NE",
@@ -3340,7 +3413,7 @@
       "wards": [
         "Ward 6"
       ],
-      "crashes": 48,
+      "crashes": 51,
       "injuries": 17,
       "fatalities": 0,
       "major_injuries": 0,
@@ -3374,9 +3447,9 @@
       "audit": {
         "date_range": [
           "2022-03-09",
-          "2026-04-15"
+          "2026-10-18"
         ],
-        "mean_join_distance_m": 2.8,
+        "mean_join_distance_m": 2.7,
         "max_join_distance_m": 21.1,
         "sample_record_ids": [
           "31987120194",
@@ -3398,22 +3471,22 @@
       }
     },
     {
-      "corridor_id": "11050892_2",
-      "route_name": "K ST NW",
-      "corridor_name": "K St NW",
-      "location_scope": "7th St NW/Massachusetts Ave NW To 9th St NW/New York Ave NW",
-      "from_street": "7TH ST NW/MASSACHUSETTS AVE NW",
-      "to_street": "9TH ST NW/NEW YORK AVE NW",
-      "length_mi": 0.112,
-      "tier": 3,
+      "corridor_id": "13035682_1",
+      "route_name": "FIRTH STERLING AVE SE",
+      "corridor_name": "Firth Sterling Ave SE",
+      "location_scope": "Howard Rd SE/Ramp-36003432 To South Capitol St Bn/Defense Blvd SW/South Capitol St Bn/Anacostia River Trail SW",
+      "from_street": "HOWARD RD SE/Ramp-36003432",
+      "to_street": "SOUTH CAPITOL ST BN/DEFENSE BLVD SW/SOUTH CAPITOL ST BN/ANACOSTIA RIVER TRAIL SW",
+      "length_mi": 0.444,
+      "tier": 1,
       "wards": [
-        "Ward 2"
+        "Ward 8"
       ],
-      "crashes": 43,
-      "injuries": 17,
+      "crashes": 34,
+      "injuries": 12,
       "fatalities": 0,
       "major_injuries": 0,
-      "minor_injuries": 17,
+      "minor_injuries": 12,
       "ksi": 0,
       "mode_ksi": {
         "pedestrian": 0,
@@ -3442,27 +3515,27 @@
       ],
       "audit": {
         "date_range": [
-          "2022-03-30",
-          "2026-06-13"
+          "2022-01-11",
+          "2026-10-31"
         ],
-        "mean_join_distance_m": 0.2,
-        "max_join_distance_m": 0.2,
+        "mean_join_distance_m": 0.4,
+        "max_join_distance_m": 4.2,
         "sample_record_ids": [
-          "32565761302",
-          "37971460584",
-          "44421473355",
-          "44882366301",
-          "48751747491",
-          "48978739667",
-          "50939908497",
-          "50944921652",
-          "50985196687",
-          "51115009618",
-          "51167248544",
-          "51345846201",
-          "51524121007",
-          "51545437775",
-          "52200857464"
+          "31305932021",
+          "31639831043",
+          "34192018650",
+          "34188792751",
+          "34467595614",
+          "34601534988",
+          "35061052063",
+          "35743429515",
+          "35829353135",
+          "37233990792",
+          "37993000758",
+          "62479454065",
+          "62692853519",
+          "65072707389",
+          "65400311081"
         ]
       }
     },
@@ -3547,7 +3620,7 @@
       "wards": [
         "Ward 6"
       ],
-      "crashes": 54,
+      "crashes": 55,
       "injuries": 9,
       "fatalities": 0,
       "major_injuries": 0,
@@ -3581,7 +3654,7 @@
       "audit": {
         "date_range": [
           "2022-04-29",
-          "2026-06-25"
+          "2026-08-10"
         ],
         "mean_join_distance_m": 0.2,
         "max_join_distance_m": 0.3,
@@ -3599,8 +3672,77 @@
           "51589746668",
           "52007579266",
           "52262909746",
-          "52353077790",
-          "52304353856"
+          "52304353856",
+          "52353077790"
+        ]
+      }
+    },
+    {
+      "corridor_id": "12024732_1",
+      "route_name": "COLUMBUS CIR NE",
+      "corridor_name": "Columbus Cir NE",
+      "location_scope": "1st St NE/Massachusetts Ave NE To F St NE",
+      "from_street": "1ST ST NE/MASSACHUSETTS AVE NE",
+      "to_street": "F ST NE",
+      "length_mi": 0.257,
+      "tier": 2,
+      "wards": [
+        "Ward 6"
+      ],
+      "crashes": 31,
+      "injuries": 5,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 5,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
+      "audit": {
+        "date_range": [
+          "2022-11-10",
+          "2026-09-11"
+        ],
+        "mean_join_distance_m": 16.4,
+        "max_join_distance_m": 19.5,
+        "sample_record_ids": [
+          "38111946215",
+          "44426668158",
+          "50060436141",
+          "50925592608",
+          "52190743321",
+          "52461651405",
+          "53280808425",
+          "53652759007",
+          "54864561923",
+          "58132360380",
+          "59521126313",
+          "60389627621",
+          "61189118729",
+          "61008485700",
+          "61380593374"
         ]
       }
     },
@@ -3670,144 +3812,6 @@
           "57982030839",
           "60031094433",
           "60610460704"
-        ]
-      }
-    },
-    {
-      "corridor_id": "13035682_1",
-      "route_name": "FIRTH STERLING AVE SE",
-      "corridor_name": "Firth Sterling Ave SE",
-      "location_scope": "Howard Rd SE/Ramp-36003432 To South Capitol St Bn/Defense Blvd SW/South Capitol St Bn/Anacostia River Trail SW",
-      "from_street": "HOWARD RD SE/Ramp-36003432",
-      "to_street": "SOUTH CAPITOL ST BN/DEFENSE BLVD SW/SOUTH CAPITOL ST BN/ANACOSTIA RIVER TRAIL SW",
-      "length_mi": 0.444,
-      "tier": 1,
-      "wards": [
-        "Ward 8"
-      ],
-      "crashes": 21,
-      "injuries": 5,
-      "fatalities": 0,
-      "major_injuries": 0,
-      "minor_injuries": 5,
-      "ksi": 0,
-      "mode_ksi": {
-        "pedestrian": 0,
-        "cyclist": 0,
-        "driver": 0,
-        "passenger": 0,
-        "other": 0
-      },
-      "recommended_interventions": [
-        {
-          "id": "automated_speed_camera",
-          "trigger": "0 traffic death(s) on this corridor"
-        },
-        {
-          "id": "road_diet",
-          "trigger": "0 KSI concentrated on one arterial"
-        },
-        {
-          "id": "speed_limit_20",
-          "trigger": "speed is the key driver of crash severity"
-        },
-        {
-          "id": "curb_extension",
-          "trigger": "0 pedestrian KSI on this corridor"
-        }
-      ],
-      "audit": {
-        "date_range": [
-          "2022-01-11",
-          "2026-07-03"
-        ],
-        "mean_join_distance_m": 0.5,
-        "max_join_distance_m": 4.2,
-        "sample_record_ids": [
-          "31305932021",
-          "31639831043",
-          "34188792751",
-          "34192018650",
-          "34467595614",
-          "34601534988",
-          "35061052063",
-          "35743429515",
-          "35829353135",
-          "37233990792",
-          "37993000758",
-          "62479454065",
-          "62692853519",
-          "65072707389",
-          "65400311081"
-        ]
-      }
-    },
-    {
-      "corridor_id": "12024732_1",
-      "route_name": "COLUMBUS CIR NE",
-      "corridor_name": "Columbus Cir NE",
-      "location_scope": "1st St NE/Massachusetts Ave NE To F St NE",
-      "from_street": "1ST ST NE/MASSACHUSETTS AVE NE",
-      "to_street": "F ST NE",
-      "length_mi": 0.257,
-      "tier": 2,
-      "wards": [
-        "Ward 6"
-      ],
-      "crashes": 28,
-      "injuries": 4,
-      "fatalities": 0,
-      "major_injuries": 0,
-      "minor_injuries": 4,
-      "ksi": 0,
-      "mode_ksi": {
-        "pedestrian": 0,
-        "cyclist": 0,
-        "driver": 0,
-        "passenger": 0,
-        "other": 0
-      },
-      "recommended_interventions": [
-        {
-          "id": "automated_speed_camera",
-          "trigger": "0 traffic death(s) on this corridor"
-        },
-        {
-          "id": "road_diet",
-          "trigger": "0 KSI concentrated on one arterial"
-        },
-        {
-          "id": "speed_limit_20",
-          "trigger": "speed is the key driver of crash severity"
-        },
-        {
-          "id": "curb_extension",
-          "trigger": "0 pedestrian KSI on this corridor"
-        }
-      ],
-      "audit": {
-        "date_range": [
-          "2022-11-10",
-          "2026-06-19"
-        ],
-        "mean_join_distance_m": 16.7,
-        "max_join_distance_m": 19.5,
-        "sample_record_ids": [
-          "38111946215",
-          "44426668158",
-          "50060436141",
-          "50925592608",
-          "52190743321",
-          "52461651405",
-          "53280808425",
-          "53652759007",
-          "54864561923",
-          "58132360380",
-          "59521126313",
-          "60389627621",
-          "61189118729",
-          "61008485700",
-          "61380593374"
         ]
       }
     },
@@ -3886,7 +3890,7 @@
       "wards": [
         "Ward 6"
       ],
-      "crashes": 7,
+      "crashes": 8,
       "injuries": 4,
       "fatalities": 0,
       "major_injuries": 0,
@@ -3920,7 +3924,7 @@
       "audit": {
         "date_range": [
           "2022-08-30",
-          "2025-03-10"
+          "2026-07-18"
         ],
         "mean_join_distance_m": 0.1,
         "max_join_distance_m": 0.2,
@@ -3931,7 +3935,142 @@
           "57018437304",
           "60093042492",
           "60204610326",
-          "63133666259"
+          "63133666259",
+          "71728827209"
+        ]
+      }
+    },
+    {
+      "corridor_id": "11062592_1",
+      "route_name": "MT VERNON PL NW",
+      "corridor_name": "Mt Vernon Pl NW",
+      "location_scope": "7th St NW/New York Ave NW To 9th St NW/Massachusetts Ave NW",
+      "from_street": "7TH ST NW/NEW YORK AVE NW",
+      "to_street": "9TH ST NW/MASSACHUSETTS AVE NW",
+      "length_mi": 0.115,
+      "tier": 2,
+      "wards": [
+        "Ward 2"
+      ],
+      "crashes": 36,
+      "injuries": 3,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 3,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
+      "audit": {
+        "date_range": [
+          "2022-01-14",
+          "2026-10-13"
+        ],
+        "mean_join_distance_m": 0.3,
+        "max_join_distance_m": 8.0,
+        "sample_record_ids": [
+          "31211184950",
+          "31398615179",
+          "31473258334",
+          "31481924424",
+          "31645063554",
+          "32527059651",
+          "33442810859",
+          "33910020205",
+          "34226866239",
+          "35027252858",
+          "35872256068",
+          "37186210380",
+          "38790345482",
+          "38872922535",
+          "39061880699"
+        ]
+      }
+    },
+    {
+      "corridor_id": "11025352A_1",
+      "route_name": "CONSTITUTION AVE NW",
+      "corridor_name": "Constitution Ave NW",
+      "location_scope": "23rd St NW/Constitution Ave NW To Interstate 66 Bn",
+      "from_street": "23RD ST NW/CONSTITUTION AVE NW",
+      "to_street": "INTERSTATE 66   BN",
+      "length_mi": 0.239,
+      "tier": 3,
+      "wards": [
+        "Ward 2"
+      ],
+      "crashes": 11,
+      "injuries": 3,
+      "fatalities": 0,
+      "major_injuries": 0,
+      "minor_injuries": 3,
+      "ksi": 0,
+      "mode_ksi": {
+        "pedestrian": 0,
+        "cyclist": 0,
+        "driver": 0,
+        "passenger": 0,
+        "other": 0
+      },
+      "recommended_interventions": [
+        {
+          "id": "automated_speed_camera",
+          "trigger": "0 traffic death(s) on this corridor"
+        },
+        {
+          "id": "road_diet",
+          "trigger": "0 KSI concentrated on one arterial"
+        },
+        {
+          "id": "speed_limit_20",
+          "trigger": "speed is the key driver of crash severity"
+        },
+        {
+          "id": "curb_extension",
+          "trigger": "0 pedestrian KSI on this corridor"
+        }
+      ],
+      "audit": {
+        "date_range": [
+          "2022-06-05",
+          "2026-08-28"
+        ],
+        "mean_join_distance_m": 14.2,
+        "max_join_distance_m": 20.5,
+        "sample_record_ids": [
+          "34145537300",
+          "40646780208",
+          "46556923224",
+          "49308884159",
+          "51533689012",
+          "63779049215",
+          "64539409324",
+          "68099684860",
+          "70762478626",
+          "71789592225",
+          "72493583558"
         ]
       }
     },
@@ -3998,75 +4137,6 @@
       }
     },
     {
-      "corridor_id": "11062592_1",
-      "route_name": "MT VERNON PL NW",
-      "corridor_name": "Mt Vernon Pl NW",
-      "location_scope": "7th St NW/New York Ave NW To 9th St NW/Massachusetts Ave NW",
-      "from_street": "7TH ST NW/NEW YORK AVE NW",
-      "to_street": "9TH ST NW/MASSACHUSETTS AVE NW",
-      "length_mi": 0.115,
-      "tier": 2,
-      "wards": [
-        "Ward 2"
-      ],
-      "crashes": 34,
-      "injuries": 2,
-      "fatalities": 0,
-      "major_injuries": 0,
-      "minor_injuries": 2,
-      "ksi": 0,
-      "mode_ksi": {
-        "pedestrian": 0,
-        "cyclist": 0,
-        "driver": 0,
-        "passenger": 0,
-        "other": 0
-      },
-      "recommended_interventions": [
-        {
-          "id": "automated_speed_camera",
-          "trigger": "0 traffic death(s) on this corridor"
-        },
-        {
-          "id": "road_diet",
-          "trigger": "0 KSI concentrated on one arterial"
-        },
-        {
-          "id": "speed_limit_20",
-          "trigger": "speed is the key driver of crash severity"
-        },
-        {
-          "id": "curb_extension",
-          "trigger": "0 pedestrian KSI on this corridor"
-        }
-      ],
-      "audit": {
-        "date_range": [
-          "2022-01-14",
-          "2026-01-24"
-        ],
-        "mean_join_distance_m": 0.3,
-        "max_join_distance_m": 8.0,
-        "sample_record_ids": [
-          "31211184950",
-          "31398615179",
-          "31473258334",
-          "31481924424",
-          "31645063554",
-          "32527059651",
-          "33442810859",
-          "33910020205",
-          "34226866239",
-          "35027252858",
-          "35872256068",
-          "37186210380",
-          "38790345482",
-          "38872922535",
-          "39061880699"
-        ]
-      }
-    },
-    {
       "corridor_id": "13005302_2",
       "route_name": "53RD ST SE",
       "corridor_name": "53rd St SE",
@@ -4126,69 +4196,6 @@
           "59916522732",
           "63353887744",
           "65187296815"
-        ]
-      }
-    },
-    {
-      "corridor_id": "11025352A_1",
-      "route_name": "CONSTITUTION AVE NW",
-      "corridor_name": "Constitution Ave NW",
-      "location_scope": "23rd St NW/Constitution Ave NW To Interstate 66 Bn",
-      "from_street": "23RD ST NW/CONSTITUTION AVE NW",
-      "to_street": "INTERSTATE 66   BN",
-      "length_mi": 0.239,
-      "tier": 3,
-      "wards": [
-        "Ward 2"
-      ],
-      "crashes": 9,
-      "injuries": 1,
-      "fatalities": 0,
-      "major_injuries": 0,
-      "minor_injuries": 1,
-      "ksi": 0,
-      "mode_ksi": {
-        "pedestrian": 0,
-        "cyclist": 0,
-        "driver": 0,
-        "passenger": 0,
-        "other": 0
-      },
-      "recommended_interventions": [
-        {
-          "id": "automated_speed_camera",
-          "trigger": "0 traffic death(s) on this corridor"
-        },
-        {
-          "id": "road_diet",
-          "trigger": "0 KSI concentrated on one arterial"
-        },
-        {
-          "id": "speed_limit_20",
-          "trigger": "speed is the key driver of crash severity"
-        },
-        {
-          "id": "curb_extension",
-          "trigger": "0 pedestrian KSI on this corridor"
-        }
-      ],
-      "audit": {
-        "date_range": [
-          "2022-06-05",
-          "2026-05-27"
-        ],
-        "mean_join_distance_m": 17.3,
-        "max_join_distance_m": 20.5,
-        "sample_record_ids": [
-          "34145537300",
-          "40646780208",
-          "46556923224",
-          "49308884159",
-          "51533689012",
-          "63779049215",
-          "64539409324",
-          "68099684860",
-          "70762478626"
         ]
       }
     },
